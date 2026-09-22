@@ -1367,22 +1367,21 @@ function formatTipTitle(title) {
 }
 
 function buildDetailIngredientsTable(r, shopMode, showMacros) {
-  var checks = shopMode ? loadShopChecks(r.id) : {};
-  var table = mk('table', 'ing-table' + (shopMode ? ' ing-table--shop' : '') + (showMacros ? ' ing-table--macros' : ''));
+  if (shopMode) return buildShoppingIngredientList(r, showMacros);
+
+  var table = mk('table', 'ing-table' + (showMacros ? ' ing-table--macros' : ''));
   var tbody = document.createElement('tbody');
-  var colCount = 2 + (shopMode ? 1 : 0);
   r.groups.forEach(function(g, gi) {
     if (g.name) {
       var headRow = mk('tr', 'ing-grp-head');
       var headCell = document.createElement('th');
-      headCell.colSpan = colCount;
+      headCell.colSpan = 2;
       headCell.textContent = g.name;
       headRow.appendChild(headCell);
       tbody.appendChild(headRow);
     }
     g.ingredients.forEach(function(ing, ii) {
-      var row = mk('tr', 'ing-row' + (shopMode ? ' ing-row--shop' : ''));
-      var key = ingCheckKey(gi, ii);
+      var row = mk('tr', 'ing-row');
       var qtyCell = mk('td', 'ing-qty');
       var amtEl = mk('span', 'ing-amt');
       amtEl.dataset.base = ing.amount;
@@ -1413,34 +1412,87 @@ function buildDetailIngredientsTable(r, shopMode, showMacros) {
           if (macroEl.childNodes.length) nameCell.appendChild(macroEl);
         }
       }
-      if (shopMode) {
-        row.appendChild(nameCell);
-        row.appendChild(qtyCell);
-        var checkCell = mk('td', 'ing-shop-check');
-        var label = mk('label', 'ing-shop-label');
-        var cb = document.createElement('input');
-        cb.type = 'checkbox';
-        cb.className = 'ing-shop-cb';
-        cb.checked = !!checks[key];
-        cb.setAttribute('aria-label', capitalizeIngName(ing.name));
-        cb.addEventListener('change', function() {
-          checks[key] = cb.checked;
-          saveShopChecks(r.id, checks);
-          row.classList.toggle('ing-row--checked', cb.checked);
-        });
-        label.appendChild(cb);
-        checkCell.appendChild(label);
-        row.appendChild(checkCell);
-        if (cb.checked) row.classList.add('ing-row--checked');
-      } else {
-        row.appendChild(qtyCell);
-        row.appendChild(nameCell);
-      }
+      row.appendChild(qtyCell);
+      row.appendChild(nameCell);
       tbody.appendChild(row);
     });
   });
   table.appendChild(tbody);
   return table;
+}
+
+function buildShoppingIngredientList(r, showMacros) {
+  var checks = loadShopChecks(r.id);
+  var list = mk('div', 'ing-shop-list');
+
+  r.groups.forEach(function(g, gi) {
+    var group = mk('div', 'ing-shop-group');
+    if (g.name) {
+      var title = mk('div', 'ing-shop-group-title');
+      title.textContent = g.name;
+      group.appendChild(title);
+    }
+    var items = mk('div', 'ing-shop-group-items');
+    g.ingredients.forEach(function(ing, ii) {
+      var key = ingCheckKey(gi, ii);
+      var card = mk('label', 'ing-shop-card');
+      if (checks[key]) card.classList.add('ing-shop-card--checked');
+
+      var nameCol = mk('span', 'ing-shop-name');
+      var nameText = mk('span', 'ing-name-text');
+      nameText.textContent = ing.name;
+      nameCol.appendChild(nameText);
+      var status = ing.match_status;
+      if (status === 'unmatched' || status === 'needs_piece_weight') {
+        card.classList.add('ing-row--unresolved');
+        var warn = mk('span', 'ing-unresolved-flag');
+        warn.textContent = status === 'needs_piece_weight' ? 'saknar styckvikt' : 'saknar näringsdata';
+        nameCol.appendChild(warn);
+      }
+      if (showMacros) {
+        var est = estimateIngredientRow(ing);
+        if (est && finiteOrNull(est.kcal) != null) {
+          var macroEl = mk('span', 'ing-macros');
+          macroEl.dataset.baseKcal = String(est.kcal);
+          macroEl.dataset.baseProt = String(est.prot);
+          macroEl.dataset.baseCarb = String(est.carb);
+          macroEl.dataset.baseFat = String(est.fat);
+          if (est.grams != null) macroEl.dataset.baseGrams = String(est.grams);
+          fillIngMacrosCell(macroEl, est, 1);
+          if (macroEl.childNodes.length) nameCol.appendChild(macroEl);
+        }
+      }
+
+      var qtyCol = mk('span', 'ing-shop-qty');
+      var amtEl = mk('span', 'ing-amt');
+      amtEl.dataset.base = ing.amount;
+      amtEl.dataset.unit = ing.unit;
+      amtEl.textContent = fmt(ing.amount, ing.unit);
+      qtyCol.appendChild(amtEl);
+
+      var checkCol = mk('span', 'ing-shop-check');
+      var cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.className = 'ing-shop-cb';
+      cb.checked = !!checks[key];
+      cb.setAttribute('aria-label', 'Markera ' + capitalizeIngName(ing.name));
+      cb.addEventListener('change', function() {
+        checks[key] = cb.checked;
+        saveShopChecks(r.id, checks);
+        card.classList.toggle('ing-shop-card--checked', cb.checked);
+      });
+      checkCol.appendChild(cb);
+
+      card.appendChild(nameCol);
+      card.appendChild(qtyCol);
+      card.appendChild(checkCol);
+      items.appendChild(card);
+    });
+    group.appendChild(items);
+    list.appendChild(group);
+  });
+
+  return list;
 }
 
 function showDetail(id, skipHistory) {

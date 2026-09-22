@@ -599,34 +599,79 @@
     display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap;
     gap: 0.65rem 0.85rem; flex-shrink: 1; min-width: 0;
   }
-  .ing-table--shop .ing-shop-check {
-    width: 1.75rem;
-    padding-left: 0.75rem;
-    padding-right: 0;
-    vertical-align: top;
-    text-align: right;
+  .ing-shop-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
   }
-  .ing-shop-label { display: flex; align-items: flex-start; justify-content: flex-end; cursor: pointer; }
-  .ing-shop-cb {
-    width: 1rem; height: 1rem; margin: 0.15rem 0 0; cursor: pointer;
-    accent-color: var(--text);
+  .ing-shop-group-title {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text2);
+    margin-bottom: 0.45rem;
   }
-  .ing-table--shop .ing-row--checked .ing-name,
-  .ing-table--shop .ing-row--checked .ing-amt,
-  .ing-table--shop .ing-row--checked .ing-macros {
-    opacity: 0.5; text-decoration: line-through;
+  .ing-shop-group-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
   }
-  .ing-table--shop td.ing-name {
+  .ing-shop-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 5.75rem 1.35rem;
+    align-items: center;
+    column-gap: 0.75rem;
+    margin: 0;
+    padding: 0.7rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .ing-shop-card:hover {
+    border-color: var(--border2);
+    background: var(--bg3);
+  }
+  .ing-shop-card--checked {
+    opacity: 0.72;
+  }
+  .ing-shop-card--checked .ing-name-text,
+  .ing-shop-card--checked .ing-amt,
+  .ing-shop-card--checked .ing-macros {
+    text-decoration: line-through;
+    opacity: 0.75;
+  }
+  .ing-shop-name {
+    min-width: 0;
+    font-size: 0.9375rem;
+    color: var(--text);
+    line-height: 1.4;
     text-align: left;
-    width: auto;
   }
-  .ing-table--shop .ing-macros { text-align: left; }
-  .ing-table--shop .ing-qty {
-    width: 1%;
-    padding-left: 0.75rem;
-    padding-right: 0;
+  .ing-shop-name .ing-macros {
+    text-align: left;
+  }
+  .ing-shop-qty {
+    font-size: 0.875rem;
+    color: var(--text2);
     white-space: nowrap;
     text-align: left;
+    font-variant-numeric: tabular-nums;
+  }
+  .ing-shop-check {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .ing-shop-cb {
+    width: 1.05rem;
+    height: 1.05rem;
+    margin: 0;
+    cursor: pointer;
+    accent-color: var(--text);
   }
   .detail-sec-head--sub { margin-top: 0.5rem; margin-bottom: 0.85rem; }
   .detail-yield { margin: 0 0 0.85rem; font-size: 0.875rem; color: var(--text2); }
@@ -647,7 +692,16 @@
     font-size: 10px; line-height: 1.35; font-variant-numeric: tabular-nums;
     letter-spacing: 0.01em;
   }
-  .ing-table .ing-macros:empty { display: none; }
+  .ing-shop-name .ing-macros {
+    display: block;
+    margin-top: 0.15rem;
+    white-space: nowrap;
+    font-size: 10px;
+    line-height: 1.35;
+    font-variant-numeric: tabular-nums;
+  }
+  .ing-table .ing-macros:empty,
+  .ing-shop-name .ing-macros:empty { display: none; }
   .ing-nutrition-warning {
     margin: 0 0 0.75rem;
     padding: 0.55rem 0.75rem;
