@@ -599,8 +599,14 @@
     display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap;
     gap: 0.65rem 0.85rem; flex-shrink: 1; min-width: 0;
   }
-  .ing-table--shop .ing-shop-check { width: 1.75rem; padding-right: 0.35rem; vertical-align: top; }
-  .ing-shop-label { display: flex; align-items: flex-start; cursor: pointer; }
+  .ing-table--shop .ing-shop-check {
+    width: 1.75rem;
+    padding-left: 0.75rem;
+    padding-right: 0;
+    vertical-align: top;
+    text-align: right;
+  }
+  .ing-shop-label { display: flex; align-items: flex-start; justify-content: flex-end; cursor: pointer; }
   .ing-shop-cb {
     width: 1rem; height: 1rem; margin: 0.15rem 0 0; cursor: pointer;
     accent-color: var(--text);
@@ -609,6 +615,18 @@
   .ing-table--shop .ing-row--checked .ing-amt,
   .ing-table--shop .ing-row--checked .ing-macros {
     opacity: 0.5; text-decoration: line-through;
+  }
+  .ing-table--shop td.ing-name {
+    text-align: left;
+    width: auto;
+  }
+  .ing-table--shop .ing-macros { text-align: left; }
+  .ing-table--shop .ing-qty {
+    width: 1%;
+    padding-left: 0.75rem;
+    padding-right: 0;
+    white-space: nowrap;
+    text-align: left;
   }
   .detail-sec-head--sub { margin-top: 0.5rem; margin-bottom: 0.85rem; }
   .detail-yield { margin: 0 0 0.85rem; font-size: 0.875rem; color: var(--text2); }

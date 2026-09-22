@@ -1382,24 +1382,6 @@ function buildDetailIngredientsTable(r, shopMode, showMacros) {
     g.ingredients.forEach(function(ing, ii) {
       var row = mk('tr', 'ing-row' + (shopMode ? ' ing-row--shop' : ''));
       var key = ingCheckKey(gi, ii);
-      if (shopMode) {
-        var checkCell = mk('td', 'ing-shop-check');
-        var label = mk('label', 'ing-shop-label');
-        var cb = document.createElement('input');
-        cb.type = 'checkbox';
-        cb.className = 'ing-shop-cb';
-        cb.checked = !!checks[key];
-        cb.setAttribute('aria-label', capitalizeIngName(ing.name));
-        cb.addEventListener('change', function() {
-          checks[key] = cb.checked;
-          saveShopChecks(r.id, checks);
-          row.classList.toggle('ing-row--checked', cb.checked);
-        });
-        label.appendChild(cb);
-        checkCell.appendChild(label);
-        row.appendChild(checkCell);
-        if (cb.checked) row.classList.add('ing-row--checked');
-      }
       var qtyCell = mk('td', 'ing-qty');
       var amtEl = mk('span', 'ing-amt');
       amtEl.dataset.base = ing.amount;
@@ -1430,8 +1412,29 @@ function buildDetailIngredientsTable(r, shopMode, showMacros) {
           if (macroEl.childNodes.length) nameCell.appendChild(macroEl);
         }
       }
-      row.appendChild(qtyCell);
-      row.appendChild(nameCell);
+      if (shopMode) {
+        row.appendChild(nameCell);
+        row.appendChild(qtyCell);
+        var checkCell = mk('td', 'ing-shop-check');
+        var label = mk('label', 'ing-shop-label');
+        var cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.className = 'ing-shop-cb';
+        cb.checked = !!checks[key];
+        cb.setAttribute('aria-label', capitalizeIngName(ing.name));
+        cb.addEventListener('change', function() {
+          checks[key] = cb.checked;
+          saveShopChecks(r.id, checks);
+          row.classList.toggle('ing-row--checked', cb.checked);
+        });
+        label.appendChild(cb);
+        checkCell.appendChild(label);
+        row.appendChild(checkCell);
+        if (cb.checked) row.classList.add('ing-row--checked');
+      } else {
+        row.appendChild(qtyCell);
+        row.appendChild(nameCell);
+      }
       tbody.appendChild(row);
     });
   });
