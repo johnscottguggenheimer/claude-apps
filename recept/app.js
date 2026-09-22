@@ -2158,6 +2158,7 @@ function bootApp(data) {
     }
   } catch (e) {}
   renderBrowseNav();
+  renderListFilters();
   updateFavoritesToggleBtn();
   renderList();
   routeFromLocation();
