@@ -62,7 +62,17 @@ function imageKeyFromRef(imageRef: string | undefined | null): string | null {
 }
 
 function recipeStorageKey(recipeId: string, ext: string): string {
-  return `recipes/${slugify(recipeId)}.${ext}`;
+  // Image keys may include `--pv-<variant>` suffixes; do not reuse title slugify's 48-char cap.
+  const safe =
+    String(recipeId)
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9-]+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '')
+      .slice(0, 96) || 'recept';
+  return `recipes/${safe}.${ext}`;
 }
 
 function imageRefCandidates(imageRef: string | undefined | null): string[] {
@@ -249,12 +259,17 @@ async function handleProteinVariantImage(
   const idx = variants.findIndex((v) => v.id === variantId);
   if (idx < 0) return json({ error: 'Varianten finns inte' }, 404);
   const v = variants[idx]!;
-  if (v.image) return json({ ok: true, image: v.image, cached: true });
+  const baseImage = typeof existing.image === 'string' ? existing.image : null;
+  // Stale cache: earlier slug truncation wrote variants to the same R2 key as the original.
+  if (v.image && v.image !== baseImage) {
+    return json({ ok: true, image: v.image, cached: true });
+  }
 
   const src = PROTEIN_SOURCE_BY_ID.get(variantId);
+  const storageId = `${id}--pv-${variantId}`;
   const draft: Recipe = {
     ...existing,
-    id: `${id}--pv-${variantId}`,
+    id: storageId,
     title: v.title || existing.title,
     groups: v.groups,
   };
@@ -268,6 +283,9 @@ async function handleProteinVariantImage(
       src ? `Proteinkälla i bilden: ${src.label}.` : null
     );
     if (!variantImage) return json({ error: 'Kunde inte generera bild' }, 502);
+    if (baseImage && variantImage === baseImage) {
+      return json({ error: 'Variantbild fick samma nyckel som originalet' }, 502);
+    }
     variants[idx] = {
       ...v,
       image: variantImage,

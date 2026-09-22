@@ -85,7 +85,8 @@ function applyProteinVariantOverlay(base, variant) {
   out.groups = variant.groups;
   if (variant.macros) out.macros = variant.macros;
   if (variant.title) out.title = variant.title;
-  if (variant.image) out.image = variant.image;
+  // Ignore stale variant images that point at the original recipe file.
+  if (variant.image && variant.image !== base.image) out.image = variant.image;
   out._proteinVariantId = variant.id;
   out._proteinVariantLabel = variant.label || variant.id;
   return out;
@@ -1637,6 +1638,10 @@ function showDetail(id, skipHistory) {
   document.getElementById('view-detail').classList.remove('hidden');
   applyServingsScale();
   window.scrollTo(0, 0);
+
+  if (r._proteinVariantId) {
+    ensureProteinVariantImage(base, r._proteinVariantId);
+  }
 }
 
 function buildProteinSwapControl(base) {
@@ -1762,7 +1767,9 @@ function ensureProteinVariants(base) {
 
 function ensureProteinVariantImage(base, variantId) {
   var v = findProteinVariant(base, variantId);
-  if (!v || v.image) return Promise.resolve(v && v.image);
+  if (!v) return Promise.resolve(null);
+  // Same URL as original = slug collision leftover; force regenerate.
+  if (v.image && v.image !== base.image) return Promise.resolve(v.image);
   return fetch(
     '/api/recipes/' +
       encodeURIComponent(base.id) +
@@ -1773,7 +1780,7 @@ function ensureProteinVariantImage(base, variantId) {
   ).then(function(res) {
     return res.json().then(function(data) {
       if (!res.ok) return null;
-      if (data.image) {
+      if (data.image && data.image !== base.image) {
         v.image = data.image;
         var idx = recipes.findIndex(function(x) { return x.id === base.id; });
         if (idx !== -1 && recipes[idx].proteinVariants) {
