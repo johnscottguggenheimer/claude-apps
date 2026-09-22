@@ -16,10 +16,15 @@
     fisk: 'Fisk'
   };
   var DIET_LABELS = {
-    all: 'Allt',
-    fisk: 'Föredra fisk',
-    vegetarisk: 'Föredra vegetariskt',
-    vegan: 'Föredra veganskt'
+    all: 'Äter allt',
+    pesc: 'Äter fisk + vegetariskt',
+    vegetarisk: 'Äter bara vegetariskt'
+  };
+  var DIET_LEGACY = {
+    fisk: 'pesc',
+    vegan: 'vegetarisk',
+    pescetarian: 'pesc',
+    vegetarian: 'vegetarisk'
   };
   var CUISINE_LABELS = {
     asiatiskt: 'Asiatiskt',
@@ -69,19 +74,6 @@
         items: CATEGORY_ORDER.map(function(cat) {
           return { type: 'category', value: cat, label: CATEGORY_LABELS[cat] };
         })
-      }]
-    },
-    {
-      id: 'diet',
-      label: 'Preferens',
-      sections: [{
-        name: '',
-        items: [
-          { type: 'all', value: null, label: 'Allt' },
-          { type: 'diet', value: 'fisk', label: 'Föredra fisk' },
-          { type: 'diet', value: 'vegetarisk', label: 'Föredra vegetariskt' },
-          { type: 'diet', value: 'vegan', label: 'Föredra veganskt' }
-        ]
       }]
     }
   ];
@@ -166,11 +158,55 @@
     return !!(r.tags && r.tags.indexOf('vegetarisk') !== -1) || groups.length > 0;
   }
 
-  function recipeMatchesDiet(r, value) {
-    // Preference B: diet menu does not hard-filter the list.
-    // Cards overlay matching proteinVariants when present.
-    if (value === 'fisk' || value === 'vegetarisk' || value === 'vegan') return true;
+  function recipeHasVariantTier(r, tiers) {
+    var variants = r && r.proteinVariants;
+    if (!variants || !variants.length) return false;
+    for (var i = 0; i < variants.length; i++) {
+      if (tiers.indexOf(variants[i].tier) !== -1) return true;
+    }
     return false;
+  }
+
+  function recipeIsMeatNative(r) {
+    if (!r || !r.tags) return false;
+    return r.tags.indexOf('kyckling') !== -1 ||
+      r.tags.indexOf('notkott') !== -1 ||
+      r.tags.indexOf('flask') !== -1;
+  }
+
+  function recipeIsFishNative(r) {
+    if (!r || !r.tags) return false;
+    return r.tags.indexOf('fisk') !== -1 || r.tags.indexOf('skaldjur') !== -1;
+  }
+
+  function recipeIsPlantNative(r) {
+    if (!r) return false;
+    if (r.tags && (r.tags.indexOf('vegetarisk') !== -1 || r.tags.indexOf('vegan') !== -1)) {
+      return true;
+    }
+    if (recipeIsMeatNative(r) || recipeIsFishNative(r)) return false;
+    return recipeIsVegan(r);
+  }
+
+  function normalizeDietValue(value) {
+    if (!value) return null;
+    if (DIET_LEGACY[value]) return DIET_LEGACY[value];
+    if (DIET_LABELS[value] && value !== 'all') return value;
+    return null;
+  }
+
+  function recipeMatchesDiet(r, value) {
+    var mode = normalizeDietValue(value);
+    if (!mode) return true;
+    if (mode === 'pesc') {
+      if (recipeIsFishNative(r) || recipeIsPlantNative(r)) return true;
+      return recipeHasVariantTier(r, ['fisk', 'vegetarisk', 'vegan']);
+    }
+    if (mode === 'vegetarisk') {
+      if (recipeIsPlantNative(r)) return true;
+      return recipeHasVariantTier(r, ['vegetarisk', 'vegan']);
+    }
+    return true;
   }
 
   function recipeMatchesCuisine(r, value) {
@@ -323,8 +359,9 @@
       state.activeFilter = { type: 'category', value: typ };
     }
     var diet = params.get('diet');
-    if (diet && DIET_LABELS[diet]) {
-      state.activeFilter = { type: 'diet', value: diet };
+    var dietNorm = normalizeDietValue(diet);
+    if (dietNorm) {
+      state.activeFilter = { type: 'diet', value: dietNorm };
     }
     var protein = params.get('protein');
     if (protein) {
@@ -521,10 +558,37 @@
     return svg;
   }
 
+  function pruneMultiToAvailable(recipes, multi) {
+    var next = copyActiveMulti(multi);
+    var proteinMenus = filterMenus(recipes, LIST_FILTER_MENUS);
+    var available = { protein: {}, cuisine: {} };
+    proteinMenus.forEach(function(menu) {
+      menu.sections.forEach(function(section) {
+        section.items.forEach(function(item) {
+          if (menu.id === 'protein' || menu.id === 'cuisine') {
+            available[menu.id][item.value] = true;
+          }
+        });
+      });
+    });
+    next.protein = next.protein.filter(function(v) { return available.protein[v]; });
+    next.cuisine = next.cuisine.filter(function(v) { return available.cuisine[v]; });
+    return next;
+  }
+
   function renderListFilters(container, options) {
     options = options || {};
     var recipes = options.recipes || null;
-    var activeMulti = copyActiveMulti(options.activeMulti);
+    var activeMulti = pruneMultiToAvailable(recipes, options.activeMulti);
+    if (
+      options.onChange &&
+      (activeMulti.protein.join(',') !== copyActiveMulti(options.activeMulti).protein.join(',') ||
+        activeMulti.cuisine.join(',') !== copyActiveMulti(options.activeMulti).cuisine.join(','))
+    ) {
+      // Drop selections that would yield empty results under current diet.
+      options.onChange(activeMulti);
+      return;
+    }
     var menus = filterMenus(recipes, LIST_FILTER_MENUS);
     container.replaceChildren();
     container.hidden = false;
@@ -686,13 +750,18 @@
     CATEGORY_ORDER: CATEGORY_ORDER,
     CATEGORY_LABELS: CATEGORY_LABELS,
     TAG_LABELS: TAG_LABELS,
+    DIET_LABELS: DIET_LABELS,
     filterLabel: filterLabel,
     readStoredFilter: readStoredFilter,
     buildListUrl: buildListUrl,
     parseListUrl: parseListUrl,
     urlForFilter: urlForFilter,
+    normalizeDietValue: normalizeDietValue,
     recipeMatchesFilter: recipeMatchesFilter,
     recipeMatchesMultiFilters: recipeMatchesMultiFilters,
+    recipeMatchesDiet: recipeMatchesDiet,
+    recipeIsFishNative: recipeIsFishNative,
+    recipeIsPlantNative: recipeIsPlantNative,
     render: render,
     renderListFilters: renderListFilters
   };

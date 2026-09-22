@@ -225,11 +225,72 @@
   }
   .browse-link:hover { color: var(--info); }
   .browse-link.active { color: var(--info); font-weight: 600; }
+  .list-heading-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0 0 0.65rem;
+  }
   .list-heading {
     font-size: 1.75rem; font-weight: 700;
     letter-spacing: -0.02em;
-    margin: 0 0 0.65rem;
+    margin: 0;
     color: var(--text);
+    min-width: 0;
+  }
+  .list-eat-mode { flex-shrink: 0; }
+  .list-eat-wrap { position: relative; }
+  .list-eat-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font: inherit;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    padding: 0.55rem 1.15rem;
+    border-radius: 999px;
+    border: 1px solid var(--info);
+    background: var(--info);
+    color: #fff;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .list-eat-btn:hover,
+  .list-eat-btn[aria-expanded="true"] {
+    filter: brightness(1.08);
+  }
+  .list-eat-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.4rem);
+    min-width: 14rem;
+    z-index: 40;
+    background: var(--bg);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    padding: 0.35rem;
+  }
+  .list-eat-menu.is-open { display: block; }
+  .list-eat-item {
+    display: block;
+    width: 100%;
+    text-align: left;
+    font: inherit;
+    font-size: 0.875rem;
+    padding: 0.55rem 0.65rem;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+  }
+  .list-eat-item:hover { background: var(--bg3); }
+  .list-eat-item.is-selected {
+    color: var(--info);
+    font-weight: 600;
   }
   .list-filters {
     display: flex; flex-wrap: wrap; align-items: center;
@@ -842,7 +903,9 @@
       max-height: min(60vh, 420px);
       overflow: auto;
     }
-    .list-heading { font-size: 1.45rem; margin-bottom: 0.75rem; }
+    .list-heading { font-size: 1.45rem; }
+    .list-heading-row { margin-bottom: 0.75rem; flex-wrap: wrap; }
+    .list-eat-btn { font-size: 0.875rem; padding: 0.5rem 1rem; }
     .recipe-card-title { font-size: 1.125rem; }
     .detail-title { font-size: 1.65rem; }
   }
@@ -883,15 +946,18 @@
       </button>
     </div>
   </div>
-  <div class="site-nav-row">
-    <nav class="browse-nav" id="browse-nav" aria-label="Bläddra recept"></nav>
+  <div class="site-nav-row" hidden>
+    <nav class="browse-nav" id="browse-nav" aria-label="Bläddra recept" hidden></nav>
   </div>
   </header>
 </div>
 <div class="app">
   <div id="view-list">
     <div class="list-body">
-      <h1 class="list-heading" id="list-heading">Alla recept</h1>
+      <div class="list-heading-row">
+        <h1 class="list-heading" id="list-heading">Alla recept</h1>
+        <div class="list-eat-mode" id="list-eat-mode"></div>
+      </div>
       <div class="list-filters" id="list-filters" aria-label="Filtrera recept"></div>
       <div id="recipe-list"></div>
     </div>

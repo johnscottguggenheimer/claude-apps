@@ -35,13 +35,15 @@ function primaryProteinTag(r) {
   return null;
 }
 
-/** List diet menu = preference (fisk | vegetarisk | vegan), not a hard filter. */
-function getListProteinPref() {
+/** Eat-mode from list filter: null | 'pesc' | 'vegetarisk' */
+function getListEatMode() {
   if (!activeFilter || activeFilter.type !== 'diet' || !activeFilter.value) return null;
-  if (activeFilter.value === 'fisk') return 'fisk';
-  if (activeFilter.value === 'vegetarisk') return 'vegetarisk';
-  if (activeFilter.value === 'vegan') return 'vegan';
-  return null;
+  if (window.ReceptBrowseNav && ReceptBrowseNav.normalizeDietValue) {
+    return ReceptBrowseNav.normalizeDietValue(activeFilter.value);
+  }
+  return activeFilter.value === 'pesc' || activeFilter.value === 'vegetarisk'
+    ? activeFilter.value
+    : null;
 }
 
 function pickPreferredVariant(variants, pref) {
@@ -64,6 +66,23 @@ function pickPreferredVariant(variants, pref) {
   }
   for (var m = 0; m < variants.length; m++) {
     if (variants[m].tier === 'vegetarisk') return variants[m];
+  }
+  return null;
+}
+
+function pickEatModeVariant(base, mode) {
+  if (!base || !mode) return null;
+  var nav = window.ReceptBrowseNav;
+  if (mode === 'pesc') {
+    if (nav && (nav.recipeIsFishNative(base) || nav.recipeIsPlantNative(base))) return null;
+    return (
+      pickPreferredVariant(base.proteinVariants, 'fisk') ||
+      pickPreferredVariant(base.proteinVariants, 'vegetarisk')
+    );
+  }
+  if (mode === 'vegetarisk') {
+    if (nav && nav.recipeIsPlantNative(base)) return null;
+    return pickPreferredVariant(base.proteinVariants, 'vegetarisk');
   }
   return null;
 }
@@ -99,8 +118,7 @@ function getDisplayRecipe(base) {
     var selected = findProteinVariant(base, detailProteinVariantId);
     if (selected) return applyProteinVariantOverlay(base, selected);
   }
-  var pref = getListProteinPref();
-  var preferred = pickPreferredVariant(base.proteinVariants, pref);
+  var preferred = pickEatModeVariant(base, getListEatMode());
   if (preferred) return applyProteinVariantOverlay(base, preferred);
   return base;
 }
@@ -770,11 +788,18 @@ function appendCardDisplayPrefs(container) {
   container.hidden = false;
 }
 
+function recipesForListFilters() {
+  if (!window.ReceptBrowseNav) return recipes;
+  return recipes.filter(function(r) {
+    return ReceptBrowseNav.recipeMatchesFilter(r, activeFilter);
+  });
+}
+
 function renderListFilters() {
   var el = document.getElementById('list-filters');
   if (!el || !window.ReceptBrowseNav) return;
   ReceptBrowseNav.renderListFilters(el, {
-    recipes: recipes,
+    recipes: recipesForListFilters(),
     activeMulti: activeMultiFilter,
     onChange: function(multi) {
       activeMultiFilter = multi;
@@ -788,30 +813,86 @@ function renderListFilters() {
 
 function renderBrowseNav() {
   var nav = document.getElementById('browse-nav');
-  if (!nav || !window.ReceptBrowseNav) return;
-  if (!isAllFilter() && !recipes.some(recipeMatchesFilter)) {
-    activeFilter = { type: 'all', value: null };
-    syncFiltersToUrl(true);
+  if (nav) {
+    nav.replaceChildren();
+    nav.hidden = true;
+    var row = nav.closest('.site-nav-row');
+    if (row) row.hidden = true;
   }
-  ReceptBrowseNav.render(nav, {
-    recipes: recipes,
-    activeFilter: activeFilter,
-    getFilterUrl: function(filter) {
-      return ReceptBrowseNav.urlForFilter(BASE_PATH, getFilterState(), filter);
-    },
-    onSelect: function(filter) {
+  renderEatModeControl();
+}
+
+function renderEatModeControl() {
+  var host = document.getElementById('list-eat-mode');
+  if (!host || !window.ReceptBrowseNav) return;
+  var labels = ReceptBrowseNav.DIET_LABELS || {};
+  var mode = getListEatMode();
+  var currentLabel = mode && labels[mode] ? labels[mode] : labels.all || 'Äter allt';
+
+  host.replaceChildren();
+  var wrap = mk('div', 'list-eat-wrap');
+  var btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'list-eat-btn' + (mode ? ' list-eat-btn--active' : '');
+  btn.setAttribute('aria-haspopup', 'menu');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.textContent = currentLabel;
+
+  var menu = mk('div', 'list-eat-menu');
+  menu.setAttribute('role', 'menu');
+
+  function closeMenu() {
+    menu.classList.remove('is-open');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+
+  function addOption(label, filter) {
+    var item = document.createElement('button');
+    item.type = 'button';
+    item.className = 'list-eat-item';
+    item.setAttribute('role', 'menuitem');
+    item.textContent = label;
+    var selected =
+      (!mode && filter.type === 'all') ||
+      (mode && filter.type === 'diet' && filter.value === mode);
+    if (selected) item.classList.add('is-selected');
+    item.addEventListener('click', function() {
+      closeMenu();
       activeFilter = filter;
-      var onDetail = !document.getElementById('view-detail').classList.contains('hidden');
-      if (onDetail) showList(false);
-      else {
-        syncFiltersToUrl(false);
-        renderBrowseNav();
-        renderListFilters();
-        renderList();
-      }
+      detailProteinVariantId = undefined;
+      syncFiltersToUrl(false);
+      renderEatModeControl();
+      renderListFilters();
+      renderList();
+      updateListHeading();
+    });
+    menu.appendChild(item);
+  }
+
+  addOption(labels.all || 'Äter allt', { type: 'all', value: null });
+  addOption(labels.pesc || 'Äter fisk + vegetariskt', { type: 'diet', value: 'pesc' });
+  addOption(labels.vegetarisk || 'Äter bara vegetariskt', { type: 'diet', value: 'vegetarisk' });
+
+  btn.addEventListener('click', function(ev) {
+    ev.stopPropagation();
+    var open = !menu.classList.contains('is-open');
+    document.querySelectorAll('.list-eat-menu.is-open').forEach(function(el) {
+      el.classList.remove('is-open');
+    });
+    document.querySelectorAll('.list-eat-btn[aria-expanded="true"]').forEach(function(b) {
+      b.setAttribute('aria-expanded', 'false');
+    });
+    if (open) {
+      menu.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+    } else {
+      closeMenu();
     }
   });
-  renderListFilters();
+
+  wrap.appendChild(btn);
+  wrap.appendChild(menu);
+  host.appendChild(wrap);
 }
 
 function inferBaseServingsFromBadges(r) {
@@ -1124,14 +1205,7 @@ function createRecipeCard(r) {
   title.className = 'recipe-card-title';
   title.textContent = display.title || r.title;
   body.appendChild(title);
-  if (getListProteinPref() && !display._proteinVariantId) {
-    var origBadge = mk('span', 'recipe-card-pref-badge');
-    var ptag = primaryProteinTag(r);
-    origBadge.textContent = ptag
-      ? 'Original ' + (TAG_LABELS[ptag] || ptag).toLowerCase()
-      : 'Original';
-    body.appendChild(origBadge);
-  } else if (display._proteinVariantLabel) {
+  if (getListEatMode() && display._proteinVariantLabel) {
     var varBadge = mk('span', 'recipe-card-pref-badge recipe-card-pref-badge--swap');
     varBadge.textContent = display._proteinVariantLabel;
     body.appendChild(varBadge);
@@ -2096,6 +2170,12 @@ document.addEventListener("click", function() {
     el.classList.remove("is-open");
   });
   document.querySelectorAll(".detail-diet-btn[aria-expanded=\"true\"]").forEach(function(btn) {
+    btn.setAttribute("aria-expanded", "false");
+  });
+  document.querySelectorAll(".list-eat-menu.is-open").forEach(function(el) {
+    el.classList.remove("is-open");
+  });
+  document.querySelectorAll(".list-eat-btn[aria-expanded=\"true\"]").forEach(function(btn) {
     btn.setAttribute("aria-expanded", "false");
   });
 });
