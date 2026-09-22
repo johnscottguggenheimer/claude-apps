@@ -746,7 +746,7 @@ function pickSearchMatchingVariant(base, q) {
 function listHeadingText() {
   var label = window.ReceptBrowseNav
     ? ReceptBrowseNav.filterLabel(activeFilter)
-    : 'Alla recept';
+    : 'Jag äter allt';
   if (showFavoritesOnly) {
     if (searchQuery.trim()) return 'Favoriter — sökresultat';
     if (!isAllFilter()) return 'Favoriter — ' + label;
@@ -859,7 +859,7 @@ function renderEatModeControl() {
   if (!host || !window.ReceptBrowseNav) return;
   var labels = ReceptBrowseNav.DIET_LABELS || {};
   var mode = getListEatMode();
-  var currentLabel = mode && labels[mode] ? labels[mode] : labels.all || 'Äter allt';
+  var currentLabel = mode && labels[mode] ? labels[mode] : labels.all || 'Jag äter allt';
 
   host.replaceChildren();
   var wrap = mk('div', 'list-eat-wrap');
@@ -917,9 +917,9 @@ function renderEatModeControl() {
     menu.appendChild(item);
   }
 
-  addOption(labels.all || 'Äter allt', { type: 'all', value: null });
-  addOption(labels.pesc || 'Äter fisk + vegetariskt', { type: 'diet', value: 'pesc' });
-  addOption(labels.vegetarisk || 'Äter bara vegetariskt', { type: 'diet', value: 'vegetarisk' });
+  addOption(labels.all || 'Jag äter allt', { type: 'all', value: null });
+  addOption(labels.pesc || 'Jag äter fisk + vegetariskt', { type: 'diet', value: 'pesc' });
+  addOption(labels.vegetarisk || 'Jag äter bara vegetariskt', { type: 'diet', value: 'vegetarisk' });
 
   btn.addEventListener('click', function(ev) {
     ev.stopPropagation();

@@ -16,9 +16,9 @@
     fisk: 'Fisk'
   };
   var DIET_LABELS = {
-    all: 'Äter allt',
-    pesc: 'Äter fisk + vegetariskt',
-    vegetarisk: 'Äter bara vegetariskt'
+    all: 'Jag äter allt',
+    pesc: 'Jag äter fisk + vegetariskt',
+    vegetarisk: 'Jag äter bara vegetariskt'
   };
   var DIET_LEGACY = {
     fisk: 'pesc',
@@ -391,12 +391,12 @@
   }
 
   function filterLabel(filter) {
-    if (isAllFilter(filter)) return 'Alla recept';
+    if (isAllFilter(filter)) return DIET_LABELS.all;
     if (filter.type === 'category') return CATEGORY_LABELS[filter.value] || filter.value;
     if (filter.type === 'tag') return TAG_LABELS[filter.value] || filter.value;
     if (filter.type === 'diet') return DIET_LABELS[filter.value] || filter.value;
     if (filter.type === 'cuisine') return CUISINE_LABELS[filter.value] || filter.value;
-    return 'Alla recept';
+    return DIET_LABELS.all;
   }
 
   function resetBrowsePanelStyles(root) {
