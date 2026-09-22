@@ -5,7 +5,7 @@
     "attribution": "Livsmedelsverkets Livsmedelsdatabas",
     "slv_fetched_at": "2026-09-03T11:41:14Z",
     "slv_count": 2606,
-    "manual_count": 16,
+    "manual_count": 38,
     "usda_count": 8,
     "note": "Macros from SLV where source=slv; aliases are app-specific. Do not alter SLV macro values."
   },
@@ -3440,8 +3440,7 @@
       "needs_review": 0,
       "source": "slv",
       "external_id": "289",
-      "aliases": [],
-      "piece_weight_source": "manual"
+      "aliases": []
     },
     {
       "id": 290,
@@ -4034,8 +4033,7 @@
       "external_id": "333",
       "aliases": [
         "champinjoner"
-      ],
-      "piece_weight_source": "manual"
+      ]
     },
     {
       "id": 334,
@@ -4196,8 +4194,7 @@
         "gul lök",
         "lök",
         "schalottenlök"
-      ],
-      "piece_weight_source": "manual"
+      ]
     },
     {
       "id": 345,
@@ -4313,8 +4310,7 @@
         "paprikaröd",
         "paprika",
         "röd paprika"
-      ],
-      "piece_weight_source": "manual"
+      ]
     },
     {
       "id": 352,
@@ -4475,8 +4471,7 @@
       "needs_review": 0,
       "source": "slv",
       "external_id": "364",
-      "aliases": [],
-      "piece_weight_source": "manual"
+      "aliases": []
     },
     {
       "id": 365,
@@ -4673,8 +4668,7 @@
       "aliases": [
         "salladslök",
         "vårlök"
-      ],
-      "piece_weight_source": "manual"
+      ]
     },
     {
       "id": 379,
@@ -10511,8 +10505,7 @@
         "pasta",
         "spaghetti",
         "lasagneplattor"
-      ],
-      "piece_weight_source": "manual"
+      ]
     },
     {
       "id": 846,
@@ -15890,7 +15883,8 @@
       "aliases": [
         "lax odlad norge fjordlax",
         "laxodladnorgefjordlax",
-        "lax"
+        "lax",
+        "laxfilé"
       ]
     },
     {
@@ -27866,8 +27860,7 @@
         "ingefärafärsk",
         "ingefära",
         "färsk ingefära"
-      ],
-      "piece_weight_source": "manual"
+      ]
     },
     {
       "id": 2294,
@@ -42781,6 +42774,377 @@
       "protein_per_100g": 4,
       "fat_per_100g": 1,
       "carbs_per_100g": 33,
+      "piece_weight_g": null,
+      "density_g_per_ml": null,
+      "needs_review": 1,
+      "source": "manual",
+      "external_id": null,
+      "aliases": []
+    },
+    {
+      "id": 900016,
+      "canonical_name": "oumph mince",
+      "category": "plant-protein",
+      "kcal_per_100g": 148,
+      "protein_per_100g": 18,
+      "fat_per_100g": 5.5,
+      "carbs_per_100g": 5,
+      "piece_weight_g": null,
+      "density_g_per_ml": null,
+      "needs_review": 1,
+      "source": "manual",
+      "external_id": null,
+      "aliases": [
+        "oumph! mince",
+        "oumph färs"
+      ]
+    },
+    {
+      "id": 900017,
+      "canonical_name": "oumph pulled",
+      "category": "plant-protein",
+      "kcal_per_100g": 155,
+      "protein_per_100g": 17,
+      "fat_per_100g": 6,
+      "carbs_per_100g": 6,
+      "piece_weight_g": null,
+      "density_g_per_ml": null,
+      "needs_review": 1,
+      "source": "manual",
+      "external_id": null,
+      "aliases": [
+        "oumph! pulled"
+      ]
+    },
+    {
+      "id": 900018,
+      "canonical_name": "oumph kebab",
+      "category": "plant-protein",
+      "kcal_per_100g": 160,
+      "protein_per_100g": 16,
+      "fat_per_100g": 7,
+      "carbs_per_100g": 7,
+      "piece_weight_g": null,
+      "density_g_per_ml": null,
+      "needs_review": 1,
+      "source": "manual",
+      "external_id": null,
+      "aliases": [
+        "oumph! kebab"
+      ]
+    },
+    {
+      "id": 900019,
+      "canonical_name": "oumph smoky bits",
+      "category": "plant-protein",
+      "kcal_per_100g": 170,
+      "protein_per_100g": 16,
+      "fat_per_100g": 8,
+      "carbs_per_100g": 8,
+      "piece_weight_g": null,
+      "density_g_per_ml": null,
+      "needs_review": 1,
+      "source": "manual",
+      "external_id": null,
+      "aliases": [
+        "oumph! smoky bits",
+        "oumph smoky"
+      ]
+    },
+    {
+      "id": 900020,
+      "canonical_name": "oumph the chunks",
+      "category": "plant-protein",
+      "kcal_per_100g": 150,
+      "protein_per_100g": 17,
+      "fat_per_100g": 5,
+      "carbs_per_100g": 6,
+      "piece_weight_g": null,
+      "density_g_per_ml": null,
+      "needs_review": 1,
+      "source": "manual",
+      "external_id": null,
+      "aliases": [
+        "oumph! the chunks",
+        "oumph chunks"
+      ]
+    },
+    {
+      "id": 900021,
+      "canonical_name": "oumph burger",
+      "category": "plant-protein",
+      "kcal_per_100g": 180,
+      "protein_per_100g": 15,
+      "fat_per_100g": 9,
+      "carbs_per_100g": 8,
+      "piece_weight_g": 114,
+      "density_g_per_ml": null,
+      "needs_review": 1,
+      "source": "manual",
+      "external_id": null,
+      "aliases": [
+        "oumph! burger"
+      ]
+    },
+    {
+      "id": 900022,
+      "canonical_name": "anamma färs",
+      "category": "plant-protein",
+      "kcal_per_100g": 140,
+      "protein_per_100g": 15,
+      "fat_per_100g": 6,
+      "carbs_per_100g": 5,
+      "piece_weight_g": null,
+      "density_g_per_ml": null,
+      "needs_review": 1,
+      "source": "manual",
+      "external_id": null,
+      "aliases": [
+        "anamma färsen"
+      ]
+    },
+    {
+      "id": 900023,
+      "canonical_name": "anamma korv",
+      "category": "plant-protein",
+      "kcal_per_100g": 170,
+      "protein_per_100g": 14,
+      "fat_per_100g": 9,
+      "carbs_per_100g": 7,
+      "piece_weight_g": 60,
+      "density_g_per_ml": null,
+      "needs_review": 1,
+      "source": "manual",
+      "external_id": null,
+      "aliases": []
+    },
+    {
+      "id": 900024,
+      "canonical_name": "anamma nuggets",
+      "category": "plant-protein",
+      "kcal_per_100g": 210,
+      "protein_per_100g": 13,
+      "fat_per_100g": 10,
+      "carbs_per_100g": 16,
+      "piece_weight_g": null,
+      "density_g_per_ml": null,
+      "needs_review": 1,
+      "source": "manual",
+      "external_id": null,
+      "aliases": []
+    },
+    {
+      "id": 900025,
+      "canonical_name": "anamma bacon",
+      "category": "plant-protein",
+      "kcal_per_100g": 220,
+      "protein_per_100g": 18,
+      "fat_per_100g": 12,
+      "carbs_per_100g": 6,
+      "piece_weight_g": null,
+      "density_g_per_ml": null,
+      "needs_review": 1,
+      "source": "manual",
+      "external_id": null,
+      "aliases": []
+    },
+    {
+      "id": 900026,
+      "canonical_name": "hälsans kök bönfärs",
+      "category": "plant-protein",
+      "kcal_per_100g": 130,
+      "protein_per_100g": 14,
+      "fat_per_100g": 4,
+      "carbs_per_100g": 10,
+      "piece_weight_g": null,
+      "density_g_per_ml": null,
+      "needs_review": 1,
+      "source": "manual",
+      "external_id": null,
+      "aliases": [
+        "hälsans kök färs",
+        "halsans kok bonfars"
+      ]
+    },
+    {
+      "id": 900027,
+      "canonical_name": "hälsans kök burgare",
+      "category": "plant-protein",
+      "kcal_per_100g": 170,
+      "protein_per_100g": 13,
+      "fat_per_100g": 7,
+      "carbs_per_100g": 12,
+      "piece_weight_g": 90,
+      "density_g_per_ml": null,
+      "needs_review": 1,
+      "source": "manual",
+      "external_id": null,
+      "aliases": [
+        "hälsans kök burger"
+      ]
+    },
+    {
+      "id": 900028,
+      "canonical_name": "naturli hakket",
+      "category": "plant-protein",
+      "kcal_per_100g": 200,
+      "protein_per_100g": 16,
+      "fat_per_100g": 12,
+      "carbs_per_100g": 4,
+      "piece_weight_g": null,
+      "density_g_per_ml": null,
+      "needs_review": 1,
+      "source": "manual",
+      "external_id": null,
+      "aliases": [
+        "naturli' hakket",
+        "naturli färs"
+      ]
+    },
+    {
+      "id": 900029,
+      "canonical_name": "naturli burger",
+      "category": "plant-protein",
+      "kcal_per_100g": 210,
+      "protein_per_100g": 15,
+      "fat_per_100g": 13,
+      "carbs_per_100g": 5,
+      "piece_weight_g": 113,
+      "density_g_per_ml": null,
+      "needs_review": 1,
+      "source": "manual",
+      "external_id": null,
+      "aliases": [
+        "naturli' burger"
+      ]
+    },
+    {
+      "id": 900030,
+      "canonical_name": "quorn färs",
+      "category": "plant-protein",
+      "kcal_per_100g": 101,
+      "protein_per_100g": 14.5,
+      "fat_per_100g": 2,
+      "carbs_per_100g": 4.5,
+      "piece_weight_g": null,
+      "density_g_per_ml": null,
+      "needs_review": 1,
+      "source": "manual",
+      "external_id": null,
+      "aliases": [
+        "quornfärsen"
+      ]
+    },
+    {
+      "id": 900031,
+      "canonical_name": "quorn filé",
+      "category": "plant-protein",
+      "kcal_per_100g": 95,
+      "protein_per_100g": 14,
+      "fat_per_100g": 1.5,
+      "carbs_per_100g": 5,
+      "piece_weight_g": 80,
+      "density_g_per_ml": null,
+      "needs_review": 1,
+      "source": "manual",
+      "external_id": null,
+      "aliases": [
+        "quorn filéer"
+      ]
+    },
+    {
+      "id": 900032,
+      "canonical_name": "quorn nuggets",
+      "category": "plant-protein",
+      "kcal_per_100g": 200,
+      "protein_per_100g": 12,
+      "fat_per_100g": 8,
+      "carbs_per_100g": 18,
+      "piece_weight_g": null,
+      "density_g_per_ml": null,
+      "needs_review": 1,
+      "source": "manual",
+      "external_id": null,
+      "aliases": []
+    },
+    {
+      "id": 900033,
+      "canonical_name": "beyond mince",
+      "category": "plant-protein",
+      "kcal_per_100g": 220,
+      "protein_per_100g": 17,
+      "fat_per_100g": 14,
+      "carbs_per_100g": 3,
+      "piece_weight_g": null,
+      "density_g_per_ml": null,
+      "needs_review": 1,
+      "source": "manual",
+      "external_id": null,
+      "aliases": [
+        "beyond meat mince",
+        "beyond färs"
+      ]
+    },
+    {
+      "id": 900034,
+      "canonical_name": "beyond burger",
+      "category": "plant-protein",
+      "kcal_per_100g": 230,
+      "protein_per_100g": 17,
+      "fat_per_100g": 15,
+      "carbs_per_100g": 4,
+      "piece_weight_g": 113,
+      "density_g_per_ml": null,
+      "needs_review": 1,
+      "source": "manual",
+      "external_id": null,
+      "aliases": [
+        "beyond meat burger"
+      ]
+    },
+    {
+      "id": 900035,
+      "canonical_name": "fetaost",
+      "category": "plant-protein",
+      "kcal_per_100g": 265,
+      "protein_per_100g": 14,
+      "fat_per_100g": 21,
+      "carbs_per_100g": 4,
+      "piece_weight_g": null,
+      "density_g_per_ml": null,
+      "needs_review": 1,
+      "source": "manual",
+      "external_id": null,
+      "aliases": [
+        "feta",
+        "smulad feta"
+      ]
+    },
+    {
+      "id": 900036,
+      "canonical_name": "sejfilé",
+      "category": "special",
+      "kcal_per_100g": 80,
+      "protein_per_100g": 18,
+      "fat_per_100g": 0.8,
+      "carbs_per_100g": 0,
+      "piece_weight_g": null,
+      "density_g_per_ml": null,
+      "needs_review": 1,
+      "source": "manual",
+      "external_id": null,
+      "aliases": [
+        "sej"
+      ]
+    },
+    {
+      "id": 900037,
+      "canonical_name": "koljafilé",
+      "category": "special",
+      "kcal_per_100g": 85,
+      "protein_per_100g": 19,
+      "fat_per_100g": 0.6,
+      "carbs_per_100g": 0,
       "piece_weight_g": null,
       "density_g_per_ml": null,
       "needs_review": 1,

@@ -17,9 +17,11 @@ import { fetchImageAsBase64, fetchRecipePage, isSocialMediaUrl } from './fetch-u
 import { getRecipe, getRecipeWithMeta, idExists, insertRecipe, listRecipes, updateRecipe, deleteRecipe, renameRecipe } from './db';
 import { resolveRecipeNutrition, replaceRecipeIngredients, nutritionGateError, loadNutritionCatalog } from './nutrition';
 import {
-  buildDietVariantsForRecipe,
-  recipeNeedsDietConversion,
-} from './diet-variants';
+  buildProteinVariantsForRecipe,
+  recipeNeedsProteinVariants,
+  type ProteinVariantsList,
+} from './protein-variants';
+import { PROTEIN_SOURCE_BY_ID } from './protein-sources';
 import {
   ensureVisitor,
   getRecipeReviewData,
@@ -193,42 +195,89 @@ async function resolveRecipeImage(
   return generateRecipeImage(env, recipe, null, null);
 }
 
-async function attachDietVariants(env: Env, recipe: Recipe): Promise<Recipe> {
+async function attachProteinVariants(env: Env, recipe: Recipe): Promise<Recipe> {
   const key = geminiKey(env);
-  if (!key || !recipeNeedsDietConversion(recipe)) return recipe;
+  if (!key || !recipeNeedsProteinVariants(recipe)) return recipe;
   try {
     const catalog = await loadNutritionCatalog(env.DB);
-    const variants = await buildDietVariantsForRecipe(key, catalog, recipe);
-    if (variants) recipe.dietVariants = variants;
+    const variants = await buildProteinVariantsForRecipe(key, catalog, recipe);
+    if (variants && variants.length) {
+      recipe.proteinVariants = variants;
+      delete recipe.dietVariants;
+    }
   } catch (e) {
-    console.warn('dietVariants failed', e instanceof Error ? e.message : e);
+    console.warn('proteinVariants failed', e instanceof Error ? e.message : e);
   }
   return recipe;
 }
 
-async function handleDietVariants(env: Env, id: string, force = false): Promise<Response> {
+async function handleProteinVariants(env: Env, id: string, force = false): Promise<Response> {
   const existing = await getRecipe(env.DB, id);
   if (!existing) return json({ error: 'Hittades inte' }, 404);
+  const current = existing.proteinVariants;
   const has =
-    existing.dietVariants &&
-    typeof existing.dietVariants === 'object' &&
-    Object.keys(existing.dietVariants as object).length > 0;
+    Array.isArray(current) && current.length > 0;
   if (has && !force) {
-    return json({ ok: true, dietVariants: existing.dietVariants, cached: true });
+    return json({ ok: true, proteinVariants: current, cached: true });
   }
-  if (!recipeNeedsDietConversion(existing)) {
-    return json({ ok: true, dietVariants: null, skipped: true });
+  if (!recipeNeedsProteinVariants(existing)) {
+    return json({ ok: true, proteinVariants: [], skipped: true });
   }
   const key = geminiKey(env);
   if (!key) return json({ error: 'GEMINI_API_KEY saknas' }, 503);
   try {
     const catalog = await loadNutritionCatalog(env.DB);
-    const variants = await buildDietVariantsForRecipe(key, catalog, existing);
-    existing.dietVariants = variants;
+    const variants = await buildProteinVariantsForRecipe(key, catalog, existing);
+    existing.proteinVariants = variants || [];
+    delete existing.dietVariants;
     await updateRecipe(env.DB, existing);
-    return json({ ok: true, dietVariants: variants, cached: false });
+    return json({ ok: true, proteinVariants: existing.proteinVariants, cached: false });
   } catch (e) {
-    return json({ error: e instanceof Error ? e.message : 'Dietvarianter misslyckades' }, 502);
+    return json({ error: e instanceof Error ? e.message : 'Proteinkälle-varianter misslyckades' }, 502);
+  }
+}
+
+/** Lazy-generate an image for one protein variant and persist it. */
+async function handleProteinVariantImage(
+  env: Env,
+  id: string,
+  variantId: string
+): Promise<Response> {
+  const existing = await getRecipe(env.DB, id);
+  if (!existing) return json({ error: 'Hittades inte' }, 404);
+  const variants = (existing.proteinVariants || []) as ProteinVariantsList;
+  const idx = variants.findIndex((v) => v.id === variantId);
+  if (idx < 0) return json({ error: 'Varianten finns inte' }, 404);
+  const v = variants[idx]!;
+  if (v.image) return json({ ok: true, image: v.image, cached: true });
+
+  const src = PROTEIN_SOURCE_BY_ID.get(variantId);
+  const draft: Recipe = {
+    ...existing,
+    id: `${id}--pv-${variantId}`,
+    title: v.title || existing.title,
+    groups: v.groups,
+  };
+  delete draft.image;
+  try {
+    const variantImage = await generateRecipeImage(
+      env,
+      draft,
+      null,
+      null,
+      src ? `Proteinkälla i bilden: ${src.label}.` : null
+    );
+    if (!variantImage) return json({ error: 'Kunde inte generera bild' }, 502);
+    variants[idx] = {
+      ...v,
+      image: variantImage,
+      label: v.label || src?.label || variantId,
+    };
+    existing.proteinVariants = variants;
+    await updateRecipe(env.DB, existing);
+    return json({ ok: true, image: variantImage, cached: false });
+  } catch (e) {
+    return json({ error: e instanceof Error ? e.message : 'Bild misslyckades' }, 502);
   }
 }
 
@@ -629,7 +678,7 @@ async function handleCreateRecipe(request: Request, env: Env): Promise<Response>
       400
     );
   }
-  await attachDietVariants(env, resolved);
+  await attachProteinVariants(env, resolved);
   await insertRecipe(env.DB, resolved, { featuredNew: !!body.featuredNew });
   await replaceRecipeIngredients(env.DB, String(resolved.id), resolution.rows);
   return json({ ok: true, recipe: resolved, featuredNew: !!body.featuredNew }, 201);
@@ -736,7 +785,7 @@ async function handleUpdateRecipe(request: Request, env: Env, id: string): Promi
     } else if (body.clearImage) {
       delete recipe.image;
     } else if (body.uploadImage && body.imageBase64 && body.mimeType) {
-      recipe.image = await storeUploadedImage(env, recipe.id, body.imageBase64, body.mimeType);
+      recipe.image = await storeUploadedImage(env, String(recipe.id), body.imageBase64, body.mimeType);
     } else if (!recipe.image && existingImageOk) {
       recipe.image = existingImage;
     }
@@ -745,7 +794,7 @@ async function handleUpdateRecipe(request: Request, env: Env, id: string): Promi
   }
 
   if (renaming && existingImageOk && existingImage && !body.uploadImage && !body.generateImage && !body.enhanceImage && !body.regenerateImage) {
-    const migrated = await migrateRecipeImage(env, id, recipe.id, existingImage);
+    const migrated = await migrateRecipeImage(env, id, String(recipe.id), existingImage);
     if (migrated) recipe.image = migrated;
   }
 
@@ -764,7 +813,7 @@ async function handleUpdateRecipe(request: Request, env: Env, id: string): Promi
       400
     );
   }
-  await attachDietVariants(env, resolved);
+  await attachProteinVariants(env, resolved);
   const saved = renaming
     ? await renameRecipe(env.DB, id, resolved, body.featuredNew)
     : await updateRecipe(env.DB, resolved, body.featuredNew);
@@ -843,9 +892,19 @@ async function handleApi(request: Request, env: Env, url: URL): Promise<Response
     if (request.method === 'POST') return handlePostReview(request, env, id);
   }
 
-  const dietVarMatch = path.match(/^\/api\/recipes\/([^/]+)\/diet-variants$/);
-  if (dietVarMatch && request.method === 'GET') {
-    return handleDietVariants(env, decodeURIComponent(dietVarMatch[1]!), false);
+  const proteinVarMatch = path.match(/^\/api\/recipes\/([^/]+)\/protein-variants$/);
+  if (proteinVarMatch && request.method === 'GET') {
+    return handleProteinVariants(env, decodeURIComponent(proteinVarMatch[1]!), false);
+  }
+  const proteinVarImgMatch = path.match(
+    /^\/api\/recipes\/([^/]+)\/protein-variants\/([^/]+)\/image$/
+  );
+  if (proteinVarImgMatch && request.method === 'POST') {
+    return handleProteinVariantImage(
+      env,
+      decodeURIComponent(proteinVarImgMatch[1]!),
+      decodeURIComponent(proteinVarImgMatch[2]!)
+    );
   }
 
   const recipeMatch = path.match(/^\/api\/recipes\/([^/]+)$/);
@@ -857,8 +916,8 @@ async function handleApi(request: Request, env: Env, url: URL): Promise<Response
   const authErr = await requireAuth(request, pw);
   if (authErr) return authErr;
 
-  if (dietVarMatch && (request.method === 'POST' || request.method === 'PUT')) {
-    return handleDietVariants(env, decodeURIComponent(dietVarMatch[1]!), true);
+  if (proteinVarMatch && (request.method === 'POST' || request.method === 'PUT')) {
+    return handleProteinVariants(env, decodeURIComponent(proteinVarMatch[1]!), true);
   }
 
   if (path.startsWith('/api/images/')) {

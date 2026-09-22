@@ -481,7 +481,21 @@
   .detail-diet-item:hover { background: var(--surface2, rgba(127,127,127,0.12)); }
   .detail-diet-item:disabled { opacity: 0.45; cursor: default; }
   .detail-diet-item-note {
-    display: block; font-size: 0.6875rem; color: var(--text2); margin-top: 0.1rem;
+    display: block;
+    font-size: 0.7rem;
+    opacity: 0.75;
+    font-weight: 400;
+    margin-top: 0.15rem;
+  }
+  .recipe-card-pref-badge {
+    display: inline-block;
+    margin: 0.15rem 0 0.25rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.02em;
+    color: var(--text3);
+  }
+  .recipe-card-pref-badge--swap {
+    color: var(--info);
   }
   .detail-meta-list {
     display: flex; flex-direction: column; gap: 0.55rem;

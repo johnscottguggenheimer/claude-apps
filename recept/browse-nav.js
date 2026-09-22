@@ -17,9 +17,9 @@
   };
   var DIET_LABELS = {
     all: 'Allt',
-    fisk: 'Pescetarian',
-    vegetarisk: 'Vegetarian',
-    vegan: 'Vegan'
+    fisk: 'Föredra fisk',
+    vegetarisk: 'Föredra vegetariskt',
+    vegan: 'Föredra veganskt'
   };
   var CUISINE_LABELS = {
     asiatiskt: 'Asiatiskt',
@@ -73,14 +73,14 @@
     },
     {
       id: 'diet',
-      label: 'Diet',
+      label: 'Preferens',
       sections: [{
         name: '',
         items: [
           { type: 'all', value: null, label: 'Allt' },
-          { type: 'diet', value: 'fisk', label: 'Pescetarian' },
-          { type: 'diet', value: 'vegetarisk', label: 'Vegetarian' },
-          { type: 'diet', value: 'vegan', label: 'Vegan' }
+          { type: 'diet', value: 'fisk', label: 'Föredra fisk' },
+          { type: 'diet', value: 'vegetarisk', label: 'Föredra vegetariskt' },
+          { type: 'diet', value: 'vegan', label: 'Föredra veganskt' }
         ]
       }]
     }
@@ -167,13 +167,9 @@
   }
 
   function recipeMatchesDiet(r, value) {
-    if (value === 'fisk') {
-      return !!(r.tags && (r.tags.indexOf('fisk') !== -1 || r.tags.indexOf('skaldjur') !== -1));
-    }
-    if (value === 'vegetarisk') {
-      return !!(r.tags && r.tags.indexOf('vegetarisk') !== -1);
-    }
-    if (value === 'vegan') return recipeIsVegan(r);
+    // Preference B: diet menu does not hard-filter the list.
+    // Cards overlay matching proteinVariants when present.
+    if (value === 'fisk' || value === 'vegetarisk' || value === 'vegan') return true;
     return false;
   }
 

@@ -10,6 +10,7 @@ import type { ResolveRecipeResult } from './types';
 export function stripClientMacros(recipe: Recipe): Recipe {
   const next: Recipe = { ...recipe };
   delete next.macros;
+  const proteinVariants = next.proteinVariants;
   const dietVariants = next.dietVariants;
   const groups = (next.groups || []) as {
     name?: string;
@@ -27,6 +28,7 @@ export function stripClientMacros(recipe: Recipe): Recipe {
       return copy;
     }),
   }));
+  if (proteinVariants != null) next.proteinVariants = proteinVariants;
   if (dietVariants != null) next.dietVariants = dietVariants;
   return next;
 }
