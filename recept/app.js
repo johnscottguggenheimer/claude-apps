@@ -790,6 +790,8 @@ function updateListHeading() {
 
 function appendCardDisplayPrefs(container) {
   if (!container) return;
+  var existing = container.querySelector('.list-filter-display-prefs');
+  if (existing) existing.remove();
   var prefs = getCardDisplayPrefs();
   var wrap = mk('div', 'list-filter-display-prefs');
 
@@ -827,7 +829,7 @@ function recipesForListFilters() {
 function renderListFilters() {
   var el = document.getElementById('list-filters');
   if (!el || !window.ReceptBrowseNav) return;
-  ReceptBrowseNav.renderListFilters(el, {
+  var rendered = ReceptBrowseNav.renderListFilters(el, {
     recipes: recipesForListFilters(),
     activeMulti: activeMultiFilter,
     getMacros100: function(r) {
@@ -846,7 +848,7 @@ function renderListFilters() {
       renderList();
     }
   });
-  appendCardDisplayPrefs(el);
+  if (rendered !== false) appendCardDisplayPrefs(el);
 }
 
 function renderBrowseNav() {

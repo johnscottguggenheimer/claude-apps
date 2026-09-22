@@ -665,7 +665,7 @@
     var activeMulti = pruneMultiToAvailable(recipes, options.activeMulti, getMacros);
     if (options.onChange && !multiEqual(activeMulti, options.activeMulti)) {
       options.onChange(activeMulti);
-      return;
+      return false;
     }
 
     container.replaceChildren();
@@ -676,60 +676,63 @@
         menu.id === 'protein'
           ? availableProteinTags(recipes, activeMulti, getMacros)
           : availableCuisines(recipes, activeMulti, getMacros);
-      var items = [];
+      var allItems = [];
       menu.sections.forEach(function(section) {
-        section.items.forEach(function(item) {
-          if (available[item.value]) items.push(item);
-        });
+        section.items.forEach(function(item) { allItems.push(item); });
       });
-      if (!items.length) return;
+      var enabledItems = allItems.filter(function(item) { return available[item.value]; });
+      var disabled = !enabledItems.length;
 
       var wrap = mk('div', 'list-filter-menu');
       var selected = activeMulti[menu.id] || [];
       var trigger = mk('button', 'list-filter-trigger');
       trigger.type = 'button';
       var triggerLabel = mk('span', 'list-filter-trigger-label');
-      triggerLabel.textContent = listFilterTriggerLabel(
-        { id: menu.id, label: menu.label, sections: [{ items: items }] },
-        activeMulti
-      );
+      triggerLabel.textContent = listFilterTriggerLabel(menu, activeMulti);
       trigger.appendChild(triggerLabel);
       trigger.appendChild(listFilterChevron());
       trigger.setAttribute('aria-haspopup', 'true');
       trigger.setAttribute('aria-expanded', 'false');
       if (selected.length) trigger.classList.add('has-selection');
+      if (disabled) {
+        trigger.disabled = true;
+        trigger.classList.add('is-disabled');
+        trigger.setAttribute('aria-disabled', 'true');
+      }
       wrap.appendChild(trigger);
 
-      var panel = mk('div', 'list-filter-panel');
-      var list = mk('ul', 'list-filter-options');
-      items.forEach(function(item) {
-        var li = mk('li');
-        var label = mk('label', 'list-filter-option');
-        var input = document.createElement('input');
-        input.type = 'checkbox';
-        input.value = item.value;
-        input.checked = selected.indexOf(item.value) !== -1;
-        label.appendChild(input);
-        var span = document.createElement('span');
-        span.textContent = item.label;
-        label.appendChild(span);
-        li.appendChild(label);
-        list.appendChild(li);
+      if (!disabled) {
+        var panel = mk('div', 'list-filter-panel');
+        var list = mk('ul', 'list-filter-options');
+        enabledItems.forEach(function(item) {
+          var li = mk('li');
+          var label = mk('label', 'list-filter-option');
+          var input = document.createElement('input');
+          input.type = 'checkbox';
+          input.value = item.value;
+          input.checked = selected.indexOf(item.value) !== -1;
+          label.appendChild(input);
+          var span = document.createElement('span');
+          span.textContent = item.label;
+          label.appendChild(span);
+          li.appendChild(label);
+          list.appendChild(li);
 
-        input.addEventListener('change', function() {
-          var next = copyActiveMulti(activeMulti);
-          var bucket = (next[menu.id] || []).slice();
-          if (input.checked) {
-            if (bucket.indexOf(item.value) === -1) bucket.push(item.value);
-          } else {
-            bucket = bucket.filter(function(v) { return v !== item.value; });
-          }
-          next[menu.id] = bucket;
-          if (options.onChange) options.onChange(next);
+          input.addEventListener('change', function() {
+            var next = copyActiveMulti(activeMulti);
+            var bucket = (next[menu.id] || []).slice();
+            if (input.checked) {
+              if (bucket.indexOf(item.value) === -1) bucket.push(item.value);
+            } else {
+              bucket = bucket.filter(function(v) { return v !== item.value; });
+            }
+            next[menu.id] = bucket;
+            if (options.onChange) options.onChange(next);
+          });
         });
-      });
-      panel.appendChild(list);
-      wrap.appendChild(panel);
+        panel.appendChild(list);
+        wrap.appendChild(panel);
+      }
       container.appendChild(wrap);
     });
 
@@ -738,10 +741,10 @@
         menu.id === 'maxKcal100'
           ? availableMaxKcalOptions(recipes, activeMulti, getMacros)
           : availableMinProtOptions(recipes, activeMulti, getMacros);
-      if (!availableOpts.length && activeMulti[menu.id] == null) return;
+      var selectedValue = activeMulti[menu.id];
+      var disabled = !availableOpts.length && selectedValue == null;
 
       var wrap = mk('div', 'list-filter-menu');
-      var selectedValue = activeMulti[menu.id];
       var trigger = mk('button', 'list-filter-trigger');
       trigger.type = 'button';
       var triggerLabel = mk('span', 'list-filter-trigger-label');
@@ -751,38 +754,45 @@
       trigger.setAttribute('aria-haspopup', 'true');
       trigger.setAttribute('aria-expanded', 'false');
       if (selectedValue != null) trigger.classList.add('has-selection');
+      if (disabled) {
+        trigger.disabled = true;
+        trigger.classList.add('is-disabled');
+        trigger.setAttribute('aria-disabled', 'true');
+      }
       wrap.appendChild(trigger);
 
-      var panel = mk('div', 'list-filter-panel');
-      var list = mk('ul', 'list-filter-options');
-      var choices = [null].concat(availableOpts);
-      if (selectedValue != null && availableOpts.indexOf(selectedValue) === -1) {
-        choices.push(selectedValue);
-      }
-      choices.forEach(function(opt) {
-        var li = mk('li');
-        var label = mk('label', 'list-filter-option');
-        var input = document.createElement('input');
-        input.type = 'radio';
-        input.name = 'list-filter-' + menu.id;
-        input.value = opt == null ? '' : String(opt);
-        input.checked = selectedValue == null ? opt == null : selectedValue === opt;
-        label.appendChild(input);
-        var span = document.createElement('span');
-        span.textContent = opt == null ? 'Alla' : String(opt);
-        label.appendChild(span);
-        li.appendChild(label);
-        list.appendChild(li);
+      if (!disabled) {
+        var panel = mk('div', 'list-filter-panel');
+        var list = mk('ul', 'list-filter-options');
+        var choices = [null].concat(availableOpts);
+        if (selectedValue != null && availableOpts.indexOf(selectedValue) === -1) {
+          choices.push(selectedValue);
+        }
+        choices.forEach(function(opt) {
+          var li = mk('li');
+          var label = mk('label', 'list-filter-option');
+          var input = document.createElement('input');
+          input.type = 'radio';
+          input.name = 'list-filter-' + menu.id;
+          input.value = opt == null ? '' : String(opt);
+          input.checked = selectedValue == null ? opt == null : selectedValue === opt;
+          label.appendChild(input);
+          var span = document.createElement('span');
+          span.textContent = opt == null ? 'Alla' : String(opt);
+          label.appendChild(span);
+          li.appendChild(label);
+          list.appendChild(li);
 
-        input.addEventListener('change', function() {
-          if (!input.checked) return;
-          var next = copyActiveMulti(activeMulti);
-          next[menu.id] = opt == null ? null : opt;
-          if (options.onChange) options.onChange(next);
+          input.addEventListener('change', function() {
+            if (!input.checked) return;
+            var next = copyActiveMulti(activeMulti);
+            next[menu.id] = opt == null ? null : opt;
+            if (options.onChange) options.onChange(next);
+          });
         });
-      });
-      panel.appendChild(list);
-      wrap.appendChild(panel);
+        panel.appendChild(list);
+        wrap.appendChild(panel);
+      }
       container.appendChild(wrap);
     });
 
@@ -797,6 +807,7 @@
     }
 
     bindDropdownBehavior(container);
+    return true;
   }
 
   function render(nav, options) {
