@@ -189,7 +189,7 @@ var VISIT_COOKIE_NAME = 'recept_seen_new';
 var FAVORITES_COOKIE_NAME = 'recept_favorites';
 var CARD_DISPLAY_COOKIE_NAME = 'recept_card_display';
 var VISIT_COOKIE_MAX_AGE = String(365 * 24 * 60 * 60);
-var DEFAULT_CARD_DISPLAY = { showNew: false, showQuickMacros: true };
+var DEFAULT_CARD_DISPLAY = { showQuickMacros: true };
 
 function readIdCookie(name) {
   try {
@@ -223,17 +223,15 @@ function isFavorite(id) {
 function getCardDisplayPrefs() {
   var data = readIdCookie(CARD_DISPLAY_COOKIE_NAME);
   if (!data || typeof data !== 'object') {
-    return { showNew: DEFAULT_CARD_DISPLAY.showNew, showQuickMacros: DEFAULT_CARD_DISPLAY.showQuickMacros };
+    return { showQuickMacros: DEFAULT_CARD_DISPLAY.showQuickMacros };
   }
   return {
-    showNew: data.showNew === true,
     showQuickMacros: data.showQuickMacros !== false
   };
 }
 
 function setCardDisplayPrefs(prefs) {
   writeIdCookie(CARD_DISPLAY_COOKIE_NAME, {
-    showNew: !!prefs.showNew,
     showQuickMacros: !!prefs.showQuickMacros
   });
 }
@@ -814,7 +812,6 @@ function appendCardDisplayPrefs(container) {
     return label;
   }
 
-  wrap.appendChild(makePref('showNew', 'Visa "Nytt!"', prefs.showNew));
   wrap.appendChild(makePref('showQuickMacros', 'Visa quick macros', prefs.showQuickMacros));
   container.appendChild(wrap);
   container.hidden = false;
@@ -1230,12 +1227,12 @@ function createRecipeCard(r) {
     emojiEl.textContent = r.emoji;
     media.appendChild(emojiEl);
   }
-  var displayPrefs = getCardDisplayPrefs();
-  if (displayPrefs.showNew && shouldShowNewBadge(r.id)) {
+  if (shouldShowNewBadge(r.id)) {
     var newLbl = mk('span', 'recipe-card-new');
     newLbl.textContent = 'Nytt!';
     media.appendChild(newLbl);
   }
+  var displayPrefs = getCardDisplayPrefs();
   if (displayPrefs.showQuickMacros) {
     var macros100 = formatCardMacrosPer100g(display);
     if (macros100) {
