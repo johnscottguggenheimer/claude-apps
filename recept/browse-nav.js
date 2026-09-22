@@ -558,48 +558,141 @@
     return svg;
   }
 
-  function pruneMultiToAvailable(recipes, multi) {
-    var next = copyActiveMulti(multi);
-    var proteinMenus = filterMenus(recipes, LIST_FILTER_MENUS);
-    var available = { protein: {}, cuisine: {} };
-    proteinMenus.forEach(function(menu) {
-      menu.sections.forEach(function(section) {
-        section.items.forEach(function(item) {
-          if (menu.id === 'protein' || menu.id === 'cuisine') {
-            available[menu.id][item.value] = true;
-          }
-        });
+  function recipesMatchingExcept(baseRecipes, multi, exceptKey, getMacros) {
+    baseRecipes = baseRecipes || [];
+    multi = copyActiveMulti(multi);
+    return baseRecipes.filter(function(r) {
+      var protein = exceptKey === 'protein' ? [] : (multi.protein || []);
+      var cuisine = exceptKey === 'cuisine' ? [] : (multi.cuisine || []);
+      if (!recipeMatchesMultiFilters(r, { protein: protein, cuisine: cuisine })) return false;
+      var maxKcal = exceptKey === 'maxKcal100' ? null : multi.maxKcal100;
+      var minProt = exceptKey === 'minProt100' ? null : multi.minProt100;
+      if (maxKcal == null && minProt == null) return true;
+      if (typeof getMacros !== 'function') return true;
+      var m = getMacros(r);
+      if (!m) return false;
+      if (maxKcal != null && m.kcal > maxKcal) return false;
+      if (minProt != null && m.prot < minProt) return false;
+      return true;
+    });
+  }
+
+  function availableProteinTags(baseRecipes, multi, getMacros) {
+    var pool = recipesMatchingExcept(baseRecipes, multi, 'protein', getMacros);
+    var out = {};
+    pool.forEach(function(r) {
+      (r.tags || []).forEach(function(tag) {
+        if (TAG_LABELS[tag] && ['kyckling', 'notkott', 'flask', 'skaldjur'].indexOf(tag) !== -1) {
+          out[tag] = true;
+        }
       });
     });
-    next.protein = next.protein.filter(function(v) { return available.protein[v]; });
-    next.cuisine = next.cuisine.filter(function(v) { return available.cuisine[v]; });
+    return out;
+  }
+
+  function availableCuisines(baseRecipes, multi, getMacros) {
+    var pool = recipesMatchingExcept(baseRecipes, multi, 'cuisine', getMacros);
+    var out = {};
+    CUISINE_ORDER.forEach(function(id) {
+      if (pool.some(function(r) { return recipeMatchesCuisine(r, id); })) out[id] = true;
+    });
+    return out;
+  }
+
+  function availableMaxKcalOptions(baseRecipes, multi, getMacros) {
+    var pool = recipesMatchingExcept(baseRecipes, multi, 'maxKcal100', getMacros);
+    return MAX_KCAL_100_OPTIONS.filter(function(opt) {
+      return pool.some(function(r) {
+        var m = typeof getMacros === 'function' ? getMacros(r) : null;
+        return m && m.kcal <= opt;
+      });
+    });
+  }
+
+  function availableMinProtOptions(baseRecipes, multi, getMacros) {
+    var pool = recipesMatchingExcept(baseRecipes, multi, 'minProt100', getMacros);
+    return MIN_PROT_100_OPTIONS.filter(function(opt) {
+      return pool.some(function(r) {
+        var m = typeof getMacros === 'function' ? getMacros(r) : null;
+        return m && m.prot >= opt;
+      });
+    });
+  }
+
+  function multiHasSelection(multi) {
+    multi = multi || {};
+    return !!(
+      (multi.protein && multi.protein.length) ||
+      (multi.cuisine && multi.cuisine.length) ||
+      multi.maxKcal100 != null ||
+      multi.minProt100 != null
+    );
+  }
+
+  function pruneMultiToAvailable(recipes, multi, getMacros) {
+    var next = copyActiveMulti(multi);
+    var proteinOk = availableProteinTags(recipes, next, getMacros);
+    var cuisineOk = availableCuisines(recipes, next, getMacros);
+    next.protein = next.protein.filter(function(v) { return proteinOk[v]; });
+    next.cuisine = next.cuisine.filter(function(v) { return cuisineOk[v]; });
+
+    var maxOpts = availableMaxKcalOptions(recipes, next, getMacros);
+    if (next.maxKcal100 != null && maxOpts.indexOf(next.maxKcal100) === -1) {
+      next.maxKcal100 = null;
+    }
+    var minOpts = availableMinProtOptions(recipes, next, getMacros);
+    if (next.minProt100 != null && minOpts.indexOf(next.minProt100) === -1) {
+      next.minProt100 = null;
+    }
     return next;
+  }
+
+  function multiEqual(a, b) {
+    a = copyActiveMulti(a);
+    b = copyActiveMulti(b);
+    return (
+      a.protein.join(',') === b.protein.join(',') &&
+      a.cuisine.join(',') === b.cuisine.join(',') &&
+      a.maxKcal100 === b.maxKcal100 &&
+      a.minProt100 === b.minProt100
+    );
   }
 
   function renderListFilters(container, options) {
     options = options || {};
-    var recipes = options.recipes || null;
-    var activeMulti = pruneMultiToAvailable(recipes, options.activeMulti);
-    if (
-      options.onChange &&
-      (activeMulti.protein.join(',') !== copyActiveMulti(options.activeMulti).protein.join(',') ||
-        activeMulti.cuisine.join(',') !== copyActiveMulti(options.activeMulti).cuisine.join(','))
-    ) {
-      // Drop selections that would yield empty results under current diet.
+    var recipes = options.recipes || [];
+    var getMacros = options.getMacros100 || null;
+    var activeMulti = pruneMultiToAvailable(recipes, options.activeMulti, getMacros);
+    if (options.onChange && !multiEqual(activeMulti, options.activeMulti)) {
       options.onChange(activeMulti);
       return;
     }
-    var menus = filterMenus(recipes, LIST_FILTER_MENUS);
+
     container.replaceChildren();
     container.hidden = false;
 
-    menus.forEach(function(menu) {
+    LIST_FILTER_MENUS.forEach(function(menu) {
+      var available =
+        menu.id === 'protein'
+          ? availableProteinTags(recipes, activeMulti, getMacros)
+          : availableCuisines(recipes, activeMulti, getMacros);
+      var items = [];
+      menu.sections.forEach(function(section) {
+        section.items.forEach(function(item) {
+          if (available[item.value]) items.push(item);
+        });
+      });
+      if (!items.length) return;
+
       var wrap = mk('div', 'list-filter-menu');
       var selected = activeMulti[menu.id] || [];
       var trigger = mk('button', 'list-filter-trigger');
       trigger.type = 'button';
       var triggerLabel = mk('span', 'list-filter-trigger-label');
-      triggerLabel.textContent = listFilterTriggerLabel(menu, activeMulti);
+      triggerLabel.textContent = listFilterTriggerLabel(
+        { id: menu.id, label: menu.label, sections: [{ items: items }] },
+        activeMulti
+      );
       trigger.appendChild(triggerLabel);
       trigger.appendChild(listFilterChevron());
       trigger.setAttribute('aria-haspopup', 'true');
@@ -609,32 +702,30 @@
 
       var panel = mk('div', 'list-filter-panel');
       var list = mk('ul', 'list-filter-options');
-      menu.sections.forEach(function(section) {
-        section.items.forEach(function(item) {
-          var li = mk('li');
-          var label = mk('label', 'list-filter-option');
-          var input = document.createElement('input');
-          input.type = 'checkbox';
-          input.value = item.value;
-          input.checked = selected.indexOf(item.value) !== -1;
-          label.appendChild(input);
-          var span = document.createElement('span');
-          span.textContent = item.label;
-          label.appendChild(span);
-          li.appendChild(label);
-          list.appendChild(li);
+      items.forEach(function(item) {
+        var li = mk('li');
+        var label = mk('label', 'list-filter-option');
+        var input = document.createElement('input');
+        input.type = 'checkbox';
+        input.value = item.value;
+        input.checked = selected.indexOf(item.value) !== -1;
+        label.appendChild(input);
+        var span = document.createElement('span');
+        span.textContent = item.label;
+        label.appendChild(span);
+        li.appendChild(label);
+        list.appendChild(li);
 
-          input.addEventListener('change', function() {
-            var next = copyActiveMulti(activeMulti);
-            var bucket = (next[menu.id] || []).slice();
-            if (input.checked) {
-              if (bucket.indexOf(item.value) === -1) bucket.push(item.value);
-            } else {
-              bucket = bucket.filter(function(v) { return v !== item.value; });
-            }
-            next[menu.id] = bucket;
-            if (options.onChange) options.onChange(next);
-          });
+        input.addEventListener('change', function() {
+          var next = copyActiveMulti(activeMulti);
+          var bucket = (next[menu.id] || []).slice();
+          if (input.checked) {
+            if (bucket.indexOf(item.value) === -1) bucket.push(item.value);
+          } else {
+            bucket = bucket.filter(function(v) { return v !== item.value; });
+          }
+          next[menu.id] = bucket;
+          if (options.onChange) options.onChange(next);
         });
       });
       panel.appendChild(list);
@@ -643,6 +734,12 @@
     });
 
     MACRO_RANGE_MENUS.forEach(function(menu) {
+      var availableOpts =
+        menu.id === 'maxKcal100'
+          ? availableMaxKcalOptions(recipes, activeMulti, getMacros)
+          : availableMinProtOptions(recipes, activeMulti, getMacros);
+      if (!availableOpts.length && activeMulti[menu.id] == null) return;
+
       var wrap = mk('div', 'list-filter-menu');
       var selectedValue = activeMulti[menu.id];
       var trigger = mk('button', 'list-filter-trigger');
@@ -658,7 +755,10 @@
 
       var panel = mk('div', 'list-filter-panel');
       var list = mk('ul', 'list-filter-options');
-      var choices = [null].concat(menu.options);
+      var choices = [null].concat(availableOpts);
+      if (selectedValue != null && availableOpts.indexOf(selectedValue) === -1) {
+        choices.push(selectedValue);
+      }
       choices.forEach(function(opt) {
         var li = mk('li');
         var label = mk('label', 'list-filter-option');
@@ -685,6 +785,16 @@
       wrap.appendChild(panel);
       container.appendChild(wrap);
     });
+
+    if (multiHasSelection(activeMulti) && options.onClear) {
+      var clearBtn = mk('button', 'list-filter-clear');
+      clearBtn.type = 'button';
+      clearBtn.textContent = 'Rensa filter';
+      clearBtn.addEventListener('click', function() {
+        options.onClear();
+      });
+      container.appendChild(clearBtn);
+    }
 
     bindDropdownBehavior(container);
   }

@@ -830,8 +830,17 @@ function renderListFilters() {
   ReceptBrowseNav.renderListFilters(el, {
     recipes: recipesForListFilters(),
     activeMulti: activeMultiFilter,
+    getMacros100: function(r) {
+      return recipeMacrosPer100g(getDisplayRecipe(r));
+    },
     onChange: function(multi) {
       activeMultiFilter = multi;
+      syncFiltersToUrl(false);
+      renderListFilters();
+      renderList();
+    },
+    onClear: function() {
+      activeMultiFilter = { protein: [], cuisine: [], maxKcal100: null, minProt100: null };
       syncFiltersToUrl(false);
       renderListFilters();
       renderList();
