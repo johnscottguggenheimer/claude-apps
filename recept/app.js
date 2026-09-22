@@ -836,7 +836,23 @@ function renderEatModeControl() {
   btn.className = 'list-eat-btn' + (mode ? ' list-eat-btn--active' : '');
   btn.setAttribute('aria-haspopup', 'menu');
   btn.setAttribute('aria-expanded', 'false');
-  btn.textContent = currentLabel;
+  btn.setAttribute('aria-label', 'Byt: ' + currentLabel);
+  var btnLabel = mk('span', 'list-eat-btn-label');
+  btnLabel.textContent = 'Byt';
+  btn.appendChild(btnLabel);
+  var chevron = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  chevron.setAttribute('class', 'list-eat-chevron');
+  chevron.setAttribute('viewBox', '0 0 24 24');
+  chevron.setAttribute('aria-hidden', 'true');
+  var chevronPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  chevronPath.setAttribute('d', 'M6 9l6 6 6-6');
+  chevronPath.setAttribute('fill', 'none');
+  chevronPath.setAttribute('stroke', 'currentColor');
+  chevronPath.setAttribute('stroke-width', '2');
+  chevronPath.setAttribute('stroke-linecap', 'round');
+  chevronPath.setAttribute('stroke-linejoin', 'round');
+  chevron.appendChild(chevronPath);
+  btn.appendChild(chevron);
 
   var menu = mk('div', 'list-eat-menu');
   menu.setAttribute('role', 'menu');

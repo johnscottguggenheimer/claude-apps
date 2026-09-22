@@ -19,7 +19,7 @@
   }
   [data-theme="dark"] {
     color-scheme: dark;
-    --bg: #1c1d1c; --bg2: #1c1d1c; --bg3: #282928;
+    --bg: #282928; --bg2: #1c1d1c; --bg3: #323332;
     --text: #f0efe8; --text2: #a0a09a; --text3: #6a6a64;
     --border: rgba(255,255,255,0.09); --border2: rgba(255,255,255,0.16);
     --info: #5ba3e8;
@@ -228,8 +228,8 @@
   .list-heading-row {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
+    justify-content: flex-start;
+    gap: 0.75rem;
     margin: 0 0 0.65rem;
   }
   .list-heading {
@@ -245,10 +245,11 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 0.3rem;
     font: inherit;
-    font-size: 0.9375rem;
+    font-size: 0.875rem;
     font-weight: 700;
-    padding: 0.55rem 1.15rem;
+    padding: 0.4rem 0.85rem 0.4rem 1rem;
     border-radius: 999px;
     border: 1px solid var(--info);
     background: var(--info);
@@ -260,10 +261,19 @@
   .list-eat-btn[aria-expanded="true"] {
     filter: brightness(1.08);
   }
+  .list-eat-chevron {
+    width: 0.95rem;
+    height: 0.95rem;
+    flex-shrink: 0;
+    transition: transform 0.15s;
+  }
+  .list-eat-btn[aria-expanded="true"] .list-eat-chevron {
+    transform: rotate(180deg);
+  }
   .list-eat-menu {
     display: none;
     position: absolute;
-    right: 0;
+    left: 0;
     top: calc(100% + 0.4rem);
     min-width: 14rem;
     z-index: 40;
