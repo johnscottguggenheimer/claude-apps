@@ -1,0 +1,1514 @@
+{
+  "generatedAt": "2026-09-22T10:11:29.745Z",
+  "recipes": 32,
+  "uniqueAliasesUsedInRecipes": 216,
+  "sampleSize": 100,
+  "sample": [
+    {
+      "aliasKey": "salt",
+      "ingredientId": 1975,
+      "canonical": "Salt m. jod",
+      "useCount": 27,
+      "recipeIds": [
+        "bbq-kycklinglar",
+        "hot-honey-chicken-sliders",
+        "street-corn-chicken-bowl",
+        "popcorn-kyckling-med-koreansk-glasyr-och-klibbig",
+        "lax-avokado-crunch-bowl",
+        "peanut-butter-cups",
+        "protein-affogato",
+        "aglio-e-olio",
+        "mexican-chicken-corn-salad",
+        "buffalo-chicken-crust-pizza",
+        "edamame-spread",
+        "middle-eastern-chicken-mince",
+        "cinnamon-sugar-donut-holes",
+        "numbing-chicken-cucumber",
+        "rice-paper-shrimp-pancake",
+        "chicken-kebab-wraps",
+        "hoagie-bread",
+        "kycklinglasagne-med-zucchini",
+        "hjortfarsbiffar-med-rostade-rotfrukter-och-svamp",
+        "kyckling-gyoza-med-dipp"
+      ],
+      "exampleRaws": [
+        "salt",
+        "salt (till pastavattnet)"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "svartpeppar",
+      "ingredientId": 900000,
+      "canonical": "svartpeppar",
+      "useCount": 17,
+      "recipeIds": [
+        "bbq-kycklinglar",
+        "hot-honey-chicken-sliders",
+        "street-corn-chicken-bowl",
+        "popcorn-kyckling-med-koreansk-glasyr-och-klibbig",
+        "lax-avokado-crunch-bowl",
+        "mexican-chicken-corn-salad",
+        "buffalo-chicken-crust-pizza",
+        "gochujang-gnocchi",
+        "middle-eastern-chicken-mince",
+        "dumpling-lasagna",
+        "chicken-kebab-wraps",
+        "hjortfarsbiffar-med-rostade-rotfrukter-och-svamp"
+      ],
+      "exampleRaws": [
+        "svartpeppar"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "soja",
+      "ingredientId": 909,
+      "canonical": "Sojasås",
+      "useCount": 13,
+      "recipeIds": [
+        "popcorn-kyckling-med-koreansk-glasyr-och-klibbig",
+        "lax-avokado-crunch-bowl",
+        "thai-chicken-cucumber-salad",
+        "honey-lime-teriyaki-beef-noodles",
+        "one-pan-dumplings-with-greens",
+        "dumpling-lasagna",
+        "numbing-chicken-cucumber",
+        "rice-paper-shrimp-pancake",
+        "kyckling-gyoza-med-dipp",
+        "thai-basil-beef-rolls"
+      ],
+      "exampleRaws": [
+        "soja"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "rödlök",
+      "ingredientId": 348,
+      "canonical": "Mangold",
+      "useCount": 12,
+      "recipeIds": [
+        "hot-honey-chicken-sliders",
+        "lax-avokado-crunch-bowl",
+        "thai-chicken-cucumber-salad",
+        "mexican-chicken-corn-salad",
+        "buffalo-chicken-crust-pizza",
+        "middle-eastern-chicken-mince",
+        "tuna-chili-crisp-salad",
+        "chicken-kebab-wraps",
+        "hjortfarsbiffar-med-rostade-rotfrukter-och-svamp"
+      ],
+      "exampleRaws": [
+        "rödlök (halv)",
+        "rödlök, fint tärnad",
+        "rödlök"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "salladslök",
+      "ingredientId": 354,
+      "canonical": "Purjolök",
+      "useCount": 11,
+      "recipeIds": [
+        "kycklingpizza-wrap",
+        "popcorn-kyckling-med-koreansk-glasyr-och-klibbig",
+        "buffalo-chicken-crust-pizza",
+        "smashed-cucumber",
+        "gochujang-gnocchi",
+        "one-pan-dumplings-with-greens",
+        "dumpling-lasagna",
+        "numbing-chicken-cucumber",
+        "rice-paper-shrimp-pancake"
+      ],
+      "exampleRaws": [
+        "salladslök",
+        "hackad salladslök (gröna delar)",
+        "skivad salladslök"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "vatten",
+      "ingredientId": 1975,
+      "canonical": "Salt m. jod",
+      "useCount": 10,
+      "recipeIds": [
+        "popcorn-kyckling-med-koreansk-glasyr-och-klibbig",
+        "pb2-banana-chocolate-chip-bread",
+        "mexican-chicken-corn-salad",
+        "gochujang-gnocchi",
+        "one-pan-dumplings-with-greens",
+        "chicken-kebab-wraps",
+        "hoagie-bread",
+        "kycklinglasagne-med-zucchini",
+        "kyckling-gyoza-med-dipp"
+      ],
+      "exampleRaws": [
+        "vatten",
+        "vatten (38–40°c)"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "vitlöksklyfta",
+      "ingredientId": 371,
+      "canonical": "Vitlök",
+      "useCount": 10,
+      "recipeIds": [
+        "edamame-spread",
+        "smashed-cucumber",
+        "gochujang-gnocchi",
+        "one-pan-dumplings-with-greens",
+        "dumpling-lasagna",
+        "numbing-chicken-cucumber",
+        "chicken-kebab-wraps",
+        "kycklinglasagne-med-zucchini",
+        "hjortfarsbiffar-med-rostade-rotfrukter-och-svamp",
+        "thai-basil-beef-rolls"
+      ],
+      "exampleRaws": [
+        "vitlöksklyftor",
+        "riven vitlöksklyfta",
+        "pressade vitlöksklyftor"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "gurka",
+      "ingredientId": 339,
+      "canonical": "Gurka",
+      "useCount": 9,
+      "recipeIds": [
+        "lax-avokado-crunch-bowl",
+        "thai-chicken-cucumber-salad",
+        "smashed-cucumber",
+        "middle-eastern-chicken-mince",
+        "tuna-chili-crisp-salad",
+        "numbing-chicken-cucumber",
+        "chicken-kebab-wraps",
+        "thai-basil-beef-rolls"
+      ],
+      "exampleRaws": [
+        "tärnad gurka",
+        "gurka",
+        "gurka (stor)"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "sesamfrö",
+      "ingredientId": 1572,
+      "canonical": "Sesamfrö m. skal",
+      "useCount": 8,
+      "recipeIds": [
+        "popcorn-kyckling-med-koreansk-glasyr-och-klibbig",
+        "lax-avokado-crunch-bowl",
+        "smashed-cucumber",
+        "tuna-chili-crisp-salad",
+        "dumpling-lasagna",
+        "numbing-chicken-cucumber",
+        "rice-paper-shrimp-pancake",
+        "kyckling-gyoza-med-dipp"
+      ],
+      "exampleRaws": [
+        "sesamfrön"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "vitlök",
+      "ingredientId": 371,
+      "canonical": "Vitlök",
+      "useCount": 7,
+      "recipeIds": [
+        "aglio-e-olio",
+        "thai-chicken-cucumber-salad",
+        "honey-lime-teriyaki-beef-noodles",
+        "middle-eastern-chicken-mince",
+        "hjortfarsbiffar-med-rostade-rotfrukter-och-svamp",
+        "kyckling-gyoza-med-dipp"
+      ],
+      "exampleRaws": [
+        "vitlök, tunt skivad",
+        "vitlök",
+        "finhackad vitlök"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "sesamolja",
+      "ingredientId": 38,
+      "canonical": "Sesamolja",
+      "useCount": 7,
+      "recipeIds": [
+        "honey-lime-teriyaki-beef-noodles",
+        "smashed-cucumber",
+        "dumpling-lasagna",
+        "numbing-chicken-cucumber",
+        "rice-paper-shrimp-pancake",
+        "kyckling-gyoza-med-dipp"
+      ],
+      "exampleRaws": [
+        "sesamolja"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "olivolja",
+      "ingredientId": 35,
+      "canonical": "Olivolja",
+      "useCount": 6,
+      "recipeIds": [
+        "bbq-kycklinglar",
+        "aglio-e-olio",
+        "edamame-spread",
+        "middle-eastern-chicken-mince",
+        "chicken-kebab-wraps",
+        "hjortfarsbiffar-med-rostade-rotfrukter-och-svamp"
+      ],
+      "exampleRaws": [
+        "olivolja"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "ägg",
+      "ingredientId": 1225,
+      "canonical": "Ägg rått",
+      "useCount": 6,
+      "recipeIds": [
+        "kycklingpizza-wrap",
+        "popcorn-kyckling-med-koreansk-glasyr-och-klibbig",
+        "pb2-banana-chocolate-chip-bread",
+        "buffalo-chicken-crust-pizza",
+        "cinnamon-sugar-donut-holes",
+        "hjortfarsbiffar-med-rostade-rotfrukter-och-svamp"
+      ],
+      "exampleRaws": [
+        "ägg",
+        "ägg (stora)",
+        "ägg (stort)"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "honung",
+      "ingredientId": 1896,
+      "canonical": "Honung",
+      "useCount": 6,
+      "recipeIds": [
+        "hot-honey-chicken-sliders",
+        "popcorn-kyckling-med-koreansk-glasyr-och-klibbig",
+        "lax-avokado-crunch-bowl",
+        "honey-lime-teriyaki-beef-noodles",
+        "hoagie-bread"
+      ],
+      "exampleRaws": [
+        "honung"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "lime",
+      "ingredientId": 572,
+      "canonical": "Lime",
+      "useCount": 6,
+      "recipeIds": [
+        "street-corn-chicken-bowl",
+        "thai-chicken-cucumber-salad",
+        "mexican-chicken-corn-salad",
+        "honey-lime-teriyaki-beef-noodles"
+      ],
+      "exampleRaws": [
+        "pressad lime",
+        "lime",
+        "limejuice"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "koriander",
+      "ingredientId": 7193,
+      "canonical": "Koriander blad",
+      "useCount": 6,
+      "recipeIds": [
+        "street-corn-chicken-bowl",
+        "mexican-chicken-corn-salad",
+        "tuna-chili-crisp-salad",
+        "numbing-chicken-cucumber",
+        "chicken-kebab-wraps"
+      ],
+      "exampleRaws": [
+        "hackad färsk koriander",
+        "koriander",
+        "grovhackad färsk koriander"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "risvinäger",
+      "ingredientId": 910006,
+      "canonical": "risvinäger",
+      "useCount": 6,
+      "recipeIds": [
+        "thai-chicken-cucumber-salad",
+        "honey-lime-teriyaki-beef-noodles",
+        "smashed-cucumber",
+        "tuna-chili-crisp-salad",
+        "dumpling-lasagna",
+        "kyckling-gyoza-med-dipp"
+      ],
+      "exampleRaws": [
+        "risvinäger",
+        "risvinäger (för att pickla löken)"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "kycklingbröst",
+      "ingredientId": 1173,
+      "canonical": "Kyckling bröstfilé rå u. skinn",
+      "useCount": 5,
+      "recipeIds": [
+        "hot-honey-chicken-sliders",
+        "street-corn-chicken-bowl",
+        "popcorn-kyckling-med-koreansk-glasyr-och-klibbig",
+        "mexican-chicken-corn-salad",
+        "numbing-chicken-cucumber"
+      ],
+      "exampleRaws": [
+        "kycklingbröst"
+      ],
+      "hitVia": "broadened"
+    },
+    {
+      "aliasKey": "vitlökspulver",
+      "ingredientId": 900000,
+      "canonical": "svartpeppar",
+      "useCount": 5,
+      "recipeIds": [
+        "hot-honey-chicken-sliders",
+        "mexican-chicken-corn-salad",
+        "buffalo-chicken-crust-pizza",
+        "chicken-kebab-wraps",
+        "kycklinglasagne-med-zucchini"
+      ],
+      "exampleRaws": [
+        "vitlökspulver"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "ingefära",
+      "ingredientId": 2269,
+      "canonical": "Ingefära färsk",
+      "useCount": 5,
+      "recipeIds": [
+        "gochujang-gnocchi",
+        "one-pan-dumplings-with-greens",
+        "dumpling-lasagna",
+        "numbing-chicken-cucumber",
+        "kyckling-gyoza-med-dipp"
+      ],
+      "exampleRaws": [
+        "riven färsk ingefära",
+        "finhackad ingefära (1 tum)",
+        "färsk ingefära"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "sötningsmedel",
+      "ingredientId": 900000,
+      "canonical": "svartpeppar",
+      "useCount": 4,
+      "recipeIds": [
+        "popcorn-kyckling-med-koreansk-glasyr-och-klibbig",
+        "pb2-banana-chocolate-chip-bread",
+        "peanut-butter-cups",
+        "chocolate-chunk-scones-4-ingredients"
+      ],
+      "exampleRaws": [
+        "sötningsmedel"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "citron",
+      "ingredientId": 559,
+      "canonical": "Citron",
+      "useCount": 4,
+      "recipeIds": [
+        "edamame-spread",
+        "middle-eastern-chicken-mince",
+        "tuna-chili-crisp-salad",
+        "chicken-kebab-wraps"
+      ],
+      "exampleRaws": [
+        "citron, zest + juice",
+        "citron",
+        "citronzest"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "chili crisp",
+      "ingredientId": 910000,
+      "canonical": "chili crisp",
+      "useCount": 4,
+      "recipeIds": [
+        "tuna-chili-crisp-salad",
+        "one-pan-dumplings-with-greens",
+        "dumpling-lasagna"
+      ],
+      "exampleRaws": [
+        "chili crisp (extra, till botten)",
+        "chili crisp"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "mozzarella",
+      "ingredientId": 2255,
+      "canonical": "Ost mozzarella fett 18%",
+      "useCount": 3,
+      "recipeIds": [
+        "kycklingpizza-wrap",
+        "hot-honey-chicken-sliders",
+        "buffalo-chicken-crust-pizza"
+      ],
+      "exampleRaws": [
+        "mozzarella",
+        "riven mozzarella"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "salt och peppar",
+      "ingredientId": 1975,
+      "canonical": "Salt m. jod",
+      "useCount": 3,
+      "recipeIds": [
+        "kycklingpizza-wrap",
+        "tuna-chili-crisp-salad"
+      ],
+      "exampleRaws": [
+        "salt och peppar"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "paprika",
+      "ingredientId": 355,
+      "canonical": "Rödkål",
+      "useCount": 3,
+      "recipeIds": [
+        "hot-honey-chicken-sliders",
+        "mexican-chicken-corn-salad",
+        "chicken-kebab-wraps"
+      ],
+      "exampleRaws": [
+        "paprika"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "sriracha",
+      "ingredientId": 1968,
+      "canonical": "Chilisås tomat",
+      "useCount": 3,
+      "recipeIds": [
+        "hot-honey-chicken-sliders",
+        "lax-avokado-crunch-bowl"
+      ],
+      "exampleRaws": [
+        "sriracha"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "majonnäs",
+      "ingredientId": 50,
+      "canonical": "Majonnäs fett 80%",
+      "useCount": 3,
+      "recipeIds": [
+        "street-corn-chicken-bowl",
+        "lax-avokado-crunch-bowl",
+        "smashed-pickle-salad"
+      ],
+      "exampleRaws": [
+        "majonnäs"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "chilipulver",
+      "ingredientId": 900000,
+      "canonical": "svartpeppar",
+      "useCount": 3,
+      "recipeIds": [
+        "street-corn-chicken-bowl",
+        "mexican-chicken-corn-salad",
+        "chicken-kebab-wraps"
+      ],
+      "exampleRaws": [
+        "chilipulver"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "vaniljextrakt",
+      "ingredientId": 1892,
+      "canonical": "Socker",
+      "useCount": 3,
+      "recipeIds": [
+        "pb2-banana-chocolate-chip-bread",
+        "protein-affogato",
+        "cinnamon-sugar-donut-holes"
+      ],
+      "exampleRaws": [
+        "vaniljextrakt"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "fisksås",
+      "ingredientId": 6675,
+      "canonical": "Fisksås",
+      "useCount": 3,
+      "recipeIds": [
+        "thai-chicken-cucumber-salad",
+        "thai-basil-beef-rolls"
+      ],
+      "exampleRaws": [
+        "fisksås",
+        "fisksås (valfritt)"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "kycklingfärs",
+      "ingredientId": 1173,
+      "canonical": "Kyckling bröstfilé rå u. skinn",
+      "useCount": 3,
+      "recipeIds": [
+        "thai-chicken-cucumber-salad",
+        "middle-eastern-chicken-mince",
+        "kyckling-gyoza-med-dipp"
+      ],
+      "exampleRaws": [
+        "kycklingfärs"
+      ],
+      "hitVia": "broadened"
+    },
+    {
+      "aliasKey": "spiskummin",
+      "ingredientId": 900000,
+      "canonical": "svartpeppar",
+      "useCount": 3,
+      "recipeIds": [
+        "mexican-chicken-corn-salad",
+        "middle-eastern-chicken-mince",
+        "chicken-kebab-wraps"
+      ],
+      "exampleRaws": [
+        "spiskummin"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "kycklingbuljong",
+      "ingredientId": 1224,
+      "canonical": "Hönsbuljong ätf.",
+      "useCount": 3,
+      "recipeIds": [
+        "dumpling-lasagna",
+        "kycklinglasagne-med-zucchini",
+        "hjortfarsbiffar-med-rostade-rotfrukter-och-svamp"
+      ],
+      "exampleRaws": [
+        "kycklingbuljong"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "timjan",
+      "ingredientId": 352,
+      "canonical": "Persilja blad",
+      "useCount": 3,
+      "recipeIds": [
+        "hjortfarsbiffar-med-rostade-rotfrukter-och-svamp"
+      ],
+      "exampleRaws": [
+        "färsk timjan eller rosmarin",
+        "färsk timjan"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "citronsaft",
+      "ingredientId": 645,
+      "canonical": "Citronjuice färskpressad",
+      "useCount": 2,
+      "recipeIds": [
+        "bbq-kycklinglar",
+        "tuna-chili-crisp-salad"
+      ],
+      "exampleRaws": [
+        "citronsaft"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "äggvita",
+      "ingredientId": 1225,
+      "canonical": "Ägg rått",
+      "useCount": 2,
+      "recipeIds": [
+        "kycklingpizza-wrap",
+        "hoagie-bread"
+      ],
+      "exampleRaws": [
+        "äggvita"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "tomatpuré",
+      "ingredientId": 410,
+      "canonical": "Tomatpuré konc. konserv.",
+      "useCount": 2,
+      "recipeIds": [
+        "kycklingpizza-wrap",
+        "kycklinglasagne-med-zucchini"
+      ],
+      "exampleRaws": [
+        "tomatpuré"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "oregano",
+      "ingredientId": 900000,
+      "canonical": "svartpeppar",
+      "useCount": 2,
+      "recipeIds": [
+        "hot-honey-chicken-sliders",
+        "kycklinglasagne-med-zucchini"
+      ],
+      "exampleRaws": [
+        "oregano"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "chilisås",
+      "ingredientId": 1968,
+      "canonical": "Chilisås tomat",
+      "useCount": 2,
+      "recipeIds": [
+        "hot-honey-chicken-sliders",
+        "mexican-chicken-corn-salad"
+      ],
+      "exampleRaws": [
+        "chilisås"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "lätt majonnäs",
+      "ingredientId": 53,
+      "canonical": "Majonnäs lätt fett 30%",
+      "useCount": 2,
+      "recipeIds": [
+        "hot-honey-chicken-sliders",
+        "chicken-kebab-wraps"
+      ],
+      "exampleRaws": [
+        "lätt majonnäs"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "majsstärkelse",
+      "ingredientId": 1945,
+      "canonical": "Majsstärkelse",
+      "useCount": 2,
+      "recipeIds": [
+        "popcorn-kyckling-med-koreansk-glasyr-och-klibbig",
+        "rice-paper-shrimp-pancake"
+      ],
+      "exampleRaws": [
+        "majsstärkelse"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "vetemjöl",
+      "ingredientId": 1941,
+      "canonical": "Vetemjöl",
+      "useCount": 2,
+      "recipeIds": [
+        "pb2-banana-chocolate-chip-bread",
+        "cinnamon-sugar-donut-holes"
+      ],
+      "exampleRaws": [
+        "vetemjöl"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "kanel",
+      "ingredientId": 2306,
+      "canonical": "Kanel",
+      "useCount": 2,
+      "recipeIds": [
+        "pb2-banana-chocolate-chip-bread",
+        "cinnamon-sugar-donut-holes"
+      ],
+      "exampleRaws": [
+        "kanel"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "lönnsirap",
+      "ingredientId": 910004,
+      "canonical": "lönnsirap",
+      "useCount": 2,
+      "recipeIds": [
+        "protein-affogato",
+        "cinnamon-sugar-donut-holes"
+      ],
+      "exampleRaws": [
+        "lönnsirap, honung eller monk fruit-sötning",
+        "lönnsirap eller honung"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "röd paprika",
+      "ingredientId": 355,
+      "canonical": "Rödkål",
+      "useCount": 2,
+      "recipeIds": [
+        "mexican-chicken-corn-salad",
+        "chicken-kebab-wraps"
+      ],
+      "exampleRaws": [
+        "röd paprika",
+        "finhackad röd paprika"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "rostad sesamolja",
+      "ingredientId": 38,
+      "canonical": "Sesamolja",
+      "useCount": 2,
+      "recipeIds": [
+        "gochujang-gnocchi",
+        "tuna-chili-crisp-salad"
+      ],
+      "exampleRaws": [
+        "rostad sesamolja"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "mynta",
+      "ingredientId": 345,
+      "canonical": "Majskolv",
+      "useCount": 2,
+      "recipeIds": [
+        "middle-eastern-chicken-mince"
+      ],
+      "exampleRaws": [
+        "mynta"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "rispapper",
+      "ingredientId": 900004,
+      "canonical": "rispapper",
+      "useCount": 2,
+      "recipeIds": [
+        "rice-paper-shrimp-pancake",
+        "thai-basil-beef-rolls"
+      ],
+      "exampleRaws": [
+        "rispapper"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "morot",
+      "ingredientId": 289,
+      "canonical": "Morot",
+      "useCount": 2,
+      "recipeIds": [
+        "hjortfarsbiffar-med-rostade-rotfrukter-och-svamp",
+        "thai-basil-beef-rolls"
+      ],
+      "exampleRaws": [
+        "morot",
+        "juliennad morot"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "kyckling lår",
+      "ingredientId": 1174,
+      "canonical": "Kyckling lår rå u. skinn",
+      "useCount": 1,
+      "recipeIds": [
+        "bbq-kycklinglar"
+      ],
+      "exampleRaws": [
+        "kycklinglår utan skinn"
+      ],
+      "hitVia": "broadened"
+    },
+    {
+      "aliasKey": "brödvittvetetortilla",
+      "ingredientId": 5974,
+      "canonical": "Bröd vitt vetetortilla",
+      "useCount": 1,
+      "recipeIds": [
+        "kycklingpizza-wrap"
+      ],
+      "exampleRaws": [
+        "brödvittvetetortilla"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "majs",
+      "ingredientId": 305,
+      "canonical": "Morot kokt m. salt",
+      "useCount": 1,
+      "recipeIds": [
+        "hot-honey-chicken-sliders"
+      ],
+      "exampleRaws": [
+        "majs"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "swiss-ost",
+      "ingredientId": 96,
+      "canonical": "Ost hårdost fett 28%",
+      "useCount": 1,
+      "recipeIds": [
+        "hot-honey-chicken-sliders"
+      ],
+      "exampleRaws": [
+        "swiss-ost / leerdamer 50%"
+      ],
+      "hitVia": "broadened"
+    },
+    {
+      "aliasKey": "vitlökspasta",
+      "ingredientId": 900000,
+      "canonical": "svartpeppar",
+      "useCount": 1,
+      "recipeIds": [
+        "hot-honey-chicken-sliders"
+      ],
+      "exampleRaws": [
+        "vitlökspasta"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "majskärnor",
+      "ingredientId": 305,
+      "canonical": "Morot kokt m. salt",
+      "useCount": 1,
+      "recipeIds": [
+        "street-corn-chicken-bowl"
+      ],
+      "exampleRaws": [
+        "majskärnor"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "smulad cotija-ost",
+      "ingredientId": 103,
+      "canonical": "Ost hårdost parmesan fett 30% typ Parmiggiano Reggiano",
+      "useCount": 1,
+      "recipeIds": [
+        "street-corn-chicken-bowl"
+      ],
+      "exampleRaws": [
+        "smulad cotija-ost"
+      ],
+      "hitVia": "broadened"
+    },
+    {
+      "aliasKey": "brunt stevia",
+      "ingredientId": 900000,
+      "canonical": "svartpeppar",
+      "useCount": 1,
+      "recipeIds": [
+        "popcorn-kyckling-med-koreansk-glasyr-och-klibbig"
+      ],
+      "exampleRaws": [
+        "brunt stevia"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "kokt ris",
+      "ingredientId": 804,
+      "canonical": "Ris råris kokt m. salt",
+      "useCount": 1,
+      "recipeIds": [
+        "lax-avokado-crunch-bowl"
+      ],
+      "exampleRaws": [
+        "kokt ris"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "kakao",
+      "ingredientId": 7031,
+      "canonical": "Kakaosmör",
+      "useCount": 1,
+      "recipeIds": [
+        "pb2-banana-chocolate-chip-bread"
+      ],
+      "exampleRaws": [
+        "kakao"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "mandelmjöl",
+      "ingredientId": 6087,
+      "canonical": "Mandelmjöl",
+      "useCount": 1,
+      "recipeIds": [
+        "peanut-butter-cups"
+      ],
+      "exampleRaws": [
+        "mandelmjöl"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "vaniljproteinpulver",
+      "ingredientId": 900001,
+      "canonical": "proteinpulver",
+      "useCount": 1,
+      "recipeIds": [
+        "protein-affogato"
+      ],
+      "exampleRaws": [
+        "vaniljproteinpulver"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "smulad torkad chili",
+      "ingredientId": 900000,
+      "canonical": "svartpeppar",
+      "useCount": 1,
+      "recipeIds": [
+        "aglio-e-olio"
+      ],
+      "exampleRaws": [
+        "smulad torkad chili/peperoncino"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "bladpersilja",
+      "ingredientId": 352,
+      "canonical": "Persilja blad",
+      "useCount": 1,
+      "recipeIds": [
+        "aglio-e-olio"
+      ],
+      "exampleRaws": [
+        "hackad bladpersilja"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "brödsmul",
+      "ingredientId": 202,
+      "canonical": "Bröd vitt fibrer 3,5%",
+      "useCount": 1,
+      "recipeIds": [
+        "aglio-e-olio"
+      ],
+      "exampleRaws": [
+        "grovt brödsmul (torrt surdegsbröd)"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "jordnötter",
+      "ingredientId": 1561,
+      "canonical": "Jordnötter rostade",
+      "useCount": 1,
+      "recipeIds": [
+        "thai-chicken-cucumber-salad"
+      ],
+      "exampleRaws": [
+        "hackade jordnötter"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "konserverad majs",
+      "ingredientId": 305,
+      "canonical": "Morot kokt m. salt",
+      "useCount": 1,
+      "recipeIds": [
+        "mexican-chicken-corn-salad"
+      ],
+      "exampleRaws": [
+        "konserverad majs"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "tjock grekisk yoghurt",
+      "ingredientId": 7146,
+      "canonical": "Yoghurt smaksatt m. sötningsm. fett 0% typ grekisk yoghurt",
+      "useCount": 1,
+      "recipeIds": [
+        "chocolate-chunk-scones-4-ingredients"
+      ],
+      "exampleRaws": [
+        "tjock grekisk yoghurt"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "risnudlar",
+      "ingredientId": 4448,
+      "canonical": "Nudlar risnudlar kokta",
+      "useCount": 1,
+      "recipeIds": [
+        "honey-lime-teriyaki-beef-noodles"
+      ],
+      "exampleRaws": [
+        "risnudlar"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "malet kycklingbröst",
+      "ingredientId": 1173,
+      "canonical": "Kyckling bröstfilé rå u. skinn",
+      "useCount": 1,
+      "recipeIds": [
+        "buffalo-chicken-crust-pizza"
+      ],
+      "exampleRaws": [
+        "malet kycklingbröst"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "buffalosås",
+      "ingredientId": 900003,
+      "canonical": "buffalosås",
+      "useCount": 1,
+      "recipeIds": [
+        "buffalo-chicken-crust-pizza"
+      ],
+      "exampleRaws": [
+        "buffalosås"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "bacon",
+      "ingredientId": 1003,
+      "canonical": "Gris bacon rå",
+      "useCount": 1,
+      "recipeIds": [
+        "buffalo-chicken-crust-pizza"
+      ],
+      "exampleRaws": [
+        "bacon, förstekt"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "fryst edamame",
+      "ingredientId": 910003,
+      "canonical": "edamame",
+      "useCount": 1,
+      "recipeIds": [
+        "edamame-spread"
+      ],
+      "exampleRaws": [
+        "fryst edamame (blancherad)"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "flingsalt",
+      "ingredientId": 1975,
+      "canonical": "Salt m. jod",
+      "useCount": 1,
+      "recipeIds": [
+        "smashed-cucumber"
+      ],
+      "exampleRaws": [
+        "flingsalt"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "keso 1,5%",
+      "ingredientId": 70,
+      "canonical": "Färskost cottage cheese naturell fett 4%",
+      "useCount": 1,
+      "recipeIds": [
+        "gochujang-gnocchi"
+      ],
+      "exampleRaws": [
+        "keso 1,5%"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "coconut aminos",
+      "ingredientId": 910005,
+      "canonical": "coconut aminos",
+      "useCount": 1,
+      "recipeIds": [
+        "gochujang-gnocchi"
+      ],
+      "exampleRaws": [
+        "coconut aminos"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "gochugaru",
+      "ingredientId": 900000,
+      "canonical": "svartpeppar",
+      "useCount": 1,
+      "recipeIds": [
+        "gochujang-gnocchi"
+      ],
+      "exampleRaws": [
+        "gochugaru"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "basmatiris",
+      "ingredientId": 2475,
+      "canonical": "Ris basmati okokt",
+      "useCount": 1,
+      "recipeIds": [
+        "middle-eastern-chicken-mince"
+      ],
+      "exampleRaws": [
+        "basmatiris"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "olivoljespray",
+      "ingredientId": 49,
+      "canonical": "Dressing fett 0%",
+      "useCount": 1,
+      "recipeIds": [
+        "cinnamon-sugar-donut-holes"
+      ],
+      "exampleRaws": [
+        "olivoljespray (händer + airfryer)"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "ruccola",
+      "ingredientId": 2561,
+      "canonical": "Ruccolasallat",
+      "useCount": 1,
+      "recipeIds": [
+        "tuna-chili-crisp-salad"
+      ],
+      "exampleRaws": [
+        "ruccola"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "sallad",
+      "ingredientId": 57,
+      "canonical": "Sallad m. skaldjur majonnäsdressing",
+      "useCount": 1,
+      "recipeIds": [
+        "thai-basil-beef-rolls"
+      ],
+      "exampleRaws": [
+        "sallad, strimlad"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "matolja",
+      "ingredientId": 3418,
+      "canonical": "Matolja",
+      "useCount": 1,
+      "recipeIds": [
+        "thai-basil-beef-rolls"
+      ],
+      "exampleRaws": [
+        "matolja"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "farinsocker",
+      "ingredientId": 1892,
+      "canonical": "Socker",
+      "useCount": 1,
+      "recipeIds": [
+        "thai-basil-beef-rolls"
+      ],
+      "exampleRaws": [
+        "farinsocker"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "nötfärs",
+      "ingredientId": 951,
+      "canonical": "Nöt färs rå fett 10%",
+      "useCount": 1,
+      "recipeIds": [
+        "thai-basil-beef-rolls"
+      ],
+      "exampleRaws": [
+        "nötfärs"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "mirin",
+      "ingredientId": 910007,
+      "canonical": "mirin",
+      "useCount": 1,
+      "recipeIds": [
+        "kyckling-gyoza-med-dipp"
+      ],
+      "exampleRaws": [
+        "mirin"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "olja",
+      "ingredientId": 2189,
+      "canonical": "Rapsolja",
+      "useCount": 1,
+      "recipeIds": [
+        "kyckling-gyoza-med-dipp"
+      ],
+      "exampleRaws": [
+        "olja"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "gyozaskal",
+      "ingredientId": 900005,
+      "canonical": "gyozaskal",
+      "useCount": 1,
+      "recipeIds": [
+        "kyckling-gyoza-med-dipp"
+      ],
+      "exampleRaws": [
+        "gyozaskal"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "grekisk yoghurt 2%",
+      "ingredientId": 6113,
+      "canonical": "Yoghurt naturell fett 10%",
+      "useCount": 1,
+      "recipeIds": [
+        "hjortfarsbiffar-med-rostade-rotfrukter-och-svamp"
+      ],
+      "exampleRaws": [
+        "grekisk yoghurt 2% eller kvarg"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "champinjon",
+      "ingredientId": 333,
+      "canonical": "Champinjon",
+      "useCount": 1,
+      "recipeIds": [
+        "hjortfarsbiffar-med-rostade-rotfrukter-och-svamp"
+      ],
+      "exampleRaws": [
+        "champinjoner"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "palsternacka",
+      "ingredientId": 290,
+      "canonical": "Palsternacka",
+      "useCount": 1,
+      "recipeIds": [
+        "hjortfarsbiffar-med-rostade-rotfrukter-och-svamp"
+      ],
+      "exampleRaws": [
+        "palsternacka"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "hjortfärs",
+      "ingredientId": 5044,
+      "canonical": "Hjort dovhjort färs rå",
+      "useCount": 1,
+      "recipeIds": [
+        "hjortfarsbiffar-med-rostade-rotfrukter-och-svamp"
+      ],
+      "exampleRaws": [
+        "hjortfärs"
+      ],
+      "hitVia": "broadened"
+    },
+    {
+      "aliasKey": "paprikapulver",
+      "ingredientId": 900000,
+      "canonical": "svartpeppar",
+      "useCount": 1,
+      "recipeIds": [
+        "kycklinglasagne-med-zucchini"
+      ],
+      "exampleRaws": [
+        "paprikapulver"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "peppar",
+      "ingredientId": 900000,
+      "canonical": "svartpeppar",
+      "useCount": 1,
+      "recipeIds": [
+        "kycklinglasagne-med-zucchini"
+      ],
+      "exampleRaws": [
+        "peppar"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "spenat",
+      "ingredientId": 4941,
+      "canonical": "Spenat färsk",
+      "useCount": 1,
+      "recipeIds": [
+        "kycklinglasagne-med-zucchini"
+      ],
+      "exampleRaws": [
+        "spenat"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "parmesan",
+      "ingredientId": 103,
+      "canonical": "Ost hårdost parmesan fett 30% typ Parmiggiano Reggiano",
+      "useCount": 1,
+      "recipeIds": [
+        "kycklinglasagne-med-zucchini"
+      ],
+      "exampleRaws": [
+        "riven parmesan"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "mini crème fraîche",
+      "ingredientId": 7139,
+      "canonical": "Crème fraiche lätt fett 13%",
+      "useCount": 1,
+      "recipeIds": [
+        "kycklinglasagne-med-zucchini"
+      ],
+      "exampleRaws": [
+        "mini crème fraîche"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "mjöl",
+      "ingredientId": 1941,
+      "canonical": "Vetemjöl",
+      "useCount": 1,
+      "recipeIds": [
+        "kycklinglasagne-med-zucchini"
+      ],
+      "exampleRaws": [
+        "mjöl"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "soltorkade tomat",
+      "ingredientId": 365,
+      "canonical": "Tomat torkad m. olja",
+      "useCount": 1,
+      "recipeIds": [
+        "kycklinglasagne-med-zucchini"
+      ],
+      "exampleRaws": [
+        "soltorkade tomater"
+      ],
+      "hitVia": "exact"
+    },
+    {
+      "aliasKey": "kycklingfilé",
+      "ingredientId": 1173,
+      "canonical": "Kyckling bröstfilé rå u. skinn",
+      "useCount": 1,
+      "recipeIds": [
+        "kycklinglasagne-med-zucchini"
+      ],
+      "exampleRaws": [
+        "kycklingfilé"
+      ],
+      "hitVia": "broadened"
+    },
+    {
+      "aliasKey": "mager ost",
+      "ingredientId": 77,
+      "canonical": "Ost hårdost fett 10%",
+      "useCount": 1,
+      "recipeIds": [
+        "kycklinglasagne-med-zucchini"
+      ],
+      "exampleRaws": [
+        "mager riven ost"
+      ],
+      "hitVia": "exact"
+    }
+  ],
+  "originNote": "Aliases come from scripts/build-nutrition-seed-from-slv.py: (1) auto short/stripped from every SLV name, (2) CURATED id map, (3) PREFERRED_SEARCH regex overrides, (4) USDA/manual. paprika→Rödkål = CURATED id 355 (Rödkål) + PREFERRED_SEARCH ^Paprika$ miss (no exact SLV name). salladslök→Purjolök = PREFERRED_SEARCH ^Salladslök|^Purjolök fallback."
+}

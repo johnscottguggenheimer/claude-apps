@@ -1,0 +1,62 @@
+{
+  "_meta": {
+    "note": "Overrides wrong CURATED ids and missing piece weights for oracle totals. Spices in 0-bucket stay on 900000.",
+    "piece_weight_defaults_g": {
+      "paprika_fruit": 150,
+      "salladslök": 15,
+      "lök": 110,
+      "tomat": 100,
+      "morot": 80,
+      "vitlöksklyfta": 3,
+      "ägg": 58,
+      "lime_whole": 60,
+      "citron_whole": 85,
+      "banan": 120,
+      "lasagneplatta": 20
+    }
+  },
+  "foods": {
+    "paprika": { "id": 351, "name": "Paprika röd", "piece_weight_g": 150 },
+    "röd paprika": { "id": 351, "name": "Paprika röd", "piece_weight_g": 150 },
+    "grön paprika": { "id": 350, "name": "Paprika grön", "piece_weight_g": 150 },
+    "salladslök": { "id": 378, "name": "Gräslök", "piece_weight_g": 15, "note": "SLV saknar salladslök; Gräslök närmast för bladlök" },
+    "vårlök": { "id": 378, "name": "Gräslök", "piece_weight_g": 15 },
+    "rödlök": { "id": 344, "name": "Lök gul", "piece_weight_g": 110, "note": "SLV saknar rödlök; gul lök som proxy" },
+    "gul lök": { "id": 344, "name": "Lök gul", "piece_weight_g": 110, "note": "CURATED 347 was Majskorn frysvara" },
+    "lök": { "id": 344, "name": "Lök gul", "piece_weight_g": 110 },
+    "schalottenlök": { "id": 344, "name": "Lök gul", "piece_weight_g": 40, "note": "proxy gul lök; smaller piece" },
+    "majs": { "id": 400, "name": "Majskorn konserv. u. lag" },
+    "majskärnor": { "id": 400, "name": "Majskorn konserv. u. lag" },
+    "konserverad majs": { "id": 400, "name": "Majskorn konserv. u. lag" },
+    "mynta": { "id": 7194, "name": "Grönmynta blad" },
+    "timjan": { "id": 352, "name": "Persilja blad", "note": "ingen timjan i SLV — persilja som örtrproxy (samma kcal-klass)" },
+    "färsk timjan": { "id": 352, "name": "Persilja blad" },
+    "vaniljextrakt": {
+      "id": "synthetic:vaniljextrakt",
+      "name": "vaniljextrakt",
+      "kcal_per_100g": 288,
+      "protein_per_100g": 0,
+      "fat_per_100g": 0,
+      "carbs_per_100g": 13,
+      "note": "manual row lost claim to socker; synthetic from MANUAL_FOODS"
+    },
+    "vatten": {
+      "id": 1953,
+      "name": "Vatten kranvatten",
+      "note": "0 kcal; curated had wrongly claimed → salt"
+    },
+    "kakao": { "id": 1886, "name": "Kakaopulver fett 20-22%" },
+    "sallad": { "id": 340, "name": "Isbergssallat", "note": "leaf salad not seafood salad #57" },
+    "äggvita": { "id": 1227, "name": "Äggvita rå" },
+    "morot": { "id": 289, "name": "Morot", "piece_weight_g": 80 },
+    "tomat": { "id": 364, "name": "Tomat", "piece_weight_g": 100 },
+    "vitlöksklyfta": { "id": 371, "name": "Vitlök", "piece_weight_g": 3 },
+    "vitlök": { "id": 371, "name": "Vitlök", "piece_weight_g": 3 },
+    "ägg": { "id": 1225, "name": "Ägg rått", "piece_weight_g": 58 },
+    "lime": { "id": 572, "name": "Lime", "piece_weight_g": 60 },
+    "citron": { "id": 559, "name": "Citron", "piece_weight_g": 85 },
+    "banan": { "id": 553, "name": "Banan", "piece_weight_g": 120 },
+    "lasagneplattor": { "id": 845, "name": "Pasta okokt", "piece_weight_g": 20, "note": "dry sheet ~20g" },
+    "ingefära": { "id": 2269, "name": "Ingefära färsk", "piece_weight_g": 12 }
+  }
+}

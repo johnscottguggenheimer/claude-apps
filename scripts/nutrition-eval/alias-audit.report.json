@@ -1,0 +1,610 @@
+{
+  "generatedAt": "2026-09-22T10:15:08.210Z",
+  "uniqueAliasesUsedInRecipes": 216,
+  "sampleSize": 100,
+  "origin": "Aliases come from scripts/build-nutrition-seed-from-slv.py: (1) auto short/stripped from every SLV name, (2) CURATED id map, (3) PREFERRED_SEARCH regex overrides, (4) USDA/manual. paprika→Rödkål = CURATED id 355 (Rödkål) + PREFERRED_SEARCH ^Paprika$ miss (no exact SLV name). salladslök→Purjolök = PREFERRED_SEARCH ^Salladslök|^Purjolök fallback.",
+  "tallies": {
+    "ok": 65,
+    "wrong": 13,
+    "uncertain": 22,
+    "missing": 0
+  },
+  "reviewed": 100,
+  "rates": {
+    "hardWrongAmongReviewed": 0.13,
+    "hardWrongPct": 13,
+    "notOkAmongReviewed": 0.35,
+    "notOkPct": 35,
+    "usageWeightedHardWrongPct": 13.9,
+    "usageWeightedNotOkPct": 29.7
+  },
+  "interpretation": "≥8% hard-wrong: eget arbetspaket före steg 3–5",
+  "systematicCauses": [
+    "CURATED i build-nutrition-seed-from-slv.py har felaktiga SLV-nummer (paprika=355 Rödkål, rödlök=348 Mangold, majs=305 Morot, mynta=345 Majskolv, timjan=352 Persilja).",
+    "PREFERRED_SEARCH kan inte rädda dem: SLV saknar exakta namn Rödlök/Mynta/Timjan/Vatten/^Paprika$.",
+    "MANUAL_FOODS svartpeppar-bucket suger in kryddor/sötningsmedel som 0 kcal (medvetet, men fel food-id).",
+    "Auto short-alias first-claim: sallad → Sallad m. skaldjur."
+  ],
+  "wrongInSample": [
+    {
+      "aliasKey": "rödlök",
+      "ingredientId": 348,
+      "canonical": "Mangold",
+      "useCount": 12,
+      "recipeIds": [
+        "hot-honey-chicken-sliders",
+        "lax-avokado-crunch-bowl",
+        "thai-chicken-cucumber-salad",
+        "mexican-chicken-corn-salad",
+        "buffalo-chicken-crust-pizza",
+        "middle-eastern-chicken-mince",
+        "tuna-chili-crisp-salad",
+        "chicken-kebab-wraps",
+        "hjortfarsbiffar-med-rostade-rotfrukter-och-svamp"
+      ],
+      "exampleRaws": [
+        "rödlök (halv)",
+        "rödlök, fint tärnad",
+        "rödlök"
+      ],
+      "hitVia": "exact",
+      "verdict": "wrong",
+      "note": "CURATED 348=Mangold; SLV saknar Rödlök — närmast Lök gul #344"
+    },
+    {
+      "aliasKey": "salladslök",
+      "ingredientId": 354,
+      "canonical": "Purjolök",
+      "useCount": 11,
+      "recipeIds": [
+        "kycklingpizza-wrap",
+        "popcorn-kyckling-med-koreansk-glasyr-och-klibbig",
+        "buffalo-chicken-crust-pizza",
+        "smashed-cucumber",
+        "gochujang-gnocchi",
+        "one-pan-dumplings-with-greens",
+        "dumpling-lasagna",
+        "numbing-chicken-cucumber",
+        "rice-paper-shrimp-pancake"
+      ],
+      "exampleRaws": [
+        "salladslök",
+        "hackad salladslök (gröna delar)",
+        "skivad salladslök"
+      ],
+      "hitVia": "exact",
+      "verdict": "wrong",
+      "note": "PREFERRED_SEARCH ^Salladslök|^Purjolök → Purjolök; ingen Salladslök i SLV"
+    },
+    {
+      "aliasKey": "paprika",
+      "ingredientId": 355,
+      "canonical": "Rödkål",
+      "useCount": 3,
+      "recipeIds": [
+        "hot-honey-chicken-sliders",
+        "mexican-chicken-corn-salad",
+        "chicken-kebab-wraps"
+      ],
+      "exampleRaws": [
+        "paprika"
+      ],
+      "hitVia": "exact",
+      "verdict": "wrong",
+      "note": "CURATED 355=Rödkål; PREFERRED ^Paprika$ missar (bara Paprika grön/röd/gul)"
+    },
+    {
+      "aliasKey": "vaniljextrakt",
+      "ingredientId": 1892,
+      "canonical": "Socker",
+      "useCount": 3,
+      "recipeIds": [
+        "pb2-banana-chocolate-chip-bread",
+        "protein-affogato",
+        "cinnamon-sugar-donut-holes"
+      ],
+      "exampleRaws": [
+        "vaniljextrakt"
+      ],
+      "hitVia": "exact",
+      "verdict": "wrong",
+      "note": "CURATED → Socker #1892; MANUAL vaniljextrakt förlorade claim"
+    },
+    {
+      "aliasKey": "timjan",
+      "ingredientId": 352,
+      "canonical": "Persilja blad",
+      "useCount": 3,
+      "recipeIds": [
+        "hjortfarsbiffar-med-rostade-rotfrukter-och-svamp"
+      ],
+      "exampleRaws": [
+        "färsk timjan eller rosmarin",
+        "färsk timjan"
+      ],
+      "hitVia": "exact",
+      "verdict": "wrong",
+      "note": "CURATED 352=Persilja blad; ingen Timjan-ört i SLV"
+    },
+    {
+      "aliasKey": "äggvita",
+      "ingredientId": 1225,
+      "canonical": "Ägg rått",
+      "useCount": 2,
+      "recipeIds": [
+        "kycklingpizza-wrap",
+        "hoagie-bread"
+      ],
+      "exampleRaws": [
+        "äggvita"
+      ],
+      "hitVia": "exact",
+      "verdict": "wrong",
+      "note": "maps to whole egg Ägg rått — protein/fat fel"
+    },
+    {
+      "aliasKey": "röd paprika",
+      "ingredientId": 355,
+      "canonical": "Rödkål",
+      "useCount": 2,
+      "recipeIds": [
+        "mexican-chicken-corn-salad",
+        "chicken-kebab-wraps"
+      ],
+      "exampleRaws": [
+        "röd paprika",
+        "finhackad röd paprika"
+      ],
+      "hitVia": "exact",
+      "verdict": "wrong",
+      "note": "same curated bug → Rödkål; should be Paprika röd #351"
+    },
+    {
+      "aliasKey": "mynta",
+      "ingredientId": 345,
+      "canonical": "Majskolv",
+      "useCount": 2,
+      "recipeIds": [
+        "middle-eastern-chicken-mince"
+      ],
+      "exampleRaws": [
+        "mynta"
+      ],
+      "hitVia": "exact",
+      "verdict": "wrong",
+      "note": "CURATED 345=Majskolv; SLV Grönmynta blad #7194"
+    },
+    {
+      "aliasKey": "majs",
+      "ingredientId": 305,
+      "canonical": "Morot kokt m. salt",
+      "useCount": 1,
+      "recipeIds": [
+        "hot-honey-chicken-sliders"
+      ],
+      "exampleRaws": [
+        "majs"
+      ],
+      "hitVia": "exact",
+      "verdict": "wrong",
+      "note": "CURATED 305=Morot kokt; should be Majskorn #347/#400"
+    },
+    {
+      "aliasKey": "majskärnor",
+      "ingredientId": 305,
+      "canonical": "Morot kokt m. salt",
+      "useCount": 1,
+      "recipeIds": [
+        "street-corn-chicken-bowl"
+      ],
+      "exampleRaws": [
+        "majskärnor"
+      ],
+      "hitVia": "exact",
+      "verdict": "wrong",
+      "note": "same as majs → Morot kokt"
+    },
+    {
+      "aliasKey": "kakao",
+      "ingredientId": 7031,
+      "canonical": "Kakaosmör",
+      "useCount": 1,
+      "recipeIds": [
+        "pb2-banana-chocolate-chip-bread"
+      ],
+      "exampleRaws": [
+        "kakao"
+      ],
+      "hitVia": "exact",
+      "verdict": "wrong",
+      "note": "→ Kakaosmör; should be Kakaopulver #1886/#7054"
+    },
+    {
+      "aliasKey": "konserverad majs",
+      "ingredientId": 305,
+      "canonical": "Morot kokt m. salt",
+      "useCount": 1,
+      "recipeIds": [
+        "mexican-chicken-corn-salad"
+      ],
+      "exampleRaws": [
+        "konserverad majs"
+      ],
+      "hitVia": "exact",
+      "verdict": "wrong",
+      "note": "→ Morot kokt; should be Majskorn konserv #400"
+    },
+    {
+      "aliasKey": "sallad",
+      "ingredientId": 57,
+      "canonical": "Sallad m. skaldjur majonnäsdressing",
+      "useCount": 1,
+      "recipeIds": [
+        "thai-basil-beef-rolls"
+      ],
+      "exampleRaws": [
+        "sallad, strimlad"
+      ],
+      "hitVia": "exact",
+      "verdict": "wrong",
+      "note": "→ Sallad m. skaldjur majonnäs; auto short-alias claim race"
+    }
+  ],
+  "uncertainInSample": [
+    {
+      "aliasKey": "vatten",
+      "ingredientId": 1975,
+      "canonical": "Salt m. jod",
+      "useCount": 10,
+      "recipeIds": [
+        "popcorn-kyckling-med-koreansk-glasyr-och-klibbig",
+        "pb2-banana-chocolate-chip-bread",
+        "mexican-chicken-corn-salad",
+        "gochujang-gnocchi",
+        "one-pan-dumplings-with-greens",
+        "chicken-kebab-wraps",
+        "hoagie-bread",
+        "kycklinglasagne-med-zucchini",
+        "kyckling-gyoza-med-dipp"
+      ],
+      "exampleRaws": [
+        "vatten",
+        "vatten (38–40°c)"
+      ],
+      "hitVia": "exact",
+      "verdict": "uncertain",
+      "note": "CURATED medvetet → salt 0 kcal; MANUAL har vatten men claim förlorade"
+    },
+    {
+      "aliasKey": "vitlökspulver",
+      "ingredientId": 900000,
+      "canonical": "svartpeppar",
+      "useCount": 5,
+      "recipeIds": [
+        "hot-honey-chicken-sliders",
+        "mexican-chicken-corn-salad",
+        "buffalo-chicken-crust-pizza",
+        "chicken-kebab-wraps",
+        "kycklinglasagne-med-zucchini"
+      ],
+      "exampleRaws": [
+        "vitlökspulver"
+      ],
+      "hitVia": "exact",
+      "verdict": "uncertain",
+      "note": "intentional 0-kcal spice bucket on svartpeppar"
+    },
+    {
+      "aliasKey": "sötningsmedel",
+      "ingredientId": 900000,
+      "canonical": "svartpeppar",
+      "useCount": 4,
+      "recipeIds": [
+        "popcorn-kyckling-med-koreansk-glasyr-och-klibbig",
+        "pb2-banana-chocolate-chip-bread",
+        "peanut-butter-cups",
+        "chocolate-chunk-scones-4-ingredients"
+      ],
+      "exampleRaws": [
+        "sötningsmedel"
+      ],
+      "hitVia": "exact",
+      "verdict": "uncertain",
+      "note": "0-kcal spice/sweetener bucket"
+    },
+    {
+      "aliasKey": "salt och peppar",
+      "ingredientId": 1975,
+      "canonical": "Salt m. jod",
+      "useCount": 3,
+      "recipeIds": [
+        "kycklingpizza-wrap",
+        "tuna-chili-crisp-salad"
+      ],
+      "exampleRaws": [
+        "salt och peppar"
+      ],
+      "hitVia": "exact",
+      "verdict": "uncertain",
+      "note": "maps only to salt; peppar ignored — ok for kcal"
+    },
+    {
+      "aliasKey": "sriracha",
+      "ingredientId": 1968,
+      "canonical": "Chilisås tomat",
+      "useCount": 3,
+      "recipeIds": [
+        "hot-honey-chicken-sliders",
+        "lax-avokado-crunch-bowl"
+      ],
+      "exampleRaws": [
+        "sriracha"
+      ],
+      "hitVia": "exact",
+      "verdict": "uncertain",
+      "note": "proxy Chilisås tomat — nära nog"
+    },
+    {
+      "aliasKey": "chilipulver",
+      "ingredientId": 900000,
+      "canonical": "svartpeppar",
+      "useCount": 3,
+      "recipeIds": [
+        "street-corn-chicken-bowl",
+        "mexican-chicken-corn-salad",
+        "chicken-kebab-wraps"
+      ],
+      "exampleRaws": [
+        "chilipulver"
+      ],
+      "hitVia": "exact",
+      "verdict": "uncertain",
+      "note": "0-kcal spice bucket"
+    },
+    {
+      "aliasKey": "kycklingfärs",
+      "ingredientId": 1173,
+      "canonical": "Kyckling bröstfilé rå u. skinn",
+      "useCount": 3,
+      "recipeIds": [
+        "thai-chicken-cucumber-salad",
+        "middle-eastern-chicken-mince",
+        "kyckling-gyoza-med-dipp"
+      ],
+      "exampleRaws": [
+        "kycklingfärs"
+      ],
+      "hitVia": "broadened",
+      "verdict": "uncertain",
+      "note": "proxy bröstfilé; fetare färs i verkligheten"
+    },
+    {
+      "aliasKey": "spiskummin",
+      "ingredientId": 900000,
+      "canonical": "svartpeppar",
+      "useCount": 3,
+      "recipeIds": [
+        "mexican-chicken-corn-salad",
+        "middle-eastern-chicken-mince",
+        "chicken-kebab-wraps"
+      ],
+      "exampleRaws": [
+        "spiskummin"
+      ],
+      "hitVia": "exact",
+      "verdict": "uncertain",
+      "note": "0-kcal spice bucket"
+    },
+    {
+      "aliasKey": "oregano",
+      "ingredientId": 900000,
+      "canonical": "svartpeppar",
+      "useCount": 2,
+      "recipeIds": [
+        "hot-honey-chicken-sliders",
+        "kycklinglasagne-med-zucchini"
+      ],
+      "exampleRaws": [
+        "oregano"
+      ],
+      "hitVia": "exact",
+      "verdict": "uncertain",
+      "note": "0-kcal spice bucket"
+    },
+    {
+      "aliasKey": "swiss-ost",
+      "ingredientId": 96,
+      "canonical": "Ost hårdost fett 28%",
+      "useCount": 1,
+      "recipeIds": [
+        "hot-honey-chicken-sliders"
+      ],
+      "exampleRaws": [
+        "swiss-ost / leerdamer 50%"
+      ],
+      "hitVia": "broadened",
+      "verdict": "uncertain",
+      "note": "proxy hårdost 28%"
+    },
+    {
+      "aliasKey": "vitlökspasta",
+      "ingredientId": 900000,
+      "canonical": "svartpeppar",
+      "useCount": 1,
+      "recipeIds": [
+        "hot-honey-chicken-sliders"
+      ],
+      "exampleRaws": [
+        "vitlökspasta"
+      ],
+      "hitVia": "exact",
+      "verdict": "uncertain",
+      "note": "0-kcal spice bucket"
+    },
+    {
+      "aliasKey": "smulad cotija-ost",
+      "ingredientId": 103,
+      "canonical": "Ost hårdost parmesan fett 30% typ Parmiggiano Reggiano",
+      "useCount": 1,
+      "recipeIds": [
+        "street-corn-chicken-bowl"
+      ],
+      "exampleRaws": [
+        "smulad cotija-ost"
+      ],
+      "hitVia": "broadened",
+      "verdict": "uncertain",
+      "note": "proxy parmesan"
+    },
+    {
+      "aliasKey": "brunt stevia",
+      "ingredientId": 900000,
+      "canonical": "svartpeppar",
+      "useCount": 1,
+      "recipeIds": [
+        "popcorn-kyckling-med-koreansk-glasyr-och-klibbig"
+      ],
+      "exampleRaws": [
+        "brunt stevia"
+      ],
+      "hitVia": "exact",
+      "verdict": "uncertain",
+      "note": "0-kcal sweetener bucket"
+    },
+    {
+      "aliasKey": "smulad torkad chili",
+      "ingredientId": 900000,
+      "canonical": "svartpeppar",
+      "useCount": 1,
+      "recipeIds": [
+        "aglio-e-olio"
+      ],
+      "exampleRaws": [
+        "smulad torkad chili/peperoncino"
+      ],
+      "hitVia": "exact",
+      "verdict": "uncertain",
+      "note": "0-kcal spice bucket"
+    },
+    {
+      "aliasKey": "brödsmul",
+      "ingredientId": 202,
+      "canonical": "Bröd vitt fibrer 3,5%",
+      "useCount": 1,
+      "recipeIds": [
+        "aglio-e-olio"
+      ],
+      "exampleRaws": [
+        "grovt brödsmul (torrt surdegsbröd)"
+      ],
+      "hitVia": "exact",
+      "verdict": "uncertain",
+      "note": "proxy vitt bröd 3,5% fiber"
+    },
+    {
+      "aliasKey": "tjock grekisk yoghurt",
+      "ingredientId": 7146,
+      "canonical": "Yoghurt smaksatt m. sötningsm. fett 0% typ grekisk yoghurt",
+      "useCount": 1,
+      "recipeIds": [
+        "chocolate-chunk-scones-4-ingredients"
+      ],
+      "exampleRaws": [
+        "tjock grekisk yoghurt"
+      ],
+      "hitVia": "exact",
+      "verdict": "uncertain",
+      "note": "smaksatt 0% typ grekisk — okish"
+    },
+    {
+      "aliasKey": "keso 1,5%",
+      "ingredientId": 70,
+      "canonical": "Färskost cottage cheese naturell fett 4%",
+      "useCount": 1,
+      "recipeIds": [
+        "gochujang-gnocchi"
+      ],
+      "exampleRaws": [
+        "keso 1,5%"
+      ],
+      "hitVia": "exact",
+      "verdict": "uncertain",
+      "note": "maps to 4% cottage — lite högt fett"
+    },
+    {
+      "aliasKey": "gochugaru",
+      "ingredientId": 900000,
+      "canonical": "svartpeppar",
+      "useCount": 1,
+      "recipeIds": [
+        "gochujang-gnocchi"
+      ],
+      "exampleRaws": [
+        "gochugaru"
+      ],
+      "hitVia": "exact",
+      "verdict": "uncertain",
+      "note": "0-kcal spice bucket"
+    },
+    {
+      "aliasKey": "olivoljespray",
+      "ingredientId": 49,
+      "canonical": "Dressing fett 0%",
+      "useCount": 1,
+      "recipeIds": [
+        "cinnamon-sugar-donut-holes"
+      ],
+      "exampleRaws": [
+        "olivoljespray (händer + airfryer)"
+      ],
+      "hitVia": "exact",
+      "verdict": "uncertain",
+      "note": "proxy dressing 0%"
+    },
+    {
+      "aliasKey": "farinsocker",
+      "ingredientId": 1892,
+      "canonical": "Socker",
+      "useCount": 1,
+      "recipeIds": [
+        "thai-basil-beef-rolls"
+      ],
+      "exampleRaws": [
+        "farinsocker"
+      ],
+      "hitVia": "exact",
+      "verdict": "uncertain",
+      "note": "proxy vitt socker"
+    },
+    {
+      "aliasKey": "grekisk yoghurt 2%",
+      "ingredientId": 6113,
+      "canonical": "Yoghurt naturell fett 10%",
+      "useCount": 1,
+      "recipeIds": [
+        "hjortfarsbiffar-med-rostade-rotfrukter-och-svamp"
+      ],
+      "exampleRaws": [
+        "grekisk yoghurt 2% eller kvarg"
+      ],
+      "hitVia": "exact",
+      "verdict": "uncertain",
+      "note": "→ naturell 10% — för fet"
+    },
+    {
+      "aliasKey": "paprikapulver",
+      "ingredientId": 900000,
+      "canonical": "svartpeppar",
+      "useCount": 1,
+      "recipeIds": [
+        "kycklinglasagne-med-zucchini"
+      ],
+      "exampleRaws": [
+        "paprikapulver"
+      ],
+      "hitVia": "exact",
+      "verdict": "uncertain",
+      "note": "0-kcal spice bucket (pulver≠grönsak)"
+    }
+  ]
+}

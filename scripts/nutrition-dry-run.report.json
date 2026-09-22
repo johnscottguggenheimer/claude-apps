@@ -1,592 +1,133 @@
 {
-  "generatedAt": "2026-09-03T10:08:43.103Z",
+  "generatedAt": "2026-09-22T10:06:49.904Z",
   "source": "api",
   "seed": {
     "path": "scripts/nutrition-seed.json",
-    "ingredients": 222,
-    "aliases": 725
+    "ingredients": 2629,
+    "aliases": 4632
   },
   "summary": {
-    "recipes": 30,
-    "totalRows": 417,
-    "matchedRows": 398,
-    "unmatchedRows": 18,
-    "needsPieceWeightRows": 1,
-    "matchRate": 0.954
+    "recipes": 32,
+    "totalRows": 446,
+    "matchedRows": 432,
+    "unmatchedRows": 0,
+    "needsPieceWeightRows": 14,
+    "matchRate": 0.969
   },
-  "unmatched": [
+  "unmatched": [],
+  "needsPieceWeight": [
     {
-      "name": "citron, juice",
+      "name": "salladslök",
+      "count": 2,
+      "recipeIds": [
+        "numbing-chicken-cucumber"
+      ],
+      "normalized": "salladslök",
+      "canonical": "Purjolök"
+    },
+    {
+      "name": "skivad salladslök",
+      "count": 2,
+      "recipeIds": [
+        "gochujang-gnocchi",
+        "one-pan-dumplings-with-greens"
+      ],
+      "normalized": "salladslök",
+      "canonical": "Purjolök"
+    },
+    {
+      "name": "finhackad ingefära (1 tum)",
+      "count": 1,
+      "recipeIds": [
+        "one-pan-dumplings-with-greens"
+      ],
+      "normalized": "ingefära",
+      "canonical": "Ingefära färsk"
+    },
+    {
+      "name": "finhackad röd paprika",
       "count": 1,
       "recipeIds": [
         "chicken-kebab-wraps"
       ],
-      "normalized": "citron, juice"
+      "normalized": "röd paprika",
+      "canonical": "Rödkål"
     },
     {
-      "name": "citron, zest + juice",
+      "name": "finhackad salladslök",
       "count": 1,
       "recipeIds": [
-        "edamame-spread"
+        "rice-paper-shrimp-pancake"
       ],
-      "normalized": "citron, zest + juice"
+      "normalized": "salladslök",
+      "canonical": "Purjolök"
     },
     {
-      "name": "citronskal, rivet",
+      "name": "juliennad morot",
       "count": 1,
       "recipeIds": [
-        "aglio-e-olio"
+        "thai-basil-beef-rolls"
       ],
-      "normalized": "citronskal, rivet"
+      "normalized": "morot",
+      "canonical": "Morot"
     },
     {
-      "name": "hackade jordnötter",
+      "name": "lasagneplattor",
       "count": 1,
       "recipeIds": [
-        "thai-chicken-cucumber-salad"
+        "kycklinglasagne-med-zucchini"
       ],
-      "normalized": "jordnötter"
+      "normalized": "lasagneplattor",
+      "canonical": "Pasta okokt"
     },
     {
-      "name": "jalapeño, kärnor borttagna",
+      "name": "morot",
       "count": 1,
       "recipeIds": [
-        "edamame-spread"
+        "hjortfarsbiffar-med-rostade-rotfrukter-och-svamp"
       ],
-      "normalized": "jalapeño"
+      "normalized": "morot",
+      "canonical": "Morot"
     },
     {
-      "name": "jalapeños",
+      "name": "röd paprika",
       "count": 1,
       "recipeIds": [
         "mexican-chicken-corn-salad"
       ],
-      "normalized": "jalapeño"
+      "normalized": "röd paprika",
+      "canonical": "Rödkål"
     },
     {
-      "name": "lönnsirap, honung eller monk fruit-sötning",
-      "count": 1,
-      "recipeIds": [
-        "protein-affogato"
-      ],
-      "normalized": "lönnsirap, honung"
-    },
-    {
-      "name": "milt chilipulver",
-      "count": 1,
-      "recipeIds": [
-        "middle-eastern-chicken-mince"
-      ],
-      "normalized": "milt chilipulver"
-    },
-    {
-      "name": "mogna bananer",
-      "count": 1,
-      "recipeIds": [
-        "pb2-banana-chocolate-chip-bread"
-      ],
-      "normalized": "mogna banan"
-    },
-    {
-      "name": "sichuanpepparkorn",
-      "count": 1,
-      "recipeIds": [
-        "numbing-chicken-cucumber"
-      ],
-      "normalized": "sichuanpepparkorn"
-    },
-    {
-      "name": "smashad och grovhackad gurka",
-      "count": 1,
-      "recipeIds": [
-        "tuna-chili-crisp-salad"
-      ],
-      "normalized": "och gurka"
-    },
-    {
-      "name": "smulad torkad chili/peperoncino",
-      "count": 1,
-      "recipeIds": [
-        "aglio-e-olio"
-      ],
-      "normalized": "smulad torkad chili/peperoncino"
-    },
-    {
-      "name": "stark pizzasås",
-      "count": 1,
-      "recipeIds": [
-        "buffalo-chicken-crust-pizza"
-      ],
-      "normalized": "stark pizzasås"
-    },
-    {
-      "name": "swiss-ost / leerdamer 50%",
-      "count": 1,
-      "recipeIds": [
-        "hot-honey-chicken-sliders"
-      ],
-      "normalized": "swiss-ost"
-    },
-    {
-      "name": "torkad dill",
-      "count": 1,
-      "recipeIds": [
-        "chicken-kebab-wraps"
-      ],
-      "normalized": "torkad dill"
-    },
-    {
-      "name": "ume-pickle (umeboshi-juice)",
+      "name": "salladslök, tunt skivad",
       "count": 1,
       "recipeIds": [
         "smashed-cucumber"
       ],
-      "normalized": "ume-pickle"
+      "normalized": "salladslök",
+      "canonical": "Purjolök"
     },
     {
-      "name": "ventresca tonfisk, oljeinlagd",
+      "name": "skivad grön paprika",
       "count": 1,
       "recipeIds": [
-        "tuna-chili-crisp-salad"
+        "honey-lime-teriyaki-beef-noodles"
       ],
-      "normalized": "ventresca tonfisk"
+      "normalized": "grön paprika",
+      "canonical": "Rödkål"
     },
     {
-      "name": "vitlökspasta",
+      "name": "tomat",
       "count": 1,
       "recipeIds": [
-        "hot-honey-chicken-sliders"
+        "middle-eastern-chicken-mince"
       ],
-      "normalized": "vitlökspasta"
+      "normalized": "tomat",
+      "canonical": "Tomat"
     }
   ],
-  "needsPieceWeight": [
-    {
-      "name": "selleristjälkar, tunt skivad",
-      "count": 1,
-      "recipeIds": [
-        "smashed-pickle-salad"
-      ],
-      "normalized": "selleristjälkar",
-      "canonical": "selleri"
-    }
-  ],
-  "largeMacroDrift": [
-    {
-      "id": "hot-honey-chicken-sliders",
-      "title": "Kycklingslider med het honung",
-      "old": {
-        "kcal": 3961,
-        "prot": 330,
-        "carb": 237,
-        "fat": 185
-      },
-      "next": {
-        "kcal": 3043,
-        "prot": 291,
-        "carb": 230,
-        "fat": 105
-      },
-      "dKcal": -918,
-      "dProt": -39,
-      "unmatchedNames": [
-        "swiss-ost / leerdamer 50%",
-        "vitlökspasta"
-      ],
-      "needsPieceNames": []
-    },
-    {
-      "id": "street-corn-chicken-bowl",
-      "title": "Kycklingbowl med street corn-smak",
-      "old": {
-        "kcal": 1942,
-        "prot": 132,
-        "carb": 145,
-        "fat": 96
-      },
-      "next": {
-        "kcal": 2479,
-        "prot": 143,
-        "carb": 263,
-        "fat": 98
-      },
-      "dKcal": 537,
-      "dProt": 11,
-      "unmatchedNames": [],
-      "needsPieceNames": []
-    },
-    {
-      "id": "lax-avokado-crunch-bowl",
-      "title": "Lax- och avokadocrunch bowl",
-      "old": {
-        "kcal": 1802,
-        "prot": 106,
-        "carb": 114,
-        "fat": 104
-      },
-      "next": {
-        "kcal": 2263,
-        "prot": 114,
-        "carb": 232,
-        "fat": 98
-      },
-      "dKcal": 461,
-      "dProt": 8,
-      "unmatchedNames": [],
-      "needsPieceNames": []
-    },
-    {
-      "id": "hjortfarsbiffar-med-rostade-rotfrukter-och-svamp",
-      "title": "Hjortfärsbiffar med rostade rotfrukter och svampsås",
-      "old": {
-        "kcal": 942,
-        "prot": 93,
-        "carb": 37,
-        "fat": 48
-      },
-      "next": {
-        "kcal": 1275,
-        "prot": 129,
-        "carb": 77,
-        "fat": 54
-      },
-      "dKcal": 333,
-      "dProt": 36,
-      "unmatchedNames": [],
-      "needsPieceNames": []
-    },
-    {
-      "id": "pb2-banana-chocolate-chip-bread",
-      "title": "Banankaka med PB2 och choklad",
-      "old": {
-        "kcal": 2520,
-        "prot": 127,
-        "carb": 328,
-        "fat": 80
-      },
-      "next": {
-        "kcal": 2190,
-        "prot": 128,
-        "carb": 247,
-        "fat": 80
-      },
-      "dKcal": -330,
-      "dProt": 1,
-      "unmatchedNames": [
-        "mogna bananer"
-      ],
-      "needsPieceNames": []
-    },
-    {
-      "id": "numbing-chicken-cucumber",
-      "title": "Sichuansallad med kyckling och gurka",
-      "old": {
-        "kcal": 1396,
-        "prot": 123,
-        "carb": 104,
-        "fat": 52
-      },
-      "next": {
-        "kcal": 1709,
-        "prot": 131,
-        "carb": 205,
-        "fat": 38
-      },
-      "dKcal": 313,
-      "dProt": 8,
-      "unmatchedNames": [
-        "sichuanpepparkorn"
-      ],
-      "needsPieceNames": []
-    },
-    {
-      "id": "tuna-chili-crisp-salad",
-      "title": "Tonfisksallad med chili crunch",
-      "old": {
-        "kcal": 1576,
-        "prot": 89,
-        "carb": 139,
-        "fat": 68
-      },
-      "next": {
-        "kcal": 1320,
-        "prot": 29,
-        "carb": 90,
-        "fat": 92
-      },
-      "dKcal": -256,
-      "dProt": -60,
-      "unmatchedNames": [
-        "ventresca tonfisk, oljeinlagd",
-        "smashad och grovhackad gurka"
-      ],
-      "needsPieceNames": []
-    },
-    {
-      "id": "thai-basil-beef-rolls",
-      "title": "Thailändska basilikarullar med nötkött",
-      "old": {
-        "kcal": 990,
-        "prot": 65,
-        "carb": 98,
-        "fat": 38
-      },
-      "next": {
-        "kcal": 1228,
-        "prot": 63,
-        "carb": 106,
-        "fat": 60
-      },
-      "dKcal": 238,
-      "dProt": -2,
-      "unmatchedNames": [],
-      "needsPieceNames": []
-    },
-    {
-      "id": "dumpling-lasagna",
-      "title": "Dumplinglasagne",
-      "old": {
-        "kcal": 1829,
-        "prot": 105,
-        "carb": 158,
-        "fat": 85
-      },
-      "next": {
-        "kcal": 2064,
-        "prot": 100,
-        "carb": 127,
-        "fat": 124
-      },
-      "dKcal": 235,
-      "dProt": -5,
-      "unmatchedNames": [],
-      "needsPieceNames": []
-    },
-    {
-      "id": "gochujang-gnocchi",
-      "title": "Krämig gochujang-gnocchi med sesambiff",
-      "old": {
-        "kcal": 1924,
-        "prot": 146,
-        "carb": 182,
-        "fat": 65
-      },
-      "next": {
-        "kcal": 2159,
-        "prot": 135,
-        "carb": 158,
-        "fat": 102
-      },
-      "dKcal": 235,
-      "dProt": -11,
-      "unmatchedNames": [],
-      "needsPieceNames": []
-    },
-    {
-      "id": "chicken-kebab-wraps",
-      "title": "Kycklingkebab-wraps",
-      "old": {
-        "kcal": 2369,
-        "prot": 247,
-        "carb": 157,
-        "fat": 101
-      },
-      "next": {
-        "kcal": 2570,
-        "prot": 213,
-        "carb": 162,
-        "fat": 120
-      },
-      "dKcal": 201,
-      "dProt": -34,
-      "unmatchedNames": [
-        "torkad dill",
-        "citron, juice"
-      ],
-      "needsPieceNames": []
-    },
-    {
-      "id": "honey-lime-teriyaki-beef-noodles",
-      "title": "Nudlar med honung, lime och teriyakinötkött",
-      "old": {
-        "kcal": 1058,
-        "prot": 60,
-        "carb": 151,
-        "fat": 24
-      },
-      "next": {
-        "kcal": 1250,
-        "prot": 52,
-        "carb": 166,
-        "fat": 40
-      },
-      "dKcal": 192,
-      "dProt": -8,
-      "unmatchedNames": [],
-      "needsPieceNames": []
-    },
-    {
-      "id": "middle-eastern-chicken-mince",
-      "title": "Kycklingfärs med Mellanöstern-smaker",
-      "old": {
-        "kcal": 2382,
-        "prot": 155,
-        "carb": 350,
-        "fat": 49
-      },
-      "next": {
-        "kcal": 2563,
-        "prot": 137,
-        "carb": 344,
-        "fat": 68
-      },
-      "dKcal": 181,
-      "dProt": -18,
-      "unmatchedNames": [
-        "milt chilipulver"
-      ],
-      "needsPieceNames": []
-    },
-    {
-      "id": "popcorn-kyckling-med-koreansk-glasyr-och-klibbigt-ris",
-      "title": "Popcornkyckling med koreansk glasyr och klibbigt ris",
-      "old": {
-        "kcal": 1947,
-        "prot": 217,
-        "carb": 196,
-        "fat": 27
-      },
-      "next": {
-        "kcal": 2121,
-        "prot": 219,
-        "carb": 236,
-        "fat": 27
-      },
-      "dKcal": 174,
-      "dProt": 2,
-      "unmatchedNames": [],
-      "needsPieceNames": []
-    },
-    {
-      "id": "thai-chicken-cucumber-salad",
-      "title": "Thailändsk kycklingfärs med gurksallad",
-      "old": {
-        "kcal": 1978,
-        "prot": 124,
-        "carb": 272,
-        "fat": 52
-      },
-      "next": {
-        "kcal": 1929,
-        "prot": 100,
-        "carb": 268,
-        "fat": 49
-      },
-      "dKcal": -49,
-      "dProt": -24,
-      "unmatchedNames": [
-        "hackade jordnötter"
-      ],
-      "needsPieceNames": []
-    },
-    {
-      "id": "peanut-butter-cups",
-      "title": "Mini jordnötssmörskoppar",
-      "old": {
-        "kcal": 1116,
-        "prot": 84,
-        "carb": 60,
-        "fat": 60
-      },
-      "next": {
-        "kcal": 1108,
-        "prot": 61,
-        "carb": 94,
-        "fat": 55
-      },
-      "dKcal": -8,
-      "dProt": -23,
-      "unmatchedNames": [],
-      "needsPieceNames": []
-    }
-  ],
+  "largeMacroDrift": [],
   "perRecipe": [
-    {
-      "id": "hjortfarsbiffar-med-rostade-rotfrukter-och-svamp",
-      "title": "Hjortfärsbiffar med rostade rotfrukter och svampsås",
-      "rows": 23,
-      "matched": 23,
-      "unmatched": 0,
-      "needsPieceWeight": 0,
-      "unmatchedNames": [],
-      "needsPieceNames": [],
-      "newMacros": {
-        "kcal": 1275,
-        "prot": 129,
-        "carb": 77,
-        "fat": 54
-      },
-      "oldMacros": {
-        "kcal": 942,
-        "prot": 93,
-        "carb": 37,
-        "fat": 48
-      },
-      "drift": {
-        "old": {
-          "kcal": 942,
-          "prot": 93,
-          "carb": 37,
-          "fat": 48
-        },
-        "next": {
-          "kcal": 1275,
-          "prot": 129,
-          "carb": 77,
-          "fat": 54
-        },
-        "dKcal": 333,
-        "dProt": 36
-      }
-    },
-    {
-      "id": "peanut-butter-cups",
-      "title": "Mini jordnötssmörskoppar",
-      "rows": 6,
-      "matched": 6,
-      "unmatched": 0,
-      "needsPieceWeight": 0,
-      "unmatchedNames": [],
-      "needsPieceNames": [],
-      "newMacros": {
-        "kcal": 1108,
-        "prot": 61,
-        "carb": 94,
-        "fat": 55
-      },
-      "oldMacros": {
-        "kcal": 1116,
-        "prot": 84,
-        "carb": 60,
-        "fat": 60
-      },
-      "drift": {
-        "old": {
-          "kcal": 1116,
-          "prot": 84,
-          "carb": 60,
-          "fat": 60
-        },
-        "next": {
-          "kcal": 1108,
-          "prot": 61,
-          "carb": 94,
-          "fat": 55
-        },
-        "dKcal": -8,
-        "dProt": -23
-      }
-    },
     {
       "id": "bbq-kycklinglar",
       "title": "BBQ-kycklinglår",
@@ -597,231 +138,108 @@
       "unmatchedNames": [],
       "needsPieceNames": [],
       "newMacros": {
-        "kcal": 934,
-        "prot": 100,
-        "carb": 9,
-        "fat": 56
+        "kcal": 663,
+        "prot": 98,
+        "carb": 1,
+        "fat": 30
       },
       "oldMacros": {
-        "kcal": 1000,
-        "prot": 105,
-        "carb": 5,
-        "fat": 58
+        "kcal": 663,
+        "prot": 98,
+        "carb": 1,
+        "fat": 30
       },
       "drift": {
         "old": {
-          "kcal": 1000,
-          "prot": 105,
-          "carb": 5,
-          "fat": 58
+          "kcal": 663,
+          "prot": 98,
+          "carb": 1,
+          "fat": 30
         },
         "next": {
-          "kcal": 934,
-          "prot": 100,
-          "carb": 9,
-          "fat": 56
+          "kcal": 663,
+          "prot": 98,
+          "carb": 1,
+          "fat": 30
         },
-        "dKcal": -66,
-        "dProt": -5
-      }
-    },
-    {
-      "id": "protein-affogato",
-      "title": "Proteinglass Affogato",
-      "rows": 7,
-      "matched": 6,
-      "unmatched": 1,
-      "needsPieceWeight": 0,
-      "unmatchedNames": [
-        "lönnsirap, honung eller monk fruit-sötning"
-      ],
-      "needsPieceNames": [],
-      "newMacros": {
-        "kcal": 329,
-        "prot": 40,
-        "carb": 19,
-        "fat": 7
-      },
-      "oldMacros": {
-        "kcal": 326,
-        "prot": 40,
-        "carb": 26,
-        "fat": 7
-      },
-      "drift": {
-        "old": {
-          "kcal": 326,
-          "prot": 40,
-          "carb": 26,
-          "fat": 7
-        },
-        "next": {
-          "kcal": 329,
-          "prot": 40,
-          "carb": 19,
-          "fat": 7
-        },
-        "dKcal": 3,
+        "dKcal": 0,
         "dProt": 0
       }
     },
     {
-      "id": "pb2-banana-chocolate-chip-bread",
-      "title": "Banankaka med PB2 och choklad",
-      "rows": 13,
-      "matched": 12,
-      "unmatched": 1,
+      "id": "kycklingpizza-wrap",
+      "title": "Kycklingpizza Wrap",
+      "rows": 8,
+      "matched": 8,
+      "unmatched": 0,
       "needsPieceWeight": 0,
-      "unmatchedNames": [
-        "mogna bananer"
-      ],
+      "unmatchedNames": [],
       "needsPieceNames": [],
       "newMacros": {
-        "kcal": 2190,
-        "prot": 128,
-        "carb": 247,
-        "fat": 80
+        "kcal": 803,
+        "prot": 68,
+        "carb": 19,
+        "fat": 51
       },
       "oldMacros": {
-        "kcal": 2520,
-        "prot": 127,
-        "carb": 328,
-        "fat": 80
+        "kcal": 803,
+        "prot": 68,
+        "carb": 19,
+        "fat": 51
       },
       "drift": {
         "old": {
-          "kcal": 2520,
-          "prot": 127,
-          "carb": 328,
-          "fat": 80
+          "kcal": 803,
+          "prot": 68,
+          "carb": 19,
+          "fat": 51
         },
         "next": {
-          "kcal": 2190,
-          "prot": 128,
-          "carb": 247,
-          "fat": 80
+          "kcal": 803,
+          "prot": 68,
+          "carb": 19,
+          "fat": 51
         },
-        "dKcal": -330,
-        "dProt": 1
-      }
-    },
-    {
-      "id": "mexican-chicken-corn-salad",
-      "title": "Mexikansk kyckling- och majssallad",
-      "rows": 22,
-      "matched": 21,
-      "unmatched": 1,
-      "needsPieceWeight": 0,
-      "unmatchedNames": [
-        "jalapeños"
-      ],
-      "needsPieceNames": [],
-      "newMacros": {
-        "kcal": 1827,
-        "prot": 235,
-        "carb": 97,
-        "fat": 55
-      },
-      "oldMacros": {
-        "kcal": 1746,
-        "prot": 227,
-        "carb": 97,
-        "fat": 50
-      },
-      "drift": {
-        "old": {
-          "kcal": 1746,
-          "prot": 227,
-          "carb": 97,
-          "fat": 50
-        },
-        "next": {
-          "kcal": 1827,
-          "prot": 235,
-          "carb": 97,
-          "fat": 55
-        },
-        "dKcal": 81,
-        "dProt": 8
+        "dKcal": 0,
+        "dProt": 0
       }
     },
     {
       "id": "hot-honey-chicken-sliders",
       "title": "Kycklingslider med het honung",
       "rows": 23,
-      "matched": 21,
-      "unmatched": 2,
-      "needsPieceWeight": 0,
-      "unmatchedNames": [
-        "swiss-ost / leerdamer 50%",
-        "vitlökspasta"
-      ],
-      "needsPieceNames": [],
-      "newMacros": {
-        "kcal": 3043,
-        "prot": 291,
-        "carb": 230,
-        "fat": 105
-      },
-      "oldMacros": {
-        "kcal": 3961,
-        "prot": 330,
-        "carb": 237,
-        "fat": 185
-      },
-      "drift": {
-        "old": {
-          "kcal": 3961,
-          "prot": 330,
-          "carb": 237,
-          "fat": 185
-        },
-        "next": {
-          "kcal": 3043,
-          "prot": 291,
-          "carb": 230,
-          "fat": 105
-        },
-        "dKcal": -918,
-        "dProt": -39
-      }
-    },
-    {
-      "id": "lax-avokado-crunch-bowl",
-      "title": "Lax- och avokadocrunch bowl",
-      "rows": 13,
-      "matched": 13,
+      "matched": 23,
       "unmatched": 0,
       "needsPieceWeight": 0,
       "unmatchedNames": [],
       "needsPieceNames": [],
       "newMacros": {
-        "kcal": 2263,
-        "prot": 114,
-        "carb": 232,
-        "fat": 98
+        "kcal": 3117,
+        "prot": 302,
+        "carb": 169,
+        "fat": 135
       },
       "oldMacros": {
-        "kcal": 1802,
-        "prot": 106,
-        "carb": 114,
-        "fat": 104
+        "kcal": 3117,
+        "prot": 302,
+        "carb": 169,
+        "fat": 135
       },
       "drift": {
         "old": {
-          "kcal": 1802,
-          "prot": 106,
-          "carb": 114,
-          "fat": 104
+          "kcal": 3117,
+          "prot": 302,
+          "carb": 169,
+          "fat": 135
         },
         "next": {
-          "kcal": 2263,
-          "prot": 114,
-          "carb": 232,
-          "fat": 98
+          "kcal": 3117,
+          "prot": 302,
+          "carb": 169,
+          "fat": 135
         },
-        "dKcal": 461,
-        "dProt": 8
+        "dKcal": 0,
+        "dProt": 0
       }
     },
     {
@@ -834,74 +252,36 @@
       "unmatchedNames": [],
       "needsPieceNames": [],
       "newMacros": {
-        "kcal": 2479,
-        "prot": 143,
-        "carb": 263,
+        "kcal": 1773,
+        "prot": 127,
+        "carb": 89,
         "fat": 98
       },
       "oldMacros": {
-        "kcal": 1942,
-        "prot": 132,
-        "carb": 145,
-        "fat": 96
+        "kcal": 1773,
+        "prot": 127,
+        "carb": 89,
+        "fat": 98
       },
       "drift": {
         "old": {
-          "kcal": 1942,
-          "prot": 132,
-          "carb": 145,
-          "fat": 96
-        },
-        "next": {
-          "kcal": 2479,
-          "prot": 143,
-          "carb": 263,
+          "kcal": 1773,
+          "prot": 127,
+          "carb": 89,
           "fat": 98
         },
-        "dKcal": 537,
-        "dProt": 11
-      }
-    },
-    {
-      "id": "kyckling-gyoza-med-dipp",
-      "title": "Gyoza-tacos med kycklingfärs",
-      "rows": 18,
-      "matched": 18,
-      "unmatched": 0,
-      "needsPieceWeight": 0,
-      "unmatchedNames": [],
-      "needsPieceNames": [],
-      "newMacros": {
-        "kcal": 1244,
-        "prot": 85,
-        "carb": 68,
-        "fat": 69
-      },
-      "oldMacros": {
-        "kcal": 1133,
-        "prot": 99,
-        "carb": 67,
-        "fat": 56
-      },
-      "drift": {
-        "old": {
-          "kcal": 1133,
-          "prot": 99,
-          "carb": 67,
-          "fat": 56
-        },
         "next": {
-          "kcal": 1244,
-          "prot": 85,
-          "carb": 68,
-          "fat": 69
+          "kcal": 1773,
+          "prot": 127,
+          "carb": 89,
+          "fat": 98
         },
-        "dKcal": 111,
-        "dProt": -14
+        "dKcal": 0,
+        "dProt": 0
       }
     },
     {
-      "id": "popcorn-kyckling-med-koreansk-glasyr-och-klibbigt-ris",
+      "id": "popcorn-kyckling-med-koreansk-glasyr-och-klibbig",
       "title": "Popcornkyckling med koreansk glasyr och klibbigt ris",
       "rows": 18,
       "matched": 18,
@@ -910,153 +290,300 @@
       "unmatchedNames": [],
       "needsPieceNames": [],
       "newMacros": {
-        "kcal": 2121,
+        "kcal": 2113,
         "prot": 219,
         "carb": 236,
-        "fat": 27
+        "fat": 30
       },
       "oldMacros": {
-        "kcal": 1947,
-        "prot": 217,
-        "carb": 196,
-        "fat": 27
+        "kcal": 2110,
+        "prot": 219,
+        "carb": 236,
+        "fat": 30
       },
       "drift": {
         "old": {
-          "kcal": 1947,
-          "prot": 217,
-          "carb": 196,
-          "fat": 27
-        },
-        "next": {
-          "kcal": 2121,
+          "kcal": 2110,
           "prot": 219,
           "carb": 236,
-          "fat": 27
+          "fat": 30
         },
-        "dKcal": 174,
-        "dProt": 2
+        "next": {
+          "kcal": 2113,
+          "prot": 219,
+          "carb": 236,
+          "fat": 30
+        },
+        "dKcal": 3,
+        "dProt": 0
+      }
+    },
+    {
+      "id": "lax-avokado-crunch-bowl",
+      "title": "Lax- och avokadocrunch bowl",
+      "rows": 13,
+      "matched": 13,
+      "unmatched": 0,
+      "needsPieceWeight": 0,
+      "unmatchedNames": [],
+      "needsPieceNames": [],
+      "newMacros": {
+        "kcal": 1850,
+        "prot": 106,
+        "carb": 82,
+        "fat": 120
+      },
+      "oldMacros": {
+        "kcal": 1850,
+        "prot": 106,
+        "carb": 82,
+        "fat": 120
+      },
+      "drift": {
+        "old": {
+          "kcal": 1850,
+          "prot": 106,
+          "carb": 82,
+          "fat": 120
+        },
+        "next": {
+          "kcal": 1850,
+          "prot": 106,
+          "carb": 82,
+          "fat": 120
+        },
+        "dKcal": 0,
+        "dProt": 0
+      }
+    },
+    {
+      "id": "pb2-banana-chocolate-chip-bread",
+      "title": "Banankaka med PB2 och choklad",
+      "rows": 13,
+      "matched": 13,
+      "unmatched": 0,
+      "needsPieceWeight": 0,
+      "unmatchedNames": [],
+      "needsPieceNames": [],
+      "newMacros": {
+        "kcal": 2650,
+        "prot": 132,
+        "carb": 319,
+        "fat": 103
+      },
+      "oldMacros": {
+        "kcal": 2650,
+        "prot": 132,
+        "carb": 319,
+        "fat": 103
+      },
+      "drift": {
+        "old": {
+          "kcal": 2650,
+          "prot": 132,
+          "carb": 319,
+          "fat": 103
+        },
+        "next": {
+          "kcal": 2650,
+          "prot": 132,
+          "carb": 319,
+          "fat": 103
+        },
+        "dKcal": 0,
+        "dProt": 0
+      }
+    },
+    {
+      "id": "peanut-butter-cups",
+      "title": "Mini jordnötssmörskoppar",
+      "rows": 6,
+      "matched": 6,
+      "unmatched": 0,
+      "needsPieceWeight": 0,
+      "unmatchedNames": [],
+      "needsPieceNames": [],
+      "newMacros": {
+        "kcal": 932,
+        "prot": 73,
+        "carb": 69,
+        "fat": 53
+      },
+      "oldMacros": {
+        "kcal": 932,
+        "prot": 73,
+        "carb": 69,
+        "fat": 53
+      },
+      "drift": {
+        "old": {
+          "kcal": 932,
+          "prot": 73,
+          "carb": 69,
+          "fat": 53
+        },
+        "next": {
+          "kcal": 932,
+          "prot": 73,
+          "carb": 69,
+          "fat": 53
+        },
+        "dKcal": 0,
+        "dProt": 0
+      }
+    },
+    {
+      "id": "protein-affogato",
+      "title": "Proteinglass Affogato",
+      "rows": 7,
+      "matched": 7,
+      "unmatched": 0,
+      "needsPieceWeight": 0,
+      "unmatchedNames": [],
+      "needsPieceNames": [],
+      "newMacros": {
+        "kcal": 412,
+        "prot": 41,
+        "carb": 35,
+        "fat": 12
+      },
+      "oldMacros": {
+        "kcal": 412,
+        "prot": 41,
+        "carb": 35,
+        "fat": 12
+      },
+      "drift": {
+        "old": {
+          "kcal": 412,
+          "prot": 41,
+          "carb": 35,
+          "fat": 12
+        },
+        "next": {
+          "kcal": 412,
+          "prot": 41,
+          "carb": 35,
+          "fat": 12
+        },
+        "dKcal": 0,
+        "dProt": 0
       }
     },
     {
       "id": "aglio-e-olio",
       "title": "Aglio e olio",
       "rows": 11,
-      "matched": 9,
-      "unmatched": 2,
+      "matched": 11,
+      "unmatched": 0,
       "needsPieceWeight": 0,
-      "unmatchedNames": [
-        "smulad torkad chili/peperoncino",
-        "citronskal, rivet"
-      ],
+      "unmatchedNames": [],
       "needsPieceNames": [],
       "newMacros": {
-        "kcal": 1700,
-        "prot": 45,
-        "carb": 175,
-        "fat": 90
+        "kcal": 1671,
+        "prot": 39,
+        "carb": 167,
+        "fat": 92
       },
       "oldMacros": {
-        "kcal": 1628,
-        "prot": 37,
-        "carb": 170,
-        "fat": 88
+        "kcal": 1671,
+        "prot": 39,
+        "carb": 167,
+        "fat": 92
       },
       "drift": {
         "old": {
-          "kcal": 1628,
-          "prot": 37,
-          "carb": 170,
-          "fat": 88
+          "kcal": 1671,
+          "prot": 39,
+          "carb": 167,
+          "fat": 92
         },
         "next": {
-          "kcal": 1700,
-          "prot": 45,
-          "carb": 175,
-          "fat": 90
+          "kcal": 1671,
+          "prot": 39,
+          "carb": 167,
+          "fat": 92
         },
-        "dKcal": 72,
-        "dProt": 8
-      }
-    },
-    {
-      "id": "middle-eastern-chicken-mince",
-      "title": "Kycklingfärs med Mellanöstern-smaker",
-      "rows": 22,
-      "matched": 21,
-      "unmatched": 1,
-      "needsPieceWeight": 0,
-      "unmatchedNames": [
-        "milt chilipulver"
-      ],
-      "needsPieceNames": [],
-      "newMacros": {
-        "kcal": 2563,
-        "prot": 137,
-        "carb": 344,
-        "fat": 68
-      },
-      "oldMacros": {
-        "kcal": 2382,
-        "prot": 155,
-        "carb": 350,
-        "fat": 49
-      },
-      "drift": {
-        "old": {
-          "kcal": 2382,
-          "prot": 155,
-          "carb": 350,
-          "fat": 49
-        },
-        "next": {
-          "kcal": 2563,
-          "prot": 137,
-          "carb": 344,
-          "fat": 68
-        },
-        "dKcal": 181,
-        "dProt": -18
+        "dKcal": 0,
+        "dProt": 0
       }
     },
     {
       "id": "thai-chicken-cucumber-salad",
       "title": "Thailändsk kycklingfärs med gurksallad",
       "rows": 16,
-      "matched": 15,
-      "unmatched": 1,
+      "matched": 16,
+      "unmatched": 0,
       "needsPieceWeight": 0,
-      "unmatchedNames": [
-        "hackade jordnötter"
-      ],
+      "unmatchedNames": [],
       "needsPieceNames": [],
       "newMacros": {
-        "kcal": 1929,
-        "prot": 100,
-        "carb": 268,
-        "fat": 49
+        "kcal": 1944,
+        "prot": 136,
+        "carb": 261,
+        "fat": 37
       },
       "oldMacros": {
-        "kcal": 1978,
-        "prot": 124,
-        "carb": 272,
-        "fat": 52
+        "kcal": 1944,
+        "prot": 136,
+        "carb": 261,
+        "fat": 37
       },
       "drift": {
         "old": {
-          "kcal": 1978,
-          "prot": 124,
-          "carb": 272,
-          "fat": 52
+          "kcal": 1944,
+          "prot": 136,
+          "carb": 261,
+          "fat": 37
         },
         "next": {
-          "kcal": 1929,
-          "prot": 100,
-          "carb": 268,
-          "fat": 49
+          "kcal": 1944,
+          "prot": 136,
+          "carb": 261,
+          "fat": 37
         },
-        "dKcal": -49,
-        "dProt": -24
+        "dKcal": 0,
+        "dProt": 0
+      }
+    },
+    {
+      "id": "mexican-chicken-corn-salad",
+      "title": "Mexikansk kyckling- och majssallad",
+      "rows": 22,
+      "matched": 21,
+      "unmatched": 0,
+      "needsPieceWeight": 1,
+      "unmatchedNames": [],
+      "needsPieceNames": [
+        "röd paprika"
+      ],
+      "newMacros": {
+        "kcal": 1512,
+        "prot": 229,
+        "carb": 49,
+        "fat": 41
+      },
+      "oldMacros": {
+        "kcal": 1512,
+        "prot": 229,
+        "carb": 49,
+        "fat": 41
+      },
+      "drift": {
+        "old": {
+          "kcal": 1512,
+          "prot": 229,
+          "carb": 49,
+          "fat": 41
+        },
+        "next": {
+          "kcal": 1512,
+          "prot": 229,
+          "carb": 49,
+          "fat": 41
+        },
+        "dKcal": 0,
+        "dProt": 0
       }
     },
     {
@@ -1069,37 +596,115 @@
       "unmatchedNames": [],
       "needsPieceNames": [],
       "newMacros": {
-        "kcal": 683,
+        "kcal": 655,
         "prot": 23,
-        "carb": 102,
-        "fat": 19
+        "carb": 92,
+        "fat": 20
       },
       "oldMacros": {
-        "kcal": 650,
-        "prot": 21,
-        "carb": 98,
-        "fat": 19
+        "kcal": 655,
+        "prot": 23,
+        "carb": 92,
+        "fat": 20
       },
       "drift": {
         "old": {
-          "kcal": 650,
-          "prot": 21,
-          "carb": 98,
-          "fat": 19
+          "kcal": 655,
+          "prot": 23,
+          "carb": 92,
+          "fat": 20
         },
         "next": {
-          "kcal": 683,
+          "kcal": 655,
           "prot": 23,
-          "carb": 102,
-          "fat": 19
+          "carb": 92,
+          "fat": 20
         },
-        "dKcal": 33,
-        "dProt": 2
+        "dKcal": 0,
+        "dProt": 0
       }
     },
     {
       "id": "honey-lime-teriyaki-beef-noodles",
       "title": "Nudlar med honung, lime och teriyakinötkött",
+      "rows": 9,
+      "matched": 8,
+      "unmatched": 0,
+      "needsPieceWeight": 1,
+      "unmatchedNames": [],
+      "needsPieceNames": [
+        "skivad grön paprika"
+      ],
+      "newMacros": {
+        "kcal": 769,
+        "prot": 47,
+        "carb": 61,
+        "fat": 37
+      },
+      "oldMacros": {
+        "kcal": 769,
+        "prot": 47,
+        "carb": 61,
+        "fat": 37
+      },
+      "drift": {
+        "old": {
+          "kcal": 769,
+          "prot": 47,
+          "carb": 61,
+          "fat": 37
+        },
+        "next": {
+          "kcal": 769,
+          "prot": 47,
+          "carb": 61,
+          "fat": 37
+        },
+        "dKcal": 0,
+        "dProt": 0
+      }
+    },
+    {
+      "id": "buffalo-chicken-crust-pizza",
+      "title": "Buffalo-pizza med kycklingbotten",
+      "rows": 16,
+      "matched": 16,
+      "unmatched": 0,
+      "needsPieceWeight": 0,
+      "unmatchedNames": [],
+      "needsPieceNames": [],
+      "newMacros": {
+        "kcal": 1368,
+        "prot": 154,
+        "carb": 26,
+        "fat": 71
+      },
+      "oldMacros": {
+        "kcal": 1368,
+        "prot": 154,
+        "carb": 26,
+        "fat": 71
+      },
+      "drift": {
+        "old": {
+          "kcal": 1368,
+          "prot": 154,
+          "carb": 26,
+          "fat": 71
+        },
+        "next": {
+          "kcal": 1368,
+          "prot": 154,
+          "carb": 26,
+          "fat": 71
+        },
+        "dKcal": 0,
+        "dProt": 0
+      }
+    },
+    {
+      "id": "edamame-spread",
+      "title": "Krämig edamame-spread med jalapeño och basilika",
       "rows": 9,
       "matched": 9,
       "unmatched": 0,
@@ -1107,151 +712,32 @@
       "unmatchedNames": [],
       "needsPieceNames": [],
       "newMacros": {
-        "kcal": 1250,
-        "prot": 52,
-        "carb": 166,
-        "fat": 40
-      },
-      "oldMacros": {
-        "kcal": 1058,
-        "prot": 60,
-        "carb": 151,
-        "fat": 24
-      },
-      "drift": {
-        "old": {
-          "kcal": 1058,
-          "prot": 60,
-          "carb": 151,
-          "fat": 24
-        },
-        "next": {
-          "kcal": 1250,
-          "prot": 52,
-          "carb": 166,
-          "fat": 40
-        },
-        "dKcal": 192,
-        "dProt": -8
-      }
-    },
-    {
-      "id": "buffalo-chicken-crust-pizza",
-      "title": "Buffalo-pizza med kycklingbotten",
-      "rows": 16,
-      "matched": 15,
-      "unmatched": 1,
-      "needsPieceWeight": 0,
-      "unmatchedNames": [
-        "stark pizzasås"
-      ],
-      "needsPieceNames": [],
-      "newMacros": {
-        "kcal": 1362,
-        "prot": 158,
-        "carb": 20,
-        "fat": 70
-      },
-      "oldMacros": {
-        "kcal": 1404,
-        "prot": 151,
-        "carb": 41,
-        "fat": 78
-      },
-      "drift": {
-        "old": {
-          "kcal": 1404,
-          "prot": 151,
-          "carb": 41,
-          "fat": 78
-        },
-        "next": {
-          "kcal": 1362,
-          "prot": 158,
-          "carb": 20,
-          "fat": 70
-        },
-        "dKcal": -42,
-        "dProt": 7
-      }
-    },
-    {
-      "id": "dumpling-lasagna",
-      "title": "Dumplinglasagne",
-      "rows": 16,
-      "matched": 16,
-      "unmatched": 0,
-      "needsPieceWeight": 0,
-      "unmatchedNames": [],
-      "needsPieceNames": [],
-      "newMacros": {
-        "kcal": 2064,
-        "prot": 100,
-        "carb": 127,
-        "fat": 124
-      },
-      "oldMacros": {
-        "kcal": 1829,
-        "prot": 105,
-        "carb": 158,
-        "fat": 85
-      },
-      "drift": {
-        "old": {
-          "kcal": 1829,
-          "prot": 105,
-          "carb": 158,
-          "fat": 85
-        },
-        "next": {
-          "kcal": 2064,
-          "prot": 100,
-          "carb": 127,
-          "fat": 124
-        },
-        "dKcal": 235,
-        "dProt": -5
-      }
-    },
-    {
-      "id": "edamame-spread",
-      "title": "Krämig edamame-spread med jalapeño och basilika",
-      "rows": 9,
-      "matched": 7,
-      "unmatched": 2,
-      "needsPieceWeight": 0,
-      "unmatchedNames": [
-        "jalapeño, kärnor borttagna",
-        "citron, zest + juice"
-      ],
-      "needsPieceNames": [],
-      "newMacros": {
         "kcal": 1215,
-        "prot": 64,
-        "carb": 64,
+        "prot": 62,
+        "carb": 54,
         "fat": 86
       },
       "oldMacros": {
-        "kcal": 1143,
-        "prot": 57,
-        "carb": 56,
-        "fat": 83
+        "kcal": 1215,
+        "prot": 62,
+        "carb": 54,
+        "fat": 86
       },
       "drift": {
         "old": {
-          "kcal": 1143,
-          "prot": 57,
-          "carb": 56,
-          "fat": 83
+          "kcal": 1215,
+          "prot": 62,
+          "carb": 54,
+          "fat": 86
         },
         "next": {
           "kcal": 1215,
-          "prot": 64,
-          "carb": 64,
+          "prot": 62,
+          "carb": 54,
           "fat": 86
         },
-        "dKcal": 72,
-        "dProt": 7
+        "dKcal": 0,
+        "dProt": 0
       }
     },
     {
@@ -1259,77 +745,119 @@
       "title": "Smashad gurka med ume och chili crunch",
       "rows": 9,
       "matched": 8,
-      "unmatched": 1,
-      "needsPieceWeight": 0,
-      "unmatchedNames": [
-        "ume-pickle (umeboshi-juice)"
+      "unmatched": 0,
+      "needsPieceWeight": 1,
+      "unmatchedNames": [],
+      "needsPieceNames": [
+        "salladslök, tunt skivad"
       ],
-      "needsPieceNames": [],
       "newMacros": {
-        "kcal": 184,
-        "prot": 3,
-        "carb": 10,
-        "fat": 15
+        "kcal": 185,
+        "prot": 4,
+        "carb": 12,
+        "fat": 14
       },
       "oldMacros": {
-        "kcal": 126,
-        "prot": 5,
+        "kcal": 185,
+        "prot": 4,
         "carb": 12,
-        "fat": 7
+        "fat": 14
       },
       "drift": {
         "old": {
-          "kcal": 126,
-          "prot": 5,
+          "kcal": 185,
+          "prot": 4,
           "carb": 12,
-          "fat": 7
+          "fat": 14
         },
         "next": {
-          "kcal": 184,
-          "prot": 3,
-          "carb": 10,
-          "fat": 15
+          "kcal": 185,
+          "prot": 4,
+          "carb": 12,
+          "fat": 14
         },
-        "dKcal": 58,
-        "dProt": -2
+        "dKcal": 0,
+        "dProt": 0
       }
     },
     {
       "id": "gochujang-gnocchi",
       "title": "Krämig gochujang-gnocchi med sesambiff",
       "rows": 16,
-      "matched": 16,
+      "matched": 15,
       "unmatched": 0,
-      "needsPieceWeight": 0,
+      "needsPieceWeight": 1,
       "unmatchedNames": [],
-      "needsPieceNames": [],
+      "needsPieceNames": [
+        "skivad salladslök"
+      ],
       "newMacros": {
-        "kcal": 2159,
-        "prot": 135,
-        "carb": 158,
-        "fat": 102
+        "kcal": 2256,
+        "prot": 143,
+        "carb": 186,
+        "fat": 103
       },
       "oldMacros": {
-        "kcal": 1924,
-        "prot": 146,
-        "carb": 182,
-        "fat": 65
+        "kcal": 2256,
+        "prot": 143,
+        "carb": 186,
+        "fat": 103
       },
       "drift": {
         "old": {
-          "kcal": 1924,
-          "prot": 146,
-          "carb": 182,
-          "fat": 65
+          "kcal": 2256,
+          "prot": 143,
+          "carb": 186,
+          "fat": 103
         },
         "next": {
-          "kcal": 2159,
-          "prot": 135,
-          "carb": 158,
-          "fat": 102
+          "kcal": 2256,
+          "prot": 143,
+          "carb": 186,
+          "fat": 103
         },
-        "dKcal": 235,
-        "dProt": -11
+        "dKcal": 0,
+        "dProt": 0
+      }
+    },
+    {
+      "id": "middle-eastern-chicken-mince",
+      "title": "Kycklingfärs med Mellanöstern-smaker",
+      "rows": 22,
+      "matched": 21,
+      "unmatched": 0,
+      "needsPieceWeight": 1,
+      "unmatchedNames": [],
+      "needsPieceNames": [
+        "tomat"
+      ],
+      "newMacros": {
+        "kcal": 2329,
+        "prot": 177,
+        "carb": 339,
+        "fat": 25
+      },
+      "oldMacros": {
+        "kcal": 2329,
+        "prot": 177,
+        "carb": 339,
+        "fat": 25
+      },
+      "drift": {
+        "old": {
+          "kcal": 2329,
+          "prot": 177,
+          "carb": 339,
+          "fat": 25
+        },
+        "next": {
+          "kcal": 2329,
+          "prot": 177,
+          "carb": 339,
+          "fat": 25
+        },
+        "dKcal": 0,
+        "dProt": 0
       }
     },
     {
@@ -1342,266 +870,267 @@
       "unmatchedNames": [],
       "needsPieceNames": [],
       "newMacros": {
-        "kcal": 1055,
-        "prot": 38,
-        "carb": 186,
+        "kcal": 1099,
+        "prot": 40,
+        "carb": 194,
         "fat": 15
       },
       "oldMacros": {
-        "kcal": 1065,
-        "prot": 37,
-        "carb": 190,
+        "kcal": 1099,
+        "prot": 40,
+        "carb": 194,
         "fat": 15
       },
       "drift": {
         "old": {
-          "kcal": 1065,
-          "prot": 37,
-          "carb": 190,
+          "kcal": 1099,
+          "prot": 40,
+          "carb": 194,
           "fat": 15
         },
         "next": {
-          "kcal": 1055,
-          "prot": 38,
-          "carb": 186,
+          "kcal": 1099,
+          "prot": 40,
+          "carb": 194,
           "fat": 15
         },
-        "dKcal": -10,
-        "dProt": 1
-      }
-    },
-    {
-      "id": "numbing-chicken-cucumber",
-      "title": "Sichuansallad med kyckling och gurka",
-      "rows": 19,
-      "matched": 18,
-      "unmatched": 1,
-      "needsPieceWeight": 0,
-      "unmatchedNames": [
-        "sichuanpepparkorn"
-      ],
-      "needsPieceNames": [],
-      "newMacros": {
-        "kcal": 1709,
-        "prot": 131,
-        "carb": 205,
-        "fat": 38
-      },
-      "oldMacros": {
-        "kcal": 1396,
-        "prot": 123,
-        "carb": 104,
-        "fat": 52
-      },
-      "drift": {
-        "old": {
-          "kcal": 1396,
-          "prot": 123,
-          "carb": 104,
-          "fat": 52
-        },
-        "next": {
-          "kcal": 1709,
-          "prot": 131,
-          "carb": 205,
-          "fat": 38
-        },
-        "dKcal": 313,
-        "dProt": 8
+        "dKcal": 0,
+        "dProt": 0
       }
     },
     {
       "id": "tuna-chili-crisp-salad",
       "title": "Tonfisksallad med chili crunch",
       "rows": 17,
-      "matched": 15,
-      "unmatched": 2,
+      "matched": 17,
+      "unmatched": 0,
       "needsPieceWeight": 0,
-      "unmatchedNames": [
-        "ventresca tonfisk, oljeinlagd",
-        "smashad och grovhackad gurka"
-      ],
+      "unmatchedNames": [],
       "needsPieceNames": [],
       "newMacros": {
-        "kcal": 1320,
-        "prot": 29,
-        "carb": 90,
-        "fat": 92
+        "kcal": 1583,
+        "prot": 90,
+        "carb": 66,
+        "fat": 105
       },
       "oldMacros": {
-        "kcal": 1576,
-        "prot": 89,
-        "carb": 139,
-        "fat": 68
+        "kcal": 1583,
+        "prot": 90,
+        "carb": 66,
+        "fat": 105
       },
       "drift": {
         "old": {
-          "kcal": 1576,
-          "prot": 89,
-          "carb": 139,
-          "fat": 68
+          "kcal": 1583,
+          "prot": 90,
+          "carb": 66,
+          "fat": 105
         },
         "next": {
-          "kcal": 1320,
-          "prot": 29,
-          "carb": 90,
-          "fat": 92
+          "kcal": 1583,
+          "prot": 90,
+          "carb": 66,
+          "fat": 105
         },
-        "dKcal": -256,
-        "dProt": -60
+        "dKcal": 0,
+        "dProt": 0
       }
     },
     {
       "id": "smashed-pickle-salad",
       "title": "Smashad picklesallad",
       "rows": 7,
-      "matched": 6,
+      "matched": 7,
       "unmatched": 0,
-      "needsPieceWeight": 1,
+      "needsPieceWeight": 0,
       "unmatchedNames": [],
-      "needsPieceNames": [
-        "selleristjälkar, tunt skivad"
-      ],
+      "needsPieceNames": [],
       "newMacros": {
-        "kcal": 266,
-        "prot": 4,
-        "carb": 12,
-        "fat": 23
+        "kcal": 306,
+        "prot": 5,
+        "carb": 26,
+        "fat": 19
       },
       "oldMacros": {
-        "kcal": 228,
-        "prot": 3,
-        "carb": 7,
-        "fat": 21
+        "kcal": 306,
+        "prot": 5,
+        "carb": 26,
+        "fat": 19
       },
       "drift": {
         "old": {
-          "kcal": 228,
-          "prot": 3,
-          "carb": 7,
-          "fat": 21
+          "kcal": 306,
+          "prot": 5,
+          "carb": 26,
+          "fat": 19
         },
         "next": {
-          "kcal": 266,
-          "prot": 4,
-          "carb": 12,
-          "fat": 23
+          "kcal": 306,
+          "prot": 5,
+          "carb": 26,
+          "fat": 19
         },
-        "dKcal": 38,
-        "dProt": 1
+        "dKcal": 0,
+        "dProt": 0
       }
     },
     {
       "id": "one-pan-dumplings-with-greens",
       "title": "Dumplings med grönsaker i en panna",
       "rows": 11,
-      "matched": 11,
+      "matched": 9,
       "unmatched": 0,
-      "needsPieceWeight": 0,
+      "needsPieceWeight": 2,
       "unmatchedNames": [],
-      "needsPieceNames": [],
+      "needsPieceNames": [
+        "finhackad ingefära (1 tum)",
+        "skivad salladslök"
+      ],
       "newMacros": {
-        "kcal": 1446,
+        "kcal": 1326,
         "prot": 42,
-        "carb": 149,
-        "fat": 79
+        "carb": 124,
+        "fat": 73
       },
       "oldMacros": {
-        "kcal": 1408,
+        "kcal": 1326,
         "prot": 42,
-        "carb": 154,
-        "fat": 72
+        "carb": 124,
+        "fat": 73
       },
       "drift": {
         "old": {
-          "kcal": 1408,
+          "kcal": 1326,
           "prot": 42,
-          "carb": 154,
-          "fat": 72
+          "carb": 124,
+          "fat": 73
         },
         "next": {
-          "kcal": 1446,
+          "kcal": 1326,
           "prot": 42,
-          "carb": 149,
-          "fat": 79
+          "carb": 124,
+          "fat": 73
         },
-        "dKcal": 38,
+        "dKcal": 0,
         "dProt": 0
       }
     },
     {
-      "id": "thai-basil-beef-rolls",
-      "title": "Thailändska basilikarullar med nötkött",
-      "rows": 13,
-      "matched": 13,
+      "id": "dumpling-lasagna",
+      "title": "Dumplinglasagne",
+      "rows": 16,
+      "matched": 16,
       "unmatched": 0,
       "needsPieceWeight": 0,
       "unmatchedNames": [],
       "needsPieceNames": [],
       "newMacros": {
-        "kcal": 1228,
-        "prot": 63,
-        "carb": 106,
-        "fat": 60
+        "kcal": 1672,
+        "prot": 111,
+        "carb": 137,
+        "fat": 73
       },
       "oldMacros": {
-        "kcal": 990,
-        "prot": 65,
-        "carb": 98,
-        "fat": 38
+        "kcal": 1672,
+        "prot": 111,
+        "carb": 137,
+        "fat": 73
       },
       "drift": {
         "old": {
-          "kcal": 990,
-          "prot": 65,
-          "carb": 98,
-          "fat": 38
+          "kcal": 1672,
+          "prot": 111,
+          "carb": 137,
+          "fat": 73
         },
         "next": {
-          "kcal": 1228,
-          "prot": 63,
-          "carb": 106,
-          "fat": 60
+          "kcal": 1672,
+          "prot": 111,
+          "carb": 137,
+          "fat": 73
         },
-        "dKcal": 238,
-        "dProt": -2
+        "dKcal": 0,
+        "dProt": 0
+      }
+    },
+    {
+      "id": "numbing-chicken-cucumber",
+      "title": "Sichuansallad med kyckling och gurka",
+      "rows": 19,
+      "matched": 17,
+      "unmatched": 0,
+      "needsPieceWeight": 2,
+      "unmatchedNames": [],
+      "needsPieceNames": [
+        "salladslök",
+        "salladslök"
+      ],
+      "newMacros": {
+        "kcal": 1345,
+        "prot": 123,
+        "carb": 125,
+        "fat": 37
+      },
+      "oldMacros": {
+        "kcal": 1345,
+        "prot": 123,
+        "carb": 125,
+        "fat": 37
+      },
+      "drift": {
+        "old": {
+          "kcal": 1345,
+          "prot": 123,
+          "carb": 125,
+          "fat": 37
+        },
+        "next": {
+          "kcal": 1345,
+          "prot": 123,
+          "carb": 125,
+          "fat": 37
+        },
+        "dKcal": 0,
+        "dProt": 0
       }
     },
     {
       "id": "rice-paper-shrimp-pancake",
       "title": "Räkpannkaka i rispapper",
       "rows": 12,
-      "matched": 12,
+      "matched": 11,
       "unmatched": 0,
-      "needsPieceWeight": 0,
+      "needsPieceWeight": 1,
       "unmatchedNames": [],
-      "needsPieceNames": [],
+      "needsPieceNames": [
+        "finhackad salladslök"
+      ],
       "newMacros": {
-        "kcal": 400,
-        "prot": 50,
-        "carb": 26,
-        "fat": 11
+        "kcal": 365,
+        "prot": 49,
+        "carb": 22,
+        "fat": 9
       },
       "oldMacros": {
-        "kcal": 391,
-        "prot": 50,
-        "carb": 23,
-        "fat": 11
+        "kcal": 365,
+        "prot": 49,
+        "carb": 22,
+        "fat": 9
       },
       "drift": {
         "old": {
-          "kcal": 391,
-          "prot": 50,
-          "carb": 23,
-          "fat": 11
+          "kcal": 365,
+          "prot": 49,
+          "carb": 22,
+          "fat": 9
         },
         "next": {
-          "kcal": 400,
-          "prot": 50,
-          "carb": 26,
-          "fat": 11
+          "kcal": 365,
+          "prot": 49,
+          "carb": 22,
+          "fat": 9
         },
-        "dKcal": 9,
+        "dKcal": 0,
         "dProt": 0
       }
     },
@@ -1609,41 +1138,40 @@
       "id": "chicken-kebab-wraps",
       "title": "Kycklingkebab-wraps",
       "rows": 26,
-      "matched": 24,
-      "unmatched": 2,
-      "needsPieceWeight": 0,
-      "unmatchedNames": [
-        "torkad dill",
-        "citron, juice"
+      "matched": 25,
+      "unmatched": 0,
+      "needsPieceWeight": 1,
+      "unmatchedNames": [],
+      "needsPieceNames": [
+        "finhackad röd paprika"
       ],
-      "needsPieceNames": [],
       "newMacros": {
-        "kcal": 2570,
-        "prot": 213,
-        "carb": 162,
-        "fat": 120
+        "kcal": 2273,
+        "prot": 276,
+        "carb": 180,
+        "fat": 49
       },
       "oldMacros": {
-        "kcal": 2369,
-        "prot": 247,
-        "carb": 157,
-        "fat": 101
+        "kcal": 2273,
+        "prot": 276,
+        "carb": 180,
+        "fat": 49
       },
       "drift": {
         "old": {
-          "kcal": 2369,
-          "prot": 247,
-          "carb": 157,
-          "fat": 101
+          "kcal": 2273,
+          "prot": 276,
+          "carb": 180,
+          "fat": 49
         },
         "next": {
-          "kcal": 2570,
-          "prot": 213,
-          "carb": 162,
-          "fat": 120
+          "kcal": 2273,
+          "prot": 276,
+          "carb": 180,
+          "fat": 49
         },
-        "dKcal": 201,
-        "dProt": -34
+        "dKcal": 0,
+        "dProt": 0
       }
     },
     {
@@ -1656,32 +1184,190 @@
       "unmatchedNames": [],
       "needsPieceNames": [],
       "newMacros": {
-        "kcal": 3713,
-        "prot": 237,
-        "carb": 618,
-        "fat": 32
+        "kcal": 3806,
+        "prot": 117,
+        "carb": 694,
+        "fat": 50
       },
       "oldMacros": {
-        "kcal": 3719,
-        "prot": 228,
-        "carb": 616,
-        "fat": 32
+        "kcal": 3806,
+        "prot": 117,
+        "carb": 694,
+        "fat": 50
       },
       "drift": {
         "old": {
-          "kcal": 3719,
-          "prot": 228,
-          "carb": 616,
-          "fat": 32
+          "kcal": 3806,
+          "prot": 117,
+          "carb": 694,
+          "fat": 50
         },
         "next": {
-          "kcal": 3713,
-          "prot": 237,
-          "carb": 618,
-          "fat": 32
+          "kcal": 3806,
+          "prot": 117,
+          "carb": 694,
+          "fat": 50
         },
-        "dKcal": -6,
-        "dProt": 9
+        "dKcal": 0,
+        "dProt": 0
+      }
+    },
+    {
+      "id": "kycklinglasagne-med-zucchini",
+      "title": "Kycklinglasagne med zucchini",
+      "rows": 21,
+      "matched": 20,
+      "unmatched": 0,
+      "needsPieceWeight": 1,
+      "unmatchedNames": [],
+      "needsPieceNames": [
+        "lasagneplattor"
+      ],
+      "newMacros": {
+        "kcal": 1849,
+        "prot": 231,
+        "carb": 45,
+        "fat": 80
+      },
+      "oldMacros": {
+        "kcal": 1849,
+        "prot": 231,
+        "carb": 45,
+        "fat": 80
+      },
+      "drift": {
+        "old": {
+          "kcal": 1849,
+          "prot": 231,
+          "carb": 45,
+          "fat": 80
+        },
+        "next": {
+          "kcal": 1849,
+          "prot": 231,
+          "carb": 45,
+          "fat": 80
+        },
+        "dKcal": 0,
+        "dProt": 0
+      }
+    },
+    {
+      "id": "hjortfarsbiffar-med-rostade-rotfrukter-och-svamp",
+      "title": "Hjortfärsbiffar med rostade rotfrukter och svampsås",
+      "rows": 23,
+      "matched": 22,
+      "unmatched": 0,
+      "needsPieceWeight": 1,
+      "unmatchedNames": [],
+      "needsPieceNames": [
+        "morot"
+      ],
+      "newMacros": {
+        "kcal": 1263,
+        "prot": 131,
+        "carb": 38,
+        "fat": 62
+      },
+      "oldMacros": {
+        "kcal": 1263,
+        "prot": 131,
+        "carb": 38,
+        "fat": 62
+      },
+      "drift": {
+        "old": {
+          "kcal": 1263,
+          "prot": 131,
+          "carb": 38,
+          "fat": 62
+        },
+        "next": {
+          "kcal": 1263,
+          "prot": 131,
+          "carb": 38,
+          "fat": 62
+        },
+        "dKcal": 0,
+        "dProt": 0
+      }
+    },
+    {
+      "id": "kyckling-gyoza-med-dipp",
+      "title": "Gyoza-tacos med kycklingfärs",
+      "rows": 18,
+      "matched": 18,
+      "unmatched": 0,
+      "needsPieceWeight": 0,
+      "unmatchedNames": [],
+      "needsPieceNames": [],
+      "newMacros": {
+        "kcal": 1105,
+        "prot": 107,
+        "carb": 71,
+        "fat": 41
+      },
+      "oldMacros": {
+        "kcal": 1105,
+        "prot": 107,
+        "carb": 71,
+        "fat": 41
+      },
+      "drift": {
+        "old": {
+          "kcal": 1105,
+          "prot": 107,
+          "carb": 71,
+          "fat": 41
+        },
+        "next": {
+          "kcal": 1105,
+          "prot": 107,
+          "carb": 71,
+          "fat": 41
+        },
+        "dKcal": 0,
+        "dProt": 0
+      }
+    },
+    {
+      "id": "thai-basil-beef-rolls",
+      "title": "Thailändska basilikarullar med nötkött",
+      "rows": 13,
+      "matched": 12,
+      "unmatched": 0,
+      "needsPieceWeight": 1,
+      "unmatchedNames": [],
+      "needsPieceNames": [
+        "juliennad morot"
+      ],
+      "newMacros": {
+        "kcal": 1148,
+        "prot": 71,
+        "carb": 95,
+        "fat": 53
+      },
+      "oldMacros": {
+        "kcal": 1148,
+        "prot": 71,
+        "carb": 95,
+        "fat": 53
+      },
+      "drift": {
+        "old": {
+          "kcal": 1148,
+          "prot": 71,
+          "carb": 95,
+          "fat": 53
+        },
+        "next": {
+          "kcal": 1148,
+          "prot": 71,
+          "carb": 95,
+          "fat": 53
+        },
+        "dKcal": 0,
+        "dProt": 0
       }
     }
   ]
