@@ -444,6 +444,8 @@
       if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
       var menu = e.target.closest('.browse-menu, .list-filter-menu');
       if (!menu || !root.contains(menu)) return;
+      var hoverBtn = menu.querySelector('.browse-trigger, .list-filter-trigger');
+      if (hoverBtn && hoverBtn.disabled) return;
       if (closeTimer) {
         clearTimeout(closeTimer);
         closeTimer = null;
@@ -470,6 +472,10 @@
     root.addEventListener('click', function(e) {
       var trigger = e.target.closest('.browse-trigger, .list-filter-trigger');
       if (trigger) {
+        if (trigger.disabled) {
+          e.preventDefault();
+          return;
+        }
         e.preventDefault();
         var menu = trigger.closest('.browse-menu, .list-filter-menu');
         var open = menu.classList.contains('is-open');
