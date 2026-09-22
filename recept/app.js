@@ -1441,6 +1441,10 @@ function buildShoppingIngredientList(r, showMacros) {
       var nameCol = mk('span', 'ing-shop-name');
       var nameText = mk('span', 'ing-name-text');
       nameText.textContent = capitalizeIngName(ing.name);
+      nameCol.appendChild(nameText);
+      var status = ing.match_status;
+      if (status === 'unmatched' || status === 'needs_piece_weight') {
+        card.classList.add('ing-row--unresolved');
         var warn = mk('span', 'ing-unresolved-flag');
         warn.textContent = status === 'needs_piece_weight' ? 'saknar styckvikt' : 'saknar näringsdata';
         nameCol.appendChild(warn);
