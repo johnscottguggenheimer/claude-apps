@@ -120,6 +120,8 @@ function getDisplayRecipe(base) {
   }
   var preferred = pickEatModeVariant(base, getListEatMode());
   if (preferred) return applyProteinVariantOverlay(base, preferred);
+  var searchHit = pickSearchMatchingVariant(base, searchQuery);
+  if (searchHit) return applyProteinVariantOverlay(base, searchHit);
   return base;
 }
 
@@ -690,6 +692,21 @@ function appendSourceLine(container, r, opts) {
   container.appendChild(row);
 }
 
+function recipeVariantMatchesQuery(variant, q) {
+  if (!variant || !q) return false;
+  if (variant.title && variant.title.toLowerCase().indexOf(q) !== -1) return true;
+  if (variant.label && variant.label.toLowerCase().indexOf(q) !== -1) return true;
+  if (variant.id && String(variant.id).toLowerCase().indexOf(q) !== -1) return true;
+  var groups = variant.groups || [];
+  for (var g = 0; g < groups.length; g++) {
+    var ings = groups[g].ingredients || [];
+    for (var j = 0; j < ings.length; j++) {
+      if (ings[j].name && ings[j].name.toLowerCase().indexOf(q) !== -1) return true;
+    }
+  }
+  return false;
+}
+
 function recipeMatchesSearch(r, q) {
   if (!q) return true;
   q = q.toLowerCase().trim();
@@ -708,7 +725,22 @@ function recipeMatchesSearch(r, q) {
       }
     }
   }
+  var variants = r.proteinVariants || [];
+  for (var v = 0; v < variants.length; v++) {
+    if (recipeVariantMatchesQuery(variants[v], q)) return true;
+  }
   return false;
+}
+
+function pickSearchMatchingVariant(base, q) {
+  if (!base || !q) return null;
+  q = q.toLowerCase().trim();
+  if (!q) return null;
+  var variants = base.proteinVariants || [];
+  for (var i = 0; i < variants.length; i++) {
+    if (recipeVariantMatchesQuery(variants[i], q)) return variants[i];
+  }
+  return null;
 }
 
 function listHeadingText() {
