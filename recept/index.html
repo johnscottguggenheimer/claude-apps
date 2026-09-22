@@ -619,9 +619,9 @@
   }
   .ing-shop-card {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 5.75rem 1.35rem;
+    grid-template-columns: minmax(0, 1fr) auto 1.35rem;
     align-items: center;
-    column-gap: 0.75rem;
+    column-gap: 0.45rem;
     margin: 0;
     padding: 0.7rem 0.8rem;
     border: 1px solid var(--border);
@@ -650,6 +650,7 @@
     color: var(--text);
     line-height: 1.4;
     text-align: left;
+    padding-right: 0.5rem;
   }
   .ing-shop-name .ing-macros {
     text-align: left;
@@ -658,7 +659,8 @@
     font-size: 0.875rem;
     color: var(--text2);
     white-space: nowrap;
-    text-align: left;
+    text-align: right;
+    justify-self: end;
     font-variant-numeric: tabular-nums;
   }
   .ing-shop-check {
