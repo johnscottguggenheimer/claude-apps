@@ -357,6 +357,22 @@
   .list-filter-trigger.has-selection {
     border-color: var(--text); font-weight: 600;
   }
+  .list-filter-trigger.is-disabled,
+  .list-filter-trigger:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    color: var(--text3);
+    border-color: var(--border);
+  }
+  .list-filter-trigger.is-disabled:hover,
+  .list-filter-trigger:disabled:hover {
+    color: var(--text3);
+    border-color: var(--border);
+  }
+  .list-filter-trigger.is-disabled:hover .list-filter-chevron,
+  .list-filter-trigger:disabled:hover .list-filter-chevron {
+    color: inherit;
+  }
   .list-filter-panel {
     display: none;
     position: absolute; top: calc(100% + 4px); left: 0;
