@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-22T10:15:41.930Z",
+  "generatedAt": "2026-09-22T10:23:02.542Z",
   "method": "Expected macros = sum of SLV/manual per_100g × grams for each line. Food choice from golden-corrections.json when present; else catalog only if alias not marked wrong. NOT taken from current resolver output.",
   "recipeCount": 32,
-  "fullyVerified": 32,
+  "fullyVerified": 31,
   "recipes": [
     {
       "id": "aglio-e-olio",
@@ -359,9 +359,9 @@
         "carb": 28
       },
       "current_resolver_macros": {
-        "kcal": 1368,
+        "kcal": 1378,
         "prot": 154,
-        "carb": 26,
+        "carb": 28,
         "fat": 71
       },
       "unresolved_line_count": 0,
@@ -497,7 +497,7 @@
           "unit": "g",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 900003,
+          "food_id": 900004,
           "food_name": "buffalosås",
           "grams": 120,
           "kcal": 60,
@@ -566,7 +566,7 @@
           "unit": "g",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 900013,
+          "food_id": 900014,
           "food_name": "bananpeppar",
           "grams": 90,
           "kcal": 27,
@@ -618,7 +618,7 @@
           "unit": "msk",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 900012,
+          "food_id": 900013,
           "food_name": "blåmögelostdressing",
           "grams": 30,
           "kcal": 105,
@@ -635,7 +635,7 @@
           "unit": "msk",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 900003,
+          "food_id": 900004,
           "food_name": "buffalosås",
           "grams": 15,
           "kcal": 8,
@@ -659,10 +659,10 @@
         "carb": 190
       },
       "current_resolver_macros": {
-        "kcal": 2273,
-        "prot": 276,
-        "carb": 180,
-        "fat": 49
+        "kcal": 2197,
+        "prot": 272,
+        "carb": 171,
+        "fat": 47
       },
       "unresolved_line_count": 0,
       "line_count": 26,
@@ -1106,7 +1106,7 @@
           "unit": "st",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 900009,
+          "food_id": 900010,
           "food_name": "libanesiskt tunnbröd",
           "grams": 280,
           "kcal": 770,
@@ -1224,9 +1224,9 @@
         "carb": 189
       },
       "current_resolver_macros": {
-        "kcal": 1099,
+        "kcal": 1093,
         "prot": 40,
-        "carb": 194,
+        "carb": 189,
         "fat": 15
       },
       "unresolved_line_count": 0,
@@ -1420,10 +1420,10 @@
         "carb": 135
       },
       "current_resolver_macros": {
-        "kcal": 1672,
-        "prot": 111,
-        "carb": 137,
-        "fat": 73
+        "kcal": 1671,
+        "prot": 112,
+        "carb": 135,
+        "fat": 74
       },
       "unresolved_line_count": 0,
       "line_count": 16,
@@ -1610,7 +1610,7 @@
           "unit": "st",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 900005,
+          "food_id": 900006,
           "food_name": "gyozaskal",
           "grams": 200,
           "kcal": 580,
@@ -1893,14 +1893,14 @@
         "notkott"
       ],
       "expected_macros": {
-        "kcal": 2265,
-        "prot": 144,
+        "kcal": 2256,
+        "prot": 142,
         "fat": 103,
         "carb": 186
       },
       "current_resolver_macros": {
-        "kcal": 2256,
-        "prot": 143,
+        "kcal": 2248,
+        "prot": 141,
         "carb": 186,
         "fat": 103
       },
@@ -2021,11 +2021,11 @@
           "unit": "msk",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 909,
-          "food_name": "Sojasås",
+          "food_id": 1966,
+          "food_name": "Vinäger ättiksyra 7%",
           "grams": 30,
-          "kcal": 17,
-          "prot": 2,
+          "kcal": 9,
+          "prot": 0,
           "fat": 0,
           "carb": 2
         },
@@ -2124,7 +2124,7 @@
           "unit": "g",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 900014,
+          "food_id": 900015,
           "food_name": "potatisgnocchi",
           "grams": 450,
           "kcal": 720,
@@ -2200,10 +2200,10 @@
         "carb": 60
       },
       "current_resolver_macros": {
-        "kcal": 1263,
-        "prot": 131,
-        "carb": 38,
-        "fat": 62
+        "kcal": 1221,
+        "prot": 127,
+        "carb": 33,
+        "fat": 61
       },
       "unresolved_line_count": 0,
       "line_count": 23,
@@ -2621,10 +2621,10 @@
         "carb": 695
       },
       "current_resolver_macros": {
-        "kcal": 3806,
-        "prot": 117,
-        "carb": 694,
-        "fat": 50
+        "kcal": 3688,
+        "prot": 111,
+        "carb": 695,
+        "fat": 39
       },
       "unresolved_line_count": 0,
       "line_count": 10,
@@ -2691,7 +2691,7 @@
           "unit": "g",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 900007,
+          "food_id": 900008,
           "food_name": "torrjäst",
           "grams": 15,
           "kcal": 49,
@@ -2794,7 +2794,7 @@
           "unit": "pinch",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 900008,
+          "food_id": 900009,
           "food_name": "vallmofrön",
           "grams": 2,
           "kcal": 11,
@@ -2818,7 +2818,7 @@
         "carb": 63
       },
       "current_resolver_macros": {
-        "kcal": 769,
+        "kcal": 770,
         "prot": 47,
         "carb": 61,
         "fat": 37
@@ -2997,10 +2997,10 @@
         "carb": 174
       },
       "current_resolver_macros": {
-        "kcal": 3117,
-        "prot": 302,
-        "carb": 169,
-        "fat": 135
+        "kcal": 3119,
+        "prot": 301,
+        "carb": 170,
+        "fat": 136
       },
       "unresolved_line_count": 0,
       "line_count": 23,
@@ -3289,7 +3289,7 @@
           "unit": "st",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 900010,
+          "food_id": 900011,
           "food_name": "brioche hamburgerbröd",
           "grams": 240,
           "kcal": 768,
@@ -3415,9 +3415,9 @@
         "carb": 71
       },
       "current_resolver_macros": {
-        "kcal": 1105,
+        "kcal": 1096,
         "prot": 107,
-        "carb": 71,
+        "carb": 70,
         "fat": 41
       },
       "unresolved_line_count": 0,
@@ -3588,7 +3588,7 @@
           "unit": "st",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 900005,
+          "food_id": 900006,
           "food_name": "gyozaskal",
           "grams": 96,
           "kcal": 278,
@@ -3742,16 +3742,16 @@
         "kyckling"
       ],
       "expected_macros": {
-        "kcal": 2136,
+        "kcal": 2110,
         "prot": 240,
-        "fat": 81,
+        "fat": 78,
         "carb": 102
       },
       "current_resolver_macros": {
-        "kcal": 1849,
+        "kcal": 1823,
         "prot": 231,
         "carb": 45,
-        "fat": 80
+        "fat": 77
       },
       "unresolved_line_count": 0,
       "line_count": 21,
@@ -3921,12 +3921,12 @@
           "unit": "g",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 123,
-          "food_name": "Mjölk fett 3% berikad",
+          "food_id": 150,
+          "food_name": "Mellanmjölk fett 1,5% berikad",
           "grams": 200,
-          "kcal": 120,
+          "kcal": 94,
           "prot": 7,
-          "fat": 6,
+          "fat": 3,
           "carb": 9
         },
         {
@@ -4133,10 +4133,10 @@
         "carb": 19
       },
       "current_resolver_macros": {
-        "kcal": 803,
-        "prot": 68,
+        "kcal": 715,
+        "prot": 67,
         "carb": 19,
-        "fat": 51
+        "fat": 41
       },
       "unresolved_line_count": 0,
       "line_count": 8,
@@ -4296,9 +4296,9 @@
         "carb": 86
       },
       "current_resolver_macros": {
-        "kcal": 1850,
+        "kcal": 1864,
         "prot": 106,
-        "carb": 82,
+        "carb": 86,
         "fat": 120
       },
       "unresolved_line_count": 0,
@@ -4544,10 +4544,10 @@
         "carb": 81
       },
       "current_resolver_macros": {
-        "kcal": 1512,
-        "prot": 229,
-        "carb": 49,
-        "fat": 41
+        "kcal": 1636,
+        "prot": 231,
+        "carb": 67,
+        "fat": 45
       },
       "unresolved_line_count": 0,
       "line_count": 22,
@@ -4946,9 +4946,9 @@
         "carb": 342
       },
       "current_resolver_macros": {
-        "kcal": 2329,
+        "kcal": 2295,
         "prot": 177,
-        "carb": 339,
+        "carb": 332,
         "fat": 25
       },
       "unresolved_line_count": 0,
@@ -5555,7 +5555,7 @@
           "unit": "msk",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 900006,
+          "food_id": 900007,
           "food_name": "kinesisk svart vinäger",
           "grams": 30,
           "kcal": 9,
@@ -5623,8 +5623,8 @@
           "unit": "msk",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 1975,
-          "food_name": "Salt m. jod",
+          "food_id": 1953,
+          "food_name": "Vatten kranvatten",
           "grams": 90,
           "kcal": 0,
           "prot": 0,
@@ -5690,16 +5690,16 @@
       "category": "middag",
       "tags": [],
       "expected_macros": {
-        "kcal": 1342,
+        "kcal": 1346,
         "prot": 43,
-        "fat": 73,
+        "fat": 74,
         "carb": 125
       },
       "current_resolver_macros": {
-        "kcal": 1326,
+        "kcal": 1330,
         "prot": 42,
         "carb": 124,
-        "fat": 73
+        "fat": 74
       },
       "unresolved_line_count": 0,
       "line_count": 11,
@@ -5715,7 +5715,7 @@
           "unit": "g",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 900011,
+          "food_id": 900012,
           "food_name": "frysta dumplings",
           "grams": 450,
           "kcal": 900,
@@ -5783,12 +5783,12 @@
           "unit": "msk",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 40,
-          "food_name": "Solrosolja",
+          "food_id": 3418,
+          "food_name": "Matolja",
           "grams": 27.3,
-          "kcal": 241,
+          "kcal": 246,
           "prot": 0,
-          "fat": 27,
+          "fat": 28,
           "carb": 0
         },
         {
@@ -5905,16 +5905,16 @@
         "vegetarisk"
       ],
       "expected_macros": {
-        "kcal": 2460,
-        "prot": 143,
-        "fat": 73,
-        "carb": 314
+        "kcal": 2491,
+        "prot": 144,
+        "fat": 82,
+        "carb": 296
       },
       "current_resolver_macros": {
-        "kcal": 2650,
-        "prot": 132,
-        "carb": 319,
-        "fat": 103
+        "kcal": 2475,
+        "prot": 142,
+        "carb": 296,
+        "fat": 81
       },
       "unresolved_line_count": 0,
       "line_count": 13,
@@ -6135,13 +6135,13 @@
           "unit": "g",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 1855,
-          "food_name": "Choklad chokladpraliner",
+          "food_id": 6907,
+          "food_name": "Mörk choklad kakao 70%",
           "grams": 90,
-          "kcal": 492,
-          "prot": 7,
-          "fat": 30,
-          "carb": 48
+          "kcal": 523,
+          "prot": 8,
+          "fat": 40,
+          "carb": 31
         }
       ]
     },
@@ -6153,16 +6153,16 @@
         "vegetarisk"
       ],
       "expected_macros": {
-        "kcal": 932,
-        "prot": 73,
-        "fat": 53,
-        "carb": 69
+        "kcal": 959,
+        "prot": 74,
+        "fat": 61,
+        "carb": 53
       },
       "current_resolver_macros": {
-        "kcal": 932,
-        "prot": 73,
-        "carb": 69,
-        "fat": 53
+        "kcal": 959,
+        "prot": 74,
+        "carb": 53,
+        "fat": 61
       },
       "unresolved_line_count": 0,
       "line_count": 6,
@@ -6246,13 +6246,13 @@
           "unit": "g",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 1855,
-          "food_name": "Choklad chokladpraliner",
+          "food_id": 6907,
+          "food_name": "Mörk choklad kakao 70%",
           "grams": 80,
-          "kcal": 438,
-          "prot": 6,
-          "fat": 27,
-          "carb": 43
+          "kcal": 465,
+          "prot": 7,
+          "fat": 35,
+          "carb": 27
         },
         {
           "group_index": 1,
@@ -6615,16 +6615,16 @@
         "vegetarisk"
       ],
       "expected_macros": {
-        "kcal": 400,
+        "kcal": 366,
         "prot": 41,
-        "fat": 12,
-        "carb": 27
+        "fat": 7,
+        "carb": 28
       },
       "current_resolver_macros": {
-        "kcal": 412,
+        "kcal": 366,
         "prot": 41,
-        "carb": 35,
-        "fat": 12
+        "carb": 28,
+        "fat": 7
       },
       "unresolved_line_count": 0,
       "line_count": 7,
@@ -6640,12 +6640,12 @@
           "unit": "g",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 123,
-          "food_name": "Mjölk fett 3% berikad",
+          "food_id": 150,
+          "food_name": "Mellanmjölk fett 1,5% berikad",
           "grams": 300,
-          "kcal": 180,
+          "kcal": 141,
           "prot": 11,
-          "fat": 9,
+          "fat": 5,
           "carb": 14
         },
         {
@@ -6657,7 +6657,7 @@
           "unit": "g",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 900001,
+          "food_id": 900002,
           "food_name": "proteinpulver",
           "grams": 30,
           "kcal": 111,
@@ -6742,13 +6742,13 @@
           "unit": "g",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 1957,
-          "food_name": "Kaffe bryggt",
+          "food_id": 1958,
+          "food_name": "Kaffe espresso bryggt drickf.",
           "grams": 60,
-          "kcal": 1,
+          "kcal": 5,
           "prot": 0,
           "fat": 0,
-          "carb": 0
+          "carb": 1
         }
       ]
     },
@@ -6888,7 +6888,7 @@
           "unit": "st",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 900004,
+          "food_id": 900005,
           "food_name": "rispapper",
           "grams": 20,
           "kcal": 66,
@@ -7050,7 +7050,7 @@
           "unit": "msk",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 900002,
+          "food_id": 900003,
           "food_name": "ume-pickle",
           "grams": 30,
           "kcal": 6,
@@ -7171,21 +7171,21 @@
         "vegetarisk"
       ],
       "expected_macros": {
-        "kcal": 306,
-        "prot": 5,
+        "kcal": 295,
+        "prot": 4,
         "fat": 19,
-        "carb": 26
+        "carb": 24
       },
       "current_resolver_macros": {
-        "kcal": 306,
-        "prot": 5,
-        "carb": 26,
+        "kcal": 295,
+        "prot": 4,
+        "carb": 24,
         "fat": 19
       },
-      "unresolved_line_count": 0,
+      "unresolved_line_count": 1,
       "line_count": 7,
-      "verified": true,
-      "verification": "oracle complete — foods from corrections or ok/uncertain aliases; macros from SLV/manual per_100g",
+      "verified": false,
+      "verification": "1 lines lack oracle food or grams — expected_macros undercounts",
       "lines": [
         {
           "group_index": 0,
@@ -7213,8 +7213,8 @@
           "unit": "msk",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 1975,
-          "food_name": "Salt m. jod",
+          "food_id": 1953,
+          "food_name": "Vatten kranvatten",
           "grams": 15,
           "kcal": 0,
           "prot": 0,
@@ -7228,15 +7228,11 @@
           "normalized": "röd lök",
           "quantity": 0.5,
           "unit": "st",
-          "status": "ok",
+          "status": "needs_grams",
+          "food_id": 344,
+          "food_name": "Lök gul",
           "source": "catalog-ok",
-          "food_id": 348,
-          "food_name": "Mangold",
-          "grams": 50,
-          "kcal": 11,
-          "prot": 1,
-          "fat": 0,
-          "carb": 1
+          "note": "could not convert to grams even with piece override"
         },
         {
           "group_index": 0,
@@ -7322,10 +7318,10 @@
         "carb": 104
       },
       "current_resolver_macros": {
-        "kcal": 1773,
-        "prot": 127,
-        "carb": 89,
-        "fat": 98
+        "kcal": 1879,
+        "prot": 131,
+        "carb": 104,
+        "fat": 101
       },
       "unresolved_line_count": 0,
       "line_count": 15,
@@ -7598,15 +7594,15 @@
       ],
       "expected_macros": {
         "kcal": 1119,
-        "prot": 68,
+        "prot": 69,
         "fat": 48,
-        "carb": 101
+        "carb": 100
       },
       "current_resolver_macros": {
-        "kcal": 1148,
-        "prot": 71,
-        "carb": 95,
-        "fat": 53
+        "kcal": 1091,
+        "prot": 68,
+        "carb": 94,
+        "fat": 48
       },
       "unresolved_line_count": 0,
       "line_count": 13,
@@ -7758,7 +7754,7 @@
           "unit": "st",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 900004,
+          "food_id": 900005,
           "food_name": "rispapper",
           "grams": 100,
           "kcal": 330,
@@ -7775,13 +7771,13 @@
           "unit": "g",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 322,
-          "food_name": "Blomkål",
+          "food_id": 379,
+          "food_name": "Basilika färsk",
           "grams": 30,
           "kcal": 8,
           "prot": 1,
           "fat": 0,
-          "carb": 1
+          "carb": 0
         },
         {
           "group_index": 1,
@@ -7851,9 +7847,9 @@
         "carb": 269
       },
       "current_resolver_macros": {
-        "kcal": 1944,
-        "prot": 136,
-        "carb": 261,
+        "kcal": 1912,
+        "prot": 133,
+        "carb": 257,
         "fat": 37
       },
       "unresolved_line_count": 0,
@@ -8092,13 +8088,13 @@
           "unit": "g",
           "status": "ok",
           "source": "catalog-ok",
-          "food_id": 322,
-          "food_name": "Blomkål",
+          "food_id": 379,
+          "food_name": "Basilika färsk",
           "grams": 15,
           "kcal": 4,
           "prot": 0,
           "fat": 0,
-          "carb": 1
+          "carb": 0
         },
         {
           "group_index": 2,
@@ -8151,9 +8147,9 @@
         "carb": 68
       },
       "current_resolver_macros": {
-        "kcal": 1583,
+        "kcal": 1594,
         "prot": 90,
-        "carb": 66,
+        "carb": 68,
         "fat": 105
       },
       "unresolved_line_count": 0,

@@ -1,0 +1,402 @@
+{
+  "avokado": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "grekisk yoghurt 0%": {
+    "verdict": "ok",
+    "note": "token overlap"
+  },
+  "bakpulver": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "keso 4%": {
+    "verdict": "ok",
+    "note": "known synonym"
+  },
+  "thaibasilika": {
+    "verdict": "ok",
+    "note": "acceptable synonym/proxy after manual eye"
+  },
+  "vit misopasta": {
+    "verdict": "ok",
+    "note": "acceptable synonym/proxy after manual eye"
+  },
+  "gurkmeja": {
+    "verdict": "uncertain",
+    "note": "0-kcal spice/sweetener bucket"
+  },
+  "ostronsås": {
+    "verdict": "ok",
+    "note": "acceptable synonym/proxy after manual eye"
+  },
+  "smör": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "vårlök": {
+    "verdict": "uncertain",
+    "note": "SLV saknar salladslök → Gräslök proxy"
+  },
+  "kyckling": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "cayennepeppar": {
+    "verdict": "uncertain",
+    "note": "0-kcal spice/sweetener bucket"
+  },
+  "brioche hamburgerbröd": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "lätt smör": {
+    "verdict": "ok",
+    "note": "acceptable synonym/proxy after manual eye"
+  },
+  "kokt vitt ris": {
+    "verdict": "ok",
+    "note": "acceptable synonym/proxy after manual eye"
+  },
+  "kummin": {
+    "verdict": "uncertain",
+    "note": "0-kcal spice/sweetener bucket"
+  },
+  "gochujangpasta": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "lax": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "pb2": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "pulveriserat jordnötssmör": {
+    "verdict": "ok",
+    "note": "acceptable synonym/proxy after manual eye"
+  },
+  "mörk choklad 70%": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "spaghetti": {
+    "verdict": "ok",
+    "note": "acceptable synonym/proxy after manual eye"
+  },
+  "ansjovisfilé": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "pecorino": {
+    "verdict": "ok",
+    "note": "acceptable synonym/proxy after manual eye"
+  },
+  "thaisoja": {
+    "verdict": "ok",
+    "note": "known synonym"
+  },
+  "cotijaost": {
+    "verdict": "ok",
+    "note": "acceptable synonym/proxy after manual eye"
+  },
+  "tajín": {
+    "verdict": "uncertain",
+    "note": "0-kcal spice/sweetener bucket"
+  },
+  "mörk choklad": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "grön paprika": {
+    "verdict": "ok",
+    "note": "token overlap"
+  },
+  "italiensk örtkrydda": {
+    "verdict": "uncertain",
+    "note": "0-kcal spice/sweetener bucket"
+  },
+  "bananpeppar": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "extra buffalosås": {
+    "verdict": "ok",
+    "note": "acceptable synonym/proxy after manual eye"
+  },
+  "basilika": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "chili crunch": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "extra mager nötfärs": {
+    "verdict": "ok",
+    "note": "acceptable synonym/proxy after manual eye"
+  },
+  "potatisgnocchi": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "milt chilipulver": {
+    "verdict": "uncertain",
+    "note": "0-kcal spice/sweetener bucket"
+  },
+  "grekisk yoghurt": {
+    "verdict": "ok",
+    "note": "token overlap"
+  },
+  "ventresca tonfisk": {
+    "verdict": "ok",
+    "note": "known synonym"
+  },
+  "kelp chili crisp": {
+    "verdict": "ok",
+    "note": "acceptable synonym/proxy after manual eye"
+  },
+  "lökpulver": {
+    "verdict": "uncertain",
+    "note": "0-kcal spice/sweetener bucket"
+  },
+  "lättost 50% cheddar": {
+    "verdict": "ok",
+    "note": "acceptable synonym/proxy after manual eye"
+  },
+  "pickles": {
+    "verdict": "ok",
+    "note": "acceptable synonym/proxy after manual eye"
+  },
+  "persiljeflakes": {
+    "verdict": "uncertain",
+    "note": "0-kcal spice/sweetener bucket"
+  },
+  "rökt paprika": {
+    "verdict": "uncertain",
+    "note": "0-kcal spice/sweetener bucket"
+  },
+  "ketchup": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "okokat klibbigt ris": {
+    "verdict": "ok",
+    "note": "acceptable synonym/proxy after manual eye"
+  },
+  "banan": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "chocolate chips": {
+    "verdict": "uncertain",
+    "note": "needs manual eye"
+  },
+  "skummjölk": {
+    "verdict": "uncertain",
+    "note": "needs manual eye"
+  },
+  "espresso": {
+    "verdict": "ok",
+    "note": "token overlap"
+  },
+  "extra virgin olivolja": {
+    "verdict": "ok",
+    "note": "known synonym"
+  },
+  "citronskal": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "jasminris": {
+    "verdict": "ok",
+    "note": "token overlap"
+  },
+  "avokadoolja": {
+    "verdict": "ok",
+    "note": "known synonym"
+  },
+  "naturell grekisk yoghurt 0%": {
+    "verdict": "uncertain",
+    "note": "needs manual eye"
+  },
+  "självjäsande mjöl": {
+    "verdict": "ok",
+    "note": "known synonym"
+  },
+  "malet nötkött": {
+    "verdict": "uncertain",
+    "note": "needs manual eye"
+  },
+  "parmesanost": {
+    "verdict": "ok",
+    "note": "token overlap"
+  },
+  "stark pizzasås": {
+    "verdict": "uncertain",
+    "note": "needs manual eye"
+  },
+  "blåmögelostdressing": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "fryst grönkål": {
+    "verdict": "uncertain",
+    "note": "needs manual eye"
+  },
+  "ume pickle": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "gochujang": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "balsamicovinäger": {
+    "verdict": "uncertain",
+    "note": "needs manual eye"
+  },
+  "kardemumma": {
+    "verdict": "uncertain",
+    "note": "0-kcal spice/sweetener bucket"
+  },
+  "tomat": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "strösocker": {
+    "verdict": "uncertain",
+    "note": "needs manual eye"
+  },
+  "panko-ströbröd": {
+    "verdict": "uncertain",
+    "note": "needs manual eye"
+  },
+  "tamari": {
+    "verdict": "uncertain",
+    "note": "needs manual eye"
+  },
+  "labneh": {
+    "verdict": "uncertain",
+    "note": "needs manual eye"
+  },
+  "hela pickles": {
+    "verdict": "ok",
+    "note": "acceptable synonym/proxy after manual eye"
+  },
+  "pickling lake": {
+    "verdict": "uncertain",
+    "note": "needs manual eye"
+  },
+  "röd lök": {
+    "verdict": "uncertain",
+    "note": "needs manual eye"
+  },
+  "selleristjälkar": {
+    "verdict": "uncertain",
+    "note": "needs manual eye"
+  },
+  "frysta dumplings": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "grönkål": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "neutral matolja": {
+    "verdict": "ok",
+    "note": "known synonym"
+  },
+  "osötad risvinäger": {
+    "verdict": "uncertain",
+    "note": "needs manual eye"
+  },
+  "malet fläskkött": {
+    "verdict": "uncertain",
+    "note": "needs manual eye"
+  },
+  "zucchini": {
+    "verdict": "uncertain",
+    "note": "needs manual eye"
+  },
+  "vallmofrö": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "näringsjäst": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "vetemjöl special": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "körsbärstomat": {
+    "verdict": "ok",
+    "note": "token overlap"
+  },
+  "gul lök": {
+    "verdict": "ok",
+    "note": "token overlap"
+  },
+  "stekspray": {
+    "verdict": "uncertain",
+    "note": "needs manual eye"
+  },
+  "räka": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "pocheringsvätska": {
+    "verdict": "uncertain",
+    "note": "needs manual eye"
+  },
+  "mörk soja": {
+    "verdict": "ok",
+    "note": "known synonym"
+  },
+  "socker": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "msg": {
+    "verdict": "uncertain",
+    "note": "0-kcal spice/sweetener bucket"
+  },
+  "italiensk kryddmix": {
+    "verdict": "uncertain",
+    "note": "0-kcal spice/sweetener bucket"
+  },
+  "chiliflakes": {
+    "verdict": "uncertain",
+    "note": "0-kcal spice/sweetener bucket"
+  },
+  "chiliflingor": {
+    "verdict": "uncertain",
+    "note": "0-kcal spice/sweetener bucket"
+  },
+  "dill": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "rostat sesamfrö": {
+    "verdict": "uncertain",
+    "note": "needs manual eye"
+  },
+  "jalapeño": {
+    "verdict": "uncertain",
+    "note": "needs manual eye"
+  },
+  "rapsolja": {
+    "verdict": "ok",
+    "note": "name aligns"
+  },
+  "mellanmjölk": {
+    "verdict": "ok",
+    "note": "name aligns"
+  }
+}

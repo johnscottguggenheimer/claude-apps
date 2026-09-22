@@ -1,14 +1,7 @@
 /**
- * Measure resolver against golden set (SLV-correct expected macros).
- *
- * Usage:
- *   npx tsx scripts/nutrition-eval/measure.mts
- *
- * Reports:
- *   - share of recipes within ±15% on kcal (krav 85%-mått)
- *   - same for P/F/C
- *   - match_status distribution (current binary)
- *   - lines contributing most to kcal error, sorted by |Δkcal|
+ * Measure resolver vs golden set.
+ * Primary gate: protein ±15%. Secondary: kcal ±15%.
+ * Line-level: expected ingredient_id match rate.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -18,8 +11,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '../..');
 
 const nutritionUrl = pathToFileURL(path.join(root, 'worker/src/nutrition/index.ts')).href;
-const { catalogFromSeed, resolveRecipeIngredients, normalizeIngredientName } =
-  await import(nutritionUrl);
+const { catalogFromSeed, resolveRecipeIngredients } = await import(nutritionUrl);
 
 const seed = JSON.parse(fs.readFileSync(path.join(root, 'scripts/nutrition-seed.json'), 'utf8'));
 const catalog = catalogFromSeed(seed.ingredients);
@@ -32,14 +24,16 @@ const { recipes } = await res.json();
 const byId = new Map(recipes.map((r) => [r.id, r]));
 
 const TOL = 0.15;
-
 function within(got, exp) {
-  if (exp === 0) return got === 0;
-  return Math.abs(got - exp) / exp <= TOL;
+  if (exp === 0) return Math.abs(got) < 1;
+  return Math.abs(got - exp) / Math.abs(exp) <= TOL;
 }
 
 const perRecipe = [];
 const statusCounts = { matched: 0, unmatched: 0, needs_piece_weight: 0 };
+let lineIdChecked = 0;
+let lineIdMatch = 0;
+const idMismatches = [];
 const errorLines = [];
 
 for (const g of golden.recipes) {
@@ -55,19 +49,34 @@ for (const g of golden.recipes) {
 
   const got = resolution.macros;
   const exp = g.expected_macros;
-  const dKcal = got.kcal - exp.kcal;
-  const dProt = got.prot - exp.prot;
-  const dFat = got.fat - exp.fat;
-  const dCarb = got.carb - exp.carb;
-
-  // Per-line: compare oracle line kcal to resolver row kcal by position
   const resolverByPos = new Map();
   for (const row of resolution.rows) {
     resolverByPos.set(`${row.group_index}:${row.ingredient_index}`, row);
   }
+
   for (const line of g.lines) {
-    if (line.status !== 'ok') continue;
+    if (line.status !== 'ok' || line.food_id == null) continue;
     const row = resolverByPos.get(`${line.group_index}:${line.ingredient_index}`);
+    lineIdChecked += 1;
+    const rid = row?.ingredient_id ?? null;
+    const expectedId = line.food_id;
+    // synthetic ids are strings — skip id equality, compare by name if needed
+    const idOk =
+      typeof expectedId === 'string'
+        ? row?.match_status === 'matched' || row?.canonical_name === line.food_name
+        : rid === expectedId;
+    if (idOk) lineIdMatch += 1;
+    else {
+      idMismatches.push({
+        recipeId: g.id,
+        raw: line.raw,
+        expectedId,
+        expectedName: line.food_name,
+        gotId: rid,
+        gotName: row?.canonical_name || null,
+        status: row?.match_status || null,
+      });
+    }
     const gotK = row?.kcal ?? 0;
     const expK = line.kcal ?? 0;
     const delta = gotK - expK;
@@ -92,16 +101,21 @@ for (const g of golden.recipes) {
     verified: g.verified,
     expected: exp,
     got,
-    delta: { kcal: dKcal, prot: dProt, fat: dFat, carb: dCarb },
+    delta: {
+      kcal: got.kcal - exp.kcal,
+      prot: got.prot - exp.prot,
+      fat: got.fat - exp.fat,
+      carb: got.carb - exp.carb,
+    },
     pct: {
-      kcal: exp.kcal ? +((dKcal / exp.kcal) * 100).toFixed(1) : null,
-      prot: exp.prot ? +((dProt / exp.prot) * 100).toFixed(1) : null,
-      fat: exp.fat ? +((dFat / exp.fat) * 100).toFixed(1) : null,
-      carb: exp.carb ? +((dCarb / exp.carb) * 100).toFixed(1) : null,
+      kcal: exp.kcal ? +(((got.kcal - exp.kcal) / exp.kcal) * 100).toFixed(1) : null,
+      prot: exp.prot ? +(((got.prot - exp.prot) / exp.prot) * 100).toFixed(1) : null,
+      fat: exp.fat ? +(((got.fat - exp.fat) / exp.fat) * 100).toFixed(1) : null,
+      carb: exp.carb ? +(((got.carb - exp.carb) / exp.carb) * 100).toFixed(1) : null,
     },
     within15: {
-      kcal: within(got.kcal, exp.kcal),
       prot: within(got.prot, exp.prot),
+      kcal: within(got.kcal, exp.kcal),
       fat: within(got.fat, exp.fat),
       carb: within(got.carb, exp.carb),
     },
@@ -110,63 +124,58 @@ for (const g of golden.recipes) {
 
 const measurable = perRecipe.filter((r) => r.verified && r.expected);
 const pctWithin = (key) =>
-  measurable.length
-    ? measurable.filter((r) => r.within15[key]).length / measurable.length
-    : null;
+  measurable.length ? measurable.filter((r) => r.within15[key]).length / measurable.length : null;
 
 errorLines.sort((a, b) => b.absDelta - a.absDelta);
 
 const report = {
   generatedAt: new Date().toISOString(),
+  primaryMetric: 'protein ±15%',
+  secondaryMetric: 'kcal ±15%',
   goldenSet: {
     path: 'scripts/nutrition-eval/golden-set.json',
     recipes: golden.recipeCount,
     fullyVerified: golden.fullyVerified,
-    method: golden.method,
   },
-  tolerance: '±15%',
   krav: {
-    target: '≥90% of recipes within ±15% kcal (85% accuracy band)',
-    kcalWithin15PctOfVerified: pctWithin('kcal'),
-    protWithin15PctOfVerified: pctWithin('prot'),
-    fatWithin15PctOfVerified: pctWithin('fat'),
-    carbWithin15PctOfVerified: pctWithin('carb'),
+    target: '≥90% recipes within ±15% protein (primary); kcal secondary',
     verifiedRecipeCount: measurable.length,
+    protWithin15Pct: pctWithin('prot'),
+    protPassCount: measurable.filter((r) => r.within15.prot).length,
+    kcalWithin15Pct: pctWithin('kcal'),
     kcalPassCount: measurable.filter((r) => r.within15.kcal).length,
+    fatWithin15Pct: pctWithin('fat'),
+    carbWithin15Pct: pctWithin('carb'),
+  },
+  lineLevel: {
+    checked: lineIdChecked,
+    ingredientIdMatch: lineIdMatch,
+    ingredientIdMatchRate: lineIdChecked ? +(lineIdMatch / lineIdChecked).toFixed(3) : null,
+    mismatchCount: idMismatches.length,
   },
   matchStatusDistribution: statusCounts,
+  topIdMismatches: idMismatches.slice(0, 40),
   topErrorLinesByAbsDeltaKcal: errorLines.slice(0, 40),
   perRecipe: perRecipe.sort(
-    (a, b) => Math.abs(b.delta?.kcal || 0) - Math.abs(a.delta?.kcal || 0)
+    (a, b) => Math.abs(b.delta?.prot || 0) - Math.abs(a.delta?.prot || 0)
   ),
 };
 
 fs.writeFileSync(path.join(__dirname, 'measure.report.json'), JSON.stringify(report, null, 2));
 
-console.log('=== Nutrition measure (vs SLV golden set) ===');
+console.log('=== Nutrition measure ===');
+console.log(`PRIMARY protein ±15%: ${report.krav.protPassCount}/${measurable.length} (${((report.krav.protWithin15Pct || 0) * 100).toFixed(1)}%)`);
+console.log(`SECONDARY kcal ±15%: ${report.krav.kcalPassCount}/${measurable.length} (${((report.krav.kcalWithin15Pct || 0) * 100).toFixed(1)}%)`);
+console.log(`F/C ±15%: F=${((report.krav.fatWithin15Pct || 0) * 100).toFixed(0)}% C=${((report.krav.carbWithin15Pct || 0) * 100).toFixed(0)}%`);
 console.log(
-  `Verified recipes: ${measurable.length}/${golden.recipeCount}`
-);
-console.log(
-  `kcal within ±15%: ${report.krav.kcalPassCount}/${measurable.length} (${(
-    (report.krav.kcalWithin15PctOfVerified || 0) * 100
-  ).toFixed(1)}%)`
-);
-console.log(
-  `P/F/C within ±15%: P=${((report.krav.protWithin15PctOfVerified || 0) * 100).toFixed(0)}% F=${((report.krav.fatWithin15PctOfVerified || 0) * 100).toFixed(0)}% C=${((report.krav.carbWithin15PctOfVerified || 0) * 100).toFixed(0)}%`
+  `Line ingredient_id match: ${lineIdMatch}/${lineIdChecked} (${((report.lineLevel.ingredientIdMatchRate || 0) * 100).toFixed(1)}%)`
 );
 console.log('match_status:', statusCounts);
-console.log('\nWorst recipes by |Δkcal|:');
-for (const r of report.perRecipe.slice(0, 12)) {
+console.log('\nWorst by |Δprot|:');
+for (const r of report.perRecipe.slice(0, 10)) {
   if (!r.delta) continue;
   console.log(
-    `  ${r.id}: Δkcal ${r.delta.kcal} (${r.pct?.kcal}%) expected ${r.expected.kcal} got ${r.got.kcal} ${r.within15?.kcal ? 'PASS' : 'FAIL'}`
+    `  ${r.id}: ΔP ${r.delta.prot} (${r.pct?.prot}%) Δkcal ${r.delta.kcal} ${r.within15?.prot ? 'PROT_PASS' : 'PROT_FAIL'}`
   );
 }
-console.log('\nTop error lines:');
-for (const e of errorLines.slice(0, 15)) {
-  console.log(
-    `  ${e.deltaKcal > 0 ? '+' : ''}${e.deltaKcal} kcal  ${e.raw} | oracle=${e.oracleFood} resolver=${e.resolverFood || e.resolverStatus}`
-  );
-}
-console.log(`\nWrote ${path.join(__dirname, 'measure.report.json')}`);
+console.log(`\nWrote measure.report.json`);

@@ -1,37 +1,122 @@
 {
-  "migratedAt": "2026-09-03T11:06:41.553Z",
-  "recipes": 31,
+  "migratedAt": "2026-09-22T10:23:48.598Z",
+  "recipes": 32,
   "report": [
     {
-      "id": "kycklinglasagne-med-zucchini",
+      "id": "bbq-kycklinglar",
       "oldMacros": {
-        "kcal": 2032,
-        "prot": 221,
-        "carb": 35,
-        "fat": 109
+        "kcal": 663,
+        "prot": 98,
+        "carb": 1,
+        "fat": 30
       },
       "newMacros": {
-        "kcal": 383,
-        "prot": 23,
-        "carb": 21,
-        "fat": 23
+        "kcal": 663,
+        "prot": 98,
+        "carb": 1,
+        "fat": 30
       },
-      "unmatched": 7,
+      "unmatched": 0,
+      "needsPiece": 0
+    },
+    {
+      "id": "kycklingpizza-wrap",
+      "oldMacros": {
+        "kcal": 803,
+        "prot": 68,
+        "carb": 19,
+        "fat": 51
+      },
+      "newMacros": {
+        "kcal": 715,
+        "prot": 67,
+        "carb": 19,
+        "fat": 41
+      },
+      "unmatched": 0,
+      "needsPiece": 0
+    },
+    {
+      "id": "hot-honey-chicken-sliders",
+      "oldMacros": {
+        "kcal": 3117,
+        "prot": 302,
+        "carb": 169,
+        "fat": 135
+      },
+      "newMacros": {
+        "kcal": 3119,
+        "prot": 301,
+        "carb": 170,
+        "fat": 136
+      },
+      "unmatched": 0,
       "needsPiece": 1
     },
     {
-      "id": "hjortfarsbiffar-med-rostade-rotfrukter-och-svamp",
+      "id": "street-corn-chicken-bowl",
       "oldMacros": {
-        "kcal": 942,
-        "prot": 93,
-        "carb": 37,
-        "fat": 48
+        "kcal": 1773,
+        "prot": 127,
+        "carb": 89,
+        "fat": 98
       },
       "newMacros": {
-        "kcal": 1275,
-        "prot": 129,
-        "carb": 77,
-        "fat": 54
+        "kcal": 1879,
+        "prot": 131,
+        "carb": 104,
+        "fat": 101
+      },
+      "unmatched": 0,
+      "needsPiece": 0
+    },
+    {
+      "id": "popcorn-kyckling-med-koreansk-glasyr-och-klibbig",
+      "oldMacros": {
+        "kcal": 2110,
+        "prot": 219,
+        "carb": 236,
+        "fat": 30
+      },
+      "newMacros": {
+        "kcal": 2113,
+        "prot": 219,
+        "carb": 236,
+        "fat": 30
+      },
+      "unmatched": 0,
+      "needsPiece": 0
+    },
+    {
+      "id": "lax-avokado-crunch-bowl",
+      "oldMacros": {
+        "kcal": 1850,
+        "prot": 106,
+        "carb": 82,
+        "fat": 120
+      },
+      "newMacros": {
+        "kcal": 1864,
+        "prot": 106,
+        "carb": 86,
+        "fat": 120
+      },
+      "unmatched": 0,
+      "needsPiece": 0
+    },
+    {
+      "id": "pb2-banana-chocolate-chip-bread",
+      "oldMacros": {
+        "kcal": 2650,
+        "prot": 132,
+        "carb": 319,
+        "fat": 103
+      },
+      "newMacros": {
+        "kcal": 2475,
+        "prot": 142,
+        "carb": 296,
+        "fat": 81
       },
       "unmatched": 0,
       "needsPiece": 0
@@ -39,33 +124,16 @@
     {
       "id": "peanut-butter-cups",
       "oldMacros": {
-        "kcal": 1116,
-        "prot": 84,
-        "carb": 60,
-        "fat": 60
+        "kcal": 932,
+        "prot": 73,
+        "carb": 69,
+        "fat": 53
       },
       "newMacros": {
-        "kcal": 1108,
-        "prot": 61,
-        "carb": 94,
-        "fat": 55
-      },
-      "unmatched": 0,
-      "needsPiece": 0
-    },
-    {
-      "id": "bbq-kycklinglar",
-      "oldMacros": {
-        "kcal": 1000,
-        "prot": 105,
-        "carb": 5,
-        "fat": 58
-      },
-      "newMacros": {
-        "kcal": 934,
-        "prot": 100,
-        "carb": 9,
-        "fat": 56
+        "kcal": 959,
+        "prot": 74,
+        "carb": 53,
+        "fat": 61
       },
       "unmatched": 0,
       "needsPiece": 0
@@ -73,135 +141,16 @@
     {
       "id": "protein-affogato",
       "oldMacros": {
-        "kcal": 326,
-        "prot": 40,
-        "carb": 26,
+        "kcal": 412,
+        "prot": 41,
+        "carb": 35,
+        "fat": 12
+      },
+      "newMacros": {
+        "kcal": 366,
+        "prot": 41,
+        "carb": 28,
         "fat": 7
-      },
-      "newMacros": {
-        "kcal": 329,
-        "prot": 40,
-        "carb": 19,
-        "fat": 7
-      },
-      "unmatched": 1,
-      "needsPiece": 0
-    },
-    {
-      "id": "pb2-banana-chocolate-chip-bread",
-      "oldMacros": {
-        "kcal": 2520,
-        "prot": 127,
-        "carb": 328,
-        "fat": 80
-      },
-      "newMacros": {
-        "kcal": 2190,
-        "prot": 128,
-        "carb": 247,
-        "fat": 80
-      },
-      "unmatched": 1,
-      "needsPiece": 0
-    },
-    {
-      "id": "mexican-chicken-corn-salad",
-      "oldMacros": {
-        "kcal": 1746,
-        "prot": 227,
-        "carb": 97,
-        "fat": 50
-      },
-      "newMacros": {
-        "kcal": 1827,
-        "prot": 235,
-        "carb": 97,
-        "fat": 55
-      },
-      "unmatched": 1,
-      "needsPiece": 0
-    },
-    {
-      "id": "hot-honey-chicken-sliders",
-      "oldMacros": {
-        "kcal": 3961,
-        "prot": 330,
-        "carb": 237,
-        "fat": 185
-      },
-      "newMacros": {
-        "kcal": 3043,
-        "prot": 291,
-        "carb": 230,
-        "fat": 105
-      },
-      "unmatched": 2,
-      "needsPiece": 0
-    },
-    {
-      "id": "lax-avokado-crunch-bowl",
-      "oldMacros": {
-        "kcal": 1802,
-        "prot": 106,
-        "carb": 114,
-        "fat": 104
-      },
-      "newMacros": {
-        "kcal": 2263,
-        "prot": 114,
-        "carb": 232,
-        "fat": 98
-      },
-      "unmatched": 0,
-      "needsPiece": 0
-    },
-    {
-      "id": "street-corn-chicken-bowl",
-      "oldMacros": {
-        "kcal": 1942,
-        "prot": 132,
-        "carb": 145,
-        "fat": 96
-      },
-      "newMacros": {
-        "kcal": 2479,
-        "prot": 143,
-        "carb": 263,
-        "fat": 98
-      },
-      "unmatched": 0,
-      "needsPiece": 0
-    },
-    {
-      "id": "kyckling-gyoza-med-dipp",
-      "oldMacros": {
-        "kcal": 1133,
-        "prot": 99,
-        "carb": 67,
-        "fat": 56
-      },
-      "newMacros": {
-        "kcal": 1244,
-        "prot": 85,
-        "carb": 68,
-        "fat": 69
-      },
-      "unmatched": 0,
-      "needsPiece": 0
-    },
-    {
-      "id": "popcorn-kyckling-med-koreansk-glasyr-och-klibbigt-ris",
-      "oldMacros": {
-        "kcal": 1947,
-        "prot": 217,
-        "carb": 196,
-        "fat": 27
-      },
-      "newMacros": {
-        "kcal": 2121,
-        "prot": 219,
-        "carb": 236,
-        "fat": 27
       },
       "unmatched": 0,
       "needsPiece": 0
@@ -209,67 +158,67 @@
     {
       "id": "aglio-e-olio",
       "oldMacros": {
-        "kcal": 1628,
-        "prot": 37,
-        "carb": 170,
-        "fat": 88
+        "kcal": 1671,
+        "prot": 39,
+        "carb": 167,
+        "fat": 92
       },
       "newMacros": {
-        "kcal": 1700,
-        "prot": 45,
-        "carb": 175,
-        "fat": 90
+        "kcal": 1671,
+        "prot": 39,
+        "carb": 167,
+        "fat": 92
       },
-      "unmatched": 2,
-      "needsPiece": 0
-    },
-    {
-      "id": "middle-eastern-chicken-mince",
-      "oldMacros": {
-        "kcal": 2382,
-        "prot": 155,
-        "carb": 350,
-        "fat": 49
-      },
-      "newMacros": {
-        "kcal": 2563,
-        "prot": 137,
-        "carb": 344,
-        "fat": 68
-      },
-      "unmatched": 1,
+      "unmatched": 0,
       "needsPiece": 0
     },
     {
       "id": "thai-chicken-cucumber-salad",
       "oldMacros": {
-        "kcal": 1978,
-        "prot": 124,
-        "carb": 272,
-        "fat": 52
+        "kcal": 1944,
+        "prot": 136,
+        "carb": 261,
+        "fat": 37
       },
       "newMacros": {
-        "kcal": 1929,
-        "prot": 100,
-        "carb": 268,
-        "fat": 49
+        "kcal": 1912,
+        "prot": 133,
+        "carb": 257,
+        "fat": 37
       },
-      "unmatched": 1,
-      "needsPiece": 0
+      "unmatched": 0,
+      "needsPiece": 2
+    },
+    {
+      "id": "mexican-chicken-corn-salad",
+      "oldMacros": {
+        "kcal": 1512,
+        "prot": 229,
+        "carb": 49,
+        "fat": 41
+      },
+      "newMacros": {
+        "kcal": 1636,
+        "prot": 231,
+        "carb": 67,
+        "fat": 45
+      },
+      "unmatched": 0,
+      "needsPiece": 2
     },
     {
       "id": "chocolate-chunk-scones-4-ingredients",
       "oldMacros": {
-        "kcal": 650,
-        "prot": 21,
-        "carb": 98,
-        "fat": 19
+        "kcal": 655,
+        "prot": 23,
+        "carb": 92,
+        "fat": 20
       },
       "newMacros": {
-        "kcal": 683,
+        "kcal": 655,
         "prot": 23,
-        "carb": 102,
-        "fat": 19
+        "carb": 92,
+        "fat": 20
       },
       "unmatched": 0,
       "needsPiece": 0
@@ -277,16 +226,16 @@
     {
       "id": "honey-lime-teriyaki-beef-noodles",
       "oldMacros": {
-        "kcal": 1058,
-        "prot": 60,
-        "carb": 151,
-        "fat": 24
+        "kcal": 769,
+        "prot": 47,
+        "carb": 61,
+        "fat": 37
       },
       "newMacros": {
-        "kcal": 1250,
-        "prot": 52,
-        "carb": 166,
-        "fat": 40
+        "kcal": 770,
+        "prot": 47,
+        "carb": 61,
+        "fat": 37
       },
       "unmatched": 0,
       "needsPiece": 0
@@ -294,33 +243,16 @@
     {
       "id": "buffalo-chicken-crust-pizza",
       "oldMacros": {
-        "kcal": 1404,
-        "prot": 151,
-        "carb": 41,
-        "fat": 78
+        "kcal": 1368,
+        "prot": 154,
+        "carb": 26,
+        "fat": 71
       },
       "newMacros": {
-        "kcal": 1362,
-        "prot": 158,
-        "carb": 20,
-        "fat": 70
-      },
-      "unmatched": 1,
-      "needsPiece": 0
-    },
-    {
-      "id": "dumpling-lasagna",
-      "oldMacros": {
-        "kcal": 1829,
-        "prot": 105,
-        "carb": 158,
-        "fat": 85
-      },
-      "newMacros": {
-        "kcal": 2064,
-        "prot": 100,
-        "carb": 127,
-        "fat": 124
+        "kcal": 1378,
+        "prot": 154,
+        "carb": 28,
+        "fat": 71
       },
       "unmatched": 0,
       "needsPiece": 0
@@ -328,118 +260,118 @@
     {
       "id": "edamame-spread",
       "oldMacros": {
-        "kcal": 1143,
-        "prot": 57,
-        "carb": 56,
-        "fat": 83
+        "kcal": 1215,
+        "prot": 62,
+        "carb": 54,
+        "fat": 86
       },
       "newMacros": {
         "kcal": 1215,
-        "prot": 64,
-        "carb": 64,
+        "prot": 62,
+        "carb": 54,
         "fat": 86
       },
-      "unmatched": 2,
+      "unmatched": 0,
       "needsPiece": 0
     },
     {
       "id": "smashed-cucumber",
       "oldMacros": {
-        "kcal": 126,
-        "prot": 5,
+        "kcal": 185,
+        "prot": 4,
         "carb": 12,
-        "fat": 7
+        "fat": 14
       },
       "newMacros": {
-        "kcal": 184,
-        "prot": 3,
-        "carb": 10,
-        "fat": 15
+        "kcal": 185,
+        "prot": 4,
+        "carb": 12,
+        "fat": 14
       },
-      "unmatched": 1,
-      "needsPiece": 0
+      "unmatched": 0,
+      "needsPiece": 1
     },
     {
       "id": "gochujang-gnocchi",
       "oldMacros": {
-        "kcal": 1924,
-        "prot": 146,
-        "carb": 182,
-        "fat": 65
+        "kcal": 2256,
+        "prot": 143,
+        "carb": 186,
+        "fat": 103
       },
       "newMacros": {
-        "kcal": 2159,
-        "prot": 135,
-        "carb": 158,
-        "fat": 102
+        "kcal": 2248,
+        "prot": 141,
+        "carb": 186,
+        "fat": 103
       },
       "unmatched": 0,
-      "needsPiece": 0
+      "needsPiece": 1
+    },
+    {
+      "id": "middle-eastern-chicken-mince",
+      "oldMacros": {
+        "kcal": 2329,
+        "prot": 177,
+        "carb": 339,
+        "fat": 25
+      },
+      "newMacros": {
+        "kcal": 2295,
+        "prot": 177,
+        "carb": 332,
+        "fat": 25
+      },
+      "unmatched": 0,
+      "needsPiece": 2
     },
     {
       "id": "cinnamon-sugar-donut-holes",
       "oldMacros": {
-        "kcal": 1065,
-        "prot": 37,
-        "carb": 190,
+        "kcal": 1099,
+        "prot": 40,
+        "carb": 194,
         "fat": 15
       },
       "newMacros": {
-        "kcal": 1055,
-        "prot": 38,
-        "carb": 186,
+        "kcal": 1093,
+        "prot": 40,
+        "carb": 189,
         "fat": 15
       },
       "unmatched": 0,
-      "needsPiece": 0
-    },
-    {
-      "id": "numbing-chicken-cucumber",
-      "oldMacros": {
-        "kcal": 1396,
-        "prot": 123,
-        "carb": 104,
-        "fat": 52
-      },
-      "newMacros": {
-        "kcal": 1709,
-        "prot": 131,
-        "carb": 205,
-        "fat": 38
-      },
-      "unmatched": 1,
       "needsPiece": 0
     },
     {
       "id": "tuna-chili-crisp-salad",
       "oldMacros": {
-        "kcal": 1576,
-        "prot": 89,
-        "carb": 139,
-        "fat": 68
+        "kcal": 1583,
+        "prot": 90,
+        "carb": 66,
+        "fat": 105
       },
       "newMacros": {
-        "kcal": 1320,
-        "prot": 29,
-        "carb": 90,
-        "fat": 92
+        "kcal": 1594,
+        "prot": 90,
+        "carb": 68,
+        "fat": 105
       },
-      "unmatched": 2,
+      "unmatched": 0,
       "needsPiece": 0
     },
     {
       "id": "smashed-pickle-salad",
       "oldMacros": {
-        "kcal": 228,
-        "prot": 3,
-        "carb": 7,
-        "fat": 21
+        "kcal": 306,
+        "prot": 5,
+        "carb": 26,
+        "fat": 19
       },
       "newMacros": {
-        "kcal": 266,
+        "kcal": 295,
         "prot": 4,
-        "carb": 12,
-        "fat": 23
+        "carb": 24,
+        "fat": 19
       },
       "unmatched": 0,
       "needsPiece": 1
@@ -447,87 +379,172 @@
     {
       "id": "one-pan-dumplings-with-greens",
       "oldMacros": {
-        "kcal": 1408,
+        "kcal": 1326,
         "prot": 42,
-        "carb": 154,
-        "fat": 72
+        "carb": 124,
+        "fat": 73
       },
       "newMacros": {
-        "kcal": 1446,
+        "kcal": 1330,
         "prot": 42,
-        "carb": 149,
-        "fat": 79
+        "carb": 124,
+        "fat": 74
+      },
+      "unmatched": 0,
+      "needsPiece": 2
+    },
+    {
+      "id": "dumpling-lasagna",
+      "oldMacros": {
+        "kcal": 1672,
+        "prot": 111,
+        "carb": 137,
+        "fat": 73
+      },
+      "newMacros": {
+        "kcal": 1671,
+        "prot": 112,
+        "carb": 135,
+        "fat": 74
       },
       "unmatched": 0,
       "needsPiece": 0
     },
     {
-      "id": "thai-basil-beef-rolls",
+      "id": "numbing-chicken-cucumber",
       "oldMacros": {
-        "kcal": 990,
-        "prot": 65,
-        "carb": 98,
-        "fat": 38
+        "kcal": 1345,
+        "prot": 123,
+        "carb": 125,
+        "fat": 37
       },
       "newMacros": {
-        "kcal": 1228,
-        "prot": 63,
-        "carb": 106,
-        "fat": 60
+        "kcal": 1345,
+        "prot": 123,
+        "carb": 125,
+        "fat": 37
       },
       "unmatched": 0,
-      "needsPiece": 0
+      "needsPiece": 2
     },
     {
       "id": "rice-paper-shrimp-pancake",
       "oldMacros": {
-        "kcal": 391,
-        "prot": 50,
-        "carb": 23,
-        "fat": 11
+        "kcal": 365,
+        "prot": 49,
+        "carb": 22,
+        "fat": 9
       },
       "newMacros": {
-        "kcal": 400,
-        "prot": 50,
-        "carb": 26,
-        "fat": 11
+        "kcal": 365,
+        "prot": 49,
+        "carb": 22,
+        "fat": 9
       },
       "unmatched": 0,
-      "needsPiece": 0
+      "needsPiece": 1
     },
     {
       "id": "chicken-kebab-wraps",
       "oldMacros": {
-        "kcal": 2369,
-        "prot": 247,
-        "carb": 157,
-        "fat": 101
+        "kcal": 2273,
+        "prot": 276,
+        "carb": 180,
+        "fat": 49
       },
       "newMacros": {
-        "kcal": 2570,
-        "prot": 213,
-        "carb": 162,
-        "fat": 120
+        "kcal": 2197,
+        "prot": 272,
+        "carb": 171,
+        "fat": 47
       },
-      "unmatched": 2,
-      "needsPiece": 0
+      "unmatched": 0,
+      "needsPiece": 3
     },
     {
       "id": "hoagie-bread",
       "oldMacros": {
-        "kcal": 3719,
-        "prot": 228,
-        "carb": 616,
-        "fat": 32
+        "kcal": 3806,
+        "prot": 117,
+        "carb": 694,
+        "fat": 50
       },
       "newMacros": {
-        "kcal": 3713,
-        "prot": 237,
-        "carb": 618,
-        "fat": 32
+        "kcal": 3688,
+        "prot": 111,
+        "carb": 695,
+        "fat": 39
       },
       "unmatched": 0,
       "needsPiece": 0
+    },
+    {
+      "id": "kycklinglasagne-med-zucchini",
+      "oldMacros": {
+        "kcal": 1849,
+        "prot": 231,
+        "carb": 45,
+        "fat": 80
+      },
+      "newMacros": {
+        "kcal": 1823,
+        "prot": 231,
+        "carb": 45,
+        "fat": 77
+      },
+      "unmatched": 0,
+      "needsPiece": 1
+    },
+    {
+      "id": "hjortfarsbiffar-med-rostade-rotfrukter-och-svamp",
+      "oldMacros": {
+        "kcal": 1263,
+        "prot": 131,
+        "carb": 38,
+        "fat": 62
+      },
+      "newMacros": {
+        "kcal": 1221,
+        "prot": 127,
+        "carb": 33,
+        "fat": 61
+      },
+      "unmatched": 0,
+      "needsPiece": 4
+    },
+    {
+      "id": "kyckling-gyoza-med-dipp",
+      "oldMacros": {
+        "kcal": 1105,
+        "prot": 107,
+        "carb": 71,
+        "fat": 41
+      },
+      "newMacros": {
+        "kcal": 1096,
+        "prot": 107,
+        "carb": 70,
+        "fat": 41
+      },
+      "unmatched": 0,
+      "needsPiece": 2
+    },
+    {
+      "id": "thai-basil-beef-rolls",
+      "oldMacros": {
+        "kcal": 1148,
+        "prot": 71,
+        "carb": 95,
+        "fat": 53
+      },
+      "newMacros": {
+        "kcal": 1091,
+        "prot": 68,
+        "carb": 94,
+        "fat": 48
+      },
+      "unmatched": 0,
+      "needsPiece": 1
     }
   ]
 }

@@ -196,11 +196,11 @@ CURATED: dict[str, int] = {
     "olivolja extra jungfruolja": 4659,
     "sesamolja": 38,
     "rostad sesamolja": 38,
-    "rapsolja": 40,  # closest common oil; solros — prefer rapsolja if found else solros
+    "rapsolja": 2189,
     "solrosolja": 40,
-    "avokadoolja": 35,  # proxy
-    "matolja": 40,
-    "olja": 40,
+    "avokadoolja": 35,  # proxy — no SLV avocado oil
+    "matolja": 3418,
+    "olja": 2189,
     "smör": 29,
     "lätt smör": 29,
     "stekspray": 49,  # dressing 0% as near-zero spray proxy — overridden by grams logic
@@ -222,19 +222,19 @@ CURATED: dict[str, int] = {
     "naturell grekisk yoghurt 0%": 7146,
     "tjock grekisk yoghurt": 7146,
     "grekisk yoghurt 2%": 6113,
-    "gräddfil": 1719,  # will prefer lighter if we find — crème fraiche lite as proxy? use yoghurt sour
+    "gräddfil": 1713,
     "crème fraîche": 1719,
     "mini crème fraîche": 7139,
-    "mellanmjölk": 123,  # 3% closest; SLV naming
+    "mellanmjölk": 150,
     "skummjölk": 118,
     "mjölk": 123,
     "parmesan": 103,
     "riven parmesan": 103,
     "riven parmesanost": 103,
-    "pecorino": 103,
+    "pecorino": 103,  # proxy parmesan
     "pecorino eller parmesan": 103,
-    "mozzarella": 96,  # hårdost 28% proxy — better find mozzarella
-    "riven mozzarella": 96,
+    "mozzarella": 2255,
+    "riven mozzarella": 2255,
     "mager riven ost": 77,  # 10%
     "lättost 50% cheddar": 95,  # 17%
     "swiss-ost": 96,
@@ -247,7 +247,7 @@ CURATED: dict[str, int] = {
     "ägg": 1225,
     "ägg stora": 1225,
     "ägg stort": 1225,
-    "äggvita": 1225,
+    "äggvita": 1227,
     # meat / fish
     "kycklingfilé": 1173,
     "halloumi": 100,
@@ -327,52 +327,50 @@ CURATED: dict[str, int] = {
     "creme fraiche": 1719,
     "fryst grönkål": 338,
     "grönkål": 337,
-    "röd lök": 348,
-    "neutral matolja": 40,
+    "röd lök": 344,  # SLV saknar rödlök → Lök gul
+    "neutral matolja": 3418,
     "lax": 1255,
     "räka": 1395,
     "räkor": 1395,
-    "majskärnor": 305,
+    "majskärnor": 400,
 
-    "paprika": 355,  # if exists
-    "röd paprika": 355,
-    "grön paprika": 355,
-    "rödlök": 348,
-    "gul lök": 347,
-    "lök": 347,
-    "schalottenlök": 349,
-    "salladslök": 350,
-    "vårlök": 350,
+    "paprika": 351,  # Paprika röd (default)
+    "röd paprika": 351,
+    "grön paprika": 350,
+    "rödlök": 344,  # proxy Lök gul
+    "gul lök": 344,
+    "lök": 344,
+    "schalottenlök": 344,  # proxy Lök gul
+    "salladslök": 378,  # Gräslök (SLV saknar salladslök)
+    "vårlök": 378,
     "vitlök": 371,
     "vitlöksklyfta": 371,
     "vitlöksklyftor": 371,
     "avokado": 320,
-    "spenat": 359,
-    "grönkål": 340,
-    "morot": 280,
+    "spenat": 4941,
+    "morot": 289,
     "palsternacka": 290,
     "champinjon": 333,
     "champinjoner": 333,
-    "majs": 305,
-    "majskärnor": 305,
-    "konserverad majs": 305,
+    "majs": 400,  # Majskorn konserv. u. lag
+    "konserverad majs": 400,
     "selleri": 321,
     "selleristjälkar": 321,
     "stjälkselleri": 321,
-    "ruccola": 356,
-    "sallad": 357,
+    "ruccola": 2561,
+    "sallad": 340,  # Isbergssallat — inte skaldjurssallad
     "persilja": 352,
     "bladpersilja": 352,
     "hackad bladpersilja": 352,
-    "dill": 330,
-    "koriander": 331,
-    "mynta": 345,
-    "basilika": 322,
-    "färsk basilika": 322,
-    "thaibasilika": 322,
-    "färsk thaibasilika": 322,
-    "ingefära": 338,
-    "färsk ingefära": 338,
+    "dill": 377,
+    "koriander": 7193,
+    "mynta": 7194,
+    "basilika": 379,
+    "färsk basilika": 379,
+    "thaibasilika": 379,
+    "färsk thaibasilika": 379,
+    "ingefära": 2269,
+    "färsk ingefära": 2269,
     "jalapeño": 380,
     "jalapeños": 380,
     "chilipeppar": 380,
@@ -396,7 +394,7 @@ CURATED: dict[str, int] = {
     "mjöl": 1941,
     "självjäsande mjöl": 1941,
     "vetegluten": 1941,
-    "mandelmjöl": 1930,  # buckwheat proxy — prefer almond if found
+    "mandelmjöl": 6087,
     "majsstärkelse": 1945,
     "socker": 1892,
     "strösocker": 1892,
@@ -406,8 +404,8 @@ CURATED: dict[str, int] = {
     "bakpulver": 1981,
     "bikarbonat": 1981,
     "kanel": 2306,
-    "sesamfrön": 1560,  # peanuts wrong — find sesame
-    "rostat sesamfrön": 1560,
+    "sesamfrön": 1572,
+    "rostat sesamfrön": 1572,
     "jordnötter": 1561,
     "hackade jordnötter": 1561,
     "panko": 202,  # bread crumbs proxy
@@ -423,11 +421,11 @@ CURATED: dict[str, int] = {
     "thaisoja": 909,
     "ostronsås": 909,  # no SLV oyster sauce; soy-adjacent proxy
     # fisksås / risvinäger → USDA secondary (not soy proxy)
-    "balsamicovinäger": 909,
+    "balsamicovinäger": 1966,  # Vinäger ättiksyra — closest SLV; no balsamico row
     "chilisås": 1968,
     "sriracha": 1968,
     "sweet chilisås": 2007,
-    "ketchup": 1968,
+    "ketchup": 1969,
     "majonnäs": 50,
     "lätt majonnäs": 53,
     "tomatsås": 461,
@@ -439,15 +437,15 @@ CURATED: dict[str, int] = {
     "vit misopasta": 908,
     "miso": 908,
     # other
-    "vatten": 1975,  # 0 kcal salt row wrong — need water. Manual 0.
-    "espresso": 1975,
-    "kakao": 1855,
-    "mörk choklad": 1855,
-    "mörk choklad 70%": 1855,
-    "hackad mörk choklad": 1855,
-    "chocolate chips": 1855,
-    "vaniljextrakt": 1892,  # negligible carbs proxy → better manual 0
-    "timjan": 352,
+    "vatten": 1953,  # Vatten kranvatten 0 kcal
+    "espresso": 1958,
+    "kakao": 1886,
+    "mörk choklad": 6907,
+    "mörk choklad 70%": 6907,
+    "hackad mörk choklad": 6907,
+    "chocolate chips": 6907,
+    # vaniljextrakt: leave to MANUAL_FOODS (do not claim socker)
+    "timjan": 352,  # SLV saknar timjan-ört → Persilja blad (örtrproxy)
     "färsk timjan": 352,
     "rosmarin": 352,
 }
@@ -455,34 +453,41 @@ CURATED: dict[str, int] = {
 # Prefer better SLV ids when we discover them during build (filled below).
 PREFERRED_SEARCH: dict[str, str] = {
     "rapsolja": r"^Rapsolja$",
-    "mozzarella": r"mozzarella",
+    "matolja": r"^Matolja$",
+    "mozzarella": r"^Ost mozzarella",
     "räkor": r"^Räka|^Räkor",
     "sesamfrön": r"^Sesamfrö",
     "gräddfil": r"^Gräddfil",
-    "mellanmjölk": r"^Mjölk fett 1,5",
+    "mellanmjölk": r"^Mellanmjölk|^Mjölk fett 1,5",
     "skummjölk": r"^Mjölk fett 0,5|^Lättmjölk",
-    "paprika": r"^Paprika$",
-    "rödlök": r"^Rödlök$",
-    "gul lök": r"^Gul lök$|^Lök$",
-    "schalottenlök": r"^Schalotten",
-    "salladslök": r"^Salladslök|^Purjolök",
+    "paprika": r"^Paprika röd$",
+    "röd paprika": r"^Paprika röd$",
+    "grön paprika": r"^Paprika grön$",
+    "rödlök": r"^Lök gul$",
+    "gul lök": r"^Lök gul$",
+    "lök": r"^Lök gul$",
+    "schalottenlök": r"^Lök gul$",
+    "salladslök": r"^Gräslök$",
+    "vårlök": r"^Gräslök$",
     "grönkål": r"^Grönkål$",
-    "spenat": r"^Spenat$",
-    "ruccola": r"^Ruccola|^Rucola",
-    "sallad": r"^Sallad |^Huvudsallad|^Isbergssallad",
+    "spenat": r"^Spenat färsk$|^Spenat",
+    "ruccola": r"^Ruccola",
+    "sallad": r"^Isbergssallat|^Huvudsallad",
     "koriander": r"^Koriander",
-    "mynta": r"^Mynta$",
-    "dill": r"^Dill$",
-    "basilika": r"^Basilika$",
-    "ingefära": r"^Ingefära$",
-    "majs": r"^Majs$",
+    "mynta": r"^Grönmynta|^Mynta$",
+    "dill": r"^Dill färsk$",
+    "basilika": r"^Basilika färsk$|^Basilika",
+    "ingefära": r"^Ingefära färsk$|^Ingefära",
+    "majs": r"^Majskorn konserv",
+    "majskärnor": r"^Majskorn konserv",
+    "konserverad majs": r"^Majskorn konserv",
     "majsstärkelse": r"Majsstärkelse|Maizena",
-    "mandelmjöl": r"^Mandelmjöl|^Mandel mjöl",
-    "kakao": r"^Kakao",
-    "mörk choklad": r"^Mörk choklad",
+    "mandelmjöl": r"^Mandelmjöl$",
+    "kakao": r"^Kakaopulver",
+    "mörk choklad": r"^Mörk choklad kakao 70%",
     "fisksås": r"Fisksås",
-        "balsamicovinäger": r"Balsamico",
-    "gräddfil": r"^Gräddfil",
+    "balsamicovinäger": r"^Vinäger",
+    "ketchup": r"^Ketchup$",
     "nötfärs": r"^Nöt färs|^Nötfärs",
     "malet fläskkött": r"^Gris färs|^Fläskfärs",
     "labneh": r"labneh|yoghurt.*Turk",
@@ -490,8 +495,10 @@ PREFERRED_SEARCH: dict[str, str] = {
     "risnudlar": r"Risnudlar|risnudlar|Glasnudlar",
     "wontonskal": r"wonton|Wonton",
     "näringsjäst": r"näringsjäst|Näringsjäst",
-    "espresso": r"^Kaffe|^Espresso",
-    "vatten": r"^Vatten$",
+    "espresso": r"^Kaffe espresso",
+    "vatten": r"^Vatten kranvatten$",
+    "morot": r"^Morot$",
+    "äggvita": r"^Äggvita rå$",
 }
 
 
@@ -1040,16 +1047,22 @@ def main() -> None:
         by_id[uid] = row
         uid += 1
 
-    # 4) Manual specialty foods (zero-spice etc.) — skip if alias taken
+    # 4) Manual specialty foods.
+    # Force-claim only for rows that must override bad CURATED (vatten/vaniljextrakt).
+    # Spice bucket (svartpeppar) stays non-forcing so SLV kanel/etc. win.
+    FORCE_MANUAL = {"vaniljextrakt"}  # vatten fixed in CURATED → SLV kranvatten
     mid = MANUAL_ID_START
     for g in MANUAL_FOODS:
-        if norm(g["canonical_name"]) in alias_owner:
-            # Still attach any free aliases onto the existing owner
+        force = norm(g["canonical_name"]) in FORCE_MANUAL
+        if norm(g["canonical_name"]) in alias_owner and not force:
             owner = alias_owner[norm(g["canonical_name"])]
             for a in g.get("aliases") or []:
                 if claim_alias(a, owner):
                     by_id[owner]["aliases"].append(norm(a))
             continue
+        if norm(g["canonical_name"]) in alias_owner and force:
+            # Steal canonical from wrong CURATED owner
+            pass
         while mid in by_id:
             mid += 1
         row = {
@@ -1067,9 +1080,9 @@ def main() -> None:
             "external_id": None,
             "aliases": [],
         }
-        claim_alias(g["canonical_name"], mid)
+        claim_alias(g["canonical_name"], mid, force=force)
         for a in g.get("aliases") or []:
-            if claim_alias(a, mid):
+            if claim_alias(a, mid, force=force):
                 row["aliases"].append(norm(a))
         ingredients.append(row)
         by_id[mid] = row

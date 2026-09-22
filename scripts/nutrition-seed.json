@@ -3,9 +3,9 @@
     "source": "Livsmedelsverket Livsmedelsdatabas",
     "source_url": "https://www.livsmedelsverket.se/om-oss/psidata/livsmedelsdatabasen",
     "attribution": "Livsmedelsverkets Livsmedelsdatabas",
-    "slv_fetched_at": "2026-09-03T11:32:36Z",
+    "slv_fetched_at": "2026-09-03T11:41:14Z",
     "slv_count": 2606,
-    "manual_count": 15,
+    "manual_count": 16,
     "usda_count": 8,
     "note": "Macros from SLV where source=slv; aliases are app-specific. Do not alter SLV macro values."
   },
@@ -456,9 +456,7 @@
       "needs_review": 0,
       "source": "slv",
       "external_id": "40",
-      "aliases": [
-        "neutral matolja"
-      ]
+      "aliases": []
     },
     {
       "id": 41,
@@ -640,9 +638,7 @@
       "needs_review": 0,
       "source": "slv",
       "external_id": "57",
-      "aliases": [
-        "sallad"
-      ]
+      "aliases": []
     },
     {
       "id": 58,
@@ -1191,7 +1187,6 @@
       "external_id": "96",
       "aliases": [
         "osthårdostfett28%",
-        "riven mozzarella",
         "swiss-ost",
         "leerdamer 50%",
         "swiss-ost / leerdamer 50%"
@@ -1246,7 +1241,8 @@
       "external_id": "100",
       "aliases": [
         "ost halloumi fett 22%",
-        "osthalloumifett22%"
+        "osthalloumifett22%",
+        "halloumi"
       ]
     },
     {
@@ -1576,7 +1572,6 @@
       "aliases": [
         "mjölk fett 3%",
         "mjölkfett3%",
-        "mellanmjölk",
         "mjölk"
       ]
     },
@@ -1807,7 +1802,8 @@
       "external_id": "150",
       "aliases": [
         "mellanmjölk fett 1,5%",
-        "mellanmjölkfett1,5%"
+        "mellanmjölkfett1,5%",
+        "mellanmjölk"
       ]
     },
     {
@@ -3333,9 +3329,7 @@
       "needs_review": 0,
       "source": "slv",
       "external_id": "280",
-      "aliases": [
-        "morot"
-      ]
+      "aliases": []
     },
     {
       "id": 281,
@@ -3676,11 +3670,7 @@
       "needs_review": 0,
       "source": "slv",
       "external_id": "305",
-      "aliases": [
-        "majskärnor",
-        "majs",
-        "konserverad majs"
-      ]
+      "aliases": []
     },
     {
       "id": 306,
@@ -3873,12 +3863,7 @@
       "needs_review": 0,
       "source": "slv",
       "external_id": "322",
-      "aliases": [
-        "basilika",
-        "färsk basilika",
-        "thaibasilika",
-        "färsk thaibasilika"
-      ]
+      "aliases": []
     },
     {
       "id": 323,
@@ -3998,9 +3983,7 @@
       "needs_review": 0,
       "source": "slv",
       "external_id": "330",
-      "aliases": [
-        "dill"
-      ]
+      "aliases": []
     },
     {
       "id": 331,
@@ -4125,9 +4108,7 @@
       "source": "slv",
       "external_id": "338",
       "aliases": [
-        "fryst grönkål",
-        "ingefära",
-        "färsk ingefära"
+        "fryst grönkål"
       ]
     },
     {
@@ -4158,7 +4139,9 @@
       "needs_review": 0,
       "source": "slv",
       "external_id": "340",
-      "aliases": []
+      "aliases": [
+        "sallad"
+      ]
     },
     {
       "id": 342,
@@ -4204,7 +4187,12 @@
       "source": "slv",
       "external_id": "344",
       "aliases": [
-        "lökgul"
+        "lökgul",
+        "röd lök",
+        "rödlök",
+        "gul lök",
+        "lök",
+        "schalottenlök"
       ]
     },
     {
@@ -4220,9 +4208,7 @@
       "needs_review": 0,
       "source": "slv",
       "external_id": "345",
-      "aliases": [
-        "mynta"
-      ]
+      "aliases": []
     },
     {
       "id": 346,
@@ -4253,9 +4239,7 @@
       "source": "slv",
       "external_id": "347",
       "aliases": [
-        "majskorn",
-        "gul lök",
-        "lök"
+        "majskorn"
       ]
     },
     {
@@ -4271,10 +4255,7 @@
       "needs_review": 0,
       "source": "slv",
       "external_id": "348",
-      "aliases": [
-        "röd lök",
-        "rödlök"
-      ]
+      "aliases": []
     },
     {
       "id": 349,
@@ -4290,8 +4271,7 @@
       "source": "slv",
       "external_id": "349",
       "aliases": [
-        "nässlorförvällda",
-        "schalottenlök"
+        "nässlorförvällda"
       ]
     },
     {
@@ -4309,7 +4289,7 @@
       "external_id": "350",
       "aliases": [
         "paprikagrön",
-        "vårlök"
+        "grön paprika"
       ]
     },
     {
@@ -4326,7 +4306,9 @@
       "source": "slv",
       "external_id": "351",
       "aliases": [
-        "paprikaröd"
+        "paprikaröd",
+        "paprika",
+        "röd paprika"
       ]
     },
     {
@@ -4380,9 +4362,7 @@
       "needs_review": 0,
       "source": "slv",
       "external_id": "354",
-      "aliases": [
-        "salladslök"
-      ]
+      "aliases": []
     },
     {
       "id": 355,
@@ -4397,11 +4377,7 @@
       "needs_review": 0,
       "source": "slv",
       "external_id": "355",
-      "aliases": [
-        "paprika",
-        "röd paprika",
-        "grön paprika"
-      ]
+      "aliases": []
     },
     {
       "id": 357,
@@ -4446,9 +4422,7 @@
       "needs_review": 0,
       "source": "slv",
       "external_id": "359",
-      "aliases": [
-        "spenat"
-      ]
+      "aliases": []
     },
     {
       "id": 361,
@@ -4671,7 +4645,8 @@
       "source": "slv",
       "external_id": "377",
       "aliases": [
-        "dillfärsk"
+        "dillfärsk",
+        "dill"
       ]
     },
     {
@@ -4687,7 +4662,10 @@
       "needs_review": 0,
       "source": "slv",
       "external_id": "378",
-      "aliases": []
+      "aliases": [
+        "salladslök",
+        "vårlök"
+      ]
     },
     {
       "id": 379,
@@ -4703,7 +4681,11 @@
       "source": "slv",
       "external_id": "379",
       "aliases": [
-        "basilikafärsk"
+        "basilikafärsk",
+        "basilika",
+        "färsk basilika",
+        "thaibasilika",
+        "färsk thaibasilika"
       ]
     },
     {
@@ -4959,7 +4941,11 @@
       "needs_review": 0,
       "source": "slv",
       "external_id": "400",
-      "aliases": []
+      "aliases": [
+        "majskärnor",
+        "majs",
+        "konserverad majs"
+      ]
     },
     {
       "id": 401,
@@ -11116,7 +11102,8 @@
       "source": "slv",
       "external_id": "905",
       "aliases": [
-        "tofufast"
+        "tofufast",
+        "tofu"
       ]
     },
     {
@@ -11187,8 +11174,7 @@
         "soja",
         "tamari",
         "thaisoja",
-        "ostronsås",
-        "balsamicovinäger"
+        "ostronsås"
       ]
     },
     {
@@ -15478,8 +15464,7 @@
         "äggrått",
         "ägg",
         "ägg stora",
-        "ägg stort",
-        "äggvita"
+        "ägg stort"
       ]
     },
     {
@@ -15512,7 +15497,9 @@
       "needs_review": 0,
       "source": "slv",
       "external_id": "1227",
-      "aliases": []
+      "aliases": [
+        "äggvita"
+      ]
     },
     {
       "id": 1229,
@@ -15752,7 +15739,10 @@
       "source": "slv",
       "external_id": "1246",
       "aliases": [
-        "torsk"
+        "torsk",
+        "vit fiskfilé",
+        "fiskfilé",
+        "torskfilé"
       ]
     },
     {
@@ -19998,8 +19988,7 @@
       "source": "slv",
       "external_id": "1560",
       "aliases": [
-        "jordnöttertorkade",
-        "rostat sesamfrön"
+        "jordnöttertorkade"
       ]
     },
     {
@@ -20193,7 +20182,8 @@
       "aliases": [
         "sesamfrö",
         "sesamfrön",
-        "rostat sesamfrö"
+        "rostat sesamfrö",
+        "rostat sesamfrön"
       ]
     },
     {
@@ -23875,10 +23865,7 @@
       "source": "slv",
       "external_id": "1855",
       "aliases": [
-        "chokladchokladpraliner",
-        "mörk choklad 70%",
-        "hackad mörk choklad",
-        "chocolate chips"
+        "chokladchokladpraliner"
       ]
     },
     {
@@ -24203,7 +24190,8 @@
       "source": "slv",
       "external_id": "1886",
       "aliases": [
-        "kakaopulverfett20-22%"
+        "kakaopulverfett20-22%",
+        "kakao"
       ]
     },
     {
@@ -24271,10 +24259,7 @@
       "external_id": "1892",
       "aliases": [
         "strösocker",
-        "farinsocker",
-        "vaniljextrakt",
-        "vanilj",
-        "vanilla extract"
+        "farinsocker"
       ]
     },
     {
@@ -25091,7 +25076,10 @@
       "source": "slv",
       "external_id": "1953",
       "aliases": [
-        "vattenkranvatten"
+        "vattenkranvatten",
+        "vatten",
+        "pocheringsvätska",
+        "pickling lake"
       ]
     },
     {
@@ -25143,8 +25131,7 @@
       "source": "slv",
       "external_id": "1957",
       "aliases": [
-        "kaffebryggt",
-        "espresso"
+        "kaffebryggt"
       ]
     },
     {
@@ -25162,7 +25149,8 @@
       "external_id": "1958",
       "aliases": [
         "kaffe espresso bryggt drickf",
-        "kaffeespressobryggtdrickf"
+        "kaffeespressobryggtdrickf",
+        "espresso"
       ]
     },
     {
@@ -25279,7 +25267,8 @@
       "source": "slv",
       "external_id": "1966",
       "aliases": [
-        "vinägerättiksyra7%"
+        "vinägerättiksyra7%",
+        "balsamicovinäger"
       ]
     },
     {
@@ -25315,8 +25304,7 @@
       "aliases": [
         "chilisåstomat",
         "chilisås",
-        "sriracha",
-        "ketchup"
+        "sriracha"
       ]
     },
     {
@@ -25434,10 +25422,7 @@
         "salt",
         "flingsalt",
         "salt till pastavattnet",
-        "salt och peppar",
-        "vatten",
-        "pocheringsvätska",
-        "pickling lake"
+        "salt och peppar"
       ]
     },
     {
@@ -27849,7 +27834,8 @@
       "external_id": "2255",
       "aliases": [
         "ostmozzarellafett18%",
-        "mozzarella"
+        "mozzarella",
+        "riven mozzarella"
       ]
     },
     {
@@ -27866,7 +27852,9 @@
       "source": "slv",
       "external_id": "2269",
       "aliases": [
-        "ingefärafärsk"
+        "ingefärafärsk",
+        "ingefära",
+        "färsk ingefära"
       ]
     },
     {
@@ -29266,7 +29254,8 @@
       "external_id": "2899",
       "aliases": [
         "ost halloumi eller",
-        "osthalloumieller"
+        "osthalloumieller",
+        "grillad halloumi"
       ]
     },
     {
@@ -29945,7 +29934,9 @@
       "needs_review": 0,
       "source": "slv",
       "external_id": "3418",
-      "aliases": []
+      "aliases": [
+        "neutral matolja"
+      ]
     },
     {
       "id": 3433,
@@ -32274,7 +32265,8 @@
       "source": "slv",
       "external_id": "4941",
       "aliases": [
-        "spenatfärsk"
+        "spenatfärsk",
+        "spenat"
       ]
     },
     {
@@ -35479,7 +35471,8 @@
       "external_id": "6287",
       "aliases": [
         "sojaprotein färs",
-        "sojaproteinfärs"
+        "sojaproteinfärs",
+        "sojafärs"
       ]
     },
     {
@@ -39561,7 +39554,10 @@
       "external_id": "6907",
       "aliases": [
         "mörkchokladkakao70%",
-        "mörk choklad"
+        "mörk choklad",
+        "mörk choklad 70%",
+        "hackad mörk choklad",
+        "chocolate chips"
       ]
     },
     {
@@ -40540,9 +40536,7 @@
       "needs_review": 0,
       "source": "slv",
       "external_id": "7031",
-      "aliases": [
-        "kakao"
-      ]
+      "aliases": []
     },
     {
       "id": 7032,
@@ -41668,7 +41662,8 @@
       "source": "slv",
       "external_id": "7194",
       "aliases": [
-        "grönmyntablad"
+        "grönmyntablad",
+        "mynta"
       ]
     },
     {
@@ -42533,6 +42528,24 @@
     },
     {
       "id": 900001,
+      "canonical_name": "vaniljextrakt",
+      "category": "special",
+      "kcal_per_100g": 288,
+      "protein_per_100g": 0,
+      "fat_per_100g": 0,
+      "carbs_per_100g": 13,
+      "piece_weight_g": null,
+      "density_g_per_ml": null,
+      "needs_review": 1,
+      "source": "manual",
+      "external_id": null,
+      "aliases": [
+        "vanilj",
+        "vanilla extract"
+      ]
+    },
+    {
+      "id": 900002,
       "canonical_name": "proteinpulver",
       "category": "special",
       "kcal_per_100g": 370,
@@ -42549,7 +42562,7 @@
       ]
     },
     {
-      "id": 900002,
+      "id": 900003,
       "canonical_name": "ume-pickle",
       "category": "special",
       "kcal_per_100g": 20,
@@ -42567,7 +42580,7 @@
       ]
     },
     {
-      "id": 900003,
+      "id": 900004,
       "canonical_name": "buffalosås",
       "category": "special",
       "kcal_per_100g": 50,
@@ -42584,7 +42597,7 @@
       ]
     },
     {
-      "id": 900004,
+      "id": 900005,
       "canonical_name": "rispapper",
       "category": "special",
       "kcal_per_100g": 330,
@@ -42599,7 +42612,7 @@
       "aliases": []
     },
     {
-      "id": 900005,
+      "id": 900006,
       "canonical_name": "gyozaskal",
       "category": "special",
       "kcal_per_100g": 290,
@@ -42616,7 +42629,7 @@
       ]
     },
     {
-      "id": 900006,
+      "id": 900007,
       "canonical_name": "kinesisk svart vinäger",
       "category": "special",
       "kcal_per_100g": 30,
@@ -42634,7 +42647,7 @@
       ]
     },
     {
-      "id": 900007,
+      "id": 900008,
       "canonical_name": "torrjäst",
       "category": "special",
       "kcal_per_100g": 325,
@@ -42649,7 +42662,7 @@
       "aliases": []
     },
     {
-      "id": 900008,
+      "id": 900009,
       "canonical_name": "vallmofrön",
       "category": "special",
       "kcal_per_100g": 525,
@@ -42664,7 +42677,7 @@
       "aliases": []
     },
     {
-      "id": 900009,
+      "id": 900010,
       "canonical_name": "libanesiskt tunnbröd",
       "category": "special",
       "kcal_per_100g": 275,
@@ -42682,7 +42695,7 @@
       ]
     },
     {
-      "id": 900010,
+      "id": 900011,
       "canonical_name": "brioche hamburgerbröd",
       "category": "special",
       "kcal_per_100g": 320,
@@ -42699,7 +42712,7 @@
       ]
     },
     {
-      "id": 900011,
+      "id": 900012,
       "canonical_name": "frysta dumplings",
       "category": "special",
       "kcal_per_100g": 200,
@@ -42714,7 +42727,7 @@
       "aliases": []
     },
     {
-      "id": 900012,
+      "id": 900013,
       "canonical_name": "blåmögelostdressing",
       "category": "special",
       "kcal_per_100g": 350,
@@ -42732,7 +42745,7 @@
       ]
     },
     {
-      "id": 900013,
+      "id": 900014,
       "canonical_name": "bananpeppar",
       "category": "special",
       "kcal_per_100g": 30,
@@ -42749,7 +42762,7 @@
       ]
     },
     {
-      "id": 900014,
+      "id": 900015,
       "canonical_name": "potatisgnocchi",
       "category": "special",
       "kcal_per_100g": 160,
