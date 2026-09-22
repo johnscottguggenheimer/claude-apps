@@ -12,6 +12,7 @@ type IngredientDbRow = {
   piece_weight_g: number | null;
   density_g_per_ml: number | null;
   needs_review: number;
+  piece_weight_source?: string | null;
 };
 
 type AliasDbRow = {
@@ -31,6 +32,7 @@ function toIngredient(row: IngredientDbRow): IngredientRow {
     piece_weight_g: row.piece_weight_g,
     density_g_per_ml: row.density_g_per_ml,
     needs_review: row.needs_review,
+    piece_weight_source: row.piece_weight_source ?? null,
   };
 }
 
@@ -39,7 +41,8 @@ export async function loadNutritionCatalog(db: D1Database): Promise<NutritionCat
   const ingredients = await db
     .prepare(
       `SELECT id, canonical_name, category, kcal_per_100g, protein_per_100g,
-              fat_per_100g, carbs_per_100g, piece_weight_g, density_g_per_ml, needs_review
+              fat_per_100g, carbs_per_100g, piece_weight_g, density_g_per_ml, needs_review,
+              piece_weight_source
        FROM ingredients`
     )
     .all<IngredientDbRow>();
@@ -81,6 +84,7 @@ export function catalogFromSeed(
     piece_weight_g?: number | null;
     density_g_per_ml?: number | null;
     needs_review?: number;
+    piece_weight_source?: string | null;
     aliases?: string[];
   }>
 ): NutritionCatalog {
@@ -99,6 +103,7 @@ export function catalogFromSeed(
       piece_weight_g: row.piece_weight_g ?? null,
       density_g_per_ml: row.density_g_per_ml ?? null,
       needs_review: row.needs_review ?? 0,
+      piece_weight_source: row.piece_weight_source ?? null,
     };
     byId.set(ing.id, ing);
     const canonKey = normalizeIngredientName(ing.canonical_name);

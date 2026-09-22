@@ -130,6 +130,7 @@ export function applyResolutionToRecipe(
         match_status: row.match_status,
         resolved_grams: row.resolved_grams,
         ingredient_id: row.ingredient_id,
+        grams_source: row.grams_source ?? null,
       };
       if (
         row.match_status === 'matched' &&

@@ -110,6 +110,8 @@ const noPiece = catalogFromSeed([
   },
 ]);
 const np = resolveIngredientLine(noPiece, 'palsternacka', 1, 'st', 0, 0);
-assert(np.match_status === 'needs_piece_weight', 'needs_piece_weight');
+assert(np.match_status === 'matched', 'st without catalog weight still matches via schablon');
+assert(np.grams_source === 'category_fallback', `grams_source ${np.grams_source}`);
+assert(np.resolved_grams != null && np.resolved_grams > 0, 'schablon grams');
 
 console.log('nutrition smoke OK');

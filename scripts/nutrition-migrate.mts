@@ -40,13 +40,17 @@ function buildSeedSql(): string {
   ];
   for (const ing of seed.ingredients) {
     lines.push(
-      `INSERT INTO ingredients (id, canonical_name, category, kcal_per_100g, protein_per_100g, fat_per_100g, carbs_per_100g, piece_weight_g, density_g_per_ml, needs_review) VALUES (${
+      `INSERT INTO ingredients (id, canonical_name, category, kcal_per_100g, protein_per_100g, fat_per_100g, carbs_per_100g, piece_weight_g, density_g_per_ml, needs_review, piece_weight_source) VALUES (${
         ing.id
       }, '${sqlEscape(ing.canonical_name)}', ${
         ing.category == null ? 'NULL' : `'${sqlEscape(ing.category)}'`
       }, ${ing.kcal_per_100g}, ${ing.protein_per_100g}, ${ing.fat_per_100g}, ${ing.carbs_per_100g}, ${
         ing.piece_weight_g == null ? 'NULL' : ing.piece_weight_g
-      }, ${ing.density_g_per_ml == null ? 'NULL' : ing.density_g_per_ml}, ${ing.needs_review || 0});`
+      }, ${ing.density_g_per_ml == null ? 'NULL' : ing.density_g_per_ml}, ${ing.needs_review || 0}, ${
+        ing.piece_weight_source == null
+          ? 'NULL'
+          : `'${sqlEscape(String(ing.piece_weight_source))}'`
+      });`
     );
     const aliases = new Set<string>([
       String(ing.canonical_name).toLowerCase().trim(),

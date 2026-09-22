@@ -1,4 +1,4 @@
-import { amountToGrams, macrosForGrams } from './grams';
+import { amountToGramsDetailed, macrosForGrams } from './grams';
 import { expandLookupKeys } from './lookup';
 import { normalizeIngredientName } from './normalize';
 import type {
@@ -32,6 +32,7 @@ export function lookupAliasBroad(
 /**
  * Resolve one ingredient line against the catalog.
  * Exact alias first, then conservative broader keys — never free substring.
+ * Gram ladder: catalog piece/density → category schablon — never blocks on st.
  */
 export function resolveIngredientLine(
   catalog: NutritionCatalog,
@@ -59,6 +60,7 @@ export function resolveIngredientLine(
     fat: null,
     carbs: null,
     match_status: 'unmatched',
+    grams_source: null,
     group_index: groupIndex,
     ingredient_index: ingredientIndex,
   };
@@ -75,19 +77,21 @@ export function resolveIngredientLine(
     return base;
   }
 
-  const grams = amountToGrams(quantity, unitNorm, raw_text || normalized, ingredient);
+  const gramsResult = amountToGramsDetailed(
+    quantity,
+    unitNorm,
+    raw_text || normalized,
+    ingredient
+  );
 
-  if (unitNorm === 'st' && grams == null) {
-    base.match_status = 'needs_piece_weight';
-    return base;
-  }
-
-  if (grams == null) {
+  if (gramsResult == null) {
     base.match_status = 'unmatched';
     return base;
   }
 
+  const { grams, source } = gramsResult;
   base.resolved_grams = grams;
+  base.grams_source = source;
   if (grams > 0) {
     const m = macrosForGrams(ingredient, grams);
     base.kcal = m.kcal;
@@ -102,4 +106,20 @@ export function resolveIngredientLine(
   }
   base.match_status = 'matched' satisfies MatchStatus;
   return base;
+}
+
+/** Ingredient ids that used category piece-weight schablon (candidates for AI cache). */
+export function listPieceWeightAiCandidates(rows: ResolvedIngredient[]): number[] {
+  const ids = new Set<number>();
+  for (const row of rows) {
+    if (
+      row.match_status === 'matched' &&
+      row.unit === 'st' &&
+      row.grams_source === 'category_fallback' &&
+      row.ingredient_id != null
+    ) {
+      ids.add(row.ingredient_id);
+    }
+  }
+  return [...ids];
 }

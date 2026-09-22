@@ -249,7 +249,7 @@ async function handleEstimateMacros(request: Request, env: Env): Promise<Respons
   if (!recipe) return json({ error: 'Saknar recipe' }, 400);
 
   try {
-    const { recipe: resolved, resolution } = await resolveRecipeNutrition(env.DB, recipe);
+    const { recipe: resolved, resolution } = await resolveRecipeNutrition(env.DB, recipe, { geminiApiKey: geminiKey(env) });
     const gate = nutritionGateError(resolution);
     return json({
       ok: true,
@@ -417,7 +417,7 @@ async function handleParse(request: Request, env: Env): Promise<Response> {
           ? String(existing.id)
           : slugify(String(recipe.title || existing.title || 'recept'));
       }
-      const { recipe: resolved } = await resolveRecipeNutrition(env.DB, recipe);
+      const { recipe: resolved } = await resolveRecipeNutrition(env.DB, recipe, { geminiApiKey: geminiKey(env) });
       return json({ recipe: resolved, saveImage: false, merged: true });
     }
 
@@ -436,7 +436,7 @@ async function handleParse(request: Request, env: Env): Promise<Response> {
       saveImage = await detectFoodPhoto(env.GEMINI_API_KEY, body.imageBase64, body.mimeType);
     }
 
-    const { recipe: resolved } = await resolveRecipeNutrition(env.DB, recipe);
+    const { recipe: resolved } = await resolveRecipeNutrition(env.DB, recipe, { geminiApiKey: geminiKey(env) });
     return json({ recipe: resolved, saveImage });
   } catch (e) {
     return json({ error: e instanceof Error ? e.message : 'Parse misslyckades' }, 502);
@@ -550,7 +550,7 @@ async function handleParseUrl(request: Request, env: Env): Promise<Response> {
     }
     delete recipe.emoji;
     if (!recipe.id) recipe.id = slugify(String(recipe.title || 'recept'));
-    const { recipe: resolved } = await resolveRecipeNutrition(env.DB, recipe);
+    const { recipe: resolved } = await resolveRecipeNutrition(env.DB, recipe, { geminiApiKey: geminiKey(env) });
     return json({
       recipe: resolved,
       imageBase64,
@@ -614,7 +614,7 @@ async function handleCreateRecipe(request: Request, env: Env): Promise<Response>
     return json({ error: e instanceof Error ? e.message : 'Bild misslyckades' }, 502);
   }
 
-  const { recipe: resolved, resolution } = await resolveRecipeNutrition(env.DB, recipe);
+  const { recipe: resolved, resolution } = await resolveRecipeNutrition(env.DB, recipe, { geminiApiKey: geminiKey(env) });
   const gate = nutritionGateError(resolution);
   if (gate) {
     return json(
@@ -749,7 +749,7 @@ async function handleUpdateRecipe(request: Request, env: Env, id: string): Promi
     if (migrated) recipe.image = migrated;
   }
 
-  const { recipe: resolved, resolution } = await resolveRecipeNutrition(env.DB, recipe);
+  const { recipe: resolved, resolution } = await resolveRecipeNutrition(env.DB, recipe, { geminiApiKey: geminiKey(env) });
   const gate = nutritionGateError(resolution);
   if (gate) {
     return json(

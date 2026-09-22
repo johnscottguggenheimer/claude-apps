@@ -2,6 +2,13 @@
 
 export type MatchStatus = 'matched' | 'unmatched' | 'needs_piece_weight';
 
+/** How grams were obtained for a line (gram ladder). */
+export type GramsSource =
+  | 'catalog'
+  | 'ai_estimated'
+  | 'category_fallback'
+  | 'unit_default';
+
 export type MacroTotals = {
   kcal: number;
   prot: number;
@@ -20,6 +27,8 @@ export type IngredientRow = {
   piece_weight_g: number | null;
   density_g_per_ml: number | null;
   needs_review: number;
+  /** Provenance of piece_weight_g when set. */
+  piece_weight_source?: string | null;
 };
 
 /** In-memory catalog: exact alias → ingredient. */
@@ -36,6 +45,7 @@ export type RecipeIngredientInput = {
   match_status?: MatchStatus;
   resolved_grams?: number | null;
   ingredient_id?: number | null;
+  grams_source?: GramsSource | null;
 };
 
 export type ResolvedIngredient = {
@@ -50,6 +60,7 @@ export type ResolvedIngredient = {
   fat: number | null;
   carbs: number | null;
   match_status: MatchStatus;
+  grams_source?: GramsSource | null;
   group_index: number;
   ingredient_index: number;
 };

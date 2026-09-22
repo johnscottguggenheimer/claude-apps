@@ -1105,23 +1105,66 @@ def main() -> None:
                     by_id[iid]["piece_weight_g"] = pw
                     break
 
+    # Vitlöksklyfta piece weight + common produce (manual, verified-ish schablons)
+    MANUAL_PIECE = {
+        "vitlök": 3,
+        "ägg": 58,
+        "zucchini": 200,
+        "squash": 200,
+        "selleristjälkar": 40,
+        "stjälkselleri": 40,
+        "tomat": 100,
+        "morot": 80,
+        "paprika": 150,
+        "röd paprika": 150,
+        "grön paprika": 150,
+        "gul lök": 110,
+        "lök": 110,
+        "rödlök": 110,
+        "salladslök": 15,
+        "vårlök": 15,
+        "gräslök": 15,
+        "banan": 120,
+        "citron": 85,
+        "lime": 60,
+        "ingefära": 12,
+        "lasagneplattor": 20,
+        "champinjon": 20,
+    }
+    for alias, pw in MANUAL_PIECE.items():
+        iid = alias_owner.get(norm(alias))
+        if not iid:
+            continue
+        row = by_id[iid]
+        if row.get("piece_weight_g") is None:
+            row["piece_weight_g"] = pw
+            row["piece_weight_source"] = "manual"
+
     # Vitlöksklyfta piece weight
     if "vitlök" in alias_owner:
         by_id[alias_owner["vitlök"]]["piece_weight_g"] = by_id[alias_owner["vitlök"]].get(
             "piece_weight_g"
         ) or 3
+        by_id[alias_owner["vitlök"]]["piece_weight_source"] = by_id[alias_owner["vitlök"]].get(
+            "piece_weight_source"
+        ) or "manual"
     if "ägg" in alias_owner:
         by_id[alias_owner["ägg"]]["piece_weight_g"] = by_id[alias_owner["ägg"]].get(
             "piece_weight_g"
-        ) or 56
+        ) or 58
+        by_id[alias_owner["ägg"]]["piece_weight_source"] = by_id[alias_owner["ägg"]].get(
+            "piece_weight_source"
+        ) or "manual"
     if "zucchini" in alias_owner or "squash" in alias_owner:
         zid = alias_owner.get("zucchini") or alias_owner.get("squash")
         if zid:
             by_id[zid]["piece_weight_g"] = by_id[zid].get("piece_weight_g") or 200
+            by_id[zid]["piece_weight_source"] = by_id[zid].get("piece_weight_source") or "manual"
     if "selleristjälkar" in alias_owner or "stjälkselleri" in alias_owner:
         sid = alias_owner.get("selleristjälkar") or alias_owner.get("stjälkselleri")
         if sid:
             by_id[sid]["piece_weight_g"] = by_id[sid].get("piece_weight_g") or 40
+            by_id[sid]["piece_weight_source"] = by_id[sid].get("piece_weight_source") or "manual"
 
     # Ensure canonical uniqueness for D1 unique index — disambiguate collisions
     seen_canon: dict[str, int] = {}

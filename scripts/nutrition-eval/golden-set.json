@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-22T10:23:02.542Z",
+  "generatedAt": "2026-09-22T10:40:45.703Z",
   "method": "Expected macros = sum of SLV/manual per_100g × grams for each line. Food choice from golden-corrections.json when present; else catalog only if alias not marked wrong. NOT taken from current resolver output.",
   "recipeCount": 32,
-  "fullyVerified": 31,
+  "fullyVerified": 32,
   "recipes": [
     {
       "id": "aglio-e-olio",
@@ -431,7 +431,7 @@
           "source": "catalog-uncertain",
           "food_id": 900000,
           "food_name": "svartpeppar",
-          "grams": 5,
+          "grams": 2.8,
           "kcal": 0,
           "prot": 0,
           "fat": 0,
@@ -659,9 +659,9 @@
         "carb": 190
       },
       "current_resolver_macros": {
-        "kcal": 2197,
-        "prot": 272,
-        "carb": 171,
+        "kcal": 2295,
+        "prot": 275,
+        "carb": 189,
         "fat": 47
       },
       "unresolved_line_count": 0,
@@ -834,7 +834,7 @@
           "source": "catalog-uncertain",
           "food_id": 900000,
           "food_name": "svartpeppar",
-          "grams": 5,
+          "grams": 2.8,
           "kcal": 0,
           "prot": 0,
           "fat": 0,
@@ -919,7 +919,7 @@
           "source": "catalog-uncertain",
           "food_id": 900000,
           "food_name": "svartpeppar",
-          "grams": 5,
+          "grams": 2.8,
           "kcal": 0,
           "prot": 0,
           "fat": 0,
@@ -1218,15 +1218,15 @@
         "vegetarisk"
       ],
       "expected_macros": {
-        "kcal": 1097,
+        "kcal": 1089,
         "prot": 40,
         "fat": 16,
-        "carb": 189
+        "carb": 187
       },
       "current_resolver_macros": {
-        "kcal": 1093,
+        "kcal": 1085,
         "prot": 40,
-        "carb": 189,
+        "carb": 187,
         "fat": 15
       },
       "unresolved_line_count": 0,
@@ -1313,11 +1313,11 @@
           "source": "catalog-ok",
           "food_id": 1981,
           "food_name": "Bakpulver",
-          "grams": 10,
-          "kcal": 17,
+          "grams": 5.5,
+          "kcal": 10,
           "prot": 0,
           "fat": 0,
-          "carb": 4
+          "carb": 2
         },
         {
           "group_index": 0,
@@ -1714,16 +1714,16 @@
         "vegetarisk"
       ],
       "expected_macros": {
-        "kcal": 1227,
+        "kcal": 1230,
         "prot": 63,
         "fat": 87,
         "carb": 56
       },
       "current_resolver_macros": {
-        "kcal": 1215,
-        "prot": 62,
+        "kcal": 1217,
+        "prot": 63,
         "carb": 54,
-        "fat": 86
+        "fat": 87
       },
       "unresolved_line_count": 0,
       "line_count": 9,
@@ -1826,8 +1826,8 @@
           "source": "catalog-ok",
           "food_id": 908,
           "food_name": "Miso sojabönspasta fermenterad",
-          "grams": 10,
-          "kcal": 21,
+          "grams": 11,
+          "kcal": 23,
           "prot": 1,
           "fat": 1,
           "carb": 2
@@ -1893,16 +1893,16 @@
         "notkott"
       ],
       "expected_macros": {
-        "kcal": 2256,
+        "kcal": 2260,
         "prot": 142,
-        "fat": 103,
+        "fat": 104,
         "carb": 186
       },
       "current_resolver_macros": {
-        "kcal": 2248,
-        "prot": 141,
+        "kcal": 2260,
+        "prot": 142,
         "carb": 186,
-        "fat": 103
+        "fat": 104
       },
       "unresolved_line_count": 0,
       "line_count": 16,
@@ -1954,11 +1954,11 @@
           "source": "catalog-ok",
           "food_id": 908,
           "food_name": "Miso sojabönspasta fermenterad",
-          "grams": 15,
-          "kcal": 31,
-          "prot": 1,
+          "grams": 16.5,
+          "kcal": 34,
+          "prot": 2,
           "fat": 2,
-          "carb": 2
+          "carb": 3
         },
         {
           "group_index": 0,
@@ -2200,10 +2200,10 @@
         "carb": 60
       },
       "current_resolver_macros": {
-        "kcal": 1221,
-        "prot": 127,
-        "carb": 33,
-        "fat": 61
+        "kcal": 1365,
+        "prot": 131,
+        "carb": 60,
+        "fat": 62
       },
       "unresolved_line_count": 0,
       "line_count": 23,
@@ -2997,9 +2997,9 @@
         "carb": 174
       },
       "current_resolver_macros": {
-        "kcal": 3119,
-        "prot": 301,
-        "carb": 170,
+        "kcal": 3140,
+        "prot": 302,
+        "carb": 174,
         "fat": 136
       },
       "unresolved_line_count": 0,
@@ -3052,7 +3052,7 @@
           "source": "catalog-ok",
           "food_id": 900000,
           "food_name": "svartpeppar",
-          "grams": 15,
+          "grams": 8.3,
           "kcal": 0,
           "prot": 0,
           "fat": 0,
@@ -3069,7 +3069,7 @@
           "source": "catalog-uncertain",
           "food_id": 900000,
           "food_name": "svartpeppar",
-          "grams": 15,
+          "grams": 8.3,
           "kcal": 0,
           "prot": 0,
           "fat": 0,
@@ -3376,7 +3376,7 @@
           "source": "catalog-uncertain",
           "food_id": 900000,
           "food_name": "svartpeppar",
-          "grams": 2.5,
+          "grams": 2.8,
           "kcal": 0,
           "prot": 0,
           "fat": 0,
@@ -3415,10 +3415,10 @@
         "carb": 71
       },
       "current_resolver_macros": {
-        "kcal": 1096,
-        "prot": 107,
-        "carb": 70,
-        "fat": 41
+        "kcal": 1117,
+        "prot": 109,
+        "carb": 71,
+        "fat": 42
       },
       "unresolved_line_count": 0,
       "line_count": 18,
@@ -3742,16 +3742,16 @@
         "kyckling"
       ],
       "expected_macros": {
-        "kcal": 2110,
+        "kcal": 2104,
         "prot": 240,
         "fat": 78,
-        "carb": 102
+        "carb": 101
       },
       "current_resolver_macros": {
-        "kcal": 1823,
-        "prot": 231,
-        "carb": 45,
-        "fat": 77
+        "kcal": 2104,
+        "prot": 240,
+        "carb": 101,
+        "fat": 78
       },
       "unresolved_line_count": 0,
       "line_count": 21,
@@ -3906,11 +3906,11 @@
           "source": "catalog-ok",
           "food_id": 1941,
           "food_name": "Vetemjöl",
-          "grams": 5,
-          "kcal": 18,
+          "grams": 2.8,
+          "kcal": 10,
           "prot": 0,
           "fat": 0,
-          "carb": 4
+          "carb": 2
         },
         {
           "group_index": 1,
@@ -3992,8 +3992,8 @@
           "source": "catalog-ok",
           "food_id": 410,
           "food_name": "Tomatpuré konc. konserv.",
-          "grams": 30,
-          "kcal": 25,
+          "grams": 33,
+          "kcal": 28,
           "prot": 1,
           "fat": 0,
           "carb": 4
@@ -4544,10 +4544,10 @@
         "carb": 81
       },
       "current_resolver_macros": {
-        "kcal": 1636,
-        "prot": 231,
-        "carb": 67,
-        "fat": 45
+        "kcal": 1712,
+        "prot": 234,
+        "carb": 81,
+        "fat": 46
       },
       "unresolved_line_count": 0,
       "line_count": 22,
@@ -4616,7 +4616,7 @@
           "source": "catalog-uncertain",
           "food_id": 900000,
           "food_name": "svartpeppar",
-          "grams": 10,
+          "grams": 5.5,
           "kcal": 0,
           "prot": 0,
           "fat": 0,
@@ -4650,7 +4650,7 @@
           "source": "catalog-uncertain",
           "food_id": 900000,
           "food_name": "svartpeppar",
-          "grams": 5,
+          "grams": 2.8,
           "kcal": 0,
           "prot": 0,
           "fat": 0,
@@ -4946,9 +4946,9 @@
         "carb": 342
       },
       "current_resolver_macros": {
-        "kcal": 2295,
-        "prot": 177,
-        "carb": 332,
+        "kcal": 2352,
+        "prot": 179,
+        "carb": 341,
         "fat": 25
       },
       "unresolved_line_count": 0,
@@ -5035,7 +5035,7 @@
           "source": "catalog-ok",
           "food_id": 900000,
           "food_name": "svartpeppar",
-          "grams": 2.5,
+          "grams": 1.4,
           "kcal": 0,
           "prot": 0,
           "fat": 0,
@@ -5341,15 +5341,15 @@
         "kyckling"
       ],
       "expected_macros": {
-        "kcal": 1366,
+        "kcal": 1339,
         "prot": 125,
         "fat": 37,
-        "carb": 126
+        "carb": 120
       },
       "current_resolver_macros": {
-        "kcal": 1345,
-        "prot": 123,
-        "carb": 125,
+        "kcal": 1339,
+        "prot": 125,
+        "carb": 120,
         "fat": 37
       },
       "unresolved_line_count": 0,
@@ -5523,11 +5523,11 @@
           "source": "catalog-ok",
           "food_id": 1892,
           "food_name": "Socker",
-          "grams": 15,
-          "kcal": 61,
+          "grams": 8.3,
+          "kcal": 33,
           "prot": 0,
           "fat": 0,
-          "carb": 15
+          "carb": 8
         },
         {
           "group_index": 2,
@@ -5696,9 +5696,9 @@
         "carb": 125
       },
       "current_resolver_macros": {
-        "kcal": 1330,
-        "prot": 42,
-        "carb": 124,
+        "kcal": 1346,
+        "prot": 43,
+        "carb": 125,
         "fat": 74
       },
       "unresolved_line_count": 0,
@@ -6281,15 +6281,15 @@
         "kyckling"
       ],
       "expected_macros": {
-        "kcal": 2117,
+        "kcal": 2129,
         "prot": 219,
-        "fat": 30,
-        "carb": 236
+        "fat": 31,
+        "carb": 238
       },
       "current_resolver_macros": {
-        "kcal": 2113,
+        "kcal": 2125,
         "prot": 219,
-        "carb": 236,
+        "carb": 238,
         "fat": 30
       },
       "unresolved_line_count": 0,
@@ -6445,11 +6445,11 @@
           "source": "catalog-ok",
           "food_id": 910002,
           "food_name": "gochujang",
-          "grams": 45,
-          "kcal": 120,
-          "prot": 1,
+          "grams": 49.5,
+          "kcal": 132,
+          "prot": 2,
           "fat": 2,
-          "carb": 24
+          "carb": 26
         },
         {
           "group_index": 1,
@@ -6760,15 +6760,15 @@
         "skaldjur"
       ],
       "expected_macros": {
-        "kcal": 373,
+        "kcal": 369,
         "prot": 49,
         "fat": 9,
-        "carb": 22
+        "carb": 21
       },
       "current_resolver_macros": {
-        "kcal": 365,
+        "kcal": 369,
         "prot": 49,
-        "carb": 22,
+        "carb": 21,
         "fat": 9
       },
       "unresolved_line_count": 0,
@@ -6821,11 +6821,11 @@
           "source": "catalog-ok",
           "food_id": 1945,
           "food_name": "Majsstärkelse",
-          "grams": 2.5,
-          "kcal": 9,
+          "grams": 1.4,
+          "kcal": 5,
           "prot": 0,
           "fat": 0,
-          "carb": 2
+          "carb": 1
         },
         {
           "group_index": 0,
@@ -6997,8 +6997,8 @@
         "carb": 12
       },
       "current_resolver_macros": {
-        "kcal": 185,
-        "prot": 4,
+        "kcal": 193,
+        "prot": 5,
         "carb": 12,
         "fat": 14
       },
@@ -7171,21 +7171,21 @@
         "vegetarisk"
       ],
       "expected_macros": {
-        "kcal": 295,
-        "prot": 4,
+        "kcal": 316,
+        "prot": 5,
         "fat": 19,
-        "carb": 24
+        "carb": 28
       },
       "current_resolver_macros": {
-        "kcal": 295,
-        "prot": 4,
-        "carb": 24,
+        "kcal": 316,
+        "prot": 5,
+        "carb": 28,
         "fat": 19
       },
-      "unresolved_line_count": 1,
+      "unresolved_line_count": 0,
       "line_count": 7,
-      "verified": false,
-      "verification": "1 lines lack oracle food or grams — expected_macros undercounts",
+      "verified": true,
+      "verification": "oracle complete — foods from corrections or ok/uncertain aliases; macros from SLV/manual per_100g",
       "lines": [
         {
           "group_index": 0,
@@ -7228,11 +7228,15 @@
           "normalized": "röd lök",
           "quantity": 0.5,
           "unit": "st",
-          "status": "needs_grams",
+          "status": "ok",
+          "source": "catalog-ok",
           "food_id": 344,
           "food_name": "Lök gul",
-          "source": "catalog-ok",
-          "note": "could not convert to grams even with piece override"
+          "grams": 55,
+          "kcal": 21,
+          "prot": 1,
+          "fat": 0,
+          "carb": 4
         },
         {
           "group_index": 0,
@@ -7593,15 +7597,15 @@
         "notkott"
       ],
       "expected_macros": {
-        "kcal": 1119,
+        "kcal": 1110,
         "prot": 69,
         "fat": 48,
-        "carb": 100
+        "carb": 98
       },
       "current_resolver_macros": {
-        "kcal": 1091,
-        "prot": 68,
-        "carb": 94,
+        "kcal": 1110,
+        "prot": 69,
+        "carb": 98,
         "fat": 48
       },
       "unresolved_line_count": 0,
@@ -7722,11 +7726,11 @@
           "source": "catalog-uncertain",
           "food_id": 1892,
           "food_name": "Socker",
-          "grams": 5,
-          "kcal": 20,
+          "grams": 2.8,
+          "kcal": 11,
           "prot": 0,
           "fat": 0,
-          "carb": 5
+          "carb": 3
         },
         {
           "group_index": 0,
@@ -7847,9 +7851,9 @@
         "carb": 269
       },
       "current_resolver_macros": {
-        "kcal": 1912,
-        "prot": 133,
-        "carb": 257,
+        "kcal": 1977,
+        "prot": 135,
+        "carb": 269,
         "fat": 37
       },
       "unresolved_line_count": 0,

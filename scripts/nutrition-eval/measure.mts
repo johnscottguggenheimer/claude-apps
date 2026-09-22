@@ -148,12 +148,16 @@ const report = {
     carbWithin15Pct: pctWithin('carb'),
   },
   lineLevel: {
+    note: 'Regression net vs golden ingredient_id — not independent catalog proof (that is alias-audit v2).',
     checked: lineIdChecked,
     ingredientIdMatch: lineIdMatch,
     ingredientIdMatchRate: lineIdChecked ? +(lineIdMatch / lineIdChecked).toFixed(3) : null,
     mismatchCount: idMismatches.length,
   },
   matchStatusDistribution: statusCounts,
+  gramsLadderNote:
+    'needs_piece_weight should stay 0 after punkt 3; st rows use catalog / ai_estimated / category_fallback.',
+
   topIdMismatches: idMismatches.slice(0, 40),
   topErrorLinesByAbsDeltaKcal: errorLines.slice(0, 40),
   perRecipe: perRecipe.sort(

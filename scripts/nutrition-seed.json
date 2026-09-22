@@ -3435,12 +3435,13 @@
       "protein_per_100g": 0.7,
       "fat_per_100g": 0.2,
       "carbs_per_100g": 6.6,
-      "piece_weight_g": null,
+      "piece_weight_g": 80,
       "density_g_per_ml": null,
       "needs_review": 0,
       "source": "slv",
       "external_id": "289",
-      "aliases": []
+      "aliases": [],
+      "piece_weight_source": "manual"
     },
     {
       "id": 290,
@@ -3848,7 +3849,8 @@
       "aliases": [
         "selleri",
         "selleristjälkar"
-      ]
+      ],
+      "piece_weight_source": "manual"
     },
     {
       "id": 322,
@@ -4025,14 +4027,15 @@
       "protein_per_100g": 2.4,
       "fat_per_100g": 0.2,
       "carbs_per_100g": 2.7,
-      "piece_weight_g": null,
+      "piece_weight_g": 20,
       "density_g_per_ml": null,
       "needs_review": 0,
       "source": "slv",
       "external_id": "333",
       "aliases": [
         "champinjoner"
-      ]
+      ],
+      "piece_weight_source": "manual"
     },
     {
       "id": 334,
@@ -4181,7 +4184,7 @@
       "protein_per_100g": 1.2,
       "fat_per_100g": 0.1,
       "carbs_per_100g": 7.3,
-      "piece_weight_g": null,
+      "piece_weight_g": 110,
       "density_g_per_ml": null,
       "needs_review": 0,
       "source": "slv",
@@ -4193,7 +4196,8 @@
         "gul lök",
         "lök",
         "schalottenlök"
-      ]
+      ],
+      "piece_weight_source": "manual"
     },
     {
       "id": 345,
@@ -4300,7 +4304,7 @@
       "protein_per_100g": 0.5,
       "fat_per_100g": 0.2,
       "carbs_per_100g": 4.1,
-      "piece_weight_g": null,
+      "piece_weight_g": 150,
       "density_g_per_ml": null,
       "needs_review": 0,
       "source": "slv",
@@ -4309,7 +4313,8 @@
         "paprikaröd",
         "paprika",
         "röd paprika"
-      ]
+      ],
+      "piece_weight_source": "manual"
     },
     {
       "id": 352,
@@ -4454,7 +4459,8 @@
       "external_id": "362",
       "aliases": [
         "zucchini"
-      ]
+      ],
+      "piece_weight_source": "manual"
     },
     {
       "id": 364,
@@ -4464,12 +4470,13 @@
       "protein_per_100g": 0.8,
       "fat_per_100g": 0.1,
       "carbs_per_100g": 2.6,
-      "piece_weight_g": null,
+      "piece_weight_g": 100,
       "density_g_per_ml": null,
       "needs_review": 0,
       "source": "slv",
       "external_id": "364",
-      "aliases": []
+      "aliases": [],
+      "piece_weight_source": "manual"
     },
     {
       "id": 365,
@@ -4581,7 +4588,8 @@
       "aliases": [
         "vitlöksklyfta",
         "vitlöksklyftor"
-      ]
+      ],
+      "piece_weight_source": "manual"
     },
     {
       "id": 372,
@@ -4657,7 +4665,7 @@
       "protein_per_100g": 2.8,
       "fat_per_100g": 0.6,
       "carbs_per_100g": 1.7,
-      "piece_weight_g": null,
+      "piece_weight_g": 15,
       "density_g_per_ml": null,
       "needs_review": 0,
       "source": "slv",
@@ -4665,7 +4673,8 @@
       "aliases": [
         "salladslök",
         "vårlök"
-      ]
+      ],
+      "piece_weight_source": "manual"
     },
     {
       "id": 379,
@@ -10492,7 +10501,7 @@
       "protein_per_100g": 11.9,
       "fat_per_100g": 1.3,
       "carbs_per_100g": 71.5,
-      "piece_weight_g": null,
+      "piece_weight_g": 20,
       "density_g_per_ml": null,
       "needs_review": 0,
       "source": "slv",
@@ -10502,7 +10511,8 @@
         "pasta",
         "spaghetti",
         "lasagneplattor"
-      ]
+      ],
+      "piece_weight_source": "manual"
     },
     {
       "id": 846,
@@ -15465,7 +15475,8 @@
         "ägg",
         "ägg stora",
         "ägg stort"
-      ]
+      ],
+      "piece_weight_source": "manual"
     },
     {
       "id": 1226,
@@ -27846,7 +27857,7 @@
       "protein_per_100g": 2.2,
       "fat_per_100g": 0.8,
       "carbs_per_100g": 9.0,
-      "piece_weight_g": null,
+      "piece_weight_g": 12,
       "density_g_per_ml": null,
       "needs_review": 0,
       "source": "slv",
@@ -27855,7 +27866,8 @@
         "ingefärafärsk",
         "ingefära",
         "färsk ingefära"
-      ]
+      ],
+      "piece_weight_source": "manual"
     },
     {
       "id": 2294,

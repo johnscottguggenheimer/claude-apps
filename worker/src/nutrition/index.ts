@@ -2,6 +2,7 @@ export type {
   IngredientRow,
   MacroTotals,
   MatchStatus,
+  GramsSource,
   NutritionCatalog,
   RecipeIngredientInput,
   ResolveRecipeResult,
@@ -16,8 +17,13 @@ export {
   isZeroGramSpiceName,
 } from './normalize';
 
-export { amountToGrams, macrosForGrams } from './grams';
-export { lookupAlias, lookupAliasBroad, resolveIngredientLine } from './match';
+export { amountToGrams, amountToGramsDetailed, macrosForGrams } from './grams';
+export {
+  lookupAlias,
+  lookupAliasBroad,
+  resolveIngredientLine,
+  listPieceWeightAiCandidates,
+} from './match';
 export { expandLookupKeys } from './lookup';
 export {
   roundMacros,
@@ -40,4 +46,6 @@ export {
   resolveRecipeNutrition,
   persistRecipeNutrition,
 } from './persist';
-export type { PersistResolution } from './persist';
+export type { PersistResolution, ResolveNutritionOptions } from './persist';
+export { schablonPieceWeightG, classifyPieceGroup } from './piece-defaults';
+export { estimatePieceWeightsAi, cachePieceWeights } from './piece-ai';
