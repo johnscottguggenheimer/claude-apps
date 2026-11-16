@@ -1,5 +1,27 @@
 # Status — receptbok
 
+## Näringsmatchning: fas 3 (granskning i stället för spärr) — committad, ej deployad
+
+*2026-11-16*
+
+### Vad som byggdes
+- **Spärren borttagen.** `POST/PUT /api/recipes` och `/api/nutrition/reresolve` sparar även med omatchade rader. Svaret innehåller `unresolved`. Receptets makron = summa av matchade rader (omatchade räknas inte).
+- **Säkerhetsnivå i detaljvyn** (`app.js` `nutritionConfidence`): `incomplete` (rader saknar data → varningsruta "makron räknas utan dem"), `estimated` (AI-bedömda rader → diskret notis), `ok` (ingen ruta). Per rad visas "uppskattad" när makron per ingrediens är på. Länk "Granska" syns bara inloggad (`.is-admin`).
+- **Granskningssida `/granska`** (`recept/granska.html` + `granska.js`, inloggning krävs, länk i adminbaren). Tre listor, sorterade på antal recept: *Saknar näringsdata*, *Osäkra matchningar* (AI med `needs_review` eller ogranskat AI-livsmedel), *AI-bedömda vikter*. Åtgärder: Godkänn, Byt livsmedel (sök i katalogen), ange/ändra gram per enhet.
+- **API** `worker/src/nutrition-review.ts`: `GET /api/nutrition/review`, `POST /api/nutrition/review` med `approve_match` | `set_match` (match_key eller name+unit, valfri vikt) | `set_weight`. Beslut sparas som `source='user'`, `needs_review=0`. Godkänd matchning mot AI-livsmedel godkänner även livsmedlet. Berörda recept räknas om direkt utan AI, `updated_at` orörd.
+- `add.js`: ingen förkontroll före spara. "Räkna om makron" varnar men stoppar inte.
+- Katalogcachens version inkluderar antal `ingredients.needs_review=1`, så godkända AI-livsmedel slår igenom direkt.
+
+### Verifierat
+Lokalt mot seed + backup (`backups/recipes-2026-11-16.sql`) med simulerade AI-rader: lista, godkänn (vetegluten: hoagie-bread protein 111→217), byt livsmedel med vikt via UI, ändra vikt, felaktiga anrop ger 400, nytt recept med okänd rad sparas och hamnar under "Saknar näringsdata", detaljvyns notis och radflagga. `tsc`, `ai-match.test.mts`, `validate-recipes` OK. **Inte** testat mot prod-datan (export av prod-D1 nekades i sessionen).
+
+### Öppet / nästa steg
+1. Deploy: `cd worker && npm run deploy` (ingen migration behövs). Pusha till GitHub. Därefter gå igenom `/granska` i prod (35 AI-livsmedel + osäkra matchningar från fas 1).
+2. Fas 4: egna produkter med etikettvärden (keso 1,5 %, kesella, skyr …). Redigering av AI-livsmedlets värden per 100 g hör hit — granskningen kan i dag bara godkänna eller byta.
+3. Kända begränsningar: vikter listar recept via `ingredient_id`+enhet i recept-JSON, så recept som inte räknats om sedan fas 1 kan saknas i listan. Listvyn visar ingen säkerhetsnivå.
+
+---
+
 ## Näringsmatchning: fas 1 (AI-väljare) — live, alla recept omräknade
 
 *2026-11-16*
@@ -37,7 +59,5 @@ Matchningen var exakt alias-uppslag. De 32 recepten var 100 % matchade bara för
 - Inlärt: 242 matchningar (35 markerade för granskning), 117 gramvikter, 35 AI-livsmedel (id 950000–950034, mest kryddor + vetegluten, keso 1,5 %, nötfärs extra mager, labneh, cotijaost).
 - Största ändringar: gochujang-gnocchi 2260→1875 kcal, honey-lime-teriyaki 770→1197 (risnudlar nu okokta), hoagie-bread protein 111→233, buffalo-pizza +169 (bacon räknas).
 
-### Öppet / nästa steg
-1. Committat (fas 1). Ej pushat till GitHub.
-2. Fas 3: ersätt spärren med säkerhetsnivå i UI (`needs_review` finns redan per rad i recept-JSON) + granskningslista för AI-livsmedel och osäkra matchningar.
-3. Fas 4: egna produkter med etikettvärden (keso 1,5 %, kesella, skyr …).
+### Öppet (fas 1)
+- Klart. Fas 3 ovan ersätter spärren.

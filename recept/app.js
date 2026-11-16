@@ -445,17 +445,30 @@ function estimateIngredientRow(ing) {
 }
 
 function countUnresolvedIngredients(r) {
-  var n = 0;
+  return nutritionConfidence(r).unresolved;
+}
+
+/** Säkerhetsnivå för receptets makron (fas 3): saknade rader + AI-bedömda rader. */
+function nutritionConfidence(r) {
+  var unresolved = 0;
+  var review = 0;
   (r.groups || []).forEach(function(g) {
     (g.ingredients || []).forEach(function(ing) {
       var st = ing.match_status;
-      if (st === 'unmatched' || st === 'needs_piece_weight') n += 1;
-      else if (!st && !(ing.macros && typeof ing.macros === 'object')) {
-        /* legacy rows without match_status: treat missing macros as unresolved when macros mode cares */
-      }
+      if (st === 'unmatched' || st === 'needs_piece_weight') unresolved += 1;
+      else if (st === 'matched' && ing.needs_review) review += 1;
     });
   });
-  return n;
+  var level = unresolved > 0 ? 'incomplete' : review > 0 ? 'estimated' : 'ok';
+  return { level: level, unresolved: unresolved, review: review };
+}
+
+function appendEstimatedFlag(host, ing, showMacros) {
+  if (!showMacros || ing.match_status !== 'matched' || !ing.needs_review) return;
+  var flag = mk('span', 'ing-estimated-flag');
+  flag.textContent = 'uppskattad';
+  flag.title = 'Livsmedel eller vikt är AI-bedömt och inte granskat';
+  host.appendChild(flag);
 }
 
 function fillIngMacrosCell(cell, row, scale) {
@@ -1136,14 +1149,26 @@ function renderIngredientToolbar(recipe, toolbarEl, onChange) {
 
 function renderDetailIngredients(recipe, host) {
   host.replaceChildren();
-  var unresolved = countUnresolvedIngredients(recipe);
-  if (unresolved > 0) {
-    var banner = mk('p', 'ing-nutrition-warning');
+  var conf = nutritionConfidence(recipe);
+  if (conf.level !== 'ok') {
+    var banner = mk('p', conf.level === 'incomplete' ? 'ing-nutrition-warning' : 'ing-nutrition-note');
     banner.setAttribute('role', 'status');
-    banner.textContent =
-      unresolved === 1
-        ? '1 ingrediens saknar näringsdata'
-        : unresolved + ' ingredienser saknar näringsdata';
+    if (conf.level === 'incomplete') {
+      banner.textContent =
+        (conf.unresolved === 1
+          ? '1 ingrediens saknar näringsdata'
+          : conf.unresolved + ' ingredienser saknar näringsdata') +
+        ' — makron räknas utan ' + (conf.unresolved === 1 ? 'den.' : 'dem.');
+    } else {
+      banner.textContent =
+        'Makron delvis uppskattade: ' + conf.review +
+        (conf.review === 1 ? ' rad har' : ' rader har') + ' AI-bedömt livsmedel eller vikt.';
+    }
+    // Synlig bara inloggad (.is-admin sätts av site-shell även efter render).
+    var link = mk('a', 'ing-nutrition-link');
+    link.href = '/granska';
+    link.textContent = 'Granska';
+    banner.appendChild(link);
     host.appendChild(banner);
   }
   host.appendChild(buildDetailIngredientsTable(recipe, isShopMode(recipe.id), isIngMacrosOn()));
@@ -1529,6 +1554,7 @@ function buildDetailIngredientsTable(r, shopMode, showMacros) {
         warn.textContent = status === 'needs_piece_weight' ? 'saknar styckvikt' : 'saknar näringsdata';
         nameCell.appendChild(warn);
       }
+      appendEstimatedFlag(nameCell, ing, showMacros);
       if (showMacros) {
         var est = estimateIngredientRow(ing);
         if (est && finiteOrNull(est.kcal) != null) {
@@ -1579,6 +1605,7 @@ function buildShoppingIngredientList(r, showMacros) {
         warn.textContent = status === 'needs_piece_weight' ? 'saknar styckvikt' : 'saknar näringsdata';
         nameCol.appendChild(warn);
       }
+      appendEstimatedFlag(nameCol, ing, showMacros);
       if (showMacros) {
         var est = estimateIngredientRow(ing);
         if (est && finiteOrNull(est.kcal) != null) {

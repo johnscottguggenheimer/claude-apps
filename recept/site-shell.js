@@ -45,13 +45,15 @@
     bar.replaceChildren();
     if (isAdmin) {
       var page = document.body.getAttribute('data-page') || 'home';
+      bar.appendChild(adminLink('/granska', 'Granska', page === 'review' ? 'is-current' : ''));
       bar.appendChild(adminLink('/add/text', 'Lägg till +', page === 'add' ? 'is-current' : ''));
       bar.appendChild(adminButton('Logga ut', function() {
         fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin' })
           .then(function() {
             setAdminState(false);
             renderAdminBar(bar, false);
-            if (document.body.getAttribute('data-page') === 'add') {
+            var pg = document.body.getAttribute('data-page');
+            if (pg === 'add' || pg === 'review') {
               location.href = '/';
             }
           });
@@ -81,7 +83,7 @@
 
   var page = document.body.getAttribute('data-page') || 'home';
 
-  if (page === 'add') {
+  if (page === 'add' || page === 'review') {
     function homeBasePath() {
       var path = location.pathname;
       var idx = path.indexOf('/recept');

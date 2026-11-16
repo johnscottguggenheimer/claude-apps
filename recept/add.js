@@ -1326,8 +1326,8 @@
       row.classList.add('ing-edit-row--invalid');
       errEl.textContent =
         status === 'needs_piece_weight'
-          ? 'Saknar styckvikt — byt till g, eller välj en katalogingrediens med känd styckvikt.'
-          : 'Saknar näringsdata — välj ett förslag nedan eller byt namn så det matchar katalogen.';
+          ? 'Saknar styckvikt — byt till g, välj ett förslag nedan eller ange vikt under Granska.'
+          : 'Saknar näringsdata — välj ett förslag nedan, eller spara och välj livsmedel under Granska.';
       openSuggestions(nameIn.value);
     };
     row._clearNutritionError = clearRowError;
@@ -1376,56 +1376,6 @@
     if (nameIn) {
       try { nameIn.focus({ preventScroll: true }); } catch (e) { nameIn.focus(); }
     }
-  }
-
-  /** Resolve macros; reject save-style if any ingredient lacks nutrition. */
-  function validateNutritionBeforeSave(recipe) {
-    return fetch('/api/estimate-macros', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'same-origin',
-      body: JSON.stringify({ recipe: recipe })
-    }).then(function(res) {
-      return res.json().then(function(data) {
-        if (!res.ok) throw new Error(data.error || 'Kunde inte kontrollera näringsdata');
-        return data;
-      });
-    }).then(function(data) {
-      applyMacrosToForm(data.macros);
-      if (data.recipe) currentRecipe = Object.assign({}, currentRecipe || {}, data.recipe, {
-        macros: data.macros
-      });
-      var unresolved = data.unresolved || [];
-      if (!unresolved.length && !data.unmatchedCount && !data.needsPieceWeightCount) {
-        clearAllIngNutritionErrors();
-        return data;
-      }
-      if (!unresolved.length && data.recipe && data.recipe.groups) {
-        unresolved = [];
-        data.recipe.groups.forEach(function(g, gi) {
-          (g.ingredients || []).forEach(function(ing, ii) {
-            if (ing.match_status === 'unmatched' || ing.match_status === 'needs_piece_weight') {
-              unresolved.push({
-                name: ing.name,
-                match_status: ing.match_status,
-                group_index: gi,
-                ingredient_index: ii
-              });
-            }
-          });
-        });
-      }
-      var first = markUnresolvedOnForm(unresolved);
-      scrollToIngError(first);
-      var n = unresolved.length || (data.unmatchedCount || 0) + (data.needsPieceWeightCount || 0);
-      var err = new Error(
-        n === 1
-          ? '1 ingrediens saknar näringsdata — rätta raden innan du sparar.'
-          : n + ' ingredienser saknar näringsdata — rätta raderna innan du sparar.'
-      );
-      err.nutrition = true;
-      throw err;
-    });
   }
 
   function buildIngGroup(group) {
@@ -2109,7 +2059,8 @@
         scrollToIngError(first);
         var n = unresolved.length || (data.unmatchedCount || 0) + (data.needsPieceWeightCount || 0);
         setStatus(
-          'Makron uppdaterade, men ' + n + ' rad(er) saknar näringsdata — rätta dem innan du sparar.',
+          'Makron uppdaterade, men ' + n + (n === 1 ? ' rad saknar' : ' rader saknar') +
+          ' näringsdata och räknas inte med. Du kan spara ändå och rätta senare under Granska.',
           true
         );
       } else {
@@ -2157,11 +2108,10 @@
       return;
     }
 
-    setStatus('Kontrollerar näringsdata…');
     var saveId = editingRecipeId;
-    validateNutritionBeforeSave(recipe)
+    clearAllIngNutritionErrors();
+    Promise.resolve()
       .then(function() {
-        recipe = readRecipeFromForm();
         var url = saveId
           ? '/api/recipes/' + encodeURIComponent(saveId)
           : '/api/recipes';
@@ -2197,10 +2147,6 @@
         }).then(function(res) {
           return res.json().then(function(data) {
             if (!res.ok) {
-              if (data.unresolved && data.unresolved.length) {
-                var first = markUnresolvedOnForm(data.unresolved);
-                scrollToIngError(first);
-              }
               throw new Error((data.details && data.details.join(' · ')) || data.error || 'Sparning misslyckades');
             }
             data._featuredNew = !!body.featuredNew;

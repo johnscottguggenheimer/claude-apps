@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Granska näringsdata — Macro-friendly recipes</title>
+<script src="/theme.js"></script>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,600,700&display=swap">
+<link rel="stylesheet" href="/fonts.css">
+<link rel="stylesheet" href="/site-shell.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root, [data-theme="light"] { --radius: 8px; }
+  [data-theme="dark"] { --radius: 8px; }
+  body { background: var(--bg2); color: var(--text); min-height: 100vh; }
+  .review-content { max-width: 760px; }
+  .review-intro { font-size: 0.875rem; color: var(--text2); line-height: 1.5; margin-bottom: 1.25rem; }
+  .review-status { font-size: 0.8125rem; color: var(--text2); min-height: 1.2em; margin-bottom: 1rem; }
+  .review-status.err { color: #c0392b; }
+  .review-section { margin-bottom: 2rem; }
+  .review-section h2 { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .review-section-hint { font-size: 0.8125rem; color: var(--text2); margin-bottom: 0.75rem; line-height: 1.45; }
+  .review-empty { font-size: 0.8125rem; color: var(--text3); }
+  .review-card {
+    background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius);
+    padding: 0.85rem 0.95rem; margin-bottom: 0.6rem;
+  }
+  .review-card.is-done { opacity: 0.5; }
+  .review-line { font-weight: 600; font-size: 0.9375rem; }
+  .review-unit { font-weight: 400; color: var(--text2); font-size: 0.8125rem; margin-left: 0.35rem; }
+  .review-food { font-size: 0.8125rem; margin-top: 0.3rem; line-height: 1.45; }
+  .review-food-name { font-weight: 600; }
+  .review-per100 { color: var(--text2); }
+  .review-tag {
+    display: inline-block; font-size: 0.6875rem; font-weight: 600; padding: 0.05rem 0.4rem;
+    border-radius: 999px; margin-left: 0.35rem; vertical-align: 1px;
+    background: color-mix(in srgb, #c47a00 16%, var(--bg2)); color: #a05a00;
+  }
+  [data-theme="dark"] .review-tag { color: #e0a04a; }
+  .review-note { font-size: 0.75rem; color: var(--text2); margin-top: 0.3rem; font-style: italic; }
+  .review-recipes { font-size: 0.75rem; color: var(--text3); margin-top: 0.35rem; }
+  .review-recipes a { color: var(--text2); }
+  .review-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 0.65rem; }
+  button {
+    font: inherit; font-size: 0.8125rem; font-weight: 600; padding: 0.45rem 0.8rem;
+    border-radius: var(--radius); border: 0.5px solid var(--border2); background: var(--bg); color: var(--text); cursor: pointer;
+  }
+  button.primary { background: var(--info); color: #fff; border-color: var(--info); }
+  button:disabled { opacity: 0.55; cursor: default; }
+  input[type=text], input[type=number] {
+    font: inherit; font-size: 0.875rem; padding: 0.45rem 0.6rem;
+    border: 0.5px solid var(--border2); border-radius: var(--radius); background: var(--bg); color: var(--text);
+  }
+  input[type=number] { width: 6.5rem; }
+  .review-search { margin-top: 0.6rem; }
+  .review-search input[type=text] { width: 100%; }
+  .review-weight-row { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; font-size: 0.8125rem; margin-top: 0.5rem; }
+  .review-weight-row--inline { margin-top: 0; }
+  .review-results { margin-top: 0.35rem; border: 0.5px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .review-results:empty { display: none; }
+  .review-result {
+    display: block; width: 100%; text-align: left; border: 0; border-radius: 0; font-weight: 500;
+    border-bottom: 0.5px solid var(--border); padding: 0.5rem 0.65rem;
+  }
+  .review-result:last-child { border-bottom: 0; }
+  .review-result:hover, .review-result:focus { background: var(--bg3); outline: none; }
+  .review-result-meta { display: block; font-size: 0.6875rem; color: var(--text2); font-weight: 400; margin-top: 0.1rem; }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body data-page="review">
+<div class="site-shell">
+  <div class="admin-bar">
+    <div class="admin-bar-inner"></div>
+  </div>
+  <header class="site-top" id="site-top">
+    <div class="site-top-bar">
+      <div class="site-brand">
+        <a href="/" class="site-brand-link">
+          <img src="/images/logo-light.png" alt="Macro-friendly recipes by Jann" class="site-logo site-logo-light" width="1024" height="262">
+          <img src="/images/logo-dark.png" alt="Macro-friendly recipes by Jann" class="site-logo site-logo-dark" width="1024" height="262">
+        </a>
+      </div>
+      <div class="site-search">
+        <svg class="site-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+        <input type="search" id="recipe-search" class="site-search-input" placeholder="Vad vill du laga?" autocomplete="off" enterkeyhint="search">
+      </div>
+      <div class="site-actions">
+        <button type="button" id="favorites-toggle-btn" class="site-action-btn" aria-label="Favoriter">
+          <svg class="site-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          Favoriter
+        </button>
+        <button type="button" id="theme-toggle-btn" class="site-action-btn" aria-label="Byt tema">
+          <svg class="site-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <span id="theme-toggle-label">Mörkt</span>
+        </button>
+      </div>
+    </div>
+    <div class="site-nav-row">
+      <nav class="browse-nav" id="browse-nav" aria-label="Bläddra recept"></nav>
+    </div>
+  </header>
+</div>
+<main class="page-body">
+  <div class="review-content">
+    <h1 class="page-heading">Granska näringsdata</h1>
+    <p class="review-intro">AI-bedömda matchningar och vikter, och rader som saknar näringsdata. Det du godkänner eller väljer här sparas som ditt beslut och skrivs aldrig över av AI. Berörda recept räknas om direkt.</p>
+    <p class="review-status" id="review-status" role="status">Laddar…</p>
+    <div id="review-root"></div>
+  </div>
+</main>
+<script src="/browse-nav.js"></script>
+<script src="/site-shell.js"></script>
+<script src="/granska.js"></script>
+</body>
+</html>

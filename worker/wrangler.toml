@@ -15,4 +15,4 @@ bucket_name = "receptbok-images"
 [assets]
 directory = "../recept"
 binding = "ASSETS"
-run_worker_first = ["/add", "/add/*", "/add.html", "/recept/add", "/recept/add/*", "/r", "/r/*"]
+run_worker_first = ["/granska", "/granska.html", "/add", "/add/*", "/add.html", "/recept/add", "/recept/add/*", "/r", "/r/*"]

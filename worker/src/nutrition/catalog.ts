@@ -114,10 +114,12 @@ async function catalogVersion(db: D1Database): Promise<string> {
   const row = await db
     .prepare(
       `SELECT (SELECT COUNT(*) FROM ingredients) AS ic, (SELECT MAX(id) FROM ingredients) AS im,
-              (SELECT COUNT(*) FROM ingredient_aliases) AS ac, (SELECT MAX(id) FROM ingredient_aliases) AS am`
+              (SELECT COUNT(*) FROM ingredient_aliases) AS ac, (SELECT MAX(id) FROM ingredient_aliases) AS am,
+              (SELECT COUNT(*) FROM ingredients WHERE needs_review = 1) AS ir`
     )
-    .first<{ ic: number; im: number | null; ac: number; am: number | null }>();
-  return row ? `${row.ic}:${row.im}:${row.ac}:${row.am}` : 'none';
+    .first<{ ic: number; im: number | null; ac: number; am: number | null; ir: number }>();
+  // ir: granskning (fas 3) ändrar needs_review utan att antal/id ändras.
+  return row ? `${row.ic}:${row.im}:${row.ac}:${row.am}:${row.ir}` : 'none';
 }
 
 async function loadBase(db: D1Database, version: string): Promise<BaseCatalog> {

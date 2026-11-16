@@ -15,7 +15,7 @@ import {
 } from './gemini';
 import { fetchImageAsBase64, fetchRecipePage, isSocialMediaUrl } from './fetch-url';
 import { getRecipe, getRecipeWithMeta, idExists, insertRecipe, listRecipes, updateRecipe, deleteRecipe, renameRecipe } from './db';
-import { resolveRecipeNutrition, replaceRecipeIngredients, nutritionGateError, loadNutritionCatalog } from './nutrition';
+import { resolveRecipeNutrition, replaceRecipeIngredients, listUnresolved, loadNutritionCatalog } from './nutrition';
 import {
   buildProteinVariantsForRecipe,
   recipeNeedsProteinVariants,
@@ -30,6 +30,7 @@ import {
 } from './reviews';
 import { slugify, normalizeRecipe, validateRecipe, type Recipe } from './validate';
 import { handleNutritionDryRun, handleNutritionReresolve } from './nutrition-admin';
+import { handleNutritionReviewAction, handleNutritionReviewList } from './nutrition-review';
 
 export interface Env {
   ASSETS: Fetcher;
@@ -318,7 +319,6 @@ async function handleEstimateMacros(request: Request, env: Env): Promise<Respons
 
   try {
     const { recipe: resolved, resolution } = await resolveRecipeNutrition(env.DB, recipe, { geminiApiKey: geminiKey(env) });
-    const gate = nutritionGateError(resolution);
     return json({
       ok: true,
       macros: resolved.macros,
@@ -326,7 +326,7 @@ async function handleEstimateMacros(request: Request, env: Env): Promise<Respons
       source: 'nutrition',
       unmatchedCount: resolution.unmatchedCount,
       needsPieceWeightCount: resolution.needsPieceWeightCount,
-      unresolved: gate?.unresolved || [],
+      unresolved: listUnresolved(resolution),
     });
   } catch (e) {
     return json({ error: e instanceof Error ? e.message : 'Makroberäkning misslyckades' }, 502);
@@ -683,24 +683,14 @@ async function handleCreateRecipe(request: Request, env: Env): Promise<Response>
   }
 
   const { recipe: resolved, resolution } = await resolveRecipeNutrition(env.DB, recipe, { geminiApiKey: geminiKey(env) });
-  const gate = nutritionGateError(resolution);
-  if (gate) {
-    return json(
-      {
-        error: 'Validering',
-        details: gate.details,
-        unresolved: gate.unresolved,
-        unmatchedCount: resolution.unmatchedCount,
-        needsPieceWeightCount: resolution.needsPieceWeightCount,
-        recipe: resolved,
-      },
-      400
-    );
-  }
+  // Fas 3: ingen spärr — omatchade rader sparas och visas som ofullständiga makron.
   await attachProteinVariants(env, resolved);
   await insertRecipe(env.DB, resolved, { featuredNew: !!body.featuredNew });
   await replaceRecipeIngredients(env.DB, String(resolved.id), resolution.rows);
-  return json({ ok: true, recipe: resolved, featuredNew: !!body.featuredNew }, 201);
+  return json(
+    { ok: true, recipe: resolved, featuredNew: !!body.featuredNew, unresolved: listUnresolved(resolution) },
+    201
+  );
 }
 
 async function migrateRecipeImage(
@@ -818,20 +808,7 @@ async function handleUpdateRecipe(request: Request, env: Env, id: string): Promi
   }
 
   const { recipe: resolved, resolution } = await resolveRecipeNutrition(env.DB, recipe, { geminiApiKey: geminiKey(env) });
-  const gate = nutritionGateError(resolution);
-  if (gate) {
-    return json(
-      {
-        error: 'Validering',
-        details: gate.details,
-        unresolved: gate.unresolved,
-        unmatchedCount: resolution.unmatchedCount,
-        needsPieceWeightCount: resolution.needsPieceWeightCount,
-        recipe: resolved,
-      },
-      400
-    );
-  }
+  // Fas 3: ingen spärr — omatchade rader sparas och visas som ofullständiga makron.
   await attachProteinVariants(env, resolved);
   const saved = renaming
     ? await renameRecipe(env.DB, id, resolved, body.featuredNew)
@@ -841,7 +818,7 @@ async function handleUpdateRecipe(request: Request, env: Env, id: string): Promi
   }
   await replaceRecipeIngredients(env.DB, String(resolved.id), resolution.rows);
   const featuredNew = body.featuredNew !== undefined ? !!body.featuredNew : undefined;
-  return json({ ok: true, recipe: resolved, featuredNew });
+  return json({ ok: true, recipe: resolved, featuredNew, unresolved: listUnresolved(resolution) });
 }
 
 async function handleDeleteRecipe(env: Env, id: string): Promise<Response> {
@@ -971,6 +948,12 @@ async function handleApi(request: Request, env: Env, url: URL): Promise<Response
   }
   if (path === '/api/nutrition/reresolve' && request.method === 'POST') {
     return handleNutritionReresolve(request, env);
+  }
+  if (path === '/api/nutrition/review' && request.method === 'GET') {
+    return handleNutritionReviewList(env);
+  }
+  if (path === '/api/nutrition/review' && request.method === 'POST') {
+    return handleNutritionReviewAction(request, env);
   }
 
   if (recipeMatch) {
@@ -1129,6 +1112,14 @@ export default {
     const addCanonical = addCanonicalPath(rawPath, url.search);
     if (addCanonical) {
       return Response.redirect(new URL(addCanonical, url.origin).href, 302);
+    }
+
+    if (rawPath === '/granska' || rawPath === '/granska.html') {
+      const authed = await isAuthed(request, adminPassword(env));
+      if (!authed) {
+        return Response.redirect(new URL('/login.html?next=' + encodeURIComponent('/granska'), url.origin).href, 302);
+      }
+      return env.ASSETS.fetch('https://assets.local/granska.html');
     }
 
     if (isAddAdminPath(rawPath)) {

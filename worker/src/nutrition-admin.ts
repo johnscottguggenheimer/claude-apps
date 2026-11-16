@@ -11,7 +11,7 @@
 import { getRecipe } from './db';
 import {
   CUSTOM_FOOD_ID_START,
-  nutritionGateError,
+  listUnresolved,
   replaceRecipeIngredients,
   resolveRecipeNutrition,
 } from './nutrition';
@@ -142,9 +142,9 @@ export async function handleNutritionReresolve(request: Request, env: Env): Prom
       })
     );
 
-    const gate = nutritionGateError(res.resolution);
+    const unresolved = listUnresolved(res.resolution);
     let saved = false;
-    if (!dryRun && !gate) {
+    if (!dryRun) {
       // Keep updated_at so the list order doesn't change.
       await env.DB.prepare('UPDATE recipes SET data = ? WHERE id = ?')
         .bind(JSON.stringify(res.recipe), String(res.recipe.id))
@@ -157,7 +157,7 @@ export async function handleNutritionReresolve(request: Request, env: Env): Prom
       before: recipe.macros,
       after: res.recipe.macros,
       ai: res.ai,
-      unresolved: gate?.unresolved.length ?? 0,
+      unresolved: unresolved.length,
       saved,
       diffs,
     });
