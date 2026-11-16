@@ -5,7 +5,7 @@
 En receptapp på **Cloudflare Workers** (D1, R2, auth, API) som samlar recept från Instagram och receptsajter. Frontend i `recept/`; backend i `worker/`.
 
 **Live:** https://receptbok.receptbok.workers.dev  
-**Repo:** https://github.com/johnscottguggenheimerSE/claude-apps  
+**Repo:** https://github.com/johnscottguggenheimer/claude-apps  
 **Fil:** `recept/index.html` (+ `recept/app.js` för logik; data via `/api/recipes`)
 
 **Deploy:** `git push origin main` + `cd worker && npm run deploy`. Se **[DEPLOY.md](./DEPLOY.md)**.
