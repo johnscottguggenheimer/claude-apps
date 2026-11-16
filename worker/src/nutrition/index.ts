@@ -7,6 +7,9 @@ export type {
   RecipeIngredientInput,
   ResolveRecipeResult,
   ResolvedIngredient,
+  MatchMethod,
+  LearnedMatch,
+  LearnedUnitWeight,
 } from './types';
 
 export {
@@ -22,9 +25,14 @@ export {
   lookupAlias,
   lookupAliasBroad,
   resolveIngredientLine,
-  listPieceWeightAiCandidates,
+  findIngredient,
+  matchKey,
+  unitClass,
+  CUSTOM_FOOD_ID_START,
 } from './match';
 export { expandLookupKeys } from './lookup';
+export { findCandidates } from './candidates';
+export type { Candidate } from './candidates';
 export {
   roundMacros,
   resolveRecipeIngredients,
@@ -48,4 +56,5 @@ export {
 } from './persist';
 export type { PersistResolution, ResolveNutritionOptions } from './persist';
 export { schablonPieceWeightG, classifyPieceGroup } from './piece-defaults';
-export { estimatePieceWeightsAi, cachePieceWeights } from './piece-ai';
+export { aiResolveLines, applyAiDecisions, plausible, validPer100, validGramsPerUnit } from './ai-match';
+export type { AiDecision, AiLineInput, Per100 } from './ai-match';

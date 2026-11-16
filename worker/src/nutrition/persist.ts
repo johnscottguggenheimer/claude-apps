@@ -1,10 +1,12 @@
 import type { Recipe } from '../validate';
 import { loadNutritionCatalog } from './catalog';
 import { replaceRecipeIngredients } from './db';
-import { listPieceWeightAiCandidates } from './match';
-import { cachePieceWeights, estimatePieceWeightsAi } from './piece-ai';
+import { aiResolveLines, applyAiDecisions, type AiDecision, type AiLineInput } from './ai-match';
+import { unitWeightKey } from './catalog';
+import { matchKey } from './match';
+import { normalizeIngredientName, isZeroGramSpiceName } from './normalize';
 import { resolveAndApplyRecipe } from './resolve';
-import type { ResolveRecipeResult } from './types';
+import type { NutritionCatalog, ResolveRecipeResult, ResolvedIngredient } from './types';
 
 /** Drop any AI-/client-supplied macro fields before authoritative resolve. */
 export function stripClientMacros(recipe: Recipe): Recipe {
@@ -25,6 +27,8 @@ export function stripClientMacros(recipe: Recipe): Recipe {
       delete copy.resolved_grams;
       delete copy.ingredient_id;
       delete copy.grams_source;
+      delete copy.match_method;
+      delete copy.needs_review;
       return copy;
     }),
   }));
@@ -33,20 +37,84 @@ export function stripClientMacros(recipe: Recipe): Recipe {
   return next;
 }
 
+export type AiRunInfo = {
+  /** Lines sent to the AI picker. */
+  lines: number;
+  learned: number;
+  created: number;
+  unitWeights: number;
+  error?: string;
+};
+
 export type PersistResolution = {
   recipe: Recipe;
   resolution: ResolveRecipeResult;
-  pieceWeightsCached?: number;
+  ai?: AiRunInfo;
+  /** Raw AI decisions (dry-run / eval only). */
+  decisions?: AiDecision[];
+  aiLines?: AiLineInput[];
+  /** Catalog used for the final resolve (includes in-memory AI foods). */
+  catalog?: NutritionCatalog;
 };
 
 export type ResolveNutritionOptions = {
-  /** When set, missing piece weights are AI-estimated once and cached to D1. */
+  /** Enables the AI picker for lines without a learned match. */
   geminiApiKey?: string | null;
+  /** Persist AI decisions as learned rows (default true). false = dry-run. */
+  learn?: boolean;
 };
+
+const WEAK_GRAMS = new Set(['category_fallback', 'unit_default']);
+
+/** Lines the AI should look at: no learned food, or a weak gram estimate. */
+export function linesForAi(
+  catalog: NutritionCatalog,
+  rows: ResolvedIngredient[]
+): AiLineInput[] {
+  const out: AiLineInput[] = [];
+  const seen = new Set<string>();
+  rows.forEach((row, idx) => {
+    const normalized = normalizeIngredientName(row.raw_text);
+    if (!normalized) return;
+    const unit = row.unit ? row.unit.toLowerCase() : null;
+    const learnedFood = row.match_method === 'learned_ai' || row.match_method === 'learned_user';
+    const current = row.ingredient_id != null ? catalog.byId.get(row.ingredient_id) ?? null : null;
+
+    let gramsOnly = false;
+    if (learnedFood) {
+      const weakGrams =
+        !!unit &&
+        unit !== 'g' &&
+        unit !== 'pinch' &&
+        (row.quantity ?? 0) > 0 &&
+        WEAK_GRAMS.has(String(row.grams_source)) &&
+        !!current &&
+        !catalog.unitWeights.has(unitWeightKey(current.id, unit)) &&
+        !isZeroGramSpiceName(normalized);
+      if (!weakGrams) return;
+      gramsOnly = true;
+    }
+
+    const key = (gramsOnly ? 'g:' + (current?.id ?? '') + '|' + unit : matchKey(normalized, unit));
+    if (seen.has(key)) return;
+    seen.add(key);
+    out.push({
+      idx,
+      raw: row.raw_text,
+      normalized,
+      amount: row.quantity,
+      unit,
+      current,
+      gramsOnly,
+    });
+  });
+  return out;
+}
 
 /**
  * Resolve macros from catalog and mirror onto recipe JSON (no recipe_ingredients writes).
- * Gram ladder: catalog → (optional AI cache) → category schablon — never blocks on st.
+ * With a Gemini key: AI picker for unlearned lines, learning persisted unless learn=false.
+ * AI failure never blocks — the deterministic result stands.
  */
 export async function resolveRecipeNutrition(
   db: D1Database,
@@ -56,31 +124,38 @@ export async function resolveRecipeNutrition(
   const catalog = await loadNutritionCatalog(db);
   const cleaned = stripClientMacros(recipe);
   let applied = resolveAndApplyRecipe(catalog, cleaned);
-  let pieceWeightsCached = 0;
 
   const aiKey = opts.geminiApiKey && String(opts.geminiApiKey).trim();
-  if (aiKey) {
-    const candidateIds = listPieceWeightAiCandidates(applied.resolution.rows);
-    const missing = candidateIds
-      .map((id) => catalog.byId.get(id))
-      .filter((row): row is NonNullable<typeof row> => {
-        if (!row) return false;
-        return row.piece_weight_g == null || row.piece_weight_g <= 0;
-      });
-    if (missing.length) {
-      try {
-        const estimates = await estimatePieceWeightsAi(aiKey, missing);
-        pieceWeightsCached = await cachePieceWeights(db, catalog, estimates);
-        if (pieceWeightsCached > 0) {
-          applied = resolveAndApplyRecipe(catalog, cleaned);
-        }
-      } catch {
-        // Schablon already applied — AI failure must not block save
-      }
-    }
-  }
+  if (!aiKey) return { ...applied, catalog };
 
-  return { ...applied, pieceWeightsCached };
+  const learn = opts.learn !== false;
+  const aiLines = linesForAi(catalog, applied.resolution.rows);
+  if (!aiLines.length) return { ...applied, catalog, ai: { lines: 0, learned: 0, created: 0, unitWeights: 0 } };
+
+  try {
+    const decisions = await aiResolveLines(aiKey, catalog, aiLines);
+    const stats = await applyAiDecisions(learn ? db : null, catalog, aiLines, decisions);
+    applied = resolveAndApplyRecipe(catalog, cleaned);
+    return {
+      ...applied,
+      catalog,
+      ai: { lines: aiLines.length, ...stats },
+      decisions,
+      aiLines,
+    };
+  } catch (e) {
+    return {
+      ...applied,
+      catalog,
+      ai: {
+        lines: aiLines.length,
+        learned: 0,
+        created: 0,
+        unitWeights: 0,
+        error: e instanceof Error ? e.message : String(e),
+      },
+    };
+  }
 }
 
 /**

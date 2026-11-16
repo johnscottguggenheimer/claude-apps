@@ -29,6 +29,7 @@ import {
   upsertReview,
 } from './reviews';
 import { slugify, normalizeRecipe, validateRecipe, type Recipe } from './validate';
+import { handleNutritionDryRun, handleNutritionReresolve } from './nutrition-admin';
 
 export interface Env {
   ASSETS: Fetcher;
@@ -964,6 +965,12 @@ async function handleApi(request: Request, env: Env, url: URL): Promise<Response
   }
   if (path === '/api/ingredients/search' && request.method === 'GET') {
     return handleIngredientSearch(request, env);
+  }
+  if (path === '/api/nutrition/dry-run' && request.method === 'POST') {
+    return handleNutritionDryRun(request, env);
+  }
+  if (path === '/api/nutrition/reresolve' && request.method === 'POST') {
+    return handleNutritionReresolve(request, env);
   }
 
   if (recipeMatch) {

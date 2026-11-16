@@ -1,0 +1,721 @@
+{
+ "note": "Hold-out: rader utanför de 32 recepten + kända fel. expect = regex mot canonical_name; new_ok = AI-skapat livsmedel accepteras om per-100g ligger i intervallet; grams = rimligt gramintervall för hela raden.",
+ "lines": [
+  {
+   "name": "kycklinglårfilé",
+   "amount": 600,
+   "unit": "g",
+   "expect": "^Kyckling lår rå u\\. skinn"
+  },
+  {
+   "name": "laxfilé",
+   "amount": 400,
+   "unit": "g",
+   "expect": "^(Lax|Regnbågslax).* rå"
+  },
+  {
+   "name": "torskfilé",
+   "amount": 500,
+   "unit": "g",
+   "expect": "^Torsk rå"
+  },
+  {
+   "name": "fläskfilé",
+   "amount": 500,
+   "unit": "g",
+   "expect": "^Gris fläskfilé rå"
+  },
+  {
+   "name": "högrevsfärs",
+   "amount": 500,
+   "unit": "g",
+   "expect": "^Nöt (färs rå fett 1[05]%|högrev rå)",
+   "new_ok": {
+    "kcal": [
+     150,
+     260
+    ]
+   }
+  },
+  {
+   "name": "nötfärs 5%",
+   "amount": 500,
+   "unit": "g",
+   "new_ok": {
+    "kcal": [
+     105,
+     160
+    ],
+    "protein": [
+     18,
+     24
+    ]
+   },
+   "note": "SLV saknar 5 %"
+  },
+  {
+   "name": "kalkonfärs",
+   "amount": 500,
+   "unit": "g",
+   "expect": "^Kalkon filé rå",
+   "new_ok": {
+    "kcal": [
+     100,
+     170
+    ]
+   }
+  },
+  {
+   "name": "halloumi",
+   "amount": 200,
+   "unit": "g",
+   "expect": "^Ost halloumi"
+  },
+  {
+   "name": "fetaost",
+   "amount": 150,
+   "unit": "g",
+   "expect": "^fetaost$"
+  },
+  {
+   "name": "kesella",
+   "amount": 250,
+   "unit": "g",
+   "expect": "^Kvarg färskost fett 10%",
+   "new_ok": {
+    "kcal": [
+     60,
+     150
+    ],
+    "protein": [
+     6,
+     12
+    ]
+   }
+  },
+  {
+   "name": "kvarg",
+   "amount": 500,
+   "unit": "g",
+   "expect": "^Kvarg"
+  },
+  {
+   "name": "cottage cheese",
+   "amount": 200,
+   "unit": "g",
+   "expect": "^Färskost cottage cheese naturell"
+  },
+  {
+   "name": "grekisk yoghurt 10%",
+   "amount": 200,
+   "unit": "g",
+   "expect": "^Yoghurt naturell fett 10%",
+   "new_ok": {
+    "kcal": [
+     100,
+     140
+    ]
+   }
+  },
+  {
+   "name": "matlagningsgrädde 15%",
+   "amount": 2,
+   "unit": "dl",
+   "expect": "^Matlagningsgrädde fett 15%",
+   "grams": [
+    185,
+    215
+   ]
+  },
+  {
+   "name": "vispgrädde",
+   "amount": 2,
+   "unit": "dl",
+   "expect": "^Vispgrädde",
+   "grams": [
+    185,
+    215
+   ]
+  },
+  {
+   "name": "kokosmjölk",
+   "amount": 400,
+   "unit": "g",
+   "expect": "^Kokosmjölk"
+  },
+  {
+   "name": "krossade tomater",
+   "amount": 400,
+   "unit": "g",
+   "expect": "^Tomat krossad"
+  },
+  {
+   "name": "passerade tomater",
+   "amount": 500,
+   "unit": "g",
+   "expect": "^Tomat (krossad|hel)",
+   "new_ok": {
+    "kcal": [
+     15,
+     45
+    ]
+   }
+  },
+  {
+   "name": "kikärtor",
+   "amount": 400,
+   "unit": "g",
+   "expect": "^Kikärtor (konserv|torkade kokta)",
+   "note": "400 g = burk, inte torkade"
+  },
+  {
+   "name": "svarta bönor",
+   "amount": 400,
+   "unit": "g",
+   "expect": "bönor",
+   "new_ok": {
+    "kcal": [
+     70,
+     150
+    ]
+   },
+   "note": "burk"
+  },
+  {
+   "name": "röda linser",
+   "amount": 200,
+   "unit": "g",
+   "expect": "^(Linser torkade|Röda linser)"
+  },
+  {
+   "name": "quinoa",
+   "amount": 150,
+   "unit": "g",
+   "expect": "^Mjölmålla quinoa okokt"
+  },
+  {
+   "name": "bulgur",
+   "amount": 200,
+   "unit": "g",
+   "expect": "^Bulgur"
+  },
+  {
+   "name": "havregryn",
+   "amount": 100,
+   "unit": "g",
+   "expect": "^Havregryn"
+  },
+  {
+   "name": "fullkornspasta",
+   "amount": 300,
+   "unit": "g",
+   "expect": "^Pasta fullkorn okokt"
+  },
+  {
+   "name": "sötpotatis",
+   "amount": 2,
+   "unit": "st",
+   "expect": "^Sötpotatis rå",
+   "grams": [
+    300,
+    800
+   ]
+  },
+  {
+   "name": "potatis",
+   "amount": 800,
+   "unit": "g",
+   "expect": "^Potatis rå"
+  },
+  {
+   "name": "broccoli",
+   "amount": 1,
+   "unit": "st",
+   "expect": "^Broccoli$",
+   "grams": [
+    250,
+    550
+   ]
+  },
+  {
+   "name": "blomkål",
+   "amount": 1,
+   "unit": "st",
+   "expect": "^Blomkål$",
+   "grams": [
+    400,
+    1000
+   ]
+  },
+  {
+   "name": "aubergine",
+   "amount": 1,
+   "unit": "st",
+   "expect": "^Aubergine$",
+   "grams": [
+    200,
+    450
+   ]
+  },
+  {
+   "name": "purjolök",
+   "amount": 1,
+   "unit": "st",
+   "expect": "^Purjolök$",
+   "grams": [
+    120,
+    350
+   ]
+  },
+  {
+   "name": "babyspenat",
+   "amount": 65,
+   "unit": "g",
+   "expect": "^Spenat färsk"
+  },
+  {
+   "name": "vitkål",
+   "amount": 300,
+   "unit": "g",
+   "expect": "^Vitkål"
+  },
+  {
+   "name": "ingefära",
+   "amount": 1,
+   "unit": "msk",
+   "expect": "^Ingefära",
+   "grams": [
+    4,
+    12
+   ]
+  },
+  {
+   "name": "jordnötssmör",
+   "amount": 2,
+   "unit": "msk",
+   "expect": "^Jordnötssmör",
+   "grams": [
+    25,
+    40
+   ]
+  },
+  {
+   "name": "tahini",
+   "amount": 2,
+   "unit": "msk",
+   "expect": "^Tahini",
+   "grams": [
+    22,
+    38
+   ]
+  },
+  {
+   "name": "cashewnötter",
+   "amount": 50,
+   "unit": "g",
+   "expect": "^Cashewnötter"
+  },
+  {
+   "name": "valnötter",
+   "amount": 50,
+   "unit": "g",
+   "expect": "^Valnötter"
+  },
+  {
+   "name": "chiafrön",
+   "amount": 2,
+   "unit": "msk",
+   "expect": "^Chiafrö",
+   "grams": [
+    18,
+    30
+   ]
+  },
+  {
+   "name": "kokosflingor",
+   "amount": 30,
+   "unit": "g",
+   "expect": "^Kokosflingor"
+  },
+  {
+   "name": "dadlar",
+   "amount": 4,
+   "unit": "st",
+   "expect": "^Dadlar",
+   "grams": [
+    25,
+    110
+   ]
+  },
+  {
+   "name": "blåbär",
+   "amount": 150,
+   "unit": "g",
+   "expect": "^Blåbär"
+  },
+  {
+   "name": "frysta hallon",
+   "amount": 150,
+   "unit": "g",
+   "expect": "^Hallon( frysvara)?$"
+  },
+  {
+   "name": "äpple",
+   "amount": 1,
+   "unit": "st",
+   "expect": "^Äpple (m\\. skal|u\\. skal|Aroma|Ingrid|Frida|Golden)",
+   "grams": [
+    120,
+    230
+   ]
+  },
+  {
+   "name": "mango",
+   "amount": 1,
+   "unit": "st",
+   "expect": "^Mango$",
+   "grams": [
+    200,
+    450
+   ]
+  },
+  {
+   "name": "tortillabröd",
+   "amount": 4,
+   "unit": "st",
+   "expect": "^Bröd vitt vetetortilla",
+   "grams": [
+    120,
+    300
+   ]
+  },
+  {
+   "name": "pitabröd",
+   "amount": 4,
+   "unit": "st",
+   "expect": "pitabröd",
+   "grams": [
+    200,
+    420
+   ]
+  },
+  {
+   "name": "hamburgerbröd",
+   "amount": 4,
+   "unit": "st",
+   "expect": "^Hamburgerbröd",
+   "grams": [
+    200,
+    360
+   ]
+  },
+  {
+   "name": "bacon",
+   "amount": 140,
+   "unit": "g",
+   "expect": "^Gris bacon rå"
+  },
+  {
+   "name": "chorizo",
+   "amount": 150,
+   "unit": "g",
+   "expect": "^Korv chorizo"
+  },
+  {
+   "name": "prosciutto",
+   "amount": 80,
+   "unit": "g",
+   "expect": "^Gris skinka lufttorkad"
+  },
+  {
+   "name": "parmaskinka",
+   "amount": 80,
+   "unit": "g",
+   "expect": "^Gris skinka lufttorkad"
+  },
+  {
+   "name": "tofu",
+   "amount": 400,
+   "unit": "g",
+   "expect": "^Tofu"
+  },
+  {
+   "name": "tempeh",
+   "amount": 200,
+   "unit": "g",
+   "expect": "^Tempeh"
+  },
+  {
+   "name": "sweet chili sås",
+   "amount": 2,
+   "unit": "msk",
+   "expect": "^Sweet chilisås"
+  },
+  {
+   "name": "hoisinsås",
+   "amount": 2,
+   "unit": "msk",
+   "new_ok": {
+    "kcal": [
+     150,
+     280
+    ]
+   }
+  },
+  {
+   "name": "sambal oelek",
+   "amount": 1,
+   "unit": "tsk",
+   "new_ok": {
+    "kcal": [
+     15,
+     130
+    ]
+   }
+  },
+  {
+   "name": "dijonsenap",
+   "amount": 1,
+   "unit": "msk",
+   "expect": "^Senap fransk"
+  },
+  {
+   "name": "grönsaksbuljong",
+   "amount": 5,
+   "unit": "dl",
+   "expect": "^Grönsaksbuljong ätf",
+   "grams": [
+    470,
+    530
+   ]
+  },
+  {
+   "name": "vitt vin",
+   "amount": 1,
+   "unit": "dl",
+   "expect": "^Vin vitt.*(12|10)",
+   "grams": [
+    95,
+    105
+   ]
+  },
+  {
+   "name": "proteinpulver choklad",
+   "amount": 30,
+   "unit": "g",
+   "expect": "^proteinpulver"
+  },
+  {
+   "name": "skyr",
+   "amount": 300,
+   "unit": "g",
+   "new_ok": {
+    "kcal": [
+     50,
+     80
+    ],
+    "protein": [
+     9,
+     13
+    ]
+   }
+  },
+  {
+   "name": "creme fraiche",
+   "amount": 2,
+   "unit": "dl",
+   "expect": "^Crème fraiche fett 3[0-9]%"
+  },
+  {
+   "name": "philadelphia light",
+   "amount": 100,
+   "unit": "g",
+   "expect": "^Färskost cream cheese lätt"
+  },
+  {
+   "name": "ricotta",
+   "amount": 250,
+   "unit": "g",
+   "expect": "^Färskost ricotta"
+  },
+  {
+   "name": "gnocchi",
+   "amount": 500,
+   "unit": "g",
+   "expect": "^potatisgnocchi",
+   "new_ok": {
+    "kcal": [
+     120,
+     200
+    ]
+   }
+  },
+  {
+   "name": "udon nudlar",
+   "amount": 300,
+   "unit": "g",
+   "expect": "^Nudlar (äggnudlar )?kokta",
+   "new_ok": {
+    "kcal": [
+     90,
+     170
+    ]
+   }
+  },
+  {
+   "name": "ägg nudlar",
+   "amount": 200,
+   "unit": "g",
+   "expect": "^Nudlar äggnudlar okokta"
+  },
+  {
+   "name": "kycklingklubbor",
+   "amount": 800,
+   "unit": "g",
+   "expect": "^Kyckling (lår|kött) rå m\\. skinn",
+   "new_ok": {
+    "kcal": [
+     150,
+     240
+    ]
+   }
+  },
+  {
+   "name": "entrecote",
+   "amount": 400,
+   "unit": "g",
+   "expect": "^Nöt entrecôte rå"
+  },
+  {
+   "name": "räkor",
+   "amount": 300,
+   "unit": "g",
+   "expect": "^Räka (kokt|konserv)"
+  },
+  {
+   "name": "ost",
+   "amount": 100,
+   "unit": "g",
+   "expect": "^Ost hårdost (eko\\. )?fett (2[3-9]|3[01])%"
+  },
+  {
+   "name": "riven ost",
+   "amount": 100,
+   "unit": "g",
+   "expect": "^Ost hårdost (eko\\. )?fett (2[3-9]|3[01])%"
+  },
+  {
+   "name": "zero sirap",
+   "amount": 2,
+   "unit": "msk",
+   "new_ok": {
+    "kcal": [
+     0,
+     50
+    ]
+   }
+  },
+  {
+   "name": "erytritol",
+   "amount": 30,
+   "unit": "g",
+   "new_ok": {
+    "kcal": [
+     0,
+     30
+    ]
+   }
+  },
+  {
+   "name": "vetegluten",
+   "amount": 160,
+   "unit": "g",
+   "new_ok": {
+    "kcal": [
+     330,
+     420
+    ],
+    "protein": [
+     65,
+     85
+    ]
+   },
+   "note": "matchas i dag mot vetemjöl"
+  },
+  {
+   "name": "bacon, förstekt",
+   "amount": 3,
+   "unit": "strimlor",
+   "expect": "^Gris bacon",
+   "grams": [
+    25,
+    80
+   ],
+   "note": "strimlor = 0 g i dag"
+  },
+  {
+   "name": "extra mager nötfärs",
+   "amount": 450,
+   "unit": "g",
+   "new_ok": {
+    "kcal": [
+     105,
+     160
+    ],
+    "protein": [
+     18,
+     24
+    ]
+   }
+  },
+  {
+   "name": "keso 1,5%",
+   "amount": 240,
+   "unit": "g",
+   "new_ok": {
+    "kcal": [
+     55,
+     90
+    ],
+    "protein": [
+     10,
+     14
+    ]
+   }
+  },
+  {
+   "name": "labneh",
+   "amount": 80,
+   "unit": "g",
+   "expect": "^Kvarg färskost fett 10%",
+   "new_ok": {
+    "kcal": [
+     120,
+     240
+    ]
+   }
+  },
+  {
+   "name": "skivad grön paprika",
+   "amount": 0.5,
+   "unit": "st",
+   "expect": "^Paprika grön",
+   "grams": [
+    50,
+    110
+   ]
+  },
+  {
+   "name": "grekisk yoghurt",
+   "amount": 200,
+   "unit": "g",
+   "expect": "^Yoghurt naturell fett 10%",
+   "new_ok": {
+    "kcal": [
+     90,
+     140
+    ]
+   }
+  }
+ ]
+}

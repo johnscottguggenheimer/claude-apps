@@ -67,12 +67,15 @@ export function amountToGramsDetailed(
     if (isCookingSprayName(name)) return { grams: amount * 1.5, source: 'unit_default' };
     if (isCitrusJuiceName(name)) return { grams: amount * 30, source: 'unit_default' };
     if (ingredient?.piece_weight_g != null && ingredient.piece_weight_g > 0) {
+      // Only verified piece weights count as catalog truth. Legacy seed values
+      // without provenance (e.g. Paprika grön = 10 g) are treated as schablon,
+      // so a learned AI weight may replace them.
       const src: GramsSource =
-        ingredient.piece_weight_source === 'ai_estimated'
-          ? 'ai_estimated'
-          : ingredient.piece_weight_source === 'category_fallback'
-            ? 'category_fallback'
-            : 'catalog';
+        ingredient.piece_weight_source === 'manual' || ingredient.piece_weight_source === 'slv'
+          ? 'catalog'
+          : ingredient.piece_weight_source === 'ai_estimated'
+            ? 'ai_estimated'
+            : 'category_fallback';
       return { grams: amount * ingredient.piece_weight_g, source: src };
     }
     // Ladder step 5: category schablon — never null when we have a food line

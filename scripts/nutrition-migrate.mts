@@ -22,6 +22,7 @@ const nutritionUrl = pathToFileURL(path.join(workerDir, 'src/nutrition/index.ts'
 const {
   catalogFromSeed,
   resolveAndApplyRecipe,
+  CUSTOM_FOOD_ID_START,
 } = await import(nutritionUrl);
 
 const seed = JSON.parse(
@@ -35,8 +36,9 @@ function sqlEscape(s: string): string {
 function buildSeedSql(): string {
   const lines: string[] = [
     'DELETE FROM recipe_ingredients;',
-    'DELETE FROM ingredient_aliases;',
-    'DELETE FROM ingredients;',
+    // AI-/användarskapade livsmedel (id >= 950000) och learned_*-tabellerna lämnas orörda.
+    `DELETE FROM ingredient_aliases WHERE ingredient_id < ${CUSTOM_FOOD_ID_START};`,
+    `DELETE FROM ingredients WHERE id < ${CUSTOM_FOOD_ID_START};`,
   ];
   for (const ing of seed.ingredients) {
     lines.push(
@@ -91,7 +93,29 @@ const res = await fetch('https://receptbok.receptbok.workers.dev/api/recipes', {
 if (!res.ok) throw new Error(`Failed to list recipes: ${res.status}`);
 const data = await res.json();
 const recipes = data.recipes || [];
-const catalog = catalogFromSeed(seed.ingredients);
+// Inlärt lager från D1: egna livsmedel + learned matches + gram per enhet.
+function d1Json<T>(sql: string): T[] {
+  const out = execSync(
+    `npx wrangler d1 execute receptbok-db --remote --json --command "${sql.replace(/"/g, '\\"')}"`,
+    { cwd: workerDir, env: process.env, shell: '/bin/zsh', encoding: 'utf8' }
+  );
+  return (JSON.parse(out)[0]?.results || []) as T[];
+}
+const customFoods = d1Json<Record<string, unknown>>(
+  `SELECT id, canonical_name, category, kcal_per_100g, protein_per_100g, fat_per_100g, carbs_per_100g, piece_weight_g, density_g_per_ml, needs_review, source FROM ingredients WHERE id >= ${CUSTOM_FOOD_ID_START}`
+);
+const catalog = catalogFromSeed([...seed.ingredients, ...customFoods]);
+for (const r of d1Json<{ match_key: string; ingredient_id: number; source: string; confidence: string | null; needs_review: number }>(
+  'SELECT match_key, ingredient_id, source, confidence, needs_review FROM learned_matches'
+)) {
+  catalog.learned.set(r.match_key, r);
+}
+for (const r of d1Json<{ ingredient_id: number; unit: string; grams_per_unit: number; source: string; needs_review: number }>(
+  'SELECT ingredient_id, unit, grams_per_unit, source, needs_review FROM learned_unit_weights'
+)) {
+  catalog.unitWeights.set(`${r.ingredient_id}|${r.unit}`, r);
+}
+console.log(`Inlärt: ${customFoods.length} egna livsmedel, ${catalog.learned.size} matchningar, ${catalog.unitWeights.size} gramvikter`);
 
 const updates: string[] = ['DELETE FROM recipe_ingredients;'];
 const report: {

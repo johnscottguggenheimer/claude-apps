@@ -131,7 +131,10 @@ export function applyResolutionToRecipe(
         resolved_grams: row.resolved_grams,
         ingredient_id: row.ingredient_id,
         grams_source: row.grams_source ?? null,
+        match_method: row.match_method,
       };
+      if (row.needs_review) next.needs_review = true;
+      else delete next.needs_review;
       if (
         row.match_status === 'matched' &&
         row.kcal != null &&
