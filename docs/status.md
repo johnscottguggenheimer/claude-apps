@@ -1,6 +1,6 @@
 # Status — receptbok
 
-## Näringsmatchning: fas 3 (granskning i stället för spärr) — committad, ej deployad
+## Näringsmatchning: fas 3 (granskning i stället för spärr) — live
 
 *2026-11-16*
 
@@ -16,7 +16,7 @@
 Lokalt mot seed + backup (`backups/recipes-2026-11-16.sql`) med simulerade AI-rader: lista, godkänn (vetegluten: hoagie-bread protein 111→217), byt livsmedel med vikt via UI, ändra vikt, felaktiga anrop ger 400, nytt recept med okänd rad sparas och hamnar under "Saknar näringsdata", detaljvyns notis och radflagga. `tsc`, `ai-match.test.mts`, `validate-recipes` OK. **Inte** testat mot prod-datan (export av prod-D1 nekades i sessionen).
 
 ### Öppet / nästa steg
-1. Deploy: `cd worker && npm run deploy` (ingen migration behövs). Pusha till GitHub. Därefter gå igenom `/granska` i prod (35 AI-livsmedel + osäkra matchningar från fas 1).
+1. Deployad 2026-11-16 (version d0ee45e0) och pushad. Kvar: gå igenom `/granska` i prod (35 AI-livsmedel + osäkra matchningar från fas 1). GitHub meddelar att repot flyttat till `johnscottguggenheimer/claude-apps` — remote kan uppdateras.
 2. Fas 4: egna produkter med etikettvärden (keso 1,5 %, kesella, skyr …). Redigering av AI-livsmedlets värden per 100 g hör hit — granskningen kan i dag bara godkänna eller byta.
 3. Kända begränsningar: vikter listar recept via `ingredient_id`+enhet i recept-JSON, så recept som inte räknats om sedan fas 1 kan saknas i listan. Listvyn visar ingen säkerhetsnivå.
 
