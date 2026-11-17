@@ -19,7 +19,14 @@ Lokalt (seed + backup från fas 3, migration 0006 körd lokalt): ändra AI-livsm
 
 ### Öppet / nästa steg
 1. Deployad 2026-11-17: migration 0006 körd i prod, Worker version 101ab006, pushad. Röktest: `/granska` 302 till login, API 401 utan login, `granska.js` innehåller `save_food`, startsidan och `/api/recipes` OK. Inloggat flöde inte testat i prod.
-2. Gå igenom `/granska` i prod: 35 AI-livsmedel och osäkra matchningar från fas 1. Lägg in etikettvärden för keso 1,5 %, labneh, cotijaost, nötfärs extra mager m.fl.
+2. **Prod-granskning klar 2026-11-17** (via `/granska`, alla ändringar som `source='user'`):
+   - Nya värden: Kycklingfärs 5 % 130 kcal/P21/F5 (Kronfågel enligt ICA, protein beräknat), Nötfärs extra mager 5 % 129/P21/K0,5/F5 (ICA), Labneh 139/P8,1/K4,1/F10 (lägsta databasvärdet).
+   - Nytt eget livsmedel: Keso Supermini 0,2 % 61 kcal/P13/K2,8/F0,2, kopplat till "supermini keso" (var keso 1,5 %).
+   - Bytt till SLV: skummjölk → Minimjölk, farinsocker → Brun farin.
+   - Övriga 67 matchningar och vikter godkända som de var. Granskningslistan är tom.
+   - Största ändringar: chicken-kebab-wraps 2452→2647, middle-eastern-chicken-mince 2519→2616, thai-chicken-cucumber-salad 2038→2111, kyckling-gyoza 1206→1286, dumpling-lasagna 1639→1784 kcal.
+   - Dumpling-lasagna-ökningen kom inte från granskningen: receptet var sparat med gyozaskal 8 g/st, men AI lärde in 10 g/st 2026-11-16 och omräkningen tog in den. USDA anger ca 8 g per wontonskal, så 10 g är troligen för högt (ej ändrat).
+   - Kvar: AI-livsmedlen "farinsocker" och "skummjölk" är oanvända men står som ogranskade (radering saknas). Sötningsmedel räknas som 0 kcal (rätt bara för erytritol/stevia-blandning, 170 g i bananbrödet). Salladslök 30 g/st mot vårlök 15 g/st.
 3. Kända begränsningar: inga fält för fibrer/socker/salt. Ingen radering av egna livsmedel. Vikter listar recept via `ingredient_id`+enhet i recept-JSON. Listvyn visar ingen säkerhetsnivå.
 
 ---
