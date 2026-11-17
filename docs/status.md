@@ -1,6 +1,6 @@
 # Status — receptbok
 
-## Kontroll av receptens makron — byggd, inte deployad
+## Kontroll av receptens makron — live
 
 *2026-11-17*
 
@@ -24,9 +24,22 @@ Lokalt: lista, regelflaggor, simulerad AI-rad (aglio e olio pasta → avvikelse 
 2. Gå igenom *Avvikelse*: rätta via "Byt livsmedel", vikter i Granska eller redigera receptet. Kör AI-kontroll igen.
 3. Markera varje recept som kontrollerat. Målet: alla 32 gröna. Nya eller ändrade recept dyker upp igen automatiskt.
 
+### Första körningen i prod (2026-11-17, version 30659e0f)
+- Migration 0007 körd, deployad, pushad. Radtabellen visar bara rader som faktiskt avviker (AI kommenterade nästan varje rad).
+- 32 recept AI-kontrollerade: 18 ok, 14 avvikelser. Rättat efter etikett (via `/granska`-API:t, `source='user'`):
+  - **PB2** var 221 kcal/100 g i katalogen (id 910001, inte redigerbar). Nytt eget livsmedel *PB2 Original* 462 kcal/P46/K38,5/F11,5 (USDA-etikett), kopplat till "pb2 (pulver)" och "pulveriserat jordnötssmör": bananbröd 2464→2753, peanut butter cups 958→1247.
+  - **Riven mozzarella**: nytt *Mozzarella riven 21%* 301 kcal/F21/K3,2 (Arla 21 % riven enligt ICA), protein 23 g uppskattat. Nyckeln normaliseras till "mozzarella", så alla mozzarellarader följde med: hot-honey-sliders 3232→3449, kycklingpizza-wrap 651→720, buffalo-pizza.
+  - **Bacon stekt**: 6 g per strimla (var 15 g): buffalo-pizza 1642→1531.
+  - **Hela pickles** → Saltgurka u. lag, 65 g/st (var söt inlagd gurka): smashed-pickle-salad 342→263.
+  - **Pressad lime** → Limejuice färskpressad, 30 g/st. Gäller alla "lime st": street-corn 1995→1925, thai-kyckling 2111→2076, honey-lime 1197→1179.
+- Efter rättning: 22 ok, 10 avvikelser. Nio bedömda som AI-fel eller brus: gyozaskal (AI 15 g/st, rätt ≈ 8), buffalosås, gochujang, affogato (sötningen tvetydig), scones-protein +3 g, smashed-cucumber +45 kcal, hjortfärsbiffar −13 %, kebab −10 %, pb-cups −10 %.
+- **Öppen fråga:** dumpling-lasagna +31 % (AI 2151 mot 1639). Troligen fläskfärsen: vi räknar *Gris färs rå fett 8%*, amerikansk ground pork ≈ 20 %. Beror på vilken färs John köper.
+- `wrangler d1 execute --remote` gav 7403 (inte behörig) mitt i sessionen. Deploy hade fungerat strax innan. Kör `npx wrangler login` om det kvarstår.
+
 ### Öppet / nästa steg
-1. **Deploy:** `npx wrangler d1 migrations apply receptbok-db --remote` (0007), sedan `npm run deploy`. Därefter testa AI-kontrollen på ett recept och kör alla.
-2. AI är en andra åsikt, inte facit. Vid avvikelse avgör etikett/SLV.
+1. Bestäm fläskfärsens fetthalt för dumpling-lasagna.
+2. Stämpla recepten som kontrollerade i `/granska` (inget är stämplat än).
+3. AI är en andra åsikt, inte facit. Vid avvikelse avgör etikett/SLV.
 
 ---
 

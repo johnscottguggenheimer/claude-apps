@@ -161,7 +161,7 @@ Regler:
 - Använd vanliga svenska butiksprodukter och Livsmedelsverkets värden som referens. Vid fetthalt i namnet (keso 1,5%, nötfärs 5%) gäller den.
 - "st" = typisk styckvikt för livsmedlet (1 ägg ≈ 55 g utan skal, 1 gul lök ≈ 100 g, 1 vitlöksklyfta ≈ 3–5 g).
 - Sötningsmedel av erytritol/stevia/monk fruit = 0 kcal och 0 g kolhydrater.
-- note: bara när något är tvetydigt eller sannolikt fel i receptet (kort, svenska). Annars null.
+- note: null som standard. Skriv bara när mängden är tvetydig (kokt/okokt, kasserad vätska) eller receptet sannolikt har fel. Aldrig "uppskattad vikt för …".
 
 Svara ENDAST med JSON:
 {"rows":[{"i":0,"grams":100,"kcal":0,"prot":0,"carb":0,"fat":0,"note":null}],"summary":"1–2 meningar om vad som är osäkert i receptet, annars tom sträng"}`;
@@ -245,7 +245,8 @@ function rowDisagreements(rows: Row[], ai: AiRow[]) {
     const dp = Math.abs(oursP - a.prot);
     const kcalOff = dk > ROW_KCAL_ABS && dk > ROW_KCAL_REL * Math.max(ours, a.kcal);
     const protOff = dp > ROW_PROT_ABS && dp > ROW_KCAL_REL * Math.max(oursP, a.prot);
-    if (!kcalOff && !protOff && !a.note) continue;
+    // AI kommenterar nästan varje rad; visa bara rader som faktiskt avviker.
+    if (!kcalOff && !protOff) continue;
     out.push({
       i: row.i,
       name: row.name,
