@@ -1,5 +1,20 @@
 # Status — receptbok
 
+## D1-kvot: billig katalogversion — byggd, inte deployad
+
+*2026-11-17*
+
+Cloudflare varnade: 78 % av D1:s dagliga gratiskvot (5 M rows_read) förbrukad. Allt kom från `receptbok-db` (traningslogg 0). `wrangler d1 insights` för dygnet:
+- `catalogVersion()` räknade hela `ingredients` + `ingredient_aliases`: **12 759 rader × 92 = 1,17 M**.
+- Ombyggd katalog vid ändrad version: alias 4 684 × 89 = 0,42 M, ingredienser 2 670 × 77 = 0,21 M (versionen ändrades vid varje rättning i dag).
+- Varje omräkning, varje sökning i "Byt livsmedel" (per tangenttryck) och varje granskningsåtgärd laddar katalogen.
+
+**Fix:** migration `0008_catalog_meta.sql` — tabell `catalog_meta` med en räknare som triggers på ingredients/aliases bumpar. `catalogVersion()` läser 1 rad (fallback till den gamla frågan om tabellen saknas). Testat lokalt: trigger bumpar version 1 → 2.
+
+**Deploy:** `npx wrangler d1 migrations apply receptbok-db --remote` (0008) och sedan `npm run deploy`. Kvoten nollställs 00:00 UTC (01:00 svensk tid). Vanlig visning av recept är billig (~64 rader), men undvik tung användning av `/granska` tills fixen är ute.
+
+---
+
 ## Kontroll av receptens makron — live
 
 *2026-11-17*

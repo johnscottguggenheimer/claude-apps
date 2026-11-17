@@ -115,6 +115,13 @@ const VERSION_SQL = `SELECT (SELECT COUNT(*) FROM ingredients) AS ic, (SELECT MA
               (SELECT COUNT(*) FROM ingredients WHERE needs_review = 1) AS ir`;
 
 async function catalogVersion(db: D1Database): Promise<string> {
+  // 0008: räknare som triggers bumpar vid ändring i ingredients/aliases — 1 rad.
+  try {
+    const meta = await db.prepare('SELECT version FROM catalog_meta WHERE id = 1').first<{ version: number }>();
+    if (meta) return 'm' + meta.version;
+  } catch {
+    // catalog_meta saknas (0008 inte körd) — fall tillbaka på den dyra frågan.
+  }
   type V = { ic: number; im: number | null; ac: number; am: number | null; ir: number; iu?: string | null };
   let row: V | null;
   try {
