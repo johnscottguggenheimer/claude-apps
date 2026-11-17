@@ -1,5 +1,29 @@
 # Status — receptbok
 
+## Näringsmatchning: fas 4 (egna livsmedel med etikettvärden) — byggd, inte deployad
+
+*2026-11-17*
+
+### Vad som byggdes
+- **`save_food`** i `POST /api/nutrition/review` (`worker/src/nutrition-review.ts`): skapa eget livsmedel (namn + kcal/fett/kolhydrater/protein per 100 g) eller ändra ett eget/AI-livsmedel (id ≥ 950000). Sparas som `source='user'`, `needs_review=0`, kategori `egen`. SLV-rader går inte att ändra (400). Dubblettnamn → 409. Rimlighet: kcal ≤ 900, P+K+F ≤ 100 g.
+- Valfritt `assign` (match_key eller name+unit, valfri gramvikt) kopplar raden till livsmedlet som användarmatchning i samma anrop. Vid namnbyte behålls gamla namnet som alias.
+- Ändrade värden räknar om alla recept som använder livsmedlet (sparat `ingredient_id` eller inlärd matchning), utan AI.
+- `GET /api/nutrition/review` returnerar även `foods`: alla egna/AI-livsmedel, ogranskade först.
+- **Migration `0006_food_updated_at.sql`**: `ingredients.updated_at`. Katalogcachens version inkluderar `MAX(updated_at)` så ändrade värden slår igenom direkt (fallback om kolumnen saknas).
+- **`/granska`**: ny sektion *Egna livsmedel* (tagg Eget / AI / AI, ogranskat) med *Ändra värden* och *+ Nytt eget livsmedel*. I *Byt livsmedel*-sökningen: "Finns inte? Skapa eget livsmedel från etiketten" (namn förifyllt från raden, kopplas direkt). Osäkra matchningar mot AI-livsmedel har *Ändra värden* (sparar och godkänner matchningen).
+- Formuläret följer etikettens ordning (energi, fett, kolhydrater, protein) och varnar när kcal avviker > 15 % från 4/4/9-beräkningen. Varnar, stoppar inte.
+- Refaktor: gemensamma `userMatchStmt`, `userWeightStmt`, `resolveKey`, `parseWeight`.
+
+### Verifierat
+Lokalt (seed + backup från fas 3, migration 0006 körd lokalt): ändra AI-livsmedel (vetegluten → eget, 2 recept omräknade, namnbyte syns direkt = cachen invalideras), skapa + koppla keso 1,5 % (gochujang-gnocchi 2260→2192 kcal), fristående nytt livsmedel via UI (listan laddas om), skapa eget från osäker matchning via UI (rödlök, 9 recept omräknade), fel: SLV-rad 400, dubblett 409, makron > 100 g 400. `tsc`, `npx tsx src/nutrition/ai-match.test.mts`, `validate-recipes` OK.
+
+### Öppet / nästa steg
+1. **Deploy:** kör `npx wrangler d1 migrations apply receptbok-db --remote` (0006) före `npm run deploy`. Koden tål att kolumnen saknas, men `save_food` skriver `updated_at` och kräver migrationen.
+2. Gå igenom `/granska` i prod: 35 AI-livsmedel och osäkra matchningar från fas 1. Lägg in etikettvärden för keso 1,5 %, labneh, cotijaost, nötfärs extra mager m.fl.
+3. Kända begränsningar: inga fält för fibrer/socker/salt. Ingen radering av egna livsmedel. Vikter listar recept via `ingredient_id`+enhet i recept-JSON. Listvyn visar ingen säkerhetsnivå.
+
+---
+
 ## Näringsmatchning: fas 3 (granskning i stället för spärr) — live
 
 *2026-11-16*
@@ -16,8 +40,8 @@
 Lokalt mot seed + backup (`backups/recipes-2026-11-16.sql`) med simulerade AI-rader: lista, godkänn (vetegluten: hoagie-bread protein 111→217), byt livsmedel med vikt via UI, ändra vikt, felaktiga anrop ger 400, nytt recept med okänd rad sparas och hamnar under "Saknar näringsdata", detaljvyns notis och radflagga. `tsc`, `ai-match.test.mts`, `validate-recipes` OK. **Inte** testat mot prod-datan (export av prod-D1 nekades i sessionen).
 
 ### Öppet / nästa steg
-1. Deployad 2026-11-16 (version d0ee45e0) och pushad. Kvar: gå igenom `/granska` i prod (35 AI-livsmedel + osäkra matchningar från fas 1). GitHub meddelar att repot flyttat till `johnscottguggenheimer/claude-apps` — remote kan uppdateras.
-2. Fas 4: egna produkter med etikettvärden (keso 1,5 %, kesella, skyr …). Redigering av AI-livsmedlets värden per 100 g hör hit — granskningen kan i dag bara godkänna eller byta.
+1. Deployad 2026-11-16 (version d0ee45e0) och pushad. Remote uppdaterad till `johnscottguggenheimer/claude-apps`.
+2. Fas 4: klar, se ovan.
 3. Kända begränsningar: vikter listar recept via `ingredient_id`+enhet i recept-JSON, så recept som inte räknats om sedan fas 1 kan saknas i listan. Listvyn visar ingen säkerhetsnivå.
 
 ---

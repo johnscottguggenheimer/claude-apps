@@ -110,16 +110,24 @@ type BaseCatalog = {
  */
 let baseCache: BaseCatalog | null = null;
 
-async function catalogVersion(db: D1Database): Promise<string> {
-  const row = await db
-    .prepare(
-      `SELECT (SELECT COUNT(*) FROM ingredients) AS ic, (SELECT MAX(id) FROM ingredients) AS im,
+const VERSION_SQL = `SELECT (SELECT COUNT(*) FROM ingredients) AS ic, (SELECT MAX(id) FROM ingredients) AS im,
               (SELECT COUNT(*) FROM ingredient_aliases) AS ac, (SELECT MAX(id) FROM ingredient_aliases) AS am,
-              (SELECT COUNT(*) FROM ingredients WHERE needs_review = 1) AS ir`
-    )
-    .first<{ ic: number; im: number | null; ac: number; am: number | null; ir: number }>();
+              (SELECT COUNT(*) FROM ingredients WHERE needs_review = 1) AS ir`;
+
+async function catalogVersion(db: D1Database): Promise<string> {
+  type V = { ic: number; im: number | null; ac: number; am: number | null; ir: number; iu?: string | null };
+  let row: V | null;
+  try {
+    // iu: redigerade livsmedel (fas 4) ändrar värden utan att antal/id ändras.
+    row = await db
+      .prepare(VERSION_SQL + ', (SELECT MAX(updated_at) FROM ingredients) AS iu')
+      .first<V>();
+  } catch {
+    // ingredients.updated_at kommer i 0006.
+    row = await db.prepare(VERSION_SQL).first<V>();
+  }
   // ir: granskning (fas 3) ändrar needs_review utan att antal/id ändras.
-  return row ? `${row.ic}:${row.im}:${row.ac}:${row.am}:${row.ir}` : 'none';
+  return row ? `${row.ic}:${row.im}:${row.ac}:${row.am}:${row.ir}:${row.iu ?? ''}` : 'none';
 }
 
 async function loadBase(db: D1Database, version: string): Promise<BaseCatalog> {

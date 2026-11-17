@@ -65,6 +65,21 @@
   .review-result:last-child { border-bottom: 0; }
   .review-result:hover, .review-result:focus { background: var(--bg3); outline: none; }
   .review-result-meta { display: block; font-size: 0.6875rem; color: var(--text2); font-weight: 400; margin-top: 0.1rem; }
+  .review-tag--own { background: color-mix(in srgb, var(--info) 14%, var(--bg2)); color: var(--info); }
+  [data-theme="dark"] .review-tag--own { color: var(--info); }
+  .review-own-btn {
+    margin-top: 0.5rem; border: 0; background: none; padding: 0.2rem 0; color: var(--info); font-weight: 500;
+  }
+  .review-card--new { background: none; border-style: dashed; padding: 0.6rem; }
+  .review-card--new > button { border: 0; background: none; color: var(--info); }
+  .review-food-form { margin-top: 0.75rem; padding-top: 0.75rem; border-top: 0.5px solid var(--border); }
+  .review-form-caption { font-size: 0.75rem; color: var(--text2); margin: 0.65rem 0 0.35rem; }
+  .review-form-row { display: flex; align-items: center; gap: 0.45rem; font-size: 0.8125rem; }
+  .review-form-row > span:first-child { min-width: 6.5rem; color: var(--text2); }
+  .review-form-row--name input { flex: 1; min-width: 0; }
+  .review-form-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 0.45rem 1rem; }
+  .review-form-unit { color: var(--text3); font-size: 0.75rem; }
+  .review-form-check:empty { display: none; }
   .hidden { display: none !important; }
 </style>
 </head>

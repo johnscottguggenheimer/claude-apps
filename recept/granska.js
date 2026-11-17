@@ -100,9 +100,11 @@
       if (actions) actions.replaceChildren(mk('span', 'review-per100', doneLabel));
       var search = card.querySelector('.review-search');
       if (search) search.remove();
+      return true;
     }).catch(function(e) {
       buttons.forEach(function(b) { b.disabled = false; });
       setStatus(e.message, true);
+      return false;
     });
   }
 
@@ -168,12 +170,128 @@
     return !!u && u !== 'g' && u !== 'msk' && u !== 'tsk' && u !== 'krm' && u !== 'ml' && u !== 'dl' && u !== 'l';
   }
 
+  function numInput(value) {
+    var i = document.createElement('input');
+    i.type = 'number';
+    i.min = '0';
+    i.step = 'any';
+    i.inputMode = 'decimal';
+    if (value != null) i.value = String(round1(value));
+    return i;
+  }
+
+  /**
+   * Formulär för eget livsmedel (fas 4). Fälten i etikettens ordning:
+   * energi, fett, kolhydrater, protein — per 100 g.
+   * opts: { food?, name?, assign?, doneLabel }
+   */
+  function foodForm(card, opts) {
+    var existing = card.querySelector('.review-food-form');
+    if (existing) {
+      existing.remove();
+      return;
+    }
+    var food = opts.food || null;
+    var form = mk('form', 'review-food-form');
+    form.noValidate = true;
+
+    var nameRow = mk('label', 'review-form-row review-form-row--name');
+    nameRow.appendChild(mk('span', '', 'Namn'));
+    var nameIn = document.createElement('input');
+    nameIn.type = 'text';
+    nameIn.value = food ? food.name : (opts.name || '');
+    nameIn.placeholder = 't.ex. Keso 1,5 % Arla';
+    nameRow.appendChild(nameIn);
+    form.appendChild(nameRow);
+
+    form.appendChild(mk('div', 'review-form-caption', 'Per 100 g enligt etiketten'));
+    var grid = mk('div', 'review-form-grid');
+    var fields = [
+      ['kcal', 'Energi', 'kcal'],
+      ['fat', 'Fett', 'g'],
+      ['carb', 'Kolhydrater', 'g'],
+      ['prot', 'Protein', 'g']
+    ];
+    var inputs = {};
+    fields.forEach(function(f) {
+      var l = mk('label', 'review-form-row');
+      l.appendChild(mk('span', '', f[1]));
+      var i = numInput(food ? food[f[0]] : null);
+      inputs[f[0]] = i;
+      l.appendChild(i);
+      l.appendChild(mk('span', 'review-form-unit', f[2]));
+      grid.appendChild(l);
+    });
+    form.appendChild(grid);
+
+    var check = mk('div', 'review-note review-form-check');
+    form.appendChild(check);
+
+    function updateCheck() {
+      var p = Number(inputs.prot.value) || 0;
+      var c = Number(inputs.carb.value) || 0;
+      var f = Number(inputs.fat.value) || 0;
+      var k = Number(inputs.kcal.value);
+      if (inputs.kcal.value === '' || (!p && !c && !f)) {
+        check.textContent = '';
+        return;
+      }
+      var calc = Math.round(4 * p + 4 * c + 9 * f);
+      var off = Math.abs(calc - k);
+      check.textContent = off > 20 && off > k * 0.15
+        ? 'Makrona ger ≈ ' + calc + ' kcal. Kontrollera värdena (fibrer och sockeralkoholer kan förklara en del).'
+        : '';
+    }
+    Object.keys(inputs).forEach(function(k) { inputs[k].addEventListener('input', updateCheck); });
+    updateCheck();
+
+    var actions = mk('div', 'review-actions');
+    var save = mk('button', 'primary', food ? 'Spara värden' : (opts.assign ? 'Skapa och använd' : 'Skapa'));
+    save.type = 'submit';
+    var cancel = mk('button', '', 'Avbryt');
+    cancel.type = 'button';
+    cancel.addEventListener('click', function() { form.remove(); });
+    actions.appendChild(save);
+    actions.appendChild(cancel);
+    form.appendChild(actions);
+
+    form.addEventListener('submit', function(ev) {
+      ev.preventDefault();
+      var missing = ['kcal', 'fat', 'carb', 'prot'].filter(function(k) { return inputs[k].value.trim() === ''; });
+      if (nameIn.value.trim().length < 2 || missing.length) {
+        setStatus('Fyll i namn och alla fyra värden.', true);
+        return;
+      }
+      var body = {
+        action: 'save_food',
+        name: nameIn.value.trim(),
+        kcal: Number(inputs.kcal.value),
+        fat: Number(inputs.fat.value),
+        carb: Number(inputs.carb.value),
+        prot: Number(inputs.prot.value)
+      };
+      if (food) body.ingredient_id = food.id;
+      if (opts.assign) body.assign = opts.assign();
+      runAction(card, body, opts.doneLabel || 'Sparat').then(function(ok) {
+        if (!ok) return;
+        form.remove();
+        // Nytt fristående livsmedel: ladda om så det syns i listan.
+        if (!food && !opts.assign) load(true);
+      });
+    });
+
+    card.appendChild(form);
+    setTimeout(function() { (food ? inputs.kcal : nameIn).focus(); }, 0);
+  }
+
   function toggleSearch(card, line, unit, matchKey) {
     var existing = card.querySelector('.review-search');
     if (existing) {
       existing.remove();
       return;
     }
+    var openForm = card.querySelector('.review-food-form');
+    if (openForm) openForm.remove();
     var weightIn = null;
     var search = buildSearch(line, function(item) {
       var body = { action: 'set_match', ingredient_id: item.id };
@@ -188,6 +306,24 @@
       }
       runAction(card, body, 'Bytt till ' + item.canonical_name);
     });
+    var own = mk('button', 'review-own-btn', 'Finns inte? Skapa eget livsmedel från etiketten');
+    own.type = 'button';
+    own.addEventListener('click', function() {
+      search.remove();
+      foodForm(card, {
+        name: line.charAt(0).toUpperCase() + line.slice(1),
+        doneLabel: 'Eget livsmedel skapat',
+        assign: function() {
+          var a = matchKey ? { match_key: matchKey } : { name: line, unit: unit };
+          if (weightIn && weightIn.value.trim() !== '') {
+            a.unit = unit;
+            a.grams_per_unit = Number(weightIn.value);
+          }
+          return a;
+        }
+      });
+    });
+    search.appendChild(own);
     if (needsWeight(unit)) {
       var row = mk('div', 'review-weight-row');
       row.appendChild(document.createTextNode('1 ' + unit + ' ='));
@@ -274,8 +410,52 @@
       toggleSearch(card, item.name, null, item.match_key);
     });
     actions.appendChild(ok);
+    if (item.food && item.food.ai) {
+      var edit = mk('button', '', 'Ändra värden');
+      edit.type = 'button';
+      edit.addEventListener('click', function() {
+        var s = card.querySelector('.review-search');
+        if (s) s.remove();
+        foodForm(card, {
+          food: item.food,
+          doneLabel: 'Värden sparade',
+          assign: function() { return { match_key: item.match_key }; }
+        });
+      });
+      actions.appendChild(edit);
+    }
     actions.appendChild(change);
     card.appendChild(actions);
+    return card;
+  }
+
+  function ownFoodCard(item) {
+    var card = mk('div', 'review-card');
+    var title = lineTitle(item.name, '');
+    if (item.origin === 'user') title.appendChild(mk('span', 'review-tag review-tag--own', 'Eget'));
+    else title.appendChild(mk('span', 'review-tag', item.needs_review ? 'AI, ogranskat' : 'AI'));
+    card.appendChild(title);
+    card.appendChild(mk('div', 'review-food review-per100', per100Text(item)));
+    card.appendChild(recipesLine(item.recipes));
+    var actions = mk('div', 'review-actions');
+    var edit = mk('button', '', 'Ändra värden');
+    edit.type = 'button';
+    edit.addEventListener('click', function() {
+      foodForm(card, { food: item, doneLabel: 'Värden sparade' });
+    });
+    actions.appendChild(edit);
+    card.appendChild(actions);
+    return card;
+  }
+
+  function newFoodButton() {
+    var card = mk('div', 'review-card review-card--new');
+    var btn = mk('button', '', '+ Nytt eget livsmedel');
+    btn.type = 'button';
+    btn.addEventListener('click', function() {
+      foodForm(card, { doneLabel: 'Eget livsmedel skapat' });
+    });
+    card.appendChild(btn);
     return card;
   }
 
@@ -323,7 +503,7 @@
     return sec;
   }
 
-  function render(data) {
+  function render(data, keepStatus) {
     root.replaceChildren();
     var unresolved = data.unresolved || [];
     var matches = data.matches || [];
@@ -340,11 +520,19 @@
       'AI-bedömda vikter', 'Gram per enhet som AI uppskattat. Godkänn eller ändra.',
       weights, weightCard, 'Inget att granska.'
     ));
+    var foods = data.foods || [];
+    var foodSec = section(
+      'Egna livsmedel', 'AI-skapade och egna livsmedel. Ändra värden efter etiketten — ändringen räknar om alla recept som använder livsmedlet.',
+      foods, ownFoodCard, 'Inga egna livsmedel än.'
+    );
+    var hint = foodSec.querySelector('.review-section-hint');
+    foodSec.insertBefore(newFoodButton(), hint ? hint.nextSibling : foodSec.children[1] || null);
+    root.appendChild(foodSec);
     var total = unresolved.length + matches.length + weights.length;
-    setStatus(total ? total + ' att granska.' : 'Allt granskat.');
+    if (!keepStatus) setStatus(total ? total + ' att granska.' : 'Allt granskat.');
   }
 
-  function load() {
+  function load(keepStatus) {
     fetch('/api/nutrition/review', { credentials: 'same-origin' })
       .then(function(res) {
         if (res.status === 401) {
@@ -356,7 +544,7 @@
           return data;
         });
       })
-      .then(function(data) { if (data) render(data); })
+      .then(function(data) { if (data) render(data, keepStatus); })
       .catch(function(e) { setStatus(e.message, true); });
   }
 
