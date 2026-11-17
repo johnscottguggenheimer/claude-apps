@@ -36,6 +36,12 @@ Lokalt: lista, regelflaggor, simulerad AI-rad (aglio e olio pasta → avvikelse 
 - **Löst:** dumpling-lasagna +31 % (AI 2151 mot 1639). Troligen fläskfärsen: vi räknar *Gris färs rå fett 8%*, amerikansk ground pork ≈ 20 %. Beror på vilken färs John köper.
 - `wrangler d1 execute --remote` gav 7403 (inte behörig) mitt i sessionen. Deploy hade fungerat strax innan. Kör `npx wrangler login` om det kvarstår.
 
+### Testat i prod (2026-11-17)
+- "Byt livsmedel" från en avvikande rad (gyozaskal → samma livsmedel): sparas, receptet räknas om, kontrollvyn laddas om.
+- Stämpel och ångra: räknarna uppdateras rätt (Kontrollerat 1 → 0).
+- Mobil 375 px: ingen horisontell scroll, radtabellen ryms.
+- **Inte testat i prod:** "Ändrat sedan kontroll" efter riktig sparning i redigeraren. En PUT sätter ny `updated_at` och flyttar receptet i listan, och `wrangler d1 --remote` ger 7403 så datumet går inte att återställa. Logiken är testad lokalt via direkt ändring i D1. Inte heller testat: spara nytt recept i prod efter fas 3–4. Inga automatiska tester för review-/audit-API:erna.
+
 ### Öppet / nästa steg
 1. Fläskfärs löst: "malet fläskkött" → *Gris färs rå fett 15%* (John vet inte fetthalten, 15 % som mellanläge): dumpling-lasagna 1639→1900, AI-avvikelse nu +13 % (wontonskal-vikten står för resten).
 2. Stämpla recepten som kontrollerade i `/granska` (inget är stämplat än).
