@@ -24,6 +24,7 @@
 
 ### Backfill (2026-11-17)
 - Halloumi-bilden för hot-honey-chicken-sliders länkad om i prod (1 rad, 3 rows_read). Bilden finns och svarar 200, men visar snarare strimlad kyckling än halloumi.
+- `updated_at` återställd från backupen för popcorn-kyckling (→ 2026-09-22T12:53:05.598Z) och street-corn-chicken-bowl (→ 2026-09-22T12:48:54.719Z). Variantbilder som genererades i prod 11:32–11:49 hade bumpat datumen via gamla `updateRecipe`, alltså före fixen. Nya `setProteinVariantImage` rör inte `updated_at`.
 - **Ingen bild genererad.** Uppdraget var att stoppa om det kostar utöver gratiskvoten. Googles prissida (aistudio.google.com/docs/pricing) anger att ingen bildmodell har gratiskvot för output: `gemini-3.1-flash-image` $0,067/bild, `gemini-3-pro-image` $0,134, `gemini-2.5-flash-image` $0,039 (avvecklas 2027-03-15). Status i prod: 13 av 59 varianter har egen bild, 46 visar platshållare.
 
 ### Öppet
