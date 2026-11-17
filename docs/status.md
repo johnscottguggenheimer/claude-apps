@@ -1,6 +1,6 @@
 # Status — receptbok
 
-## Proteinvarianter: egen bild eller platshållare — committad, ej deployad
+## Proteinvarianter: egen bild eller platshållare — live (version 97022147)
 
 *2026-11-17*
 
@@ -22,10 +22,13 @@
 ### Verifierat lokalt
 `tsc` OK. `json_set`-patchen ändrar bara rätt variant, giltig JSON, `updated_at` orörd. UI: vald variant utan bild → platshållare, exakt en POST (502 lokalt utan Gemini-nyckel) och ingen loop; listan i vegetariskt läge visar platshållare i stället för originalfoton. Lyckad generering och PUT med bevarade bilder är inte testade end-to-end (kräver Gemini).
 
+### Backfill (2026-11-17)
+- Halloumi-bilden för hot-honey-chicken-sliders länkad om i prod (1 rad, 3 rows_read). Bilden finns och svarar 200, men visar snarare strimlad kyckling än halloumi.
+- **Ingen bild genererad.** Uppdraget var att stoppa om det kostar utöver gratiskvoten. Googles prissida (aistudio.google.com/docs/pricing) anger att ingen bildmodell har gratiskvot för output: `gemini-3.1-flash-image` $0,067/bild, `gemini-3-pro-image` $0,134, `gemini-2.5-flash-image` $0,039 (avvecklas 2027-03-15). Status i prod: 13 av 59 varianter har egen bild, 46 visar platshållare.
+
 ### Öppet
-1. Deploy + push (väntar på John).
-2. Backfill av 46 bilder: ca $0,067/bild med `gemini-3.1-flash-image` (ingen gratiskvot för bild) ≈ $3 / ~30 kr. Körs sekventiellt mot prod-endpointen efter deploy. Halloumi-bilden ovan kan länkas om gratis.
-3. Bildendpointen är publik: vem som helst kan utlösa en Gemini-bild per variant som saknar bild (max en per variant, sedan cachad).
+1. Backfill av 46 bilder: ~$3 / ~30 kr, och ingen gratiskvot finns. Kräver Johns uttryckliga ja till kostnaden. Kör då sekventiellt mot `POST /api/recipes/:id/protein-variants/:variant/image` (ingen inloggning krävs). Lista i prod: varianter där `proteinVariants[].image` saknas. Kostnaden kan halveras om `gemini-2.5-flash-image` läggs först i `IMAGE_MODELS`, men den modellen avvecklas 2027-03-15.
+2. Bildendpointen är publik: vem som helst kan utlösa en Gemini-bild per variant som saknar bild (max en per variant, sedan cachad). Varianter genereras också när någon öppnar dem i appen, så de 46 fylls på gradvis och kostar pengar ändå.
 
 ---
 
@@ -84,7 +87,8 @@ Lokalt: lista, regelflaggor, simulerad AI-rad (aglio e olio pasta → avvikelse 
 - "Byt livsmedel" från en avvikande rad (gyozaskal → samma livsmedel): sparas, receptet räknas om, kontrollvyn laddas om.
 - Stämpel och ångra: räknarna uppdateras rätt (Kontrollerat 1 → 0).
 - Mobil 375 px: ingen horisontell scroll, radtabellen ryms.
-- **Inte testat i prod:** "Ändrat sedan kontroll" efter riktig sparning i redigeraren. En PUT sätter ny `updated_at` och flyttar receptet i listan, och `wrangler d1 --remote` ger 7403 så datumet går inte att återställa. Logiken är testad lokalt via direkt ändring i D1. Inte heller testat: spara nytt recept i prod efter fas 3–4. Inga automatiska tester för review-/audit-API:erna.
+- "Ändrat sedan kontroll" testat i prod 2026-11-17 via PUT (smashed-cucumber: stämpel → mängd 1→2 ger `stale` med "var kontrollerat" → återställd ger `verified` → stämpel borttagen). `updated_at` återställd till 2026-09-22T12:46:35Z.
+- **Tidigare ej testat (nu löst ovan):** "Ändrat sedan kontroll" efter riktig sparning i redigeraren. En PUT sätter ny `updated_at` och flyttar receptet i listan, och `wrangler d1 --remote` ger 7403 så datumet går inte att återställa. Logiken är testad lokalt via direkt ändring i D1. Inte heller testat: spara nytt recept i prod efter fas 3–4. Inga automatiska tester för review-/audit-API:erna.
 
 ### Öppet / nästa steg
 1. Fläskfärs löst: "malet fläskkött" → *Gris färs rå fett 15%* (John vet inte fetthalten, 15 % som mellanläge): dumpling-lasagna 1639→1900, AI-avvikelse nu +13 % (wontonskal-vikten står för resten).
