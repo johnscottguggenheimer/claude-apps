@@ -95,6 +95,18 @@ function findProteinVariant(base, variantId) {
   return null;
 }
 
+/** Variant image state while lazy generation runs: 'pending' | 'failed'. */
+var variantImageState = {};
+
+function variantImageStateKey(baseId, variantId) {
+  return baseId + '::' + variantId;
+}
+
+function variantHasOwnImage(base, variant) {
+  // Same URL as the original = old slug collision; treat as missing.
+  return !!(variant && variant.image && variant.image !== base.image);
+}
+
 function applyProteinVariantOverlay(base, variant) {
   if (!base || !variant || !variant.groups) return base;
   var out = {};
@@ -104,8 +116,13 @@ function applyProteinVariantOverlay(base, variant) {
   out.groups = variant.groups;
   if (variant.macros) out.macros = variant.macros;
   if (variant.title) out.title = variant.title;
-  // Ignore stale variant images that point at the original recipe file.
-  if (variant.image && variant.image !== base.image) out.image = variant.image;
+  // A variant never shows the original's photo: own image or a placeholder.
+  if (variantHasOwnImage(base, variant)) {
+    out.image = variant.image;
+  } else {
+    delete out.image;
+    out._variantImageMissing = true;
+  }
   out._proteinVariantId = variant.id;
   out._proteinVariantLabel = variant.label || variant.id;
   return out;
@@ -1230,12 +1247,29 @@ function appendMetricTags(parent, tags, tagClass) {
   });
 }
 
+function appendVariantImagePlaceholder(parent, r, cls) {
+  var ph = mk('div', cls);
+  var emojiEl = mk('span', cls + '-emoji');
+  emojiEl.textContent = r.emoji || '🍽️';
+  ph.appendChild(emojiEl);
+  var state = variantImageState[variantImageStateKey(r.id, r._proteinVariantId)];
+  var note = mk('span', cls + '-note');
+  note.textContent =
+    state === 'pending'
+      ? 'Skapar bild för ' + (r._proteinVariantLabel || 'varianten') + '…'
+      : 'Bild saknas för ' + (r._proteinVariantLabel || 'varianten');
+  ph.appendChild(note);
+  parent.appendChild(ph);
+}
+
 function buildDetailHero(r, opts) {
   opts = opts || {};
   var hero = mk('div', 'detail-hero');
   if (r.image) {
     hero.classList.add('detail-hero--photo');
     hero.style.backgroundImage = "url('" + assetUrl(r.image) + "')";
+  } else if (r._variantImageMissing) {
+    appendVariantImagePlaceholder(hero, r, 'variant-img-ph');
   }
   if (opts && opts.includeTitle === false) return hero;
   var title = document.createElement('h1');
@@ -1258,6 +1292,8 @@ function createRecipeCard(r) {
     img.alt = '';
     img.loading = 'lazy';
     media.appendChild(img);
+  } else if (display._variantImageMissing) {
+    appendVariantImagePlaceholder(media, display, 'variant-img-ph');
   } else if (r.emoji) {
     var emojiEl = mk('span', 'recipe-card-emoji');
     emojiEl.textContent = r.emoji;
@@ -1904,7 +1940,7 @@ function buildProteinSwapControl(base) {
       }
       detailProteinVariantId = nextId;
       showDetail(base.id, true);
-      ensureProteinVariantImage(base, nextId);
+      ensureProteinVariantImage(base, nextId, true);
     }).catch(function(ex) {
       alert(ex.message || 'Kunde inte hämta proteinkälle-varianter');
     });
@@ -1974,11 +2010,17 @@ function ensureProteinVariants(base) {
   });
 }
 
-function ensureProteinVariantImage(base, variantId) {
+/** retryFailed: only on an explicit variant pick, so a failing call never loops via re-render. */
+function ensureProteinVariantImage(base, variantId, retryFailed) {
   var v = findProteinVariant(base, variantId);
   if (!v) return Promise.resolve(null);
-  // Same URL as original = slug collision leftover; force regenerate.
-  if (v.image && v.image !== base.image) return Promise.resolve(v.image);
+  if (variantHasOwnImage(base, v)) return Promise.resolve(v.image);
+  var stateKey = variantImageStateKey(base.id, variantId);
+  var state = variantImageState[stateKey];
+  if (state === 'pending') return Promise.resolve(null);
+  if (state === 'failed' && !retryFailed) return Promise.resolve(null);
+  variantImageState[stateKey] = 'pending';
+  rerenderIfShowingVariant(base, variantId);
   return fetch(
     '/api/recipes/' +
       encodeURIComponent(base.id) +
@@ -1988,24 +2030,40 @@ function ensureProteinVariantImage(base, variantId) {
     { method: 'POST', credentials: 'same-origin' }
   ).then(function(res) {
     return res.json().then(function(data) {
-      if (!res.ok) return null;
-      if (data.image && data.image !== base.image) {
-        v.image = data.image;
-        var idx = recipes.findIndex(function(x) { return x.id === base.id; });
-        if (idx !== -1 && recipes[idx].proteinVariants) {
-          for (var i = 0; i < recipes[idx].proteinVariants.length; i++) {
-            if (recipes[idx].proteinVariants[i].id === variantId) {
-              recipes[idx].proteinVariants[i].image = data.image;
-            }
+      if (!res.ok || !data.image || data.image === base.image) {
+        variantImageState[stateKey] = 'failed';
+        rerenderIfShowingVariant(base, variantId);
+        return null;
+      }
+      delete variantImageState[stateKey];
+      v.image = data.image;
+      var idx = recipes.findIndex(function(x) { return x.id === base.id; });
+      if (idx !== -1 && recipes[idx].proteinVariants) {
+        for (var i = 0; i < recipes[idx].proteinVariants.length; i++) {
+          if (recipes[idx].proteinVariants[i].id === variantId) {
+            recipes[idx].proteinVariants[i].image = data.image;
           }
         }
-        if (currentId === base.id && detailProteinVariantId === variantId) {
-          showDetail(base.id, true);
-        }
       }
-      return data.image || null;
+      rerenderIfShowingVariant(base, variantId);
+      return data.image;
     });
-  }).catch(function() { return null; });
+  }).catch(function() {
+    variantImageState[stateKey] = 'failed';
+    rerenderIfShowingVariant(base, variantId);
+    return null;
+  });
+}
+
+/** Re-render detail when it shows this variant (picked, eat mode or search). */
+function rerenderIfShowingVariant(base, variantId) {
+  if (currentId !== base.id) return;
+  var detail = document.getElementById('view-detail');
+  if (!detail || detail.classList.contains('hidden')) return;
+  if (getDisplayRecipe(base)._proteinVariantId !== variantId) return;
+  var y = window.scrollY;
+  showDetail(base.id, true);
+  window.scrollTo(0, y);
 }
 
 function loadReviewsPanel(recipeId, host) {

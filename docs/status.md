@@ -1,5 +1,34 @@
 # Status — receptbok
 
+## Proteinvarianter: egen bild eller platshållare — committad, ej deployad
+
+*2026-11-17*
+
+### Orsak
+- Variantbilder genereras lazy: `POST /api/recipes/:id/protein-variants/:variant/image` (publik) körs först när någon öppnar detaljvyn med varianten vald. Lagras i R2 som `recipes/<id>-pv-<variant>.jpg`, ref i `proteinVariants[].image` i receptets JSON i D1.
+- `applyProteinVariantOverlay` (app.js) kopierade originalets `image` när varianten saknade egen bild. Listkort i "Jag äter …"-läge visade därför alltid originalet, och detaljvyn gjorde det också om genereringen misslyckades (t.ex. kvot).
+- Varje `PUT /api/recipes/:id` och `POST …/protein-variants` byggde om varianterna utan bilder, så redan genererade bilder tappades.
+- Bildgenereringen skrev hela receptet (read-modify-write efter ~10 s Gemini): kunde skriva över samtidiga ändringar och bumpade `updated_at` (listordningen).
+- Detaljvyn renderades bara om efter generering om varianten valts manuellt, inte via ätläge/sök.
+
+### Prod-kartläggning (91 rows_read)
+21 recept har 59 varianter: **12 med egen bild, 47 saknar**, 0 pekar på originalets bild. Av de 47 finns bara en bild kvar i R2 (`hot-honey-chicken-sliders-pv-halloumi.jpg`, tappad vid redigering). Övriga har aldrig genererats.
+
+### Fix
+- `app.js`: en variant visar aldrig originalets bild. Utan egen bild: platshållare med emoji och "Skapar bild för X…" / "Bild saknas för X" (`.variant-img-ph`, kort och hero). Genereringsstatus per variant; misslyckad generering försöks bara igen vid aktivt val av variant (ingen loop). Omrendering när detaljvyn visar varianten oavsett hur den valts.
+- `index.ts`: `attachProteinVariants` och `handleProteinVariants` behåller befintliga bilder per variant-id. Radering av recept tar även bort variantbilderna i R2.
+- `db.ts` `setProteinVariantImage`: atomisk `json_set` på bara den variantens `image`, `updated_at` orörd, 409 om varianten försvunnit.
+
+### Verifierat lokalt
+`tsc` OK. `json_set`-patchen ändrar bara rätt variant, giltig JSON, `updated_at` orörd. UI: vald variant utan bild → platshållare, exakt en POST (502 lokalt utan Gemini-nyckel) och ingen loop; listan i vegetariskt läge visar platshållare i stället för originalfoton. Lyckad generering och PUT med bevarade bilder är inte testade end-to-end (kräver Gemini).
+
+### Öppet
+1. Deploy + push (väntar på John).
+2. Backfill av 46 bilder: ca $0,067/bild med `gemini-3.1-flash-image` (ingen gratiskvot för bild) ≈ $3 / ~30 kr. Körs sekventiellt mot prod-endpointen efter deploy. Halloumi-bilden ovan kan länkas om gratis.
+3. Bildendpointen är publik: vem som helst kan utlösa en Gemini-bild per variant som saknar bild (max en per variant, sedan cachad).
+
+---
+
 ## D1-kvot: billig katalogversion — live
 
 *2026-11-17*

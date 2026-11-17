@@ -76,6 +76,39 @@ export async function updateRecipe(db: D1Database, recipe: Recipe, featuredNew?:
   return true;
 }
 
+/**
+ * Set one protein variant's image in place (atomic json_set). Leaves updated_at
+ * alone so list order doesn't change, and can't overwrite a concurrent edit of
+ * the rest of the recipe. Returns false if the variant no longer exists.
+ */
+export async function setProteinVariantImage(
+  db: D1Database,
+  recipeId: string,
+  variantId: string,
+  image: string
+): Promise<boolean> {
+  const res = await db
+    .prepare(
+      `UPDATE recipes
+         SET data = json_set(
+           data,
+           '$.proteinVariants[' || (
+             SELECT v.key FROM json_each(recipes.data, '$.proteinVariants') v
+             WHERE json_extract(v.value, '$.id') = ?2 LIMIT 1
+           ) || '].image',
+           ?3
+         )
+       WHERE id = ?1
+         AND EXISTS (
+           SELECT 1 FROM json_each(recipes.data, '$.proteinVariants') v
+           WHERE json_extract(v.value, '$.id') = ?2
+         )`
+    )
+    .bind(recipeId, variantId, image)
+    .run();
+  return (res.meta?.changes ?? 0) > 0;
+}
+
 export async function renameRecipe(
   db: D1Database,
   oldId: string,

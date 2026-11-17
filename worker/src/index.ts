@@ -14,7 +14,7 @@ import {
   mergeRecipe,
 } from './gemini';
 import { fetchImageAsBase64, fetchRecipePage, isSocialMediaUrl } from './fetch-url';
-import { getRecipe, getRecipeWithMeta, idExists, insertRecipe, listRecipes, updateRecipe, deleteRecipe, renameRecipe } from './db';
+import { getRecipe, getRecipeWithMeta, idExists, insertRecipe, listRecipes, updateRecipe, deleteRecipe, renameRecipe, setProteinVariantImage } from './db';
 import { resolveRecipeNutrition, replaceRecipeIngredients, listUnresolved, loadNutritionCatalog } from './nutrition';
 import {
   buildProteinVariantsForRecipe,
@@ -208,13 +208,43 @@ async function resolveRecipeImage(
   return generateRecipeImage(env, recipe, null, null);
 }
 
-async function attachProteinVariants(env: Env, recipe: Recipe): Promise<Recipe> {
+/** Own image per variant id, ignoring refs that point at the original's file. */
+function variantImagesById(
+  previous: unknown,
+  baseImage: string | null
+): Map<string, string> {
+  const out = new Map<string, string>();
+  if (!Array.isArray(previous)) return out;
+  for (const v of previous as ProteinVariantsList) {
+    if (v && v.id && typeof v.image === 'string' && v.image && v.image !== baseImage) {
+      out.set(v.id, v.image);
+    }
+  }
+  return out;
+}
+
+/**
+ * Rebuild protein variants. Images already generated for a variant id are kept,
+ * so an edit doesn't silently drop every variant photo (they'd fall back to
+ * nothing and need new Gemini calls).
+ */
+async function attachProteinVariants(
+  env: Env,
+  recipe: Recipe,
+  previousVariants?: unknown
+): Promise<Recipe> {
   const key = geminiKey(env);
   if (!key || !recipeNeedsProteinVariants(recipe)) return recipe;
   try {
     const catalog = await loadNutritionCatalog(env.DB);
     const variants = await buildProteinVariantsForRecipe(key, catalog, recipe);
     if (variants && variants.length) {
+      const baseImage = typeof recipe.image === 'string' ? recipe.image : null;
+      const kept = variantImagesById(previousVariants ?? recipe.proteinVariants, baseImage);
+      for (const v of variants) {
+        const img = kept.get(v.id);
+        if (img) v.image = img;
+      }
       recipe.proteinVariants = variants;
       delete recipe.dietVariants;
     }
@@ -240,7 +270,15 @@ async function handleProteinVariants(env: Env, id: string, force = false): Promi
   if (!key) return json({ error: 'GEMINI_API_KEY saknas' }, 503);
   try {
     const catalog = await loadNutritionCatalog(env.DB);
+    const kept = variantImagesById(
+      existing.proteinVariants,
+      typeof existing.image === 'string' ? existing.image : null
+    );
     const variants = await buildProteinVariantsForRecipe(key, catalog, existing);
+    for (const v of variants || []) {
+      const img = kept.get(v.id);
+      if (img) v.image = img;
+    }
     existing.proteinVariants = variants || [];
     delete existing.dietVariants;
     await updateRecipe(env.DB, existing);
@@ -289,13 +327,10 @@ async function handleProteinVariantImage(
     if (baseImage && variantImage === baseImage) {
       return json({ error: 'Variantbild fick samma nyckel som originalet' }, 502);
     }
-    variants[idx] = {
-      ...v,
-      image: variantImage,
-      label: v.label || src?.label || variantId,
-    };
-    existing.proteinVariants = variants;
-    await updateRecipe(env.DB, existing);
+    // Patch only this variant's image: generation takes seconds, and a full
+    // read-modify-write would drop a concurrent edit or another variant's image.
+    const saved = await setProteinVariantImage(env.DB, id, variantId, variantImage);
+    if (!saved) return json({ error: 'Varianten ändrades under bildgenereringen' }, 409);
     return json({ ok: true, image: variantImage, cached: false });
   } catch (e) {
     return json({ error: e instanceof Error ? e.message : 'Bild misslyckades' }, 502);
@@ -810,7 +845,7 @@ async function handleUpdateRecipe(request: Request, env: Env, id: string): Promi
 
   const { recipe: resolved, resolution } = await resolveRecipeNutrition(env.DB, recipe, { geminiApiKey: geminiKey(env) });
   // Fas 3: ingen spärr — omatchade rader sparas och visas som ofullständiga makron.
-  await attachProteinVariants(env, resolved);
+  await attachProteinVariants(env, resolved, existing.proteinVariants);
   const saved = renaming
     ? await renameRecipe(env.DB, id, resolved, body.featuredNew)
     : await updateRecipe(env.DB, resolved, body.featuredNew);
@@ -826,8 +861,9 @@ async function handleDeleteRecipe(env: Env, id: string): Promise<Response> {
   const existing = await getRecipe(env.DB, id);
   if (!existing) return json({ error: 'Hittades inte' }, 404);
 
-  const imageRef = typeof existing.image === 'string' ? existing.image : undefined;
-  if (imageRef) {
+  const imageRefs = [existing.image, ...((existing.proteinVariants || []) as ProteinVariantsList).map((v) => v.image)];
+  for (const imageRef of imageRefs) {
+    if (typeof imageRef !== 'string' || !imageRef) continue;
     for (const key of imageRefCandidates(imageRef)) {
       await env.IMAGES.delete(key);
     }
