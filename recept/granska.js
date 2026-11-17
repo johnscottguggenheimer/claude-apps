@@ -100,6 +100,8 @@
       if (actions) actions.replaceChildren(mk('span', 'review-per100', doneLabel));
       var search = card.querySelector('.review-search');
       if (search) search.remove();
+      // Kontrollvyn (granska-kontroll.js) laddar om sina recept.
+      window.dispatchEvent(new CustomEvent('review:changed'));
       return true;
     }).catch(function(e) {
       buttons.forEach(function(b) { b.disabled = false; });
@@ -547,6 +549,9 @@
       .then(function(data) { if (data) render(data, keepStatus); })
       .catch(function(e) { setStatus(e.message, true); });
   }
+
+  window.ReviewTools = { toggleSearch: toggleSearch };
+  window.addEventListener('audit:changed', function() { load(true); });
 
   load();
 })();

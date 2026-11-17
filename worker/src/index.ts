@@ -31,6 +31,7 @@ import {
 import { slugify, normalizeRecipe, validateRecipe, type Recipe } from './validate';
 import { handleNutritionDryRun, handleNutritionReresolve } from './nutrition-admin';
 import { handleNutritionReviewAction, handleNutritionReviewList } from './nutrition-review';
+import { handleNutritionAuditAction, handleNutritionAuditList } from './nutrition-audit';
 
 export interface Env {
   ASSETS: Fetcher;
@@ -954,6 +955,12 @@ async function handleApi(request: Request, env: Env, url: URL): Promise<Response
   }
   if (path === '/api/nutrition/review' && request.method === 'POST') {
     return handleNutritionReviewAction(request, env);
+  }
+  if (path === '/api/nutrition/audit' && request.method === 'GET') {
+    return handleNutritionAuditList(env);
+  }
+  if (path === '/api/nutrition/audit' && request.method === 'POST') {
+    return handleNutritionAuditAction(request, env);
   }
 
   if (recipeMatch) {

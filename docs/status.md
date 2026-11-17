@@ -1,5 +1,35 @@
 # Status — receptbok
 
+## Kontroll av receptens makron — byggd, inte deployad
+
+*2026-11-17*
+
+### Varför
+Granskningen i fas 3–4 täckte bara det AI själv flaggade (49 av 242 inlärda matchningar). Äldre alias-matchningar, styckvikter från katalogen och kokt/okokt var aldrig systematiskt kontrollerade. En manuell genomgång av prod (446 rader, 32 recept) hittade inga grova fel. Riset är okokt enligt stegen, och de gamla "ursprungsmakrona" i recipes.js var själva fel (t.ex. tonfisksallad 680 → 1729 kcal är rimligt). Men en stickprovsläsning är ingen kontroll.
+
+### Vad som byggdes
+- **Migration `0007_recipe_checks.sql`**: `recipe_checks` (AI-bedömning per recept + stämpel), knuten till en hash av portioner + ingredienser (namn, mängd, enhet).
+- **`worker/src/nutrition-audit.ts`**, `GET/POST /api/nutrition/audit` (inloggning):
+  - *Regler* (live): rader utan data, orimliga gram per enhet (st, msk, tsk, dl, nypa), 0 kcal på riktiga livsmedel, lagrade makron som inte stämmer med raderna, kcal mot 4/4/9, > 1100 kcal per portion.
+  - *Oberoende AI* (`action: 'check'`): Gemini 2.5 Flash får bara titel, portioner, ingredienser och steg, inte våra värden. Den uppskattar gram + makron per rad (kokt/okokt från stegen, kasserad vätska räknas bort). Avvikelse = > 10 % kcal eller > 12 % protein på receptet, eller rad med > 40 kcal och > 35 % skillnad (protein > 5 g).
+  - *Stämpel* (`verify` / `unverify`): gäller hashen. Ändrade ingredienser → status "Ändrat sedan kontroll".
+  - Status: `flagged` → `stale` → `unchecked` → `ok` (AI håller med) → `verified`.
+- **`/granska`**: ny sektion *Kontroll av recept* överst (`recept/granska-kontroll.js`). Fulla kort för avvikelser med radtabell Vi/AI och AI:s kommentar, "Byt livsmedel" per avvikande rad (återanvänder sökningen från granska.js via `window.ReviewTools`), "Kör AI-kontroll", "Markera som kontrollerat", länk till redigering. Kompakta listor för ej kontrollerade, AI håller med och kontrollerade. Knapp "Kör AI-kontroll på N recept" kör alla i tur och ordning.
+
+### Verifierat
+Lokalt: lista, regelflaggor, simulerad AI-rad (aglio e olio pasta → avvikelse −22 %, radtabell), stämpel + ångra, stämpeln släpper när en mängd ändras, okänt recept 404, AI utan nyckel 503. `tsc` OK. **AI-anropet är inte testat** (Gemini-nyckeln finns bara i Cloudflare).
+
+### Arbetsflöde (när det är deployat)
+1. `/granska` → "Kör AI-kontroll på 32 recept".
+2. Gå igenom *Avvikelse*: rätta via "Byt livsmedel", vikter i Granska eller redigera receptet. Kör AI-kontroll igen.
+3. Markera varje recept som kontrollerat. Målet: alla 32 gröna. Nya eller ändrade recept dyker upp igen automatiskt.
+
+### Öppet / nästa steg
+1. **Deploy:** `npx wrangler d1 migrations apply receptbok-db --remote` (0007), sedan `npm run deploy`. Därefter testa AI-kontrollen på ett recept och kör alla.
+2. AI är en andra åsikt, inte facit. Vid avvikelse avgör etikett/SLV.
+
+---
+
 ## Näringsmatchning: fas 4 (egna livsmedel med etikettvärden) — live
 
 *2026-11-17*

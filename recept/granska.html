@@ -80,6 +80,51 @@
   .review-form-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 0.45rem 1rem; }
   .review-form-unit { color: var(--text3); font-size: 0.75rem; }
   .review-form-check:empty { display: none; }
+  .audit { margin-bottom: 2.25rem; }
+  .audit h2 { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .audit-summary { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.6rem 0 0.75rem; }
+  .audit-toolbar { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-bottom: 0.75rem; }
+  .audit-progress { font-size: 0.8125rem; color: var(--text2); }
+  .audit-chip {
+    display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.75rem; font-weight: 600;
+    padding: 0.15rem 0.55rem; border-radius: 999px; background: var(--bg3); color: var(--text2);
+  }
+  .audit-chip--flagged { background: color-mix(in srgb, #c0392b 14%, var(--bg2)); color: #b03a2e; }
+  .audit-chip--stale, .audit-chip--unchecked { background: color-mix(in srgb, #c47a00 16%, var(--bg2)); color: #a05a00; }
+  .audit-chip--ok { background: color-mix(in srgb, var(--info) 14%, var(--bg2)); color: var(--info); }
+  .audit-chip--verified { background: color-mix(in srgb, #2e8b57 16%, var(--bg2)); color: #23734a; }
+  [data-theme="dark"] .audit-chip--flagged { color: #ef8a7e; }
+  [data-theme="dark"] .audit-chip--stale, [data-theme="dark"] .audit-chip--unchecked { color: #e0a04a; }
+  [data-theme="dark"] .audit-chip--verified { color: #6fcf97; }
+  .audit-head { display: flex; justify-content: space-between; gap: 0.75rem; align-items: baseline; flex-wrap: wrap; }
+  .audit-head a { color: inherit; text-decoration: none; }
+  .audit-head a:hover { text-decoration: underline; }
+  .audit-macros { font-size: 0.8125rem; margin-top: 0.35rem; line-height: 1.5; }
+  .audit-macros .audit-diff { font-weight: 600; }
+  .audit-diff--off { color: #b03a2e; }
+  [data-theme="dark"] .audit-diff--off { color: #ef8a7e; }
+  .audit-issues { list-style: none; margin-top: 0.45rem; font-size: 0.8125rem; }
+  .audit-issues li { padding: 0.15rem 0; }
+  .audit-issues li::before { content: '• '; color: var(--text3); }
+  .audit-issue--error { color: #b03a2e; }
+  [data-theme="dark"] .audit-issue--error { color: #ef8a7e; }
+  .audit-rows { width: 100%; border-collapse: collapse; margin-top: 0.6rem; font-size: 0.75rem; }
+  .audit-rows th { text-align: left; font-weight: 600; color: var(--text2); padding: 0.25rem 0.4rem 0.25rem 0; border-bottom: 0.5px solid var(--border); }
+  .audit-rows td { padding: 0.35rem 0.4rem 0.35rem 0; border-bottom: 0.5px solid var(--border); vertical-align: top; }
+  .audit-rows td.num { white-space: nowrap; }
+  .audit-rows tr.is-off td:first-child { font-weight: 600; }
+  .audit-rows .review-note { margin-top: 0.15rem; }
+  .audit-row-btn { font-size: 0.6875rem; padding: 0.2rem 0.45rem; margin-top: 0.25rem; }
+  .audit-table-wrap { overflow-x: auto; }
+  .audit-verified-list { font-size: 0.8125rem; color: var(--text2); line-height: 1.6; }
+  .audit-verified-list a { color: var(--text); }
+  .audit-verified-list { margin-top: 0.4rem; }
+  .audit-compact-row {
+    display: flex; justify-content: space-between; align-items: center; gap: 0.75rem;
+    padding: 0.3rem 0; border-bottom: 0.5px solid var(--border);
+  }
+  .audit-compact-row:last-child { border-bottom: 0; }
+  .audit-compact-row .audit-row-btn { margin-top: 0; flex-shrink: 0; }
   .hidden { display: none !important; }
 </style>
 </head>
@@ -120,6 +165,7 @@
   <div class="review-content">
     <h1 class="page-heading">Granska näringsdata</h1>
     <p class="review-intro">AI-bedömda matchningar och vikter, och rader som saknar näringsdata. Det du godkänner eller väljer här sparas som ditt beslut och skrivs aldrig över av AI. Berörda recept räknas om direkt.</p>
+    <section class="audit" id="audit-root" aria-labelledby="audit-heading"></section>
     <p class="review-status" id="review-status" role="status">Laddar…</p>
     <div id="review-root"></div>
   </div>
@@ -127,5 +173,6 @@
 <script src="/browse-nav.js"></script>
 <script src="/site-shell.js"></script>
 <script src="/granska.js"></script>
+<script src="/granska-kontroll.js"></script>
 </body>
 </html>
