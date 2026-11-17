@@ -1,5 +1,7 @@
 name = "receptbok"
 main = "src/index.ts"
+# Privat Cloudflare-konto (gmail), inte KAN. Fel inloggning ger tydligt fel.
+account_id = "f201d12b96217889926e6289a8fcc7af"
 compatibility_date = "2024-11-01"
 
 [[d1_databases]]

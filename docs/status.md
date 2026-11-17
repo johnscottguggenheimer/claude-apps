@@ -34,7 +34,7 @@ Lokalt: lista, regelflaggor, simulerad AI-rad (aglio e olio pasta → avvikelse 
   - **Pressad lime** → Limejuice färskpressad, 30 g/st. Gäller alla "lime st": street-corn 1995→1925, thai-kyckling 2111→2076, honey-lime 1197→1179.
 - Efter rättning: 22 ok, 10 avvikelser. Nio bedömda som AI-fel eller brus: gyozaskal (AI 15 g/st, rätt ≈ 8), buffalosås, gochujang, affogato (sötningen tvetydig), scones-protein +3 g, smashed-cucumber +45 kcal, hjortfärsbiffar −13 %, kebab −10 %, pb-cups −10 %.
 - **Löst:** dumpling-lasagna +31 % (AI 2151 mot 1639). Troligen fläskfärsen: vi räknar *Gris färs rå fett 8%*, amerikansk ground pork ≈ 20 %. Beror på vilken färs John köper.
-- `wrangler d1 execute --remote` gav 7403 (inte behörig) mitt i sessionen. Deploy hade fungerat strax innan. Kör `npx wrangler login` om det kvarstår.
+- `wrangler d1 execute --remote` gav 7403: wrangler var inloggad på KAN-kontot. Löst: inloggad med gmail-kontot, och `account_id = f201d12b…` ligger nu i `worker/wrangler.toml`, så fel konto ger ett tydligt fel. Byta konto: `npx wrangler logout`, sedan `npx wrangler login --browser=false` och länken i ett privat fönster.
 
 ### Testat i prod (2026-11-17)
 - "Byt livsmedel" från en avvikande rad (gyozaskal → samma livsmedel): sparas, receptet räknas om, kontrollvyn laddas om.
