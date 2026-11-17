@@ -1,6 +1,6 @@
 # Status — receptbok
 
-## D1-kvot: billig katalogversion — byggd, inte deployad
+## D1-kvot: billig katalogversion — live
 
 *2026-11-17*
 
@@ -11,7 +11,7 @@ Cloudflare varnade: 78 % av D1:s dagliga gratiskvot (5 M rows_read) förbrukad. 
 
 **Fix:** migration `0008_catalog_meta.sql` — tabell `catalog_meta` med en räknare som triggers på ingredients/aliases bumpar. `catalogVersion()` läser 1 rad (fallback till den gamla frågan om tabellen saknas). Testat lokalt: trigger bumpar version 1 → 2.
 
-**Deploy:** `npx wrangler d1 migrations apply receptbok-db --remote` (0008) och sedan `npm run deploy`. Kvoten nollställs 00:00 UTC (01:00 svensk tid). Vanlig visning av recept är billig (~64 rader), men undvik tung användning av `/granska` tills fixen är ute.
+**Deployad 2026-11-17** (version 72e37156): 0008 körd i prod, `catalog_meta.version = 1` och 6 triggers på plats. Sök och kontrollista svarar (första sök 351 ms med katalogbygge, sedan 70–80 ms från cachen). `d1 insights` hade ännu inte data för den nya frågan direkt efter deploy. Kontrollera nästa dag att `SELECT version FROM catalog_meta` läser 1 rad och att dygnsförbrukningen ligger långt under 5 M.
 
 ---
 
