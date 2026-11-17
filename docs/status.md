@@ -33,11 +33,11 @@ Lokalt: lista, regelflaggor, simulerad AI-rad (aglio e olio pasta → avvikelse 
   - **Hela pickles** → Saltgurka u. lag, 65 g/st (var söt inlagd gurka): smashed-pickle-salad 342→263.
   - **Pressad lime** → Limejuice färskpressad, 30 g/st. Gäller alla "lime st": street-corn 1995→1925, thai-kyckling 2111→2076, honey-lime 1197→1179.
 - Efter rättning: 22 ok, 10 avvikelser. Nio bedömda som AI-fel eller brus: gyozaskal (AI 15 g/st, rätt ≈ 8), buffalosås, gochujang, affogato (sötningen tvetydig), scones-protein +3 g, smashed-cucumber +45 kcal, hjortfärsbiffar −13 %, kebab −10 %, pb-cups −10 %.
-- **Öppen fråga:** dumpling-lasagna +31 % (AI 2151 mot 1639). Troligen fläskfärsen: vi räknar *Gris färs rå fett 8%*, amerikansk ground pork ≈ 20 %. Beror på vilken färs John köper.
+- **Löst:** dumpling-lasagna +31 % (AI 2151 mot 1639). Troligen fläskfärsen: vi räknar *Gris färs rå fett 8%*, amerikansk ground pork ≈ 20 %. Beror på vilken färs John köper.
 - `wrangler d1 execute --remote` gav 7403 (inte behörig) mitt i sessionen. Deploy hade fungerat strax innan. Kör `npx wrangler login` om det kvarstår.
 
 ### Öppet / nästa steg
-1. Bestäm fläskfärsens fetthalt för dumpling-lasagna.
+1. Fläskfärs löst: "malet fläskkött" → *Gris färs rå fett 15%* (John vet inte fetthalten, 15 % som mellanläge): dumpling-lasagna 1639→1900, AI-avvikelse nu +13 % (wontonskal-vikten står för resten).
 2. Stämpla recepten som kontrollerade i `/granska` (inget är stämplat än).
 3. AI är en andra åsikt, inte facit. Vid avvikelse avgör etikett/SLV.
 
