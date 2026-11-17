@@ -25,7 +25,7 @@ Lokalt (seed + backup från fas 3, migration 0006 körd lokalt): ändra AI-livsm
    - Bytt till SLV: skummjölk → Minimjölk, farinsocker → Brun farin.
    - Övriga 67 matchningar och vikter godkända som de var. Granskningslistan är tom.
    - Största ändringar: chicken-kebab-wraps 2452→2647, middle-eastern-chicken-mince 2519→2616, thai-chicken-cucumber-salad 2038→2111, kyckling-gyoza 1206→1286, dumpling-lasagna 1639→1784 kcal.
-   - Dumpling-lasagna-ökningen kom inte från granskningen: receptet var sparat med gyozaskal 8 g/st, men AI lärde in 10 g/st 2026-11-16 och omräkningen tog in den. USDA anger ca 8 g per wontonskal, så 10 g är troligen för högt (ej ändrat).
+   - Dumpling-lasagna-ökningen kom inte från granskningen: receptet var sparat med gyozaskal 8 g/st, men AI lärde in 10 g/st 2026-11-16 och omräkningen tog in den. USDA anger ca 8 g per wontonskal → satt till 8 g/st (user): dumpling-lasagna 1784→1639, kyckling-gyoza 1286→1216 kcal.
    - Kvar: AI-livsmedlen "farinsocker" och "skummjölk" är oanvända men står som ogranskade (radering saknas). Sötningsmedel räknas som 0 kcal (rätt bara för erytritol/stevia-blandning, 170 g i bananbrödet). Salladslök 30 g/st mot vårlök 15 g/st.
 3. Kända begränsningar: inga fält för fibrer/socker/salt. Ingen radering av egna livsmedel. Vikter listar recept via `ingredient_id`+enhet i recept-JSON. Listvyn visar ingen säkerhetsnivå.
 
