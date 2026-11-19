@@ -423,6 +423,7 @@ function fmtNum(val) {
 }
 
 function fmt(val, unit) {
+  if (!(Number(val) > 0)) return 'efter smak';
   if (unit === 'g') return Math.round(val) + 'g';
   if (unit === 'msk') return fmtNum(val) + ' msk';
   if (unit === 'tsk') {

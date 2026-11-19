@@ -54,6 +54,7 @@ Mått — kritiska regler (fel här ger 1g-mjölk o.dyl.):
 - **ALDRIG** byt bara etiketten till g utan att räkna om. 1 cup ≠ 1 g, 1 tbsp ≠ 1 g, 1 scoop ≠ 1 g, 1¼ cup mjölk ≠ 1.25 g
 - Föredra msk/tsk för olja, soja, vinäger, pastasåser, honung, kryddor i små mängder — tvinga inte allt till gram
 - Små äkta grammängder (salt, peppar, jäst, bakpulver) får vara några gram
+- Ingrediens utan mängd i källan («to taste», «optional», «for garnish», «till servering»): amount 0 och unit som passar (msk/st/näve). 0 visas som «efter smak» i appen. Hitta aldrig på mängder som inte står i källan
 
 Språk — ingredienser och steg (naturlig svenska, inte ord-för-ord):
 - **Mejeri med fetthalt:** använd svensk butiksnomenklatur med **procent**, inte «fullfet/lågfet/light» som adjektiv.

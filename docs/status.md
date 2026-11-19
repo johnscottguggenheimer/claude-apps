@@ -1,5 +1,16 @@
 # Status — receptbok
 
+## Ingrediens utan mängd visas som «efter smak» — live
+
+*2026-11-19*
+
+- Orsak: källor anger «to taste»/«for garnish» utan mängd, prompten kräver `amount` som tal, Gemini satte 0 och `fmt` visade «0 st» (laksa-dumpling-noodle-soup).
+- `app.js` `fmt`: amount ≤ 0 eller saknad → «efter smak» (detaljvy, inköpslista, skalning).
+- `gemini.ts`: prompten säger uttryckligen amount 0 för mängdlösa ingredienser, hitta aldrig på mängder.
+- Prod: bara laksa (8 rader) och kycklingpizza-wrap (salt och peppar, salladslök) har 0. Ingen dataändring.
+
+---
+
 ## Proteinvarianter: egen bild eller platshållare — live (version 97022147)
 
 *2026-11-17*
